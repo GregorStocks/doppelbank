@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
-import sys
 import subprocess
+import sys
 
 CHECK_COMMANDS = [
     ["uv", "run", "ruff", "check", "src/", "tests/"],
@@ -13,6 +13,7 @@ FIX_COMMANDS = [
     ["uv", "run", "black", "src/", "tests/"],
 ]
 
+
 def run_commands(commands):
     for cmd in commands:
         print(f"\n$ {' '.join(cmd)}")
@@ -20,6 +21,7 @@ def run_commands(commands):
         if result.returncode != 0:
             print(f"Command failed: {' '.join(cmd)}")
             sys.exit(result.returncode)
+
 
 def main():
     if len(sys.argv) < 2 or sys.argv[1] not in {"check", "fix"}:
@@ -31,5 +33,16 @@ def main():
     elif mode == "fix":
         run_commands(FIX_COMMANDS)
 
+
+def check():
+    """Entry point for uv run check"""
+    run_commands(CHECK_COMMANDS)
+
+
+def fix():
+    """Entry point for uv run fix"""
+    run_commands(FIX_COMMANDS)
+
+
 if __name__ == "__main__":
-    main() 
+    main()

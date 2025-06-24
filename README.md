@@ -39,6 +39,35 @@ Doppelbank has three major components.
 
 ## Development
 
+### Protobuf code generation (bedrock events)
+
+This project uses [betterproto](https://github.com/betterproto/betterproto) for Python code generation from `.proto` files.
+
+**Requirements:**
+- [protoc](https://github.com/protocolbuffers/protobuf) (Protocol Buffers compiler)
+  - On macOS: `brew install protobuf`
+  - On Linux: `sudo apt-get install protobuf-compiler`
+  - On Windows: [Download from releases](https://github.com/protocolbuffers/protobuf/releases)
+
+**To regenerate Python code from .proto files:**
+
+```bash
+uv run buildproto
+```
+
+This will generate Python files in `src/doppelbank/bedrock/generated/` using the `protoc-gen-python_betterproto` plugin from your uv environment.
+
+### Linting, formatting, and type checking
+
+- **Check only (no changes):**
+  ```bash
+  uv run check
+  ```
+- **Autofix (apply formatting and autofixable lint):**
+  ```bash
+  uv run fix
+  ```
+
 ### Testing
 
 The project includes comprehensive unit tests for all components:
@@ -56,6 +85,11 @@ uv run pytest tests/test_bedrock_models.py
 # Run tests with coverage
 uv run pytest --cov=doppelbank
 ```
+
+### Dependencies
+
+- All Python dependencies (including dev tools) are managed with [uv](https://github.com/astral-sh/uv).
+- The only non-Python dependency is `protoc` (see above).
 
 ### Bedrock CLI
 
