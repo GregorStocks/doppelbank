@@ -28,6 +28,8 @@
     - Pull stuff out of cli.py
     - Clean up serde.py mess (why are there two of them?)
     - Clean up protobuf docstrings (ensure we don't have so much duplication around amounts/timestamps/etc)
+- [ ] **General**
+    - Clean up CLAUDE.md and move the stuff that isn't Claude-specific to more general developer documentation
 
 # Claude Coding Standards
 
@@ -41,42 +43,12 @@
    - Local project imports last
    - Each group separated by a blank line
 
-## Example
-
-```python
-# Standard library
-import argparse
-import json
-import sys
-from pathlib import Path
-from typing import List, Optional
-
-# Third-party
-from google.protobuf import text_format
-from google.protobuf.json_format import MessageToJson
-
-# Local project
-from doppelbank.bedrock.models import create_paycheck_event, save_events
-from doppelbank.bedrock.generated import events_pb2
-```
-
-## Why These Rules?
-
-- **Absolute imports** are more explicit and work better with IDEs and linters
-- **Top-level imports** make code more readable and avoid import-time side effects
-- **Consistent structure** makes the codebase easier to navigate and maintain
-
-# Doppelbank Project Conventions and Best Practices
-
 ## Tooling and Workflow
 
 - **All Python dependencies** (including dev tools and codegen plugins) are managed with [uv](https://github.com/astral-sh/uv).
 - **All project scripts** (lint, fix, buildproto, preflight, etc.) live in `src/scripts/` and are exposed as uv project scripts in `pyproject.toml`.
 - **No global Python tools** are required. The only non-Python dependency is `protoc` (the Protocol Buffers compiler).
-- **Protobuf codegen** uses `protoc` with the `protoc-gen-python_betterproto` plugin from the uv environment. To regenerate code:
-  ```bash
-  uv run buildproto
-  ```
+- **Protobuf codegen** uses `protoc` with the `protoc-gen-python_betterproto` plugin from the uv environment. To regenerate code: `uv run buildproto`
 - **Linting, formatting, and type checking** are unified and ergonomic:
   - Check only: `uv run check`
   - Autofix: `uv run fix`
@@ -92,63 +64,18 @@ from doppelbank.bedrock.generated import events_pb2
 - You must have `protoc` installed on your system (e.g., `brew install protobuf` on macOS).
 - The Python-side plugin (`protoc-gen-python_betterproto`) is managed by uv and does not require global installation.
 
-## Ruff Configuration
-- **Ruff's defaults are recommended.**
-  - No custom `select`, `ignore`, or `line-length` unless you have a strong reason.
-  - This keeps the config simple and future-proof.
-- If you need to override rules for legacy or special cases, do so minimally in `pyproject.toml`.
-
 ## Scripts and Entrypoints
 - All scripts are written in Python (no bash) and live in `src/scripts/`.
 - Scripts are exposed as uv project scripts in `pyproject.toml` for ergonomic usage:
   - `uv run check`, `uv run fix`, `uv run buildproto`, `uv run preflight`, etc.
-- Scripts can also be run as modules (e.g., `uv run -m scripts.lint check`), but the project scripts are preferred for ergonomics.
 
 ## Directory Structure
 - All source code is under `src/`.
 - All scripts are under `src/scripts/` and are Python packages (with `__init__.py`).
-- Generated code from `.proto` files goes in `src/doppelbank/bedrock/generated/`.
 
 ## General Best Practices
 - Keep the developer workflow as simple as possible: clone, `uv sync --extra dev`, and use the provided uv scripts.
-- Avoid global Python tools or dependencies outside of `protoc`.
 - Prefer Python scripts over bash for all automation.
-- Use ruff, black, and mypy for code quality, with unified commands.
-- Document any workflow changes in this file and the README.
-
-# Doppelbank Project Conventions (Claude Edition)
-
-## General Principles
-- All code is modern Python 3, using dataclasses, type hints, and idiomatic style.
-- Protobuf schemas live in `protos/`, generated code in `src/doppelbank/*/generated/`.
-- All scripts and CLIs live in `src/scripts/` or as `src/doppelbank/*/cli.py`.
-- All serialization is via betterproto, with generic helpers in `lib/serde.py`.
-- All developer workflow is via `uv` (https://github.com/astral-sh/uv).
-
-## Running Scripts and CLIs
-- **ALWAYS use `uv run` to invoke scripts and CLIs.**
-    - Example: `uv run python -m doppelbank.bedrock.cli ...`
-    - Example: `uv run python -m doppelbank.detritus.cli ...`
-- Do **NOT** use `python` or `python3` directly. This will not set up the environment or PYTHONPATH correctly.
-- `uv` automatically sets up `PYTHONPATH=src` so imports work as expected.
-- `uv` does **not** support `[tool.uv.scripts]` in `pyproject.toml` (as of 2024-06). Ignore any instructions to use this feature.
-- If you want to add ergonomic scripts, use shell aliases or Makefile targets, not `[tool.uv.scripts]`.
-
-## Example CLI Usage
-
-```sh
-uv run python -m doppelbank.bedrock.cli generate --user-id testuser --output bedrock.json --format json --seed 42
-uv run python -m doppelbank.detritus.cli --input bedrock.json --output detritus.json --format json
-```
-
-## Testing and Linting
-- Run tests: `uv run python -m pytest`
-- Run lint: `uv run python src/scripts/lint.py`
-- Run preflight: `uv run python src/scripts/preflight.py`
-
-## Protobuf Codegen
-- Run codegen: `uv run python src/scripts/buildproto.py`
-- Only `protoc` is required as an external dependency.
 
 ## Test-Driven Development (TDD) Practice
 - **Always write tests that fail first.**
@@ -159,12 +86,6 @@ uv run python -m doppelbank.detritus.cli --input bedrock.json --output detritus.
     - Run `uv run python -m pytest -v` and confirm you see the failure or output.
     - Remove the temporary assertion or print after confirming.
 - This practice helps prevent false positives and ensures your test suite is always up to date and effective.
-
-## Summary
-- **Never** use `python` or `python3` directly.
-- **Always** use `uv run ...` for everything.
-- Ignore `[tool.uv.scripts]` in `pyproject.toml`.
-- All scripts and CLIs are invoked via `uv run python -m ...`.
 
 ## TODOs and Developer Hygiene
 
