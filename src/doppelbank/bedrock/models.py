@@ -9,11 +9,8 @@ and core event creation functions.
 from typing import List
 
 # Local project
-from doppelbank.bedrock.generated.doppelbank.bedrock import (
-    CardSwipeEvent,
-    Event,
-    PaycheckEvent,
-    TransferEvent,
+from generated.bedrock import (
+    Event, EventCollection, PaycheckEvent, TransferEvent, CardSwipeEvent
 )
 
 

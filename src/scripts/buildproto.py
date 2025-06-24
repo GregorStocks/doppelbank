@@ -1,58 +1,47 @@
 #!/usr/bin/env python3
 """
-Script to compile all .proto files in protos/bedrock and protos/detritus to their generated directories in src/ using protoc and the betterproto plugin.
+Script to compile protos/bedrock.proto and protos/detritus.proto to src/generated/bedrock.py and src/generated/detritus.py using protoc and the betterproto plugin.
 Requires: protoc (brew install protobuf)
 """
 import subprocess
 from pathlib import Path
-import hashlib
+import shutil
 
 PROTO_CONFIGS = [
     {
-        "proto_dir": Path("protos/bedrock"),
-        "out_dir": Path("src/doppelbank/bedrock/generated"),
-        "hash_for_preflight": True,
+        "proto_file": Path("protos/bedrock.proto"),
+        "out_file": Path("src/generated/bedrock.py"),
     },
     {
-        "proto_dir": Path("protos/detritus"),
-        "out_dir": Path("src/doppelbank/detritus/generated"),
-        "hash_for_preflight": False,
+        "proto_file": Path("protos/detritus.proto"),
+        "out_file": Path("src/generated/detritus.py"),
     },
 ]
 
-
-def hash_files(files):
-    h = hashlib.sha256()
-    for f in sorted(files, key=lambda x: str(x)):
-        with open(f, "rb") as fp:
-            h.update(fp.read())
-    return h.hexdigest()
-
-
 def main():
+    Path("src/generated").mkdir(exist_ok=True, parents=True)
     for config in PROTO_CONFIGS:
-        proto_dir = config["proto_dir"]
-        out_dir = config["out_dir"]
-        out_dir.mkdir(exist_ok=True, parents=True)
-        proto_files = list(proto_dir.glob("*.proto"))
-        if not proto_files:
+        proto_file = config["proto_file"]
+        out_file = config["out_file"]
+        if not proto_file.exists():
             continue
-        for proto_file in proto_files:
-            print(f"Compiling {proto_file} with protoc + betterproto plugin...")
-            subprocess.run([
-                "protoc",
-                f"--python_betterproto_out={out_dir}",
-                f"--proto_path={proto_dir}",
-                str(proto_file)
-            ], check=True)
-        # Write proto hash for preflight check (bedrock only)
-        if config["hash_for_preflight"]:
-            proto_hash = hash_files(proto_files)
-            hash_file = out_dir / ".proto_hash"
-            with open(hash_file, "w") as f:
-                f.write(proto_hash)
-        print(f"✓ Compiled {len(proto_files)} proto file(s) to {out_dir}")
-
+        print(f"Compiling {proto_file} to {out_file} with protoc + betterproto plugin...")
+        subprocess.run([
+            "protoc",
+            f"--python_betterproto_out=src/generated",
+            f"--proto_path=protos",
+            str(proto_file)
+        ], check=True)
+        # The generated file will be named after the proto file (e.g., bedrock.py)
+        generated_file = Path("src/generated") / proto_file.stem / f"{proto_file.stem}.py"
+        if generated_file.exists():
+            shutil.move(str(generated_file), str(out_file))
+            # Remove the now-empty directory
+            try:
+                (Path("src/generated") / proto_file.stem).rmdir()
+            except Exception:
+                pass
+        print(f"✓ Compiled {proto_file} to {out_file}")
 
 if __name__ == "__main__":
     main()

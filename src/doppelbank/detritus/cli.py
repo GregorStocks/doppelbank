@@ -1,8 +1,8 @@
 import argparse
 from pathlib import Path
 from doppelbank.lib import serde
-from doppelbank.bedrock.generated.doppelbank.bedrock import EventCollection
-from doppelbank.detritus.generated.doppelbank.detritus import (
+from generated.bedrock import EventCollection
+from generated.detritus import (
     TransactionsSyncResponse, Transaction, Account
 )
 

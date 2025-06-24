@@ -7,7 +7,7 @@ Unit tests for bedrock models.
 # Third-party
 import betterproto
 
-from doppelbank.bedrock.generated.doppelbank.bedrock import Event
+from generated.bedrock import Event
 
 # Local project
 from doppelbank.bedrock.models import (

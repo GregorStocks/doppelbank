@@ -1,4 +1,4 @@
-from doppelbank.bedrock.generated.doppelbank.bedrock import EventCollection, Event, PaycheckEvent
+from generated.bedrock import EventCollection, Event, PaycheckEvent
 from doppelbank.detritus.cli import bedrock_to_detritus
 
 def test_bedrock_to_detritus_minimal():

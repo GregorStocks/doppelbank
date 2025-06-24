@@ -11,9 +11,8 @@ from pathlib import Path
 from typing import List
 
 # Local project
-from doppelbank.bedrock.generated.doppelbank.bedrock import (
-    Event,
-    EventCollection,
+from generated.bedrock import (
+    EventCollection, Event, PaycheckEvent, TransferEvent, CardSwipeEvent
 )
 from doppelbank.bedrock.models import (
     create_card_swipe_event,
