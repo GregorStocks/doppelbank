@@ -9,9 +9,7 @@ and core event creation functions.
 from typing import List
 
 # Local project
-from generated.bedrock import (
-    Event, EventCollection, PaycheckEvent, TransferEvent, CardSwipeEvent
-)
+from generated.bedrock import CardSwipeEvent, Event, PaycheckEvent, TransferEvent
 
 
 def create_paycheck_event(

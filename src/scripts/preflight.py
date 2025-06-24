@@ -1,13 +1,14 @@
 #!/usr/bin/env python3
 """
-Preflight script: checks if buildproto is needed (by generating to a temp dir and comparing), runs check, then tests.
+Preflight script: checks if buildproto is needed (by generating to a temp dir and comparing),
+runs check, then tests.
 No side effects: fails if codegen is needed, but does not overwrite files.
 """
+import filecmp
 import subprocess
-from pathlib import Path
 import sys
 import tempfile
-import filecmp
+from pathlib import Path
 
 PROTO_DIR = Path("src/doppelbank/bedrock")
 GEN_DIR = PROTO_DIR / "generated"

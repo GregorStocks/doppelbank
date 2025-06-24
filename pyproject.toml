@@ -43,3 +43,13 @@ build-backend = "hatchling.build"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/doppelbank"]
+
+[tool.ruff.lint]
+# Enable the rule that prevents imports after non-import statements
+select = ["E", "F", "W", "I"]
+# E402: Module level import not at top of file
+# This enforces that all imports are at the top of the file
+
+[tool.ruff]
+# Set line length to match black's default
+line-length = 100

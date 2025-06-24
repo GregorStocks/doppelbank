@@ -1,8 +1,9 @@
-from fastapi import FastAPI, HTTPException
-from pathlib import Path
-from doppelbank.lib import serde
-from generated.detritus import BankLedger
 import os
+from pathlib import Path
+
+from fastapi import FastAPI, HTTPException
+
+from generated.detritus import BankLedger
 
 app = FastAPI()
 
@@ -12,8 +13,9 @@ DATA_DIR.mkdir(exist_ok=True)
 # TODO: Add authentication
 # TODO: Support more endpoints (e.g., /accounts, /balances)
 
+
 @app.get("/transactions/sync")
-# TODO: Transform BankLedger to Plaid API format before returning (this is not the real Plaid format)
+# TODO: Transform BankLedger to Plaid API format before returning (not the real Plaid format)
 # TODO: Always serve as JSON (this is fake-Plaid, not a real protobuf API)
 # TODO: Accept a timestamp query param (e.g., 'as_of') to support Plaid-style sync semantics
 # TODO: Use account_id (not filename) to select the ledger file; map account_id to file internally
@@ -22,6 +24,7 @@ DATA_DIR.mkdir(exist_ok=True)
 # TODO: Add proper error handling for missing/invalid account_id
 # TODO: Add tests for Plaid-style sync behavior
 # TODO: Document all API quirks and differences from real Plaid
+
 
 def transactions_sync(file: str = "test_ledger_detritus.json", format: str = "json"):
     """Serve transactions from a detritus ledger file in the data directory."""
@@ -39,6 +42,7 @@ def transactions_sync(file: str = "test_ledger_detritus.json", format: str = "js
     else:
         raise HTTPException(status_code=400, detail="Unsupported format")
     return ledger.to_dict()
+
 
 def main():
     print("hello, veneer")

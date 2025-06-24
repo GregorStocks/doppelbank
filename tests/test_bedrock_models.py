@@ -7,8 +7,6 @@ Unit tests for bedrock models.
 # Third-party
 import betterproto
 
-from generated.bedrock import Event
-
 # Local project
 from doppelbank.bedrock.models import (
     create_card_swipe_event,
@@ -16,6 +14,7 @@ from doppelbank.bedrock.models import (
     create_transfer_event,
     get_event_summary,
 )
+from generated.bedrock import Event
 
 
 class TestEventCreation:

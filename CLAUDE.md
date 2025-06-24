@@ -30,7 +30,6 @@
     - Clean up protobuf docstrings (ensure we don't have so much duplication around amounts/timestamps/etc)
 - [ ] **General**
     - Clean up CLAUDE.md and move the stuff that isn't Claude-specific to more general developer documentation
-    - Enforce import standards in a linter
     - Github commit hooks?
 
 # Claude Coding Standards

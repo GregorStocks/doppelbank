@@ -1,17 +1,20 @@
-from generated.bedrock import EventCollection, Event, CardSwipeEvent
-from generated.detritus import BankLedger, BankEvent, AddPending, AddCleared
 from doppelbank.detritus.cli import bedrock_to_detritus
+from generated.bedrock import CardSwipeEvent, Event, EventCollection
+from generated.detritus import AddCleared, AddPending, BankEvent, BankLedger
+
 
 def test_bedrock_to_detritus_minimal():
-    event = Event(card_swipe=CardSwipeEvent(
-        event_id="evt1",
-        user_id="u1",
-        timestamp="2024-01-01T12:00:00.000000Z",
-        amount=12345,  # int cents
-        merchant="Test Merchant",
-        category="Test Category",
-        description="Test Desc"
-    ))
+    event = Event(
+        card_swipe=CardSwipeEvent(
+            event_id="evt1",
+            user_id="u1",
+            timestamp="2024-01-01T12:00:00.000000Z",
+            amount=12345,  # int cents
+            merchant="Test Merchant",
+            category="Test Category",
+            description="Test Desc",
+        )
+    )
     collection = EventCollection(events=[event])
     ledger = bedrock_to_detritus(collection)
     assert isinstance(ledger, BankLedger)
@@ -35,4 +38,4 @@ def test_bedrock_to_detritus_minimal():
     assert pending.timestamp.endswith("Z")
     assert len(pending.timestamp.split(".")[-1]) == 7  # .123456Z
     assert cleared.timestamp.endswith("Z")
-    assert len(cleared.timestamp.split(".")[-1]) == 7 
+    assert len(cleared.timestamp.split(".")[-1]) == 7

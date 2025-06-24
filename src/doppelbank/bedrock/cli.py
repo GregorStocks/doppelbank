@@ -144,9 +144,7 @@ def validate_args(args: argparse.Namespace) -> None:
         raise ValueError("Months must be positive")
 
     if args.format not in ["json", "csv", "binary"]:
-        raise ValueError(
-            "Output format must be 'json', 'csv', or 'binary'"
-        )
+        raise ValueError("Output format must be 'json', 'csv', or 'binary'")
 
 
 def main():

@@ -10,15 +10,14 @@ import csv
 from pathlib import Path
 from typing import List
 
-# Local project
-from generated.bedrock import (
-    EventCollection, Event, PaycheckEvent, TransferEvent, CardSwipeEvent
-)
 from doppelbank.bedrock.models import (
     create_card_swipe_event,
     create_paycheck_event,
     create_transfer_event,
 )
+
+# Local project
+from generated.bedrock import Event, EventCollection
 
 
 def save_events_binary(events: List[Event], file_path: Path) -> None:
