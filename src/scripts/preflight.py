@@ -8,7 +8,6 @@ from pathlib import Path
 import sys
 import tempfile
 import filecmp
-import shutil
 
 PROTO_DIR = Path("src/doppelbank/bedrock")
 GEN_DIR = PROTO_DIR / "generated"
@@ -34,15 +33,20 @@ def main():
         tmpdir_path = Path(tmpdir)
         # Generate code to temp dir
         for proto_file in proto_files:
-            subprocess.run([
-                "protoc",
-                f"--python_betterproto_out={tmpdir_path}",
-                f"--proto_path={PROTO_DIR}",
-                str(proto_file)
-            ], check=True)
+            subprocess.run(
+                [
+                    "protoc",
+                    f"--python_betterproto_out={tmpdir_path}",
+                    f"--proto_path={PROTO_DIR}",
+                    str(proto_file),
+                ],
+                check=True,
+            )
         # Compare temp dir to checked-in generated dir
         if not compare_generated(tmpdir_path, GEN_DIR):
-            print("[!] You need to run 'uv run buildproto' (generated code is out of date)")
+            print(
+                "[!] You need to run 'uv run buildproto' (generated code is out of date)"
+            )
             sys.exit(1)
     print("[✓] Protobuf code is up to date.")
     print("[•] Running code quality checks...")

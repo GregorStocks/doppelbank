@@ -39,3 +39,6 @@ build-backend = "hatchling.build"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/doppelbank"]
+
+[tool.uv.scripts]
+detritus = "python -m doppelbank.detritus.cli"

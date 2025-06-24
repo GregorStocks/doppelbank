@@ -1,0 +1,62 @@
+syntax = "proto3";
+
+package doppelbank.detritus;
+
+// Account type enum (simplified)
+enum AccountType {
+    ACCOUNT_TYPE_UNSPECIFIED = 0;
+    CHECKING = 1;
+    SAVINGS = 2;
+    CREDIT = 3;
+    LOAN = 4;
+    INVESTMENT = 5;
+}
+
+enum TransactionType {
+    TRANSACTION_TYPE_UNSPECIFIED = 0;
+    PLACE = 1;
+    DIGITAL = 2;
+    SPECIAL = 3;
+}
+
+// Account object
+message Account {
+    string account_id = 1;
+    string name = 2;
+    string mask = 3;
+    string official_name = 4;
+    AccountType type = 5;
+    string subtype = 6;
+    string institution_id = 7;
+    string currency_code = 8;
+}
+
+// Transaction object
+message Transaction {
+    string transaction_id = 1;
+    string account_id = 2;
+    string name = 3;
+    string merchant_name = 4;
+    double amount = 5;
+    string iso_currency_code = 6;
+    string date = 7;
+    string authorized_date = 8;
+    TransactionType transaction_type = 9;
+    string category = 10;
+    string category_id = 11;
+    string pending_transaction_id = 12;
+    bool pending = 13;
+    string payment_channel = 14;
+    string original_description = 15;
+    string personal_finance_category = 16;
+}
+
+// Sync response
+message TransactionsSyncResponse {
+    repeated Transaction added = 1;
+    repeated Transaction modified = 2;
+    repeated Transaction removed = 3;
+    repeated Account accounts = 4;
+    string next_cursor = 5;
+    bool has_more = 6;
+} 

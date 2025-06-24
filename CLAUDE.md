@@ -84,3 +84,53 @@ from doppelbank.bedrock.generated import events_pb2
 - Prefer Python scripts over bash for all automation.
 - Use ruff, black, and mypy for code quality, with unified commands.
 - Document any workflow changes in this file and the README.
+
+# Doppelbank Project Conventions (Claude Edition)
+
+## General Principles
+- All code is modern Python 3, using dataclasses, type hints, and idiomatic style.
+- Protobuf schemas live in `protos/`, generated code in `src/doppelbank/*/generated/`.
+- All scripts and CLIs live in `src/scripts/` or as `src/doppelbank/*/cli.py`.
+- All serialization is via betterproto, with generic helpers in `lib/serde.py`.
+- All developer workflow is via `uv` (https://github.com/astral-sh/uv).
+
+## Running Scripts and CLIs
+- **ALWAYS use `uv run` to invoke scripts and CLIs.**
+    - Example: `uv run python -m doppelbank.bedrock.cli ...`
+    - Example: `uv run python -m doppelbank.detritus.cli ...`
+- Do **NOT** use `python` or `python3` directly. This will not set up the environment or PYTHONPATH correctly.
+- `uv` automatically sets up `PYTHONPATH=src` so imports work as expected.
+- `uv` does **not** support `[tool.uv.scripts]` in `pyproject.toml` (as of 2024-06). Ignore any instructions to use this feature.
+- If you want to add ergonomic scripts, use shell aliases or Makefile targets, not `[tool.uv.scripts]`.
+
+## Example CLI Usage
+
+```sh
+uv run python -m doppelbank.bedrock.cli generate --user-id testuser --output bedrock.json --format json --seed 42
+uv run python -m doppelbank.detritus.cli --input bedrock.json --output detritus.json --format json
+```
+
+## Testing and Linting
+- Run tests: `uv run python -m pytest`
+- Run lint: `uv run python src/scripts/lint.py`
+- Run preflight: `uv run python src/scripts/preflight.py`
+
+## Protobuf Codegen
+- Run codegen: `uv run python src/scripts/buildproto.py`
+- Only `protoc` is required as an external dependency.
+
+## Test-Driven Development (TDD) Practice
+- **Always write tests that fail first.**
+    - When adding new functionality, start by writing a test that will fail (red), then implement the code to make it pass (green).
+    - This ensures your tests are meaningful and actually test the new code.
+- **Confirm new tests are being run:**
+    - When adding a new test file or test case, temporarily add `assert False` or a `print()` statement in the test to verify it is picked up by pytest.
+    - Run `uv run python -m pytest -v` and confirm you see the failure or output.
+    - Remove the temporary assertion or print after confirming.
+- This practice helps prevent false positives and ensures your test suite is always up to date and effective.
+
+## Summary
+- **Never** use `python` or `python3` directly.
+- **Always** use `uv run ...` for everything.
+- Ignore `[tool.uv.scripts]` in `pyproject.toml`.
+- All scripts and CLIs are invoked via `uv run python -m ...`.

@@ -143,9 +143,9 @@ def validate_args(args: argparse.Namespace) -> None:
     if args.months <= 0:
         raise ValueError("Months must be positive")
 
-    if args.format not in ["json", "csv", "binary", "textproto"]:
+    if args.format not in ["json", "csv", "binary"]:
         raise ValueError(
-            "Output format must be 'json', 'csv', 'binary', or 'textproto'"
+            "Output format must be 'json', 'csv', or 'binary'"
         )
 
 
@@ -190,7 +190,7 @@ Examples:
     generate_parser.add_argument("--output", type=Path, help="Output file path")
     generate_parser.add_argument(
         "--format",
-        choices=["json", "csv", "binary", "textproto"],
+        choices=["json", "csv", "binary"],
         default="json",
         help="Output format (default: json)",
     )

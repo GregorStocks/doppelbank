@@ -108,3 +108,17 @@ uv run python -m doppelbank.bedrock.cli generate --user-id 42 --months 3 --forma
 # Validate an event file
 uv run python -m doppelbank.bedrock.cli validate events.json
 ```
+
+## Detritus CLI
+
+Generate Plaid-style sync data from bedrock events:
+
+```sh
+uv run detritus -- --input path/to/bedrock.json --output path/to/detritus.json --format json
+```
+
+- `--input`: Path to a bedrock events file (json or binary)
+- `--output`: Path to output detritus sync file (json or binary)
+- `--format`: Output format (`json` or `binary`, default: `json`)
+
+This will read the bedrock events, transform them, and write a Plaid-style sync file.

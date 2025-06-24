@@ -2,7 +2,7 @@
 Serialization and deserialization utilities for bedrock events.
 
 This module handles converting events to/from various formats including
-JSON, CSV, binary protobuf, and textproto.
+JSON, CSV, and binary protobuf.
 """
 
 # Standard library
@@ -39,16 +39,6 @@ def save_events_json(events: List[Event], file_path: Path) -> None:
     json_str = collection.to_json(indent=2)
     with open(file_path, "w") as f:
         f.write(json_str)
-
-
-def save_events_textproto(events: List[Event], file_path: Path) -> None:
-    """Save events as textproto (human-readable protobuf format)."""
-    collection = EventCollection()
-    collection.events = events
-
-    text_str = collection.to_dict()
-    with open(file_path, "w") as f:
-        f.write(str(text_str))
 
 
 def save_events_csv(events: List[Event], file_path: Path) -> None:
@@ -118,13 +108,6 @@ def load_events_json(file_path: Path) -> List[Event]:
     return list(collection.events)
 
 
-def load_events_textproto(file_path: Path) -> List[Event]:
-    """Load events from textproto file."""
-    # Note: betterproto doesn't have direct textproto support
-    # We'll need to implement this differently or skip it
-    raise NotImplementedError("Textproto loading not yet implemented with betterproto")
-
-
 def load_events_csv(file_path: Path) -> List[Event]:
     """Load events from CSV file."""
     events = []
@@ -176,8 +159,6 @@ def save_events(events: List[Event], file_path: Path, format: str = "json") -> N
         save_events_binary(events, file_path)
     elif format == "json":
         save_events_json(events, file_path)
-    elif format == "textproto":
-        save_events_textproto(events, file_path)
     elif format == "csv":
         save_events_csv(events, file_path)
     else:
@@ -190,8 +171,6 @@ def load_events(file_path: Path) -> List[Event]:
         return load_events_binary(file_path)
     elif file_path.suffix.lower() == ".json":
         return load_events_json(file_path)
-    elif file_path.suffix.lower() == ".textproto":
-        return load_events_textproto(file_path)
     elif file_path.suffix.lower() == ".csv":
         return load_events_csv(file_path)
     else:
