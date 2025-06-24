@@ -8,9 +8,6 @@
 - [ ] **Veneer**
     - Support the exact same request/response format as the Plaid API (though likely with additional parameters and metadata, and perhaps missing some params and fields)
     - Support for timestamps in the query ("tell me what the transactions would have looked like yesterday")
-    - Better tests:
-      - Actually stand up a full server and query it via curl, to ensure our coverage is truly end-to-end
-      - Single test that goes from Bedrock to Veneer
     - Use account_id (not filename) to select ledger file; map account_id to file internally.
     - Remove 'format' and 'file' params from API.
     - Error handling.
