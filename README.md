@@ -27,6 +27,12 @@ http POST http://localhost:8000/transactions/sync access_token=demo-0042
 uv run pytest
 ```
 
-## License
+## Architecture
 
-TODO
+Doppelbank has three major components.
+
+**Bedrock** – Simulates the "real world." Emits structured, human-readable events, such as paychecks, transfers, card-swipes, etc.
+
+**Detritus** – Simulates the bank. Converts bedrock events to a messier sequence of account-level events - messier merchant strings/memos, pending, duplications, lags, etc.
+
+**Veneer** – Serves detritus-processed data over Plaid-compatible endpoints.

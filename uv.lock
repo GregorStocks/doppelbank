@@ -48,22 +48,17 @@ name = "doppelbank"
 version = "0.1.0"
 source = { editable = "." }
 dependencies = [
+    { name = "black" },
     { name = "mypy" },
     { name = "pytest" },
 ]
 
-[package.optional-dependencies]
-dev = [
-    { name = "black" },
-]
-
 [package.metadata]
 requires-dist = [
-    { name = "black", marker = "extra == 'dev'", specifier = ">=25.1.0,<26.0.0" },
+    { name = "black", specifier = ">=25.1.0" },
     { name = "mypy", specifier = ">=1.16.1,<2.0.0" },
     { name = "pytest", specifier = ">=8.4.1,<9.0.0" },
 ]
-provides-extras = ["dev"]
 
 [[package]]
 name = "iniconfig"
