@@ -1,0 +1,46 @@
+syntax = "proto3";
+
+package doppelbank.bedrock;
+
+// A paycheck event representing regular income from employment
+message PaycheckEvent {
+  string user_id = 1;
+  double amount = 2;
+  string timestamp = 3;
+  string employer = 4;
+  string description = 5;
+}
+
+// A transfer event representing money movement between accounts
+message TransferEvent {
+  string user_id = 1;
+  double amount = 2;
+  string timestamp = 3;
+  string from_account = 4;
+  string to_account = 5;
+  string description = 6;
+}
+
+// A card swipe event representing credit/debit card transactions
+message CardSwipeEvent {
+  string user_id = 1;
+  double amount = 2;
+  string timestamp = 3;
+  string merchant = 4;
+  string category = 5;
+  string description = 6;
+}
+
+// Union of all possible event types
+message Event {
+  oneof event_data {
+    PaycheckEvent paycheck = 1;
+    TransferEvent transfer = 2;
+    CardSwipeEvent card_swipe = 3;
+  }
+}
+
+// A collection of events
+message EventCollection {
+  repeated Event events = 1;
+} 

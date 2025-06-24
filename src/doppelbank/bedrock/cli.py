@@ -6,14 +6,26 @@ Generates structured, human-readable events such as paychecks, transfers,
 card-swipes, etc. that represent real-world financial activities.
 """
 
+# Standard library
 import argparse
-import csv
 import json
 import random
 import sys
+import tempfile
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any, Dict, List, Optional
+
+# Local project
+from doppelbank.bedrock.models import (
+    create_paycheck_event,
+    create_transfer_event,
+    create_card_swipe_event,
+    save_events,
+    save_events_json,
+    load_events,
+    get_event_summary
+)
 
 
 class UserInfo:
@@ -53,56 +65,6 @@ class UserInfo:
         }
 
 
-def generate_paycheck_event(user_info: UserInfo, amount: float, timestamp: datetime) -> Dict[str, Any]:
-    """Generate a paycheck event."""
-    return {
-        "event_type": "paycheck",
-        "user_id": user_info.user_id,
-        "amount": amount,
-        "timestamp": timestamp.strftime("%Y-%m-%dT%H:%M:%S.%fZ"),
-        "employer": user_info.employer,
-        "description": "Bi-weekly paycheck"
-    }
-
-
-def generate_transfer_event(
-    user_info: UserInfo,
-    amount: float, 
-    timestamp: datetime, 
-    from_account: str, 
-    to_account: str
-) -> Dict[str, Any]:
-    """Generate a transfer event."""
-    return {
-        "event_type": "transfer",
-        "user_id": user_info.user_id,
-        "amount": amount,
-        "timestamp": timestamp.strftime("%Y-%m-%dT%H:%M:%S.%fZ"),
-        "from_account": from_account,
-        "to_account": to_account,
-        "description": f"Transfer from {from_account} to {to_account}"
-    }
-
-
-def generate_card_swipe_event(
-    user_info: UserInfo,
-    amount: float, 
-    timestamp: datetime, 
-    merchant: str, 
-    category: str
-) -> Dict[str, Any]:
-    """Generate a card swipe event."""
-    return {
-        "event_type": "card_swipe",
-        "user_id": user_info.user_id,
-        "amount": -amount,  # Negative for spending
-        "timestamp": timestamp.strftime("%Y-%m-%dT%H:%M:%S.%fZ"),
-        "merchant": merchant,
-        "category": category,
-        "description": f"Purchase at {merchant}"
-    }
-
-
 def generate_random_timestamp(base_date: datetime, user_info: UserInfo) -> datetime:
     """Generate a random timestamp within a given date in the user's timezone."""
     # Random hour between 6 AM and 10 PM
@@ -136,7 +98,7 @@ def generate_events(
     months: int = 12,
     seed: Optional[int] = None,
     output_format: str = "json"
-) -> List[Dict[str, Any]]:
+) -> List[Any]:
     """Generate a sequence of financial events for a user."""
     events = []
     
@@ -155,7 +117,13 @@ def generate_events(
         # Generate paycheck every 2 weeks
         if current_date.weekday() == 4 and current_date.day % 14 < 7:  # Every other Friday
             timestamp = generate_random_timestamp(current_date, user_info)
-            events.append(generate_paycheck_event(user_info, biweekly_pay, timestamp))
+            events.append(create_paycheck_event(
+                user_id=user_info.user_id,
+                amount=biweekly_pay,
+                timestamp=timestamp.strftime("%Y-%m-%dT%H:%M:%S.%fZ"),
+                employer=user_info.employer,
+                description="Bi-weekly paycheck"
+            ))
         
         # Generate some random card swipes
         if current_date.weekday() < 5:  # Weekdays
@@ -167,27 +135,18 @@ def generate_events(
                 category = random.choice(categories)
                 amount = random.uniform(5.0, 50.0)
                 timestamp = generate_random_timestamp(current_date, user_info)
-                events.append(generate_card_swipe_event(user_info, amount, timestamp, merchant, category))
+                events.append(create_card_swipe_event(
+                    user_id=user_info.user_id,
+                    amount=-amount,  # Negative for spending
+                    timestamp=timestamp.strftime("%Y-%m-%dT%H:%M:%S.%fZ"),
+                    merchant=merchant,
+                    category=category,
+                    description=f"Purchase at {merchant}"
+                ))
         
         current_date += timedelta(days=1)
     
     return events
-
-
-def save_events(events: List[Dict[str, Any]], output_path: Path, format: str = "json"):
-    """Save events to a file."""
-    if format == "json":
-        with open(output_path, 'w') as f:
-            json.dump(events, f, indent=2)
-    elif format == "csv":
-        if events:
-            fieldnames = events[0].keys()
-            with open(output_path, 'w', newline='') as f:
-                writer = csv.DictWriter(f, fieldnames=fieldnames)
-                writer.writeheader()
-                writer.writerows(events)
-    else:
-        raise ValueError(f"Unsupported format: {format}")
 
 
 def validate_args(args: argparse.Namespace) -> None:
@@ -195,8 +154,8 @@ def validate_args(args: argparse.Namespace) -> None:
     if args.months <= 0:
         raise ValueError("Months must be positive")
     
-    if args.format not in ["json", "csv"]:
-        raise ValueError("Output format must be 'json' or 'csv'")
+    if args.format not in ["json", "csv", "binary", "textproto"]:
+        raise ValueError("Output format must be 'json', 'csv', 'binary', or 'textproto'")
 
 
 def main():
@@ -223,7 +182,7 @@ Examples:
     generate_parser.add_argument("--months", type=int, default=12, help="Number of months to generate (default: 12)")
     generate_parser.add_argument("--seed", type=int, help="Random seed for deterministic generation")
     generate_parser.add_argument("--output", type=Path, help="Output file path")
-    generate_parser.add_argument("--format", choices=["json", "csv"], default="json", help="Output format (default: json)")
+    generate_parser.add_argument("--format", choices=["json", "csv", "binary", "textproto"], default="json", help="Output format (default: json)")
     
     # Validate command
     validate_parser = subparsers.add_parser("validate", help="Validate event file")
@@ -268,13 +227,12 @@ Examples:
             else:
                 # Output to stdout
                 if args.format == "json":
-                    json.dump(events, sys.stdout, indent=2)
+                    with tempfile.NamedTemporaryFile(mode='w', suffix='.json', delete=False) as f:
+                        save_events_json(events, Path(f.name))
+                        with open(f.name, 'r') as f2:
+                            print(f2.read())
                 else:
-                    if events:
-                        fieldnames = events[0].keys()
-                        writer = csv.DictWriter(sys.stdout, fieldnames=fieldnames)
-                        writer.writeheader()
-                        writer.writerows(events)
+                    print("Output to stdout only supported for JSON format")
         
         elif args.command == "validate":
             if not args.file.exists():
@@ -282,27 +240,17 @@ Examples:
                 sys.exit(1)
             
             try:
-                with open(args.file) as f:
-                    events = json.load(f)
+                events = load_events(args.file)
+                summary = get_event_summary(events)
                 
-                if not isinstance(events, list):
-                    print("Error: File must contain a list of events", file=sys.stderr)
-                    sys.exit(1)
-                
-                print(f"Validated {len(events)} events in {args.file}")
-                
-                # Count event types
-                event_types = {}
-                for event in events:
-                    event_type = event.get("event_type", "unknown")
-                    event_types[event_type] = event_types.get(event_type, 0) + 1
-                
+                print(f"Validated {summary['total']} events in {args.file}")
                 print("Event type distribution:")
-                for event_type, count in event_types.items():
-                    print(f"  {event_type}: {count}")
+                for event_type, count in summary.items():
+                    if event_type != 'total':
+                        print(f"  {event_type}: {count}")
                     
-            except json.JSONDecodeError as e:
-                print(f"Error: Invalid JSON in {args.file}: {e}", file=sys.stderr)
+            except Exception as e:
+                print(f"Error: Invalid file {args.file}: {e}", file=sys.stderr)
                 sys.exit(1)
         
         elif args.command == "info":
@@ -324,6 +272,12 @@ Examples:
             print("  - timezone: User's timezone (default: US/Pacific)")
             print("  - employer: Employer name for paycheck events")
             print("  - salary: Annual salary for calculating paycheck amounts")
+            print()
+            print("Supported output formats:")
+            print("  - json: Human-readable JSON")
+            print("  - csv: Comma-separated values")
+            print("  - binary: Compact binary protobuf")
+            print("  - textproto: Human-readable protobuf text format")
     
     except ValueError as e:
         print(f"Error: {e}", file=sys.stderr)
