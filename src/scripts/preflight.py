@@ -10,8 +10,7 @@ import sys
 import tempfile
 from pathlib import Path
 
-PROTO_DIR = Path("src/doppelbank/bedrock")
-GEN_DIR = PROTO_DIR / "generated"
+from scripts.proto_common import GEN_DIR, compile_proto_to_directory, get_proto_files
 
 
 def compare_generated(temp_dir, gen_dir):
@@ -26,23 +25,20 @@ def compare_generated(temp_dir, gen_dir):
 
 
 def main():
-    proto_files = list(PROTO_DIR.glob("*.proto"))
+    try:
+        proto_files = get_proto_files()
+    except FileNotFoundError as e:
+        print(f"[!] {e}")
+        sys.exit(1)
+
     if not proto_files:
-        print("[!] No .proto files found.")
+        print("[!] No .proto files configured.")
         sys.exit(1)
     with tempfile.TemporaryDirectory() as tmpdir:
         tmpdir_path = Path(tmpdir)
-        # Generate code to temp dir
+        # Generate code to temp dir using shared logic
         for proto_file in proto_files:
-            subprocess.run(
-                [
-                    "protoc",
-                    f"--python_betterproto_out={tmpdir_path}",
-                    f"--proto_path={PROTO_DIR}",
-                    str(proto_file),
-                ],
-                check=True,
-            )
+            compile_proto_to_directory(proto_file, tmpdir_path)
         # Compare temp dir to checked-in generated dir
         if not compare_generated(tmpdir_path, GEN_DIR):
             print(
