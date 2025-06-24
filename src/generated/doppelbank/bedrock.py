@@ -11,43 +11,35 @@ import betterproto
 class PaycheckEvent(betterproto.Message):
     """A paycheck event representing regular income from employment"""
 
-    event_id: str = betterproto.string_field(1)
-    user_id: str = betterproto.string_field(2)
-    # Timestamp in UTC, ISO8601 format with microsecond precision (e.g.,
-    # 2024-07-01T12:00:00.123456Z). All timestamps in this schema use this format
-    # and precision.
+    user_id: str = betterproto.string_field(1)
+    amount: float = betterproto.double_field(2)
     timestamp: str = betterproto.string_field(3)
-    # Amount in integer cents (e.g., USD 12.34 = 1234). Positive = credit to
-    # account, negative = debit from account.
-    amount: int = betterproto.int64_field(4)
-    employer: str = betterproto.string_field(5)
-    description: str = betterproto.string_field(6)
+    employer: str = betterproto.string_field(4)
+    description: str = betterproto.string_field(5)
 
 
 @dataclass
 class TransferEvent(betterproto.Message):
     """A transfer event representing money movement between accounts"""
 
-    event_id: str = betterproto.string_field(1)
-    user_id: str = betterproto.string_field(2)
+    user_id: str = betterproto.string_field(1)
+    amount: float = betterproto.double_field(2)
     timestamp: str = betterproto.string_field(3)
-    amount: int = betterproto.int64_field(4)
-    from_account: str = betterproto.string_field(5)
-    to_account: str = betterproto.string_field(6)
-    description: str = betterproto.string_field(7)
+    from_account: str = betterproto.string_field(4)
+    to_account: str = betterproto.string_field(5)
+    description: str = betterproto.string_field(6)
 
 
 @dataclass
 class CardSwipeEvent(betterproto.Message):
     """A card swipe event representing credit/debit card transactions"""
 
-    event_id: str = betterproto.string_field(1)
-    user_id: str = betterproto.string_field(2)
+    user_id: str = betterproto.string_field(1)
+    amount: float = betterproto.double_field(2)
     timestamp: str = betterproto.string_field(3)
-    amount: int = betterproto.int64_field(4)
-    merchant: str = betterproto.string_field(5)
-    category: str = betterproto.string_field(6)
-    description: str = betterproto.string_field(7)
+    merchant: str = betterproto.string_field(4)
+    category: str = betterproto.string_field(5)
+    description: str = betterproto.string_field(6)
 
 
 @dataclass

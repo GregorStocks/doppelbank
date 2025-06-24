@@ -1,62 +1,72 @@
 syntax = "proto3";
 
-package doppelbank.detritus;
+package detritus;
 
-// Account type enum (simplified)
-enum AccountType {
-    ACCOUNT_TYPE_UNSPECIFIED = 0;
-    CHECKING = 1;
-    SAVINGS = 2;
-    CREDIT = 3;
-    LOAN = 4;
-    INVESTMENT = 5;
+// Atomic bank ledger event
+message BankEvent {
+    string event_id = 1;      // Unique for this event
+    // Timestamp in UTC, ISO8601 format with microsecond precision (e.g., 2024-07-01T12:00:00.123456Z).
+    // All timestamps in this schema use this format and precision.
+    // If multiple events have the same timestamp, they are considered to have occurred simultaneously.
+    string timestamp = 2;
+    oneof event_type {
+        AddPending add_pending = 10;
+        RemovePending remove_pending = 11;
+        AddCleared add_cleared = 12;
+        UpdateBalance update_balance = 13;
+        // ...add more as needed
+    }
 }
 
-enum TransactionType {
-    TRANSACTION_TYPE_UNSPECIFIED = 0;
-    PLACE = 1;
-    DIGITAL = 2;
-    SPECIAL = 3;
+// A pending transaction is added
+message AddPending {
+    string event_id = 1; // Unique for this event
+    string transaction_id = 2;
+    string account_id = 3;
+    // Amount in integer cents (e.g., USD 12.34 = 1234).
+    // Positive = credit to account, negative = debit from account.
+    int64 amount = 4;
+    string description = 5;
+    string merchant = 6;
+    string category = 7;
+    // ...other fields as needed
 }
 
-// Account object
-message Account {
-    string account_id = 1;
-    string name = 2;
-    string mask = 3;
-    string official_name = 4;
-    AccountType type = 5;
-    string subtype = 6;
-    string institution_id = 7;
-    string currency_code = 8;
+// A pending transaction is removed (e.g., when it clears)
+message RemovePending {
+    string event_id = 1; // Unique for this event
+    string transaction_id = 2;
+    string account_id = 3;
+    string reason = 4; // e.g., "cleared", "canceled"
+    string related_event_id = 5; // Link to add_pending
 }
 
-// Transaction object
-message Transaction {
-    string transaction_id = 1;
+// A cleared transaction is added
+message AddCleared {
+    string event_id = 1; // Unique for this event
+    string transaction_id = 2;
+    string account_id = 3;
+    int64 amount = 4; // See amount docs above
+    string description = 5;
+    string merchant = 6;
+    string category = 7;
+    string pending_event_id = 8; // Link to the pending event, if any
+    // ...other fields as needed
+}
+
+// The available balance is updated
+message UpdateBalance {
+    string event_id = 1; // Unique for this event
     string account_id = 2;
-    string name = 3;
-    string merchant_name = 4;
-    double amount = 5;
-    string iso_currency_code = 6;
-    string date = 7;
-    string authorized_date = 8;
-    TransactionType transaction_type = 9;
-    string category = 10;
-    string category_id = 11;
-    string pending_transaction_id = 12;
-    bool pending = 13;
-    string payment_channel = 14;
-    string original_description = 15;
-    string personal_finance_category = 16;
+    int64 new_balance = 3; // In integer cents. See sign convention docs above.
+    string reason = 4; // e.g., "transaction", "fee", etc.
+    string related_event_id = 5;
 }
 
-// Sync response
-message TransactionsSyncResponse {
-    repeated Transaction added = 1;
-    repeated Transaction modified = 2;
-    repeated Transaction removed = 3;
-    repeated Account accounts = 4;
-    string next_cursor = 5;
-    bool has_more = 6;
-} 
+message BankLedger {
+    repeated BankEvent events = 1;
+}
+
+// NOTE: We use string for timestamps for maximum compatibility and readability (ISO8601 UTC, e.g., 2024-07-01T12:00:00.123456Z).
+// All timestamps are in UTC and use microsecond precision. If you want to use a numeric type (e.g., int64 micros since epoch), you can add an additional field or change the type as needed.
+// All amounts are int64 in the smallest currency unit (e.g., cents). Positive = credit to account, negative = debit from account. 

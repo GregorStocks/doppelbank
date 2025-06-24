@@ -82,7 +82,7 @@ def generate_events(
     seed: Optional[int] = None,
     output_format: str = "json",
 ) -> List[Any]:
-    """Generate a sequence of financial events for a user."""
+    """Generate a sequence of financial events for a user. All amounts are int cents."""
     events = []
 
     # Set seed for deterministic generation
@@ -92,8 +92,8 @@ def generate_events(
     # Generate events for the specified number of months
     start_date = datetime.now() - timedelta(days=months * 30)
 
-    # Calculate bi-weekly paycheck amount
-    biweekly_pay = user_info.salary / 26  # 26 pay periods per year
+    # Calculate bi-weekly paycheck amount (int cents)
+    biweekly_pay = int(round(user_info.salary * 100 / 26))  # 26 pay periods per year
 
     current_date = start_date
     while current_date <= datetime.now():
@@ -120,7 +120,7 @@ def generate_events(
             for _ in range(2):  # 2 purchases per weekday
                 merchant = random.choice(merchants)
                 category = random.choice(categories)
-                amount = random.uniform(5.0, 50.0)
+                amount = int(round(random.uniform(5.0, 50.0) * 100))  # int cents
                 timestamp = generate_random_timestamp(current_date, user_info)
                 events.append(
                     create_card_swipe_event(

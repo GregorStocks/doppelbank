@@ -1,34 +1,41 @@
 syntax = "proto3";
 
-package doppelbank.bedrock;
+package bedrock;
 
 // A paycheck event representing regular income from employment
 message PaycheckEvent {
-  string user_id = 1;
-  double amount = 2;
+  string event_id = 1; // Unique for this event
+  string user_id = 2;
+  // Timestamp in UTC, ISO8601 format with microsecond precision (e.g., 2024-07-01T12:00:00.123456Z).
+  // All timestamps in this schema use this format and precision.
   string timestamp = 3;
-  string employer = 4;
-  string description = 5;
+  // Amount in integer cents (e.g., USD 12.34 = 1234).
+  // Positive = credit to account, negative = debit from account.
+  int64 amount = 4;
+  string employer = 5;
+  string description = 6;
 }
 
 // A transfer event representing money movement between accounts
 message TransferEvent {
-  string user_id = 1;
-  double amount = 2;
-  string timestamp = 3;
-  string from_account = 4;
-  string to_account = 5;
-  string description = 6;
+  string event_id = 1; // Unique for this event
+  string user_id = 2;
+  string timestamp = 3; // See timestamp docs above
+  int64 amount = 4; // See amount docs above
+  string from_account = 5;
+  string to_account = 6;
+  string description = 7;
 }
 
 // A card swipe event representing credit/debit card transactions
 message CardSwipeEvent {
-  string user_id = 1;
-  double amount = 2;
-  string timestamp = 3;
-  string merchant = 4;
-  string category = 5;
-  string description = 6;
+  string event_id = 1; // Unique for this event
+  string user_id = 2;
+  string timestamp = 3; // See timestamp docs above
+  int64 amount = 4; // See amount docs above
+  string merchant = 5;
+  string category = 6;
+  string description = 7;
 }
 
 // Union of all possible event types
@@ -43,4 +50,8 @@ message Event {
 // A collection of events
 message EventCollection {
   repeated Event events = 1;
-} 
+}
+
+// NOTE: We use string for timestamps for maximum compatibility and readability (ISO8601 UTC, e.g., 2024-07-01T12:00:00.123456Z).
+// All timestamps are in UTC and use microsecond precision. If you want to use a numeric type (e.g., int64 micros since epoch), you can add an additional field or change the type as needed.
+// All amounts are int64 in the smallest currency unit (e.g., cents). Positive = credit to account, negative = debit from account. 

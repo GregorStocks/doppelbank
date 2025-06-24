@@ -119,7 +119,7 @@ def load_events_csv(file_path: Path) -> List[Event]:
             if event_type == "paycheck":
                 event = create_paycheck_event(
                     user_id=row["userId"],  # Handle camelCase from dict
-                    amount=float(row["amount"]),
+                    amount=int(row["amount"]),
                     timestamp=row["timestamp"],
                     employer=row["employer"],
                     description=row["description"],
@@ -127,7 +127,7 @@ def load_events_csv(file_path: Path) -> List[Event]:
             elif event_type == "transfer":
                 event = create_transfer_event(
                     user_id=row["userId"],  # Handle camelCase from dict
-                    amount=float(row["amount"]),
+                    amount=int(row["amount"]),
                     timestamp=row["timestamp"],
                     from_account=row.get(
                         "fromAccount", ""
@@ -138,7 +138,7 @@ def load_events_csv(file_path: Path) -> List[Event]:
             elif event_type == "card_swipe":
                 event = create_card_swipe_event(
                     user_id=row["userId"],  # Handle camelCase from dict
-                    amount=float(row["amount"]),
+                    amount=int(row["amount"]),
                     timestamp=row["timestamp"],
                     merchant=row["merchant"],
                     category=row["category"],

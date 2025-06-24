@@ -134,3 +134,7 @@ uv run python -m doppelbank.detritus.cli --input bedrock.json --output detritus.
 - **Always** use `uv run ...` for everything.
 - Ignore `[tool.uv.scripts]` in `pyproject.toml`.
 - All scripts and CLIs are invoked via `uv run python -m ...`.
+
+## TODOs and Developer Hygiene
+
+Leave explicit TODOs in the code when you're leaving something unfinished.

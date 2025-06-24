@@ -7,67 +7,73 @@ from typing import List
 import betterproto
 
 
-class AccountType(betterproto.Enum):
-    """Account type enum (simplified)"""
+@dataclass
+class BankEvent(betterproto.Message):
+    """Atomic bank ledger event"""
 
-    ACCOUNT_TYPE_UNSPECIFIED = 0
-    CHECKING = 1
-    SAVINGS = 2
-    CREDIT = 3
-    LOAN = 4
-    INVESTMENT = 5
-
-
-class TransactionType(betterproto.Enum):
-    TRANSACTION_TYPE_UNSPECIFIED = 0
-    PLACE = 1
-    DIGITAL = 2
-    SPECIAL = 3
+    event_id: str = betterproto.string_field(1)
+    # Timestamp in UTC, ISO8601 format with microsecond precision (e.g.,
+    # 2024-07-01T12:00:00.123456Z). All timestamps in this schema use this format
+    # and precision. If multiple events have the same timestamp, they are
+    # considered to have occurred simultaneously.
+    timestamp: str = betterproto.string_field(2)
+    add_pending: "AddPending" = betterproto.message_field(10, group="event_type")
+    remove_pending: "RemovePending" = betterproto.message_field(11, group="event_type")
+    add_cleared: "AddCleared" = betterproto.message_field(12, group="event_type")
+    update_balance: "UpdateBalance" = betterproto.message_field(13, group="event_type")
 
 
 @dataclass
-class Account(betterproto.Message):
-    """Account object"""
+class AddPending(betterproto.Message):
+    """A pending transaction is added"""
 
-    account_id: str = betterproto.string_field(1)
-    name: str = betterproto.string_field(2)
-    mask: str = betterproto.string_field(3)
-    official_name: str = betterproto.string_field(4)
-    type: "AccountType" = betterproto.enum_field(5)
-    subtype: str = betterproto.string_field(6)
-    institution_id: str = betterproto.string_field(7)
-    currency_code: str = betterproto.string_field(8)
+    event_id: str = betterproto.string_field(1)
+    transaction_id: str = betterproto.string_field(2)
+    account_id: str = betterproto.string_field(3)
+    # Amount in integer cents (e.g., USD 12.34 = 1234). Positive = credit to
+    # account, negative = debit from account.
+    amount: int = betterproto.int64_field(4)
+    description: str = betterproto.string_field(5)
+    merchant: str = betterproto.string_field(6)
+    category: str = betterproto.string_field(7)
 
 
 @dataclass
-class Transaction(betterproto.Message):
-    """Transaction object"""
+class RemovePending(betterproto.Message):
+    """A pending transaction is removed (e.g., when it clears)"""
 
-    transaction_id: str = betterproto.string_field(1)
+    event_id: str = betterproto.string_field(1)
+    transaction_id: str = betterproto.string_field(2)
+    account_id: str = betterproto.string_field(3)
+    reason: str = betterproto.string_field(4)
+    related_event_id: str = betterproto.string_field(5)
+
+
+@dataclass
+class AddCleared(betterproto.Message):
+    """A cleared transaction is added"""
+
+    event_id: str = betterproto.string_field(1)
+    transaction_id: str = betterproto.string_field(2)
+    account_id: str = betterproto.string_field(3)
+    amount: int = betterproto.int64_field(4)
+    description: str = betterproto.string_field(5)
+    merchant: str = betterproto.string_field(6)
+    category: str = betterproto.string_field(7)
+    pending_event_id: str = betterproto.string_field(8)
+
+
+@dataclass
+class UpdateBalance(betterproto.Message):
+    """The available balance is updated"""
+
+    event_id: str = betterproto.string_field(1)
     account_id: str = betterproto.string_field(2)
-    name: str = betterproto.string_field(3)
-    merchant_name: str = betterproto.string_field(4)
-    amount: float = betterproto.double_field(5)
-    iso_currency_code: str = betterproto.string_field(6)
-    date: str = betterproto.string_field(7)
-    authorized_date: str = betterproto.string_field(8)
-    transaction_type: "TransactionType" = betterproto.enum_field(9)
-    category: str = betterproto.string_field(10)
-    category_id: str = betterproto.string_field(11)
-    pending_transaction_id: str = betterproto.string_field(12)
-    pending: bool = betterproto.bool_field(13)
-    payment_channel: str = betterproto.string_field(14)
-    original_description: str = betterproto.string_field(15)
-    personal_finance_category: str = betterproto.string_field(16)
+    new_balance: int = betterproto.int64_field(3)
+    reason: str = betterproto.string_field(4)
+    related_event_id: str = betterproto.string_field(5)
 
 
 @dataclass
-class TransactionsSyncResponse(betterproto.Message):
-    """Sync response"""
-
-    added: List["Transaction"] = betterproto.message_field(1)
-    modified: List["Transaction"] = betterproto.message_field(2)
-    removed: List["Transaction"] = betterproto.message_field(3)
-    accounts: List["Account"] = betterproto.message_field(4)
-    next_cursor: str = betterproto.string_field(5)
-    has_more: bool = betterproto.bool_field(6)
+class BankLedger(betterproto.Message):
+    events: List["BankEvent"] = betterproto.message_field(1)

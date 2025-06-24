@@ -131,8 +131,8 @@ class TestGenerateEvents:
 
         assert len(paycheck_events) > 0
 
-        # Bi-weekly pay should be 52000 / 26 = 2000
-        expected_pay = 52000.0 / 26
+        # Bi-weekly pay should be 52000 / 26 = 2000 dollars, or 200000 cents
+        expected_pay = int(round(52000.0 * 100 / 26))
 
         for event in paycheck_events:
             assert event.paycheck.amount == expected_pay

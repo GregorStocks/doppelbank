@@ -19,6 +19,6 @@ def test_detritus_cli(tmp_path):
     assert detritus_path.exists()
     with open(detritus_path) as f:
         data = json.load(f)
-    assert "added" in data
-    assert isinstance(data["added"], list)
-    assert len(data["added"]) > 0 
+    assert "events" in data
+    assert isinstance(data["events"], list)
+    assert len(data["events"]) > 0 
