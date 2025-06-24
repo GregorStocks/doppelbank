@@ -8,7 +8,6 @@
 - [ ] **Veneer**
     - Support the exact same request/response format as the Plaid API (though likely with additional parameters and metadata, and perhaps missing some params and fields)
     - Support for timestamps in the query ("tell me what the transactions would have looked like yesterday")
-    - Remove 'format' and 'file' params from API.
     - Error handling.
     - Documentation for everything different from Plaid.
     - Support for other endpoints, such that a regular Plaid client could talk to Veneer and not get too confused.

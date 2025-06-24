@@ -38,7 +38,7 @@ class TestVeneerAPI:
     def test_transactions_sync_basic(self):
         """Test basic transactions sync endpoint using FastAPI TestClient."""
         client = TestClient(app)
-        response = client.post("/transactions/sync", json={})
+        response = client.post("/transactions/sync", json={"options": {"account_id": "test_account"}})
 
         assert response.status_code == 200
         data = response.json()
@@ -50,7 +50,7 @@ class TestVeneerAPI:
     def test_transactions_sync_with_format_param(self):
         """Test transactions sync with format parameter."""
         client = TestClient(app)
-        response = client.post("/transactions/sync", json={"format": "json"})
+        response = client.post("/transactions/sync", json={"options": {"account_id": "test_account"}})
 
         assert response.status_code == 200
         data = response.json()
@@ -81,16 +81,6 @@ class TestVeneerAPI:
         data = response.json()
         assert "detail" in data
         assert "not found" in data["detail"].lower()
-
-    def test_transactions_sync_invalid_format(self):
-        """Test error handling for invalid format parameter."""
-        client = TestClient(app)
-        response = client.post("/transactions/sync", json={"format": "invalid"})
-
-        assert response.status_code == 400
-        data = response.json()
-        assert "detail" in data
-        assert "unsupported" in data["detail"].lower()
 
     def test_validate_account_id_empty(self):
         """Test validation rejects empty account_id."""
