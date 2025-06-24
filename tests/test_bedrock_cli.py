@@ -108,8 +108,8 @@ class TestGenerateEvents:
 
         assert len(events) == len(events2)
 
-        # Check that the first few events are identical
-        for i in range(min(3, len(events))):
+        # Check that the events are identical
+        for i in range(len(events)):
             assert events[i].to_dict() == events2[i].to_dict()
 
     def test_generate_events_no_seed(self):

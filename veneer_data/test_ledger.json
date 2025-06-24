@@ -1,0 +1,5396 @@
+{
+  "events": [
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-07-01T07:14:08.772246Z",
+        "amount": "-3837",
+        "merchant": "Starbucks",
+        "category": "Food & Drink",
+        "description": "Purchase at Starbucks"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-07-01T01:01:05.229258Z",
+        "amount": "-3157",
+        "merchant": "Starbucks",
+        "category": "Food & Drink",
+        "description": "Purchase at Starbucks"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-07-02T22:41:44.571412Z",
+        "amount": "-3026",
+        "merchant": "Subway",
+        "category": "Food & Drink",
+        "description": "Purchase at Subway"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-07-02T08:51:55.006814Z",
+        "amount": "-2521",
+        "merchant": "Target",
+        "category": "Shopping",
+        "description": "Purchase at Target"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-07-03T04:13:48.352944Z",
+        "amount": "-2031",
+        "merchant": "Subway",
+        "category": "Entertainment",
+        "description": "Purchase at Subway"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-07-03T11:54:22.633052Z",
+        "amount": "-2210",
+        "merchant": "Starbucks",
+        "category": "Food & Drink",
+        "description": "Purchase at Starbucks"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-07-04T17:07:59.396922Z",
+        "amount": "-3784",
+        "merchant": "CVS",
+        "category": "Food & Drink",
+        "description": "Purchase at CVS"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-07-04T19:56:55.379201Z",
+        "amount": "-4232",
+        "merchant": "Starbucks",
+        "category": "Transportation",
+        "description": "Purchase at Starbucks"
+      }
+    },
+    {
+      "paycheck": {
+        "userId": "testuser",
+        "timestamp": "2024-07-05T18:12:45.072933Z",
+        "amount": "250000",
+        "employer": "Acme Corp",
+        "description": "Bi-weekly paycheck"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-07-05T02:54:14.908573Z",
+        "amount": "-3979",
+        "merchant": "Starbucks",
+        "category": "Shopping",
+        "description": "Purchase at Starbucks"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-07-05T20:53:23.170555Z",
+        "amount": "-1751",
+        "merchant": "Starbucks",
+        "category": "Entertainment",
+        "description": "Purchase at Starbucks"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-07-08T08:44:59.716751Z",
+        "amount": "-1443",
+        "merchant": "CVS",
+        "category": "Transportation",
+        "description": "Purchase at CVS"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-07-08T07:10:29.397887Z",
+        "amount": "-2904",
+        "merchant": "Starbucks",
+        "category": "Shopping",
+        "description": "Purchase at Starbucks"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-07-09T01:14:52.033659Z",
+        "amount": "-3581",
+        "merchant": "CVS",
+        "category": "Shopping",
+        "description": "Purchase at CVS"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-07-09T06:58:36.918938Z",
+        "amount": "-1705",
+        "merchant": "CVS",
+        "category": "Entertainment",
+        "description": "Purchase at CVS"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-07-10T12:56:58.674079Z",
+        "amount": "-3449",
+        "merchant": "CVS",
+        "category": "Shopping",
+        "description": "Purchase at CVS"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-07-10T07:47:35.565158Z",
+        "amount": "-1692",
+        "merchant": "Target",
+        "category": "Shopping",
+        "description": "Purchase at Target"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-07-11T12:23:14.145051Z",
+        "amount": "-4540",
+        "merchant": "CVS",
+        "category": "Entertainment",
+        "description": "Purchase at CVS"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-07-11T01:55:07.160265Z",
+        "amount": "-909",
+        "merchant": "Amazon",
+        "category": "Entertainment",
+        "description": "Purchase at Amazon"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-07-12T12:24:38.490785Z",
+        "amount": "-3184",
+        "merchant": "Subway",
+        "category": "Entertainment",
+        "description": "Purchase at Subway"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-07-12T00:43:46.120116Z",
+        "amount": "-4870",
+        "merchant": "Amazon",
+        "category": "Transportation",
+        "description": "Purchase at Amazon"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-07-15T10:07:18.455884Z",
+        "amount": "-3959",
+        "merchant": "Amazon",
+        "category": "Transportation",
+        "description": "Purchase at Amazon"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-07-15T23:56:46.276183Z",
+        "amount": "-515",
+        "merchant": "Subway",
+        "category": "Entertainment",
+        "description": "Purchase at Subway"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-07-16T03:55:40.312942Z",
+        "amount": "-2785",
+        "merchant": "Amazon",
+        "category": "Shopping",
+        "description": "Purchase at Amazon"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-07-16T05:34:49.967242Z",
+        "amount": "-1188",
+        "merchant": "Amazon",
+        "category": "Shopping",
+        "description": "Purchase at Amazon"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-07-17T15:01:07.974230Z",
+        "amount": "-3195",
+        "merchant": "Amazon",
+        "category": "Food & Drink",
+        "description": "Purchase at Amazon"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-07-17T07:56:36.992948Z",
+        "amount": "-1578",
+        "merchant": "CVS",
+        "category": "Transportation",
+        "description": "Purchase at CVS"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-07-18T02:48:34.803035Z",
+        "amount": "-3794",
+        "merchant": "Starbucks",
+        "category": "Food & Drink",
+        "description": "Purchase at Starbucks"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-07-18T17:10:16.553306Z",
+        "amount": "-3469",
+        "merchant": "Subway",
+        "category": "Shopping",
+        "description": "Purchase at Subway"
+      }
+    },
+    {
+      "paycheck": {
+        "userId": "testuser",
+        "timestamp": "2024-07-19T19:27:13.974036Z",
+        "amount": "250000",
+        "employer": "Acme Corp",
+        "description": "Bi-weekly paycheck"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-07-19T12:42:41.391559Z",
+        "amount": "-3708",
+        "merchant": "Amazon",
+        "category": "Shopping",
+        "description": "Purchase at Amazon"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-07-19T07:04:21.022056Z",
+        "amount": "-1045",
+        "merchant": "Target",
+        "category": "Entertainment",
+        "description": "Purchase at Target"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-07-22T00:04:45.661759Z",
+        "amount": "-3148",
+        "merchant": "Amazon",
+        "category": "Shopping",
+        "description": "Purchase at Amazon"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-07-22T01:55:21.074299Z",
+        "amount": "-803",
+        "merchant": "Starbucks",
+        "category": "Shopping",
+        "description": "Purchase at Starbucks"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-07-23T15:13:34.138739Z",
+        "amount": "-1753",
+        "merchant": "Amazon",
+        "category": "Shopping",
+        "description": "Purchase at Amazon"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-07-23T15:51:26.199659Z",
+        "amount": "-1593",
+        "merchant": "Amazon",
+        "category": "Entertainment",
+        "description": "Purchase at Amazon"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-07-24T11:27:26.489710Z",
+        "amount": "-3465",
+        "merchant": "Starbucks",
+        "category": "Food & Drink",
+        "description": "Purchase at Starbucks"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-07-24T23:21:51.903529Z",
+        "amount": "-773",
+        "merchant": "Starbucks",
+        "category": "Food & Drink",
+        "description": "Purchase at Starbucks"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-07-25T17:28:08.442374Z",
+        "amount": "-1362",
+        "merchant": "Starbucks",
+        "category": "Shopping",
+        "description": "Purchase at Starbucks"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-07-25T02:28:51.903189Z",
+        "amount": "-2582",
+        "merchant": "Subway",
+        "category": "Transportation",
+        "description": "Purchase at Subway"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-07-26T17:53:00.097793Z",
+        "amount": "-728",
+        "merchant": "Amazon",
+        "category": "Food & Drink",
+        "description": "Purchase at Amazon"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-07-26T15:13:55.420521Z",
+        "amount": "-2329",
+        "merchant": "Subway",
+        "category": "Shopping",
+        "description": "Purchase at Subway"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-07-29T12:16:59.822157Z",
+        "amount": "-2205",
+        "merchant": "Starbucks",
+        "category": "Shopping",
+        "description": "Purchase at Starbucks"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-07-29T23:50:35.694022Z",
+        "amount": "-2404",
+        "merchant": "Target",
+        "category": "Transportation",
+        "description": "Purchase at Target"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-07-30T06:03:37.771476Z",
+        "amount": "-1355",
+        "merchant": "Target",
+        "category": "Shopping",
+        "description": "Purchase at Target"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-07-30T01:03:37.499948Z",
+        "amount": "-3866",
+        "merchant": "Amazon",
+        "category": "Food & Drink",
+        "description": "Purchase at Amazon"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-07-31T16:05:54.194851Z",
+        "amount": "-756",
+        "merchant": "Amazon",
+        "category": "Shopping",
+        "description": "Purchase at Amazon"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-07-31T07:25:07.987335Z",
+        "amount": "-3538",
+        "merchant": "Starbucks",
+        "category": "Food & Drink",
+        "description": "Purchase at Starbucks"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-08-01T01:39:05.439589Z",
+        "amount": "-3105",
+        "merchant": "Amazon",
+        "category": "Shopping",
+        "description": "Purchase at Amazon"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-08-01T06:42:45.329445Z",
+        "amount": "-4706",
+        "merchant": "Amazon",
+        "category": "Transportation",
+        "description": "Purchase at Amazon"
+      }
+    },
+    {
+      "paycheck": {
+        "userId": "testuser",
+        "timestamp": "2024-08-02T07:16:25.137235Z",
+        "amount": "250000",
+        "employer": "Acme Corp",
+        "description": "Bi-weekly paycheck"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-08-02T02:00:29.651332Z",
+        "amount": "-1923",
+        "merchant": "CVS",
+        "category": "Entertainment",
+        "description": "Purchase at CVS"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-08-02T06:32:16.138890Z",
+        "amount": "-830",
+        "merchant": "Amazon",
+        "category": "Food & Drink",
+        "description": "Purchase at Amazon"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-08-05T11:18:10.459469Z",
+        "amount": "-4457",
+        "merchant": "CVS",
+        "category": "Food & Drink",
+        "description": "Purchase at CVS"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-08-05T20:33:00.700305Z",
+        "amount": "-3253",
+        "merchant": "Amazon",
+        "category": "Transportation",
+        "description": "Purchase at Amazon"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-08-06T03:56:08.277312Z",
+        "amount": "-4693",
+        "merchant": "Amazon",
+        "category": "Transportation",
+        "description": "Purchase at Amazon"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-08-06T04:17:18.634210Z",
+        "amount": "-3841",
+        "merchant": "Starbucks",
+        "category": "Food & Drink",
+        "description": "Purchase at Starbucks"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-08-07T20:54:16.529959Z",
+        "amount": "-1416",
+        "merchant": "Subway",
+        "category": "Transportation",
+        "description": "Purchase at Subway"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-08-07T01:05:40.444151Z",
+        "amount": "-4574",
+        "merchant": "Target",
+        "category": "Transportation",
+        "description": "Purchase at Target"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-08-08T04:40:16.169430Z",
+        "amount": "-516",
+        "merchant": "CVS",
+        "category": "Food & Drink",
+        "description": "Purchase at CVS"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-08-08T03:04:56.724586Z",
+        "amount": "-3024",
+        "merchant": "Target",
+        "category": "Entertainment",
+        "description": "Purchase at Target"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-08-09T18:35:09.450664Z",
+        "amount": "-4256",
+        "merchant": "Subway",
+        "category": "Food & Drink",
+        "description": "Purchase at Subway"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-08-09T01:57:22.220281Z",
+        "amount": "-1887",
+        "merchant": "Subway",
+        "category": "Food & Drink",
+        "description": "Purchase at Subway"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-08-12T17:56:55.426117Z",
+        "amount": "-2092",
+        "merchant": "Subway",
+        "category": "Food & Drink",
+        "description": "Purchase at Subway"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-08-12T07:55:10.838742Z",
+        "amount": "-4666",
+        "merchant": "Amazon",
+        "category": "Shopping",
+        "description": "Purchase at Amazon"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-08-13T23:59:21.820391Z",
+        "amount": "-612",
+        "merchant": "Subway",
+        "category": "Entertainment",
+        "description": "Purchase at Subway"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-08-13T22:06:24.914533Z",
+        "amount": "-1701",
+        "merchant": "Target",
+        "category": "Shopping",
+        "description": "Purchase at Target"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-08-14T14:22:19.860394Z",
+        "amount": "-1501",
+        "merchant": "Starbucks",
+        "category": "Entertainment",
+        "description": "Purchase at Starbucks"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-08-14T06:25:21.292136Z",
+        "amount": "-606",
+        "merchant": "Subway",
+        "category": "Shopping",
+        "description": "Purchase at Subway"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-08-15T16:25:43.884642Z",
+        "amount": "-2080",
+        "merchant": "Starbucks",
+        "category": "Transportation",
+        "description": "Purchase at Starbucks"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-08-15T03:56:16.187241Z",
+        "amount": "-4727",
+        "merchant": "Amazon",
+        "category": "Transportation",
+        "description": "Purchase at Amazon"
+      }
+    },
+    {
+      "paycheck": {
+        "userId": "testuser",
+        "timestamp": "2024-08-16T18:16:02.113668Z",
+        "amount": "250000",
+        "employer": "Acme Corp",
+        "description": "Bi-weekly paycheck"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-08-16T10:27:38.536265Z",
+        "amount": "-2056",
+        "merchant": "Amazon",
+        "category": "Entertainment",
+        "description": "Purchase at Amazon"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-08-16T06:16:02.743215Z",
+        "amount": "-4548",
+        "merchant": "Starbucks",
+        "category": "Entertainment",
+        "description": "Purchase at Starbucks"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-08-19T17:43:46.985937Z",
+        "amount": "-2840",
+        "merchant": "Target",
+        "category": "Food & Drink",
+        "description": "Purchase at Target"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-08-19T21:58:21.653425Z",
+        "amount": "-2441",
+        "merchant": "Subway",
+        "category": "Transportation",
+        "description": "Purchase at Subway"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-08-20T09:32:19.699287Z",
+        "amount": "-3739",
+        "merchant": "CVS",
+        "category": "Food & Drink",
+        "description": "Purchase at CVS"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-08-20T09:35:08.201158Z",
+        "amount": "-2311",
+        "merchant": "Target",
+        "category": "Transportation",
+        "description": "Purchase at Target"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-08-21T05:39:36.315568Z",
+        "amount": "-3548",
+        "merchant": "Target",
+        "category": "Entertainment",
+        "description": "Purchase at Target"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-08-21T06:27:50.608158Z",
+        "amount": "-1867",
+        "merchant": "Target",
+        "category": "Food & Drink",
+        "description": "Purchase at Target"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-08-22T14:43:13.536004Z",
+        "amount": "-2592",
+        "merchant": "Amazon",
+        "category": "Transportation",
+        "description": "Purchase at Amazon"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-08-22T09:32:42.663686Z",
+        "amount": "-3465",
+        "merchant": "Target",
+        "category": "Shopping",
+        "description": "Purchase at Target"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-08-23T07:43:19.235552Z",
+        "amount": "-920",
+        "merchant": "Amazon",
+        "category": "Transportation",
+        "description": "Purchase at Amazon"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-08-23T07:30:39.891014Z",
+        "amount": "-610",
+        "merchant": "Subway",
+        "category": "Shopping",
+        "description": "Purchase at Subway"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-08-26T20:36:12.753240Z",
+        "amount": "-2365",
+        "merchant": "Starbucks",
+        "category": "Entertainment",
+        "description": "Purchase at Starbucks"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-08-26T04:41:44.005814Z",
+        "amount": "-2298",
+        "merchant": "Target",
+        "category": "Entertainment",
+        "description": "Purchase at Target"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-08-27T22:33:29.052657Z",
+        "amount": "-1485",
+        "merchant": "Starbucks",
+        "category": "Entertainment",
+        "description": "Purchase at Starbucks"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-08-27T03:29:08.840346Z",
+        "amount": "-4629",
+        "merchant": "Amazon",
+        "category": "Shopping",
+        "description": "Purchase at Amazon"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-08-28T14:39:52.754213Z",
+        "amount": "-4775",
+        "merchant": "Target",
+        "category": "Transportation",
+        "description": "Purchase at Target"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-08-28T17:28:57.166889Z",
+        "amount": "-4238",
+        "merchant": "Amazon",
+        "category": "Entertainment",
+        "description": "Purchase at Amazon"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-08-29T07:53:40.290782Z",
+        "amount": "-1666",
+        "merchant": "Target",
+        "category": "Entertainment",
+        "description": "Purchase at Target"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-08-29T08:28:04.748206Z",
+        "amount": "-3320",
+        "merchant": "Amazon",
+        "category": "Entertainment",
+        "description": "Purchase at Amazon"
+      }
+    },
+    {
+      "paycheck": {
+        "userId": "testuser",
+        "timestamp": "2024-08-30T09:15:17.352161Z",
+        "amount": "250000",
+        "employer": "Acme Corp",
+        "description": "Bi-weekly paycheck"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-08-30T07:24:44.160227Z",
+        "amount": "-1123",
+        "merchant": "CVS",
+        "category": "Food & Drink",
+        "description": "Purchase at CVS"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-08-30T10:34:29.435970Z",
+        "amount": "-2367",
+        "merchant": "Subway",
+        "category": "Food & Drink",
+        "description": "Purchase at Subway"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-09-02T12:57:49.612451Z",
+        "amount": "-4248",
+        "merchant": "Starbucks",
+        "category": "Shopping",
+        "description": "Purchase at Starbucks"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-09-02T11:19:48.408930Z",
+        "amount": "-2646",
+        "merchant": "Starbucks",
+        "category": "Entertainment",
+        "description": "Purchase at Starbucks"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-09-03T08:27:31.030434Z",
+        "amount": "-2697",
+        "merchant": "Target",
+        "category": "Shopping",
+        "description": "Purchase at Target"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-09-03T12:46:10.881334Z",
+        "amount": "-3510",
+        "merchant": "Target",
+        "category": "Transportation",
+        "description": "Purchase at Target"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-09-04T17:01:58.413160Z",
+        "amount": "-4913",
+        "merchant": "Target",
+        "category": "Shopping",
+        "description": "Purchase at Target"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-09-04T13:08:55.484125Z",
+        "amount": "-878",
+        "merchant": "Amazon",
+        "category": "Food & Drink",
+        "description": "Purchase at Amazon"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-09-05T10:13:29.342722Z",
+        "amount": "-1671",
+        "merchant": "Subway",
+        "category": "Food & Drink",
+        "description": "Purchase at Subway"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-09-05T13:16:53.085884Z",
+        "amount": "-1752",
+        "merchant": "CVS",
+        "category": "Entertainment",
+        "description": "Purchase at CVS"
+      }
+    },
+    {
+      "paycheck": {
+        "userId": "testuser",
+        "timestamp": "2024-09-06T15:01:47.565621Z",
+        "amount": "250000",
+        "employer": "Acme Corp",
+        "description": "Bi-weekly paycheck"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-09-06T02:49:41.042213Z",
+        "amount": "-1509",
+        "merchant": "Starbucks",
+        "category": "Transportation",
+        "description": "Purchase at Starbucks"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-09-06T00:39:09.250132Z",
+        "amount": "-1397",
+        "merchant": "Starbucks",
+        "category": "Shopping",
+        "description": "Purchase at Starbucks"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-09-09T18:13:29.733442Z",
+        "amount": "-3513",
+        "merchant": "Subway",
+        "category": "Entertainment",
+        "description": "Purchase at Subway"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-09-09T19:47:45.120096Z",
+        "amount": "-1255",
+        "merchant": "CVS",
+        "category": "Transportation",
+        "description": "Purchase at CVS"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-09-10T00:59:19.603766Z",
+        "amount": "-986",
+        "merchant": "Subway",
+        "category": "Transportation",
+        "description": "Purchase at Subway"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-09-10T06:04:37.724161Z",
+        "amount": "-4737",
+        "merchant": "Target",
+        "category": "Entertainment",
+        "description": "Purchase at Target"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-09-11T09:54:43.629577Z",
+        "amount": "-3637",
+        "merchant": "Subway",
+        "category": "Food & Drink",
+        "description": "Purchase at Subway"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-09-11T13:42:23.072306Z",
+        "amount": "-2062",
+        "merchant": "Starbucks",
+        "category": "Food & Drink",
+        "description": "Purchase at Starbucks"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-09-12T13:52:31.110665Z",
+        "amount": "-557",
+        "merchant": "Amazon",
+        "category": "Transportation",
+        "description": "Purchase at Amazon"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-09-12T14:45:09.456641Z",
+        "amount": "-3360",
+        "merchant": "Target",
+        "category": "Transportation",
+        "description": "Purchase at Target"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-09-13T17:49:30.487455Z",
+        "amount": "-3272",
+        "merchant": "Subway",
+        "category": "Transportation",
+        "description": "Purchase at Subway"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-09-13T07:53:59.090872Z",
+        "amount": "-1950",
+        "merchant": "Target",
+        "category": "Transportation",
+        "description": "Purchase at Target"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-09-16T14:36:39.700646Z",
+        "amount": "-1597",
+        "merchant": "CVS",
+        "category": "Entertainment",
+        "description": "Purchase at CVS"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-09-16T10:11:31.222423Z",
+        "amount": "-629",
+        "merchant": "Target",
+        "category": "Transportation",
+        "description": "Purchase at Target"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-09-17T19:44:56.289688Z",
+        "amount": "-2032",
+        "merchant": "CVS",
+        "category": "Transportation",
+        "description": "Purchase at CVS"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-09-17T06:05:15.755053Z",
+        "amount": "-2825",
+        "merchant": "Amazon",
+        "category": "Food & Drink",
+        "description": "Purchase at Amazon"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-09-18T07:44:30.677278Z",
+        "amount": "-2998",
+        "merchant": "Target",
+        "category": "Entertainment",
+        "description": "Purchase at Target"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-09-18T02:18:14.424045Z",
+        "amount": "-4068",
+        "merchant": "Target",
+        "category": "Entertainment",
+        "description": "Purchase at Target"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-09-19T11:30:35.556711Z",
+        "amount": "-3488",
+        "merchant": "Subway",
+        "category": "Transportation",
+        "description": "Purchase at Subway"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-09-19T17:21:22.736996Z",
+        "amount": "-4985",
+        "merchant": "CVS",
+        "category": "Entertainment",
+        "description": "Purchase at CVS"
+      }
+    },
+    {
+      "paycheck": {
+        "userId": "testuser",
+        "timestamp": "2024-09-20T14:17:19.263615Z",
+        "amount": "250000",
+        "employer": "Acme Corp",
+        "description": "Bi-weekly paycheck"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-09-20T10:07:47.561894Z",
+        "amount": "-3746",
+        "merchant": "Subway",
+        "category": "Food & Drink",
+        "description": "Purchase at Subway"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-09-20T15:17:46.618226Z",
+        "amount": "-1474",
+        "merchant": "Subway",
+        "category": "Shopping",
+        "description": "Purchase at Subway"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-09-23T06:18:14.378411Z",
+        "amount": "-4912",
+        "merchant": "Amazon",
+        "category": "Transportation",
+        "description": "Purchase at Amazon"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-09-23T17:08:17.047726Z",
+        "amount": "-564",
+        "merchant": "Subway",
+        "category": "Transportation",
+        "description": "Purchase at Subway"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-09-24T04:40:55.789359Z",
+        "amount": "-3638",
+        "merchant": "Starbucks",
+        "category": "Transportation",
+        "description": "Purchase at Starbucks"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-09-24T18:18:30.501968Z",
+        "amount": "-4427",
+        "merchant": "Target",
+        "category": "Food & Drink",
+        "description": "Purchase at Target"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-09-25T01:16:55.500935Z",
+        "amount": "-1330",
+        "merchant": "Target",
+        "category": "Transportation",
+        "description": "Purchase at Target"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-09-25T02:36:40.719796Z",
+        "amount": "-2303",
+        "merchant": "Starbucks",
+        "category": "Food & Drink",
+        "description": "Purchase at Starbucks"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-09-26T18:19:05.260247Z",
+        "amount": "-1171",
+        "merchant": "Starbucks",
+        "category": "Shopping",
+        "description": "Purchase at Starbucks"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-09-26T19:14:49.547957Z",
+        "amount": "-3228",
+        "merchant": "Starbucks",
+        "category": "Entertainment",
+        "description": "Purchase at Starbucks"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-09-27T09:55:37.449660Z",
+        "amount": "-4588",
+        "merchant": "Target",
+        "category": "Entertainment",
+        "description": "Purchase at Target"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-09-27T23:06:48.217881Z",
+        "amount": "-3243",
+        "merchant": "CVS",
+        "category": "Food & Drink",
+        "description": "Purchase at CVS"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-09-30T05:15:11.578805Z",
+        "amount": "-3472",
+        "merchant": "Subway",
+        "category": "Transportation",
+        "description": "Purchase at Subway"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-09-30T14:44:38.492738Z",
+        "amount": "-512",
+        "merchant": "Starbucks",
+        "category": "Shopping",
+        "description": "Purchase at Starbucks"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-10-01T22:18:44.901362Z",
+        "amount": "-1542",
+        "merchant": "CVS",
+        "category": "Food & Drink",
+        "description": "Purchase at CVS"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-10-01T08:50:50.655420Z",
+        "amount": "-3593",
+        "merchant": "Target",
+        "category": "Food & Drink",
+        "description": "Purchase at Target"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-10-02T17:14:41.156226Z",
+        "amount": "-2413",
+        "merchant": "Amazon",
+        "category": "Shopping",
+        "description": "Purchase at Amazon"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-10-02T05:50:19.623948Z",
+        "amount": "-821",
+        "merchant": "CVS",
+        "category": "Shopping",
+        "description": "Purchase at CVS"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-10-03T14:44:19.733723Z",
+        "amount": "-2476",
+        "merchant": "Amazon",
+        "category": "Transportation",
+        "description": "Purchase at Amazon"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-10-03T15:28:05.627086Z",
+        "amount": "-2752",
+        "merchant": "Target",
+        "category": "Transportation",
+        "description": "Purchase at Target"
+      }
+    },
+    {
+      "paycheck": {
+        "userId": "testuser",
+        "timestamp": "2024-10-04T01:56:27.770214Z",
+        "amount": "250000",
+        "employer": "Acme Corp",
+        "description": "Bi-weekly paycheck"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-10-04T07:43:53.902317Z",
+        "amount": "-616",
+        "merchant": "CVS",
+        "category": "Transportation",
+        "description": "Purchase at CVS"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-10-04T21:52:17.604238Z",
+        "amount": "-4998",
+        "merchant": "Amazon",
+        "category": "Food & Drink",
+        "description": "Purchase at Amazon"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-10-07T20:28:58.291668Z",
+        "amount": "-2617",
+        "merchant": "Starbucks",
+        "category": "Shopping",
+        "description": "Purchase at Starbucks"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-10-07T15:05:30.364863Z",
+        "amount": "-3357",
+        "merchant": "Subway",
+        "category": "Entertainment",
+        "description": "Purchase at Subway"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-10-08T03:54:10.345824Z",
+        "amount": "-1945",
+        "merchant": "Target",
+        "category": "Transportation",
+        "description": "Purchase at Target"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-10-08T12:52:48.576818Z",
+        "amount": "-1797",
+        "merchant": "Target",
+        "category": "Entertainment",
+        "description": "Purchase at Target"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-10-09T08:20:07.810075Z",
+        "amount": "-896",
+        "merchant": "Starbucks",
+        "category": "Entertainment",
+        "description": "Purchase at Starbucks"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-10-09T17:29:26.056837Z",
+        "amount": "-3459",
+        "merchant": "Target",
+        "category": "Food & Drink",
+        "description": "Purchase at Target"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-10-10T15:40:28.796907Z",
+        "amount": "-3302",
+        "merchant": "Subway",
+        "category": "Transportation",
+        "description": "Purchase at Subway"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-10-10T04:59:18.459398Z",
+        "amount": "-1702",
+        "merchant": "Starbucks",
+        "category": "Shopping",
+        "description": "Purchase at Starbucks"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-10-11T20:38:51.250921Z",
+        "amount": "-630",
+        "merchant": "Target",
+        "category": "Food & Drink",
+        "description": "Purchase at Target"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-10-11T17:26:05.235615Z",
+        "amount": "-2979",
+        "merchant": "Subway",
+        "category": "Transportation",
+        "description": "Purchase at Subway"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-10-14T20:53:09.522584Z",
+        "amount": "-4762",
+        "merchant": "Starbucks",
+        "category": "Entertainment",
+        "description": "Purchase at Starbucks"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-10-14T15:30:15.478975Z",
+        "amount": "-2370",
+        "merchant": "CVS",
+        "category": "Transportation",
+        "description": "Purchase at CVS"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-10-15T19:32:47.922040Z",
+        "amount": "-2226",
+        "merchant": "Amazon",
+        "category": "Shopping",
+        "description": "Purchase at Amazon"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-10-15T13:21:59.825981Z",
+        "amount": "-1743",
+        "merchant": "Subway",
+        "category": "Food & Drink",
+        "description": "Purchase at Subway"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-10-16T09:46:19.878157Z",
+        "amount": "-4192",
+        "merchant": "Amazon",
+        "category": "Transportation",
+        "description": "Purchase at Amazon"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-10-16T14:34:30.361888Z",
+        "amount": "-4394",
+        "merchant": "Amazon",
+        "category": "Entertainment",
+        "description": "Purchase at Amazon"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-10-17T10:55:12.731380Z",
+        "amount": "-2549",
+        "merchant": "CVS",
+        "category": "Entertainment",
+        "description": "Purchase at CVS"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-10-17T13:02:20.780879Z",
+        "amount": "-1551",
+        "merchant": "Subway",
+        "category": "Entertainment",
+        "description": "Purchase at Subway"
+      }
+    },
+    {
+      "paycheck": {
+        "userId": "testuser",
+        "timestamp": "2024-10-18T15:45:58.850823Z",
+        "amount": "250000",
+        "employer": "Acme Corp",
+        "description": "Bi-weekly paycheck"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-10-18T20:09:31.038817Z",
+        "amount": "-4948",
+        "merchant": "Target",
+        "category": "Entertainment",
+        "description": "Purchase at Target"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-10-18T14:06:33.954667Z",
+        "amount": "-4414",
+        "merchant": "Subway",
+        "category": "Transportation",
+        "description": "Purchase at Subway"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-10-21T13:55:41.161859Z",
+        "amount": "-3751",
+        "merchant": "Target",
+        "category": "Food & Drink",
+        "description": "Purchase at Target"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-10-21T08:21:39.726353Z",
+        "amount": "-4017",
+        "merchant": "Starbucks",
+        "category": "Entertainment",
+        "description": "Purchase at Starbucks"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-10-22T21:54:34.398468Z",
+        "amount": "-4333",
+        "merchant": "Target",
+        "category": "Food & Drink",
+        "description": "Purchase at Target"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-10-22T01:39:04.246174Z",
+        "amount": "-4426",
+        "merchant": "CVS",
+        "category": "Entertainment",
+        "description": "Purchase at CVS"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-10-23T13:06:48.664532Z",
+        "amount": "-3860",
+        "merchant": "CVS",
+        "category": "Shopping",
+        "description": "Purchase at CVS"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-10-23T09:57:01.048225Z",
+        "amount": "-1249",
+        "merchant": "Starbucks",
+        "category": "Entertainment",
+        "description": "Purchase at Starbucks"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-10-24T11:27:09.256059Z",
+        "amount": "-1820",
+        "merchant": "CVS",
+        "category": "Food & Drink",
+        "description": "Purchase at CVS"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-10-24T05:10:11.082804Z",
+        "amount": "-3047",
+        "merchant": "Amazon",
+        "category": "Entertainment",
+        "description": "Purchase at Amazon"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-10-25T07:31:58.611484Z",
+        "amount": "-3289",
+        "merchant": "Amazon",
+        "category": "Entertainment",
+        "description": "Purchase at Amazon"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-10-25T08:29:16.699233Z",
+        "amount": "-2575",
+        "merchant": "Subway",
+        "category": "Shopping",
+        "description": "Purchase at Subway"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-10-28T21:34:10.077449Z",
+        "amount": "-4555",
+        "merchant": "Starbucks",
+        "category": "Entertainment",
+        "description": "Purchase at Starbucks"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-10-28T09:40:27.723846Z",
+        "amount": "-4944",
+        "merchant": "Target",
+        "category": "Transportation",
+        "description": "Purchase at Target"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-10-29T06:24:54.506680Z",
+        "amount": "-4304",
+        "merchant": "CVS",
+        "category": "Entertainment",
+        "description": "Purchase at CVS"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-10-29T11:36:18.733247Z",
+        "amount": "-2216",
+        "merchant": "Starbucks",
+        "category": "Shopping",
+        "description": "Purchase at Starbucks"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-10-30T21:25:17.008491Z",
+        "amount": "-4901",
+        "merchant": "CVS",
+        "category": "Food & Drink",
+        "description": "Purchase at CVS"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-10-30T23:31:53.948075Z",
+        "amount": "-4598",
+        "merchant": "Amazon",
+        "category": "Food & Drink",
+        "description": "Purchase at Amazon"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-10-31T11:14:40.199367Z",
+        "amount": "-3232",
+        "merchant": "CVS",
+        "category": "Shopping",
+        "description": "Purchase at CVS"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-10-31T23:49:42.713928Z",
+        "amount": "-3550",
+        "merchant": "Amazon",
+        "category": "Transportation",
+        "description": "Purchase at Amazon"
+      }
+    },
+    {
+      "paycheck": {
+        "userId": "testuser",
+        "timestamp": "2024-11-01T04:40:06.947287Z",
+        "amount": "250000",
+        "employer": "Acme Corp",
+        "description": "Bi-weekly paycheck"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-11-01T01:37:23.767934Z",
+        "amount": "-4049",
+        "merchant": "Starbucks",
+        "category": "Transportation",
+        "description": "Purchase at Starbucks"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-11-01T10:47:26.184171Z",
+        "amount": "-4593",
+        "merchant": "Subway",
+        "category": "Food & Drink",
+        "description": "Purchase at Subway"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-11-04T11:33:32.957860Z",
+        "amount": "-4039",
+        "merchant": "Subway",
+        "category": "Shopping",
+        "description": "Purchase at Subway"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-11-04T15:51:18.782824Z",
+        "amount": "-1656",
+        "merchant": "CVS",
+        "category": "Shopping",
+        "description": "Purchase at CVS"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-11-05T02:09:48.236574Z",
+        "amount": "-2607",
+        "merchant": "CVS",
+        "category": "Food & Drink",
+        "description": "Purchase at CVS"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-11-05T12:00:16.562636Z",
+        "amount": "-906",
+        "merchant": "Target",
+        "category": "Transportation",
+        "description": "Purchase at Target"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-11-06T23:43:16.612955Z",
+        "amount": "-2159",
+        "merchant": "Starbucks",
+        "category": "Entertainment",
+        "description": "Purchase at Starbucks"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-11-06T07:30:01.649641Z",
+        "amount": "-988",
+        "merchant": "Target",
+        "category": "Transportation",
+        "description": "Purchase at Target"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-11-07T07:41:04.666269Z",
+        "amount": "-4619",
+        "merchant": "Amazon",
+        "category": "Transportation",
+        "description": "Purchase at Amazon"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-11-07T03:08:02.992227Z",
+        "amount": "-3422",
+        "merchant": "Target",
+        "category": "Transportation",
+        "description": "Purchase at Target"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-11-08T03:06:15.930358Z",
+        "amount": "-4982",
+        "merchant": "Starbucks",
+        "category": "Transportation",
+        "description": "Purchase at Starbucks"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-11-08T11:42:47.730316Z",
+        "amount": "-2249",
+        "merchant": "Amazon",
+        "category": "Shopping",
+        "description": "Purchase at Amazon"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-11-11T23:09:56.435037Z",
+        "amount": "-3143",
+        "merchant": "Amazon",
+        "category": "Entertainment",
+        "description": "Purchase at Amazon"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-11-11T08:02:44.388528Z",
+        "amount": "-3270",
+        "merchant": "Starbucks",
+        "category": "Entertainment",
+        "description": "Purchase at Starbucks"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-11-12T07:54:23.104180Z",
+        "amount": "-2501",
+        "merchant": "Subway",
+        "category": "Entertainment",
+        "description": "Purchase at Subway"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-11-12T08:12:07.995109Z",
+        "amount": "-772",
+        "merchant": "CVS",
+        "category": "Transportation",
+        "description": "Purchase at CVS"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-11-13T20:40:38.022394Z",
+        "amount": "-3482",
+        "merchant": "Target",
+        "category": "Food & Drink",
+        "description": "Purchase at Target"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-11-13T04:50:36.215173Z",
+        "amount": "-1596",
+        "merchant": "Starbucks",
+        "category": "Transportation",
+        "description": "Purchase at Starbucks"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-11-14T07:21:49.154721Z",
+        "amount": "-3139",
+        "merchant": "Starbucks",
+        "category": "Shopping",
+        "description": "Purchase at Starbucks"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-11-14T04:08:34.262829Z",
+        "amount": "-1748",
+        "merchant": "Amazon",
+        "category": "Food & Drink",
+        "description": "Purchase at Amazon"
+      }
+    },
+    {
+      "paycheck": {
+        "userId": "testuser",
+        "timestamp": "2024-11-15T05:07:42.908536Z",
+        "amount": "250000",
+        "employer": "Acme Corp",
+        "description": "Bi-weekly paycheck"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-11-15T07:37:20.016547Z",
+        "amount": "-567",
+        "merchant": "Starbucks",
+        "category": "Shopping",
+        "description": "Purchase at Starbucks"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-11-15T23:26:33.119169Z",
+        "amount": "-736",
+        "merchant": "Subway",
+        "category": "Transportation",
+        "description": "Purchase at Subway"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-11-18T11:32:37.114351Z",
+        "amount": "-2517",
+        "merchant": "Starbucks",
+        "category": "Entertainment",
+        "description": "Purchase at Starbucks"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-11-18T01:46:50.952895Z",
+        "amount": "-4754",
+        "merchant": "Target",
+        "category": "Shopping",
+        "description": "Purchase at Target"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-11-19T00:03:30.888456Z",
+        "amount": "-2561",
+        "merchant": "Amazon",
+        "category": "Transportation",
+        "description": "Purchase at Amazon"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-11-19T15:45:58.465108Z",
+        "amount": "-3587",
+        "merchant": "Target",
+        "category": "Entertainment",
+        "description": "Purchase at Target"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-11-20T04:04:08.288375Z",
+        "amount": "-1950",
+        "merchant": "Starbucks",
+        "category": "Food & Drink",
+        "description": "Purchase at Starbucks"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-11-20T19:33:18.475755Z",
+        "amount": "-2214",
+        "merchant": "Amazon",
+        "category": "Transportation",
+        "description": "Purchase at Amazon"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-11-21T22:07:54.686516Z",
+        "amount": "-946",
+        "merchant": "Amazon",
+        "category": "Entertainment",
+        "description": "Purchase at Amazon"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-11-21T07:26:21.867611Z",
+        "amount": "-2435",
+        "merchant": "Amazon",
+        "category": "Shopping",
+        "description": "Purchase at Amazon"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-11-22T03:20:27.327704Z",
+        "amount": "-2372",
+        "merchant": "Target",
+        "category": "Entertainment",
+        "description": "Purchase at Target"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-11-22T21:59:30.070394Z",
+        "amount": "-4791",
+        "merchant": "CVS",
+        "category": "Transportation",
+        "description": "Purchase at CVS"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-11-25T03:47:47.390748Z",
+        "amount": "-920",
+        "merchant": "Starbucks",
+        "category": "Food & Drink",
+        "description": "Purchase at Starbucks"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-11-25T17:35:21.702559Z",
+        "amount": "-3139",
+        "merchant": "Subway",
+        "category": "Food & Drink",
+        "description": "Purchase at Subway"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-11-26T21:48:27.910260Z",
+        "amount": "-2091",
+        "merchant": "Starbucks",
+        "category": "Entertainment",
+        "description": "Purchase at Starbucks"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-11-26T11:06:36.532060Z",
+        "amount": "-3202",
+        "merchant": "Starbucks",
+        "category": "Transportation",
+        "description": "Purchase at Starbucks"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-11-27T07:54:06.367121Z",
+        "amount": "-3455",
+        "merchant": "Subway",
+        "category": "Shopping",
+        "description": "Purchase at Subway"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-11-27T08:36:14.846432Z",
+        "amount": "-1017",
+        "merchant": "Amazon",
+        "category": "Transportation",
+        "description": "Purchase at Amazon"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-11-28T21:53:44.280439Z",
+        "amount": "-3240",
+        "merchant": "Target",
+        "category": "Food & Drink",
+        "description": "Purchase at Target"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-11-28T09:58:21.368074Z",
+        "amount": "-1730",
+        "merchant": "Starbucks",
+        "category": "Shopping",
+        "description": "Purchase at Starbucks"
+      }
+    },
+    {
+      "paycheck": {
+        "userId": "testuser",
+        "timestamp": "2024-11-29T00:11:55.150210Z",
+        "amount": "250000",
+        "employer": "Acme Corp",
+        "description": "Bi-weekly paycheck"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-11-29T23:40:01.096214Z",
+        "amount": "-813",
+        "merchant": "Amazon",
+        "category": "Entertainment",
+        "description": "Purchase at Amazon"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-11-29T14:21:10.388028Z",
+        "amount": "-2193",
+        "merchant": "Amazon",
+        "category": "Shopping",
+        "description": "Purchase at Amazon"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-12-02T18:38:05.926251Z",
+        "amount": "-3996",
+        "merchant": "CVS",
+        "category": "Transportation",
+        "description": "Purchase at CVS"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-12-02T19:03:43.085544Z",
+        "amount": "-1208",
+        "merchant": "Starbucks",
+        "category": "Shopping",
+        "description": "Purchase at Starbucks"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-12-03T15:38:28.434303Z",
+        "amount": "-3479",
+        "merchant": "CVS",
+        "category": "Entertainment",
+        "description": "Purchase at CVS"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-12-03T03:22:27.116276Z",
+        "amount": "-3897",
+        "merchant": "CVS",
+        "category": "Shopping",
+        "description": "Purchase at CVS"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-12-04T09:02:14.414463Z",
+        "amount": "-2871",
+        "merchant": "CVS",
+        "category": "Entertainment",
+        "description": "Purchase at CVS"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-12-04T09:13:49.143901Z",
+        "amount": "-535",
+        "merchant": "Amazon",
+        "category": "Food & Drink",
+        "description": "Purchase at Amazon"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-12-05T00:31:47.451574Z",
+        "amount": "-1977",
+        "merchant": "CVS",
+        "category": "Transportation",
+        "description": "Purchase at CVS"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-12-05T22:14:32.585864Z",
+        "amount": "-2211",
+        "merchant": "Subway",
+        "category": "Shopping",
+        "description": "Purchase at Subway"
+      }
+    },
+    {
+      "paycheck": {
+        "userId": "testuser",
+        "timestamp": "2024-12-06T21:51:22.075576Z",
+        "amount": "250000",
+        "employer": "Acme Corp",
+        "description": "Bi-weekly paycheck"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-12-06T14:58:04.903987Z",
+        "amount": "-2463",
+        "merchant": "Target",
+        "category": "Food & Drink",
+        "description": "Purchase at Target"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-12-06T22:40:26.303578Z",
+        "amount": "-3080",
+        "merchant": "CVS",
+        "category": "Entertainment",
+        "description": "Purchase at CVS"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-12-09T10:10:51.993645Z",
+        "amount": "-594",
+        "merchant": "Starbucks",
+        "category": "Entertainment",
+        "description": "Purchase at Starbucks"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-12-09T11:05:27.885506Z",
+        "amount": "-4244",
+        "merchant": "Amazon",
+        "category": "Entertainment",
+        "description": "Purchase at Amazon"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-12-10T12:33:05.414991Z",
+        "amount": "-2461",
+        "merchant": "Starbucks",
+        "category": "Shopping",
+        "description": "Purchase at Starbucks"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-12-10T05:04:32.663984Z",
+        "amount": "-1497",
+        "merchant": "CVS",
+        "category": "Transportation",
+        "description": "Purchase at CVS"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-12-11T11:22:46.858729Z",
+        "amount": "-4577",
+        "merchant": "Starbucks",
+        "category": "Shopping",
+        "description": "Purchase at Starbucks"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-12-11T08:12:11.631661Z",
+        "amount": "-963",
+        "merchant": "Subway",
+        "category": "Shopping",
+        "description": "Purchase at Subway"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-12-12T20:31:29.791093Z",
+        "amount": "-1297",
+        "merchant": "Subway",
+        "category": "Food & Drink",
+        "description": "Purchase at Subway"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-12-12T18:41:40.654858Z",
+        "amount": "-3565",
+        "merchant": "Amazon",
+        "category": "Entertainment",
+        "description": "Purchase at Amazon"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-12-13T02:30:28.662055Z",
+        "amount": "-1179",
+        "merchant": "CVS",
+        "category": "Transportation",
+        "description": "Purchase at CVS"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-12-13T11:32:04.325486Z",
+        "amount": "-3161",
+        "merchant": "CVS",
+        "category": "Transportation",
+        "description": "Purchase at CVS"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-12-16T11:53:18.080458Z",
+        "amount": "-669",
+        "merchant": "Target",
+        "category": "Entertainment",
+        "description": "Purchase at Target"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-12-16T17:50:47.939394Z",
+        "amount": "-2582",
+        "merchant": "Starbucks",
+        "category": "Entertainment",
+        "description": "Purchase at Starbucks"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-12-17T18:41:12.337145Z",
+        "amount": "-4591",
+        "merchant": "Starbucks",
+        "category": "Entertainment",
+        "description": "Purchase at Starbucks"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-12-17T01:28:06.850360Z",
+        "amount": "-2756",
+        "merchant": "Amazon",
+        "category": "Entertainment",
+        "description": "Purchase at Amazon"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-12-18T05:02:15.741995Z",
+        "amount": "-2770",
+        "merchant": "CVS",
+        "category": "Food & Drink",
+        "description": "Purchase at CVS"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-12-18T19:10:23.390963Z",
+        "amount": "-2858",
+        "merchant": "Target",
+        "category": "Entertainment",
+        "description": "Purchase at Target"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-12-19T10:43:38.054909Z",
+        "amount": "-2339",
+        "merchant": "CVS",
+        "category": "Entertainment",
+        "description": "Purchase at CVS"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-12-19T17:43:24.297949Z",
+        "amount": "-1984",
+        "merchant": "CVS",
+        "category": "Food & Drink",
+        "description": "Purchase at CVS"
+      }
+    },
+    {
+      "paycheck": {
+        "userId": "testuser",
+        "timestamp": "2024-12-20T08:46:54.688457Z",
+        "amount": "250000",
+        "employer": "Acme Corp",
+        "description": "Bi-weekly paycheck"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-12-20T18:42:09.961278Z",
+        "amount": "-2000",
+        "merchant": "Amazon",
+        "category": "Shopping",
+        "description": "Purchase at Amazon"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-12-20T22:42:25.135215Z",
+        "amount": "-4855",
+        "merchant": "CVS",
+        "category": "Transportation",
+        "description": "Purchase at CVS"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-12-23T12:41:50.344432Z",
+        "amount": "-1893",
+        "merchant": "Amazon",
+        "category": "Food & Drink",
+        "description": "Purchase at Amazon"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-12-23T13:32:23.019116Z",
+        "amount": "-3407",
+        "merchant": "Subway",
+        "category": "Food & Drink",
+        "description": "Purchase at Subway"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-12-24T06:21:49.509892Z",
+        "amount": "-1311",
+        "merchant": "CVS",
+        "category": "Transportation",
+        "description": "Purchase at CVS"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-12-24T04:04:18.885447Z",
+        "amount": "-5000",
+        "merchant": "Subway",
+        "category": "Shopping",
+        "description": "Purchase at Subway"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-12-25T19:08:38.395019Z",
+        "amount": "-3479",
+        "merchant": "Starbucks",
+        "category": "Food & Drink",
+        "description": "Purchase at Starbucks"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-12-25T22:49:39.848343Z",
+        "amount": "-1314",
+        "merchant": "Subway",
+        "category": "Shopping",
+        "description": "Purchase at Subway"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-12-26T11:43:46.249068Z",
+        "amount": "-697",
+        "merchant": "Subway",
+        "category": "Entertainment",
+        "description": "Purchase at Subway"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-12-26T14:14:34.250786Z",
+        "amount": "-3886",
+        "merchant": "Target",
+        "category": "Transportation",
+        "description": "Purchase at Target"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-12-27T06:23:43.993137Z",
+        "amount": "-4568",
+        "merchant": "CVS",
+        "category": "Entertainment",
+        "description": "Purchase at CVS"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-12-27T09:49:24.527335Z",
+        "amount": "-2578",
+        "merchant": "Amazon",
+        "category": "Entertainment",
+        "description": "Purchase at Amazon"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-12-30T06:51:38.145121Z",
+        "amount": "-4848",
+        "merchant": "Amazon",
+        "category": "Entertainment",
+        "description": "Purchase at Amazon"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-12-30T11:35:59.107573Z",
+        "amount": "-3385",
+        "merchant": "CVS",
+        "category": "Food & Drink",
+        "description": "Purchase at CVS"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-12-31T05:17:28.949282Z",
+        "amount": "-1783",
+        "merchant": "Amazon",
+        "category": "Food & Drink",
+        "description": "Purchase at Amazon"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2024-12-31T02:58:14.856375Z",
+        "amount": "-4240",
+        "merchant": "Amazon",
+        "category": "Shopping",
+        "description": "Purchase at Amazon"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-01-01T13:03:25.526392Z",
+        "amount": "-4687",
+        "merchant": "Target",
+        "category": "Transportation",
+        "description": "Purchase at Target"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-01-01T02:23:14.029556Z",
+        "amount": "-2238",
+        "merchant": "CVS",
+        "category": "Shopping",
+        "description": "Purchase at CVS"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-01-02T20:21:50.153143Z",
+        "amount": "-4276",
+        "merchant": "CVS",
+        "category": "Food & Drink",
+        "description": "Purchase at CVS"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-01-02T15:44:53.145534Z",
+        "amount": "-1791",
+        "merchant": "Subway",
+        "category": "Food & Drink",
+        "description": "Purchase at Subway"
+      }
+    },
+    {
+      "paycheck": {
+        "userId": "testuser",
+        "timestamp": "2025-01-03T22:30:28.645239Z",
+        "amount": "250000",
+        "employer": "Acme Corp",
+        "description": "Bi-weekly paycheck"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-01-03T06:53:09.575462Z",
+        "amount": "-586",
+        "merchant": "Starbucks",
+        "category": "Food & Drink",
+        "description": "Purchase at Starbucks"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-01-03T09:15:19.127767Z",
+        "amount": "-1000",
+        "merchant": "Amazon",
+        "category": "Entertainment",
+        "description": "Purchase at Amazon"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-01-06T19:29:04.116242Z",
+        "amount": "-2389",
+        "merchant": "Starbucks",
+        "category": "Shopping",
+        "description": "Purchase at Starbucks"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-01-06T18:15:45.150551Z",
+        "amount": "-3344",
+        "merchant": "Target",
+        "category": "Food & Drink",
+        "description": "Purchase at Target"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-01-07T11:15:36.436802Z",
+        "amount": "-507",
+        "merchant": "CVS",
+        "category": "Entertainment",
+        "description": "Purchase at CVS"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-01-07T11:04:33.570511Z",
+        "amount": "-2856",
+        "merchant": "Subway",
+        "category": "Food & Drink",
+        "description": "Purchase at Subway"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-01-08T15:02:40.405674Z",
+        "amount": "-2257",
+        "merchant": "Amazon",
+        "category": "Food & Drink",
+        "description": "Purchase at Amazon"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-01-08T11:50:04.361551Z",
+        "amount": "-3863",
+        "merchant": "CVS",
+        "category": "Transportation",
+        "description": "Purchase at CVS"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-01-09T23:48:21.139890Z",
+        "amount": "-3972",
+        "merchant": "Subway",
+        "category": "Food & Drink",
+        "description": "Purchase at Subway"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-01-09T20:11:53.816990Z",
+        "amount": "-2957",
+        "merchant": "Starbucks",
+        "category": "Transportation",
+        "description": "Purchase at Starbucks"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-01-10T04:04:45.813894Z",
+        "amount": "-3343",
+        "merchant": "Target",
+        "category": "Entertainment",
+        "description": "Purchase at Target"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-01-10T01:50:12.928818Z",
+        "amount": "-1820",
+        "merchant": "Target",
+        "category": "Food & Drink",
+        "description": "Purchase at Target"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-01-13T16:25:52.569408Z",
+        "amount": "-4700",
+        "merchant": "Starbucks",
+        "category": "Transportation",
+        "description": "Purchase at Starbucks"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-01-13T20:12:18.374314Z",
+        "amount": "-665",
+        "merchant": "Target",
+        "category": "Transportation",
+        "description": "Purchase at Target"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-01-14T11:27:56.419453Z",
+        "amount": "-1729",
+        "merchant": "Starbucks",
+        "category": "Transportation",
+        "description": "Purchase at Starbucks"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-01-14T05:31:44.521691Z",
+        "amount": "-2026",
+        "merchant": "Target",
+        "category": "Entertainment",
+        "description": "Purchase at Target"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-01-15T23:27:05.451524Z",
+        "amount": "-4105",
+        "merchant": "CVS",
+        "category": "Transportation",
+        "description": "Purchase at CVS"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-01-15T10:06:05.343848Z",
+        "amount": "-2955",
+        "merchant": "Amazon",
+        "category": "Shopping",
+        "description": "Purchase at Amazon"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-01-16T22:27:10.723270Z",
+        "amount": "-2507",
+        "merchant": "CVS",
+        "category": "Transportation",
+        "description": "Purchase at CVS"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-01-16T23:55:58.369685Z",
+        "amount": "-2512",
+        "merchant": "Target",
+        "category": "Transportation",
+        "description": "Purchase at Target"
+      }
+    },
+    {
+      "paycheck": {
+        "userId": "testuser",
+        "timestamp": "2025-01-17T19:27:17.670532Z",
+        "amount": "250000",
+        "employer": "Acme Corp",
+        "description": "Bi-weekly paycheck"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-01-17T12:23:32.840010Z",
+        "amount": "-3520",
+        "merchant": "Starbucks",
+        "category": "Food & Drink",
+        "description": "Purchase at Starbucks"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-01-17T19:43:50.459457Z",
+        "amount": "-1143",
+        "merchant": "Subway",
+        "category": "Food & Drink",
+        "description": "Purchase at Subway"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-01-20T20:23:23.401451Z",
+        "amount": "-803",
+        "merchant": "Starbucks",
+        "category": "Shopping",
+        "description": "Purchase at Starbucks"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-01-20T21:28:23.390084Z",
+        "amount": "-3223",
+        "merchant": "Amazon",
+        "category": "Food & Drink",
+        "description": "Purchase at Amazon"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-01-21T16:23:25.329657Z",
+        "amount": "-3083",
+        "merchant": "Target",
+        "category": "Food & Drink",
+        "description": "Purchase at Target"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-01-21T00:47:11.523285Z",
+        "amount": "-4822",
+        "merchant": "CVS",
+        "category": "Shopping",
+        "description": "Purchase at CVS"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-01-22T03:16:49.272933Z",
+        "amount": "-4611",
+        "merchant": "Amazon",
+        "category": "Entertainment",
+        "description": "Purchase at Amazon"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-01-22T09:44:58.515060Z",
+        "amount": "-4984",
+        "merchant": "Target",
+        "category": "Shopping",
+        "description": "Purchase at Target"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-01-23T02:28:11.942333Z",
+        "amount": "-1111",
+        "merchant": "Subway",
+        "category": "Food & Drink",
+        "description": "Purchase at Subway"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-01-23T10:42:22.744007Z",
+        "amount": "-4147",
+        "merchant": "Target",
+        "category": "Food & Drink",
+        "description": "Purchase at Target"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-01-24T05:45:45.972370Z",
+        "amount": "-4511",
+        "merchant": "Starbucks",
+        "category": "Transportation",
+        "description": "Purchase at Starbucks"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-01-24T03:12:50.145622Z",
+        "amount": "-2789",
+        "merchant": "Subway",
+        "category": "Transportation",
+        "description": "Purchase at Subway"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-01-27T17:36:23.490110Z",
+        "amount": "-618",
+        "merchant": "Subway",
+        "category": "Entertainment",
+        "description": "Purchase at Subway"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-01-27T02:04:19.417500Z",
+        "amount": "-3254",
+        "merchant": "Amazon",
+        "category": "Shopping",
+        "description": "Purchase at Amazon"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-01-28T18:04:08.332427Z",
+        "amount": "-3961",
+        "merchant": "Target",
+        "category": "Entertainment",
+        "description": "Purchase at Target"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-01-28T16:22:08.920607Z",
+        "amount": "-2596",
+        "merchant": "Starbucks",
+        "category": "Entertainment",
+        "description": "Purchase at Starbucks"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-01-29T04:27:32.954951Z",
+        "amount": "-3955",
+        "merchant": "Amazon",
+        "category": "Shopping",
+        "description": "Purchase at Amazon"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-01-29T09:10:10.338334Z",
+        "amount": "-2831",
+        "merchant": "Starbucks",
+        "category": "Food & Drink",
+        "description": "Purchase at Starbucks"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-01-30T16:57:18.887025Z",
+        "amount": "-4764",
+        "merchant": "Subway",
+        "category": "Transportation",
+        "description": "Purchase at Subway"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-01-30T17:17:08.655383Z",
+        "amount": "-1383",
+        "merchant": "Starbucks",
+        "category": "Transportation",
+        "description": "Purchase at Starbucks"
+      }
+    },
+    {
+      "paycheck": {
+        "userId": "testuser",
+        "timestamp": "2025-01-31T09:39:34.097966Z",
+        "amount": "250000",
+        "employer": "Acme Corp",
+        "description": "Bi-weekly paycheck"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-01-31T18:09:10.690731Z",
+        "amount": "-3163",
+        "merchant": "Amazon",
+        "category": "Shopping",
+        "description": "Purchase at Amazon"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-01-31T18:02:52.905740Z",
+        "amount": "-4291",
+        "merchant": "Amazon",
+        "category": "Transportation",
+        "description": "Purchase at Amazon"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-02-03T20:49:36.277511Z",
+        "amount": "-705",
+        "merchant": "Starbucks",
+        "category": "Food & Drink",
+        "description": "Purchase at Starbucks"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-02-03T00:31:56.657629Z",
+        "amount": "-3281",
+        "merchant": "Subway",
+        "category": "Entertainment",
+        "description": "Purchase at Subway"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-02-04T09:30:15.843776Z",
+        "amount": "-3389",
+        "merchant": "Amazon",
+        "category": "Transportation",
+        "description": "Purchase at Amazon"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-02-04T22:03:10.460959Z",
+        "amount": "-2541",
+        "merchant": "Target",
+        "category": "Transportation",
+        "description": "Purchase at Target"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-02-05T10:38:09.327766Z",
+        "amount": "-2590",
+        "merchant": "Target",
+        "category": "Entertainment",
+        "description": "Purchase at Target"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-02-05T04:48:23.539995Z",
+        "amount": "-4889",
+        "merchant": "CVS",
+        "category": "Transportation",
+        "description": "Purchase at CVS"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-02-06T14:07:17.471435Z",
+        "amount": "-1936",
+        "merchant": "Amazon",
+        "category": "Food & Drink",
+        "description": "Purchase at Amazon"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-02-06T09:24:55.645270Z",
+        "amount": "-936",
+        "merchant": "Subway",
+        "category": "Shopping",
+        "description": "Purchase at Subway"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-02-07T05:52:20.979109Z",
+        "amount": "-4832",
+        "merchant": "Target",
+        "category": "Shopping",
+        "description": "Purchase at Target"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-02-07T05:31:32.489491Z",
+        "amount": "-1354",
+        "merchant": "Amazon",
+        "category": "Transportation",
+        "description": "Purchase at Amazon"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-02-10T02:25:32.479441Z",
+        "amount": "-2738",
+        "merchant": "Target",
+        "category": "Transportation",
+        "description": "Purchase at Target"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-02-10T01:03:18.518934Z",
+        "amount": "-3125",
+        "merchant": "Subway",
+        "category": "Shopping",
+        "description": "Purchase at Subway"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-02-11T00:54:06.451860Z",
+        "amount": "-1786",
+        "merchant": "Amazon",
+        "category": "Entertainment",
+        "description": "Purchase at Amazon"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-02-11T12:23:02.420040Z",
+        "amount": "-3774",
+        "merchant": "Subway",
+        "category": "Transportation",
+        "description": "Purchase at Subway"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-02-12T09:04:24.528750Z",
+        "amount": "-2131",
+        "merchant": "Starbucks",
+        "category": "Shopping",
+        "description": "Purchase at Starbucks"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-02-12T19:43:39.124582Z",
+        "amount": "-4214",
+        "merchant": "Target",
+        "category": "Transportation",
+        "description": "Purchase at Target"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-02-13T10:35:23.791638Z",
+        "amount": "-2273",
+        "merchant": "Subway",
+        "category": "Food & Drink",
+        "description": "Purchase at Subway"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-02-13T12:32:02.047504Z",
+        "amount": "-3211",
+        "merchant": "Subway",
+        "category": "Shopping",
+        "description": "Purchase at Subway"
+      }
+    },
+    {
+      "paycheck": {
+        "userId": "testuser",
+        "timestamp": "2025-02-14T01:08:45.349218Z",
+        "amount": "250000",
+        "employer": "Acme Corp",
+        "description": "Bi-weekly paycheck"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-02-14T16:08:20.976610Z",
+        "amount": "-1170",
+        "merchant": "Target",
+        "category": "Entertainment",
+        "description": "Purchase at Target"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-02-14T19:47:53.313769Z",
+        "amount": "-1231",
+        "merchant": "Amazon",
+        "category": "Transportation",
+        "description": "Purchase at Amazon"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-02-17T16:34:31.743167Z",
+        "amount": "-2783",
+        "merchant": "Amazon",
+        "category": "Transportation",
+        "description": "Purchase at Amazon"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-02-17T00:23:21.706537Z",
+        "amount": "-2637",
+        "merchant": "Amazon",
+        "category": "Transportation",
+        "description": "Purchase at Amazon"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-02-18T23:55:44.659827Z",
+        "amount": "-3127",
+        "merchant": "Starbucks",
+        "category": "Entertainment",
+        "description": "Purchase at Starbucks"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-02-18T20:50:49.606574Z",
+        "amount": "-1695",
+        "merchant": "Starbucks",
+        "category": "Entertainment",
+        "description": "Purchase at Starbucks"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-02-19T18:30:10.549697Z",
+        "amount": "-3746",
+        "merchant": "Amazon",
+        "category": "Shopping",
+        "description": "Purchase at Amazon"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-02-19T21:15:02.600383Z",
+        "amount": "-1165",
+        "merchant": "Amazon",
+        "category": "Entertainment",
+        "description": "Purchase at Amazon"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-02-20T10:26:09.433020Z",
+        "amount": "-585",
+        "merchant": "Starbucks",
+        "category": "Shopping",
+        "description": "Purchase at Starbucks"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-02-20T19:58:30.915215Z",
+        "amount": "-2758",
+        "merchant": "Subway",
+        "category": "Entertainment",
+        "description": "Purchase at Subway"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-02-21T17:20:42.501608Z",
+        "amount": "-2834",
+        "merchant": "Starbucks",
+        "category": "Shopping",
+        "description": "Purchase at Starbucks"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-02-21T05:29:58.559024Z",
+        "amount": "-1912",
+        "merchant": "Amazon",
+        "category": "Entertainment",
+        "description": "Purchase at Amazon"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-02-24T23:43:41.842690Z",
+        "amount": "-3541",
+        "merchant": "CVS",
+        "category": "Transportation",
+        "description": "Purchase at CVS"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-02-24T07:17:35.312999Z",
+        "amount": "-1365",
+        "merchant": "CVS",
+        "category": "Entertainment",
+        "description": "Purchase at CVS"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-02-25T22:13:44.739233Z",
+        "amount": "-3970",
+        "merchant": "Subway",
+        "category": "Transportation",
+        "description": "Purchase at Subway"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-02-25T17:59:59.834042Z",
+        "amount": "-2659",
+        "merchant": "Target",
+        "category": "Transportation",
+        "description": "Purchase at Target"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-02-26T21:34:24.939272Z",
+        "amount": "-1048",
+        "merchant": "CVS",
+        "category": "Transportation",
+        "description": "Purchase at CVS"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-02-26T04:18:02.301602Z",
+        "amount": "-4796",
+        "merchant": "Target",
+        "category": "Transportation",
+        "description": "Purchase at Target"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-02-27T20:16:47.502351Z",
+        "amount": "-4658",
+        "merchant": "Starbucks",
+        "category": "Transportation",
+        "description": "Purchase at Starbucks"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-02-27T08:59:35.729988Z",
+        "amount": "-4226",
+        "merchant": "Subway",
+        "category": "Shopping",
+        "description": "Purchase at Subway"
+      }
+    },
+    {
+      "paycheck": {
+        "userId": "testuser",
+        "timestamp": "2025-02-28T08:08:06.645584Z",
+        "amount": "250000",
+        "employer": "Acme Corp",
+        "description": "Bi-weekly paycheck"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-02-28T21:57:33.236633Z",
+        "amount": "-1591",
+        "merchant": "Amazon",
+        "category": "Shopping",
+        "description": "Purchase at Amazon"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-02-28T10:45:30.105428Z",
+        "amount": "-951",
+        "merchant": "Subway",
+        "category": "Food & Drink",
+        "description": "Purchase at Subway"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-03-03T05:26:41.980452Z",
+        "amount": "-4840",
+        "merchant": "Subway",
+        "category": "Food & Drink",
+        "description": "Purchase at Subway"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-03-03T09:20:18.677273Z",
+        "amount": "-3427",
+        "merchant": "Target",
+        "category": "Entertainment",
+        "description": "Purchase at Target"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-03-04T07:34:47.758243Z",
+        "amount": "-3435",
+        "merchant": "Starbucks",
+        "category": "Food & Drink",
+        "description": "Purchase at Starbucks"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-03-04T05:59:58.038105Z",
+        "amount": "-2380",
+        "merchant": "Starbucks",
+        "category": "Shopping",
+        "description": "Purchase at Starbucks"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-03-05T23:55:59.303528Z",
+        "amount": "-1338",
+        "merchant": "Target",
+        "category": "Entertainment",
+        "description": "Purchase at Target"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-03-05T19:06:59.351317Z",
+        "amount": "-1843",
+        "merchant": "Starbucks",
+        "category": "Food & Drink",
+        "description": "Purchase at Starbucks"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-03-06T17:33:31.932456Z",
+        "amount": "-4951",
+        "merchant": "CVS",
+        "category": "Entertainment",
+        "description": "Purchase at CVS"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-03-06T03:21:10.766634Z",
+        "amount": "-1728",
+        "merchant": "Subway",
+        "category": "Entertainment",
+        "description": "Purchase at Subway"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-03-07T00:47:21.829179Z",
+        "amount": "-3734",
+        "merchant": "Target",
+        "category": "Transportation",
+        "description": "Purchase at Target"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-03-07T20:57:25.867161Z",
+        "amount": "-1290",
+        "merchant": "CVS",
+        "category": "Shopping",
+        "description": "Purchase at CVS"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-03-10T21:06:11.147442Z",
+        "amount": "-890",
+        "merchant": "Target",
+        "category": "Transportation",
+        "description": "Purchase at Target"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-03-10T00:16:24.246961Z",
+        "amount": "-4711",
+        "merchant": "Target",
+        "category": "Transportation",
+        "description": "Purchase at Target"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-03-11T09:37:46.600705Z",
+        "amount": "-4793",
+        "merchant": "Target",
+        "category": "Transportation",
+        "description": "Purchase at Target"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-03-11T22:15:03.700224Z",
+        "amount": "-3442",
+        "merchant": "Starbucks",
+        "category": "Transportation",
+        "description": "Purchase at Starbucks"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-03-12T12:43:32.967946Z",
+        "amount": "-1881",
+        "merchant": "Starbucks",
+        "category": "Entertainment",
+        "description": "Purchase at Starbucks"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-03-12T09:23:39.231577Z",
+        "amount": "-3374",
+        "merchant": "CVS",
+        "category": "Food & Drink",
+        "description": "Purchase at CVS"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-03-13T14:47:38.391774Z",
+        "amount": "-2652",
+        "merchant": "Subway",
+        "category": "Shopping",
+        "description": "Purchase at Subway"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-03-13T21:52:13.798867Z",
+        "amount": "-3908",
+        "merchant": "Target",
+        "category": "Entertainment",
+        "description": "Purchase at Target"
+      }
+    },
+    {
+      "paycheck": {
+        "userId": "testuser",
+        "timestamp": "2025-03-14T07:43:48.624756Z",
+        "amount": "250000",
+        "employer": "Acme Corp",
+        "description": "Bi-weekly paycheck"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-03-14T11:04:58.591573Z",
+        "amount": "-2877",
+        "merchant": "Starbucks",
+        "category": "Entertainment",
+        "description": "Purchase at Starbucks"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-03-14T16:12:36.562728Z",
+        "amount": "-4229",
+        "merchant": "Starbucks",
+        "category": "Food & Drink",
+        "description": "Purchase at Starbucks"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-03-17T16:28:07.713341Z",
+        "amount": "-1977",
+        "merchant": "Subway",
+        "category": "Shopping",
+        "description": "Purchase at Subway"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-03-17T16:28:51.058338Z",
+        "amount": "-909",
+        "merchant": "Subway",
+        "category": "Entertainment",
+        "description": "Purchase at Subway"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-03-18T14:36:03.585941Z",
+        "amount": "-2810",
+        "merchant": "Target",
+        "category": "Shopping",
+        "description": "Purchase at Target"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-03-18T12:16:52.003161Z",
+        "amount": "-3755",
+        "merchant": "Target",
+        "category": "Transportation",
+        "description": "Purchase at Target"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-03-19T11:44:04.567451Z",
+        "amount": "-704",
+        "merchant": "Subway",
+        "category": "Food & Drink",
+        "description": "Purchase at Subway"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-03-19T15:02:18.428728Z",
+        "amount": "-4938",
+        "merchant": "Starbucks",
+        "category": "Food & Drink",
+        "description": "Purchase at Starbucks"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-03-20T23:41:26.392650Z",
+        "amount": "-3946",
+        "merchant": "Subway",
+        "category": "Shopping",
+        "description": "Purchase at Subway"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-03-20T12:24:05.715894Z",
+        "amount": "-4413",
+        "merchant": "Target",
+        "category": "Entertainment",
+        "description": "Purchase at Target"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-03-21T11:07:11.563356Z",
+        "amount": "-3441",
+        "merchant": "Amazon",
+        "category": "Shopping",
+        "description": "Purchase at Amazon"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-03-21T07:53:00.792911Z",
+        "amount": "-3775",
+        "merchant": "Target",
+        "category": "Shopping",
+        "description": "Purchase at Target"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-03-24T23:34:27.557772Z",
+        "amount": "-2584",
+        "merchant": "Starbucks",
+        "category": "Transportation",
+        "description": "Purchase at Starbucks"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-03-24T11:09:17.197636Z",
+        "amount": "-1614",
+        "merchant": "Target",
+        "category": "Shopping",
+        "description": "Purchase at Target"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-03-25T13:39:49.981716Z",
+        "amount": "-4143",
+        "merchant": "Starbucks",
+        "category": "Food & Drink",
+        "description": "Purchase at Starbucks"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-03-25T03:38:02.468127Z",
+        "amount": "-1427",
+        "merchant": "Starbucks",
+        "category": "Shopping",
+        "description": "Purchase at Starbucks"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-03-26T01:25:28.245722Z",
+        "amount": "-1601",
+        "merchant": "Amazon",
+        "category": "Food & Drink",
+        "description": "Purchase at Amazon"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-03-26T01:08:32.303314Z",
+        "amount": "-3895",
+        "merchant": "Amazon",
+        "category": "Shopping",
+        "description": "Purchase at Amazon"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-03-27T21:52:20.248411Z",
+        "amount": "-3099",
+        "merchant": "Subway",
+        "category": "Transportation",
+        "description": "Purchase at Subway"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-03-27T16:14:26.315098Z",
+        "amount": "-4936",
+        "merchant": "CVS",
+        "category": "Shopping",
+        "description": "Purchase at CVS"
+      }
+    },
+    {
+      "paycheck": {
+        "userId": "testuser",
+        "timestamp": "2025-03-28T08:03:35.994595Z",
+        "amount": "250000",
+        "employer": "Acme Corp",
+        "description": "Bi-weekly paycheck"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-03-28T13:35:31.049161Z",
+        "amount": "-3317",
+        "merchant": "Amazon",
+        "category": "Shopping",
+        "description": "Purchase at Amazon"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-03-28T10:44:26.428090Z",
+        "amount": "-4036",
+        "merchant": "CVS",
+        "category": "Entertainment",
+        "description": "Purchase at CVS"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-03-31T17:30:15.890598Z",
+        "amount": "-2194",
+        "merchant": "Subway",
+        "category": "Transportation",
+        "description": "Purchase at Subway"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-03-31T04:51:29.959175Z",
+        "amount": "-4359",
+        "merchant": "Subway",
+        "category": "Transportation",
+        "description": "Purchase at Subway"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-04-01T17:33:08.407286Z",
+        "amount": "-4855",
+        "merchant": "Starbucks",
+        "category": "Entertainment",
+        "description": "Purchase at Starbucks"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-04-01T20:05:59.471635Z",
+        "amount": "-1415",
+        "merchant": "Subway",
+        "category": "Transportation",
+        "description": "Purchase at Subway"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-04-02T06:03:17.395489Z",
+        "amount": "-2910",
+        "merchant": "CVS",
+        "category": "Food & Drink",
+        "description": "Purchase at CVS"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-04-02T06:51:48.616126Z",
+        "amount": "-4431",
+        "merchant": "Amazon",
+        "category": "Food & Drink",
+        "description": "Purchase at Amazon"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-04-03T10:19:58.016078Z",
+        "amount": "-2657",
+        "merchant": "Amazon",
+        "category": "Shopping",
+        "description": "Purchase at Amazon"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-04-03T03:47:48.502184Z",
+        "amount": "-4829",
+        "merchant": "Subway",
+        "category": "Shopping",
+        "description": "Purchase at Subway"
+      }
+    },
+    {
+      "paycheck": {
+        "userId": "testuser",
+        "timestamp": "2025-04-04T07:44:38.737954Z",
+        "amount": "250000",
+        "employer": "Acme Corp",
+        "description": "Bi-weekly paycheck"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-04-04T17:20:49.296809Z",
+        "amount": "-4618",
+        "merchant": "Subway",
+        "category": "Entertainment",
+        "description": "Purchase at Subway"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-04-04T11:19:16.377114Z",
+        "amount": "-2901",
+        "merchant": "Target",
+        "category": "Entertainment",
+        "description": "Purchase at Target"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-04-07T23:30:48.880521Z",
+        "amount": "-2597",
+        "merchant": "Amazon",
+        "category": "Entertainment",
+        "description": "Purchase at Amazon"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-04-07T13:02:36.906058Z",
+        "amount": "-2168",
+        "merchant": "CVS",
+        "category": "Shopping",
+        "description": "Purchase at CVS"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-04-08T17:59:37.607275Z",
+        "amount": "-573",
+        "merchant": "Subway",
+        "category": "Shopping",
+        "description": "Purchase at Subway"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-04-08T10:14:24.597467Z",
+        "amount": "-1186",
+        "merchant": "Target",
+        "category": "Transportation",
+        "description": "Purchase at Target"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-04-09T21:21:16.800441Z",
+        "amount": "-2978",
+        "merchant": "Subway",
+        "category": "Entertainment",
+        "description": "Purchase at Subway"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-04-09T23:50:22.177487Z",
+        "amount": "-2574",
+        "merchant": "Target",
+        "category": "Entertainment",
+        "description": "Purchase at Target"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-04-10T17:41:03.549395Z",
+        "amount": "-1328",
+        "merchant": "Subway",
+        "category": "Entertainment",
+        "description": "Purchase at Subway"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-04-10T21:03:48.006693Z",
+        "amount": "-4753",
+        "merchant": "Starbucks",
+        "category": "Food & Drink",
+        "description": "Purchase at Starbucks"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-04-11T07:04:45.158366Z",
+        "amount": "-4291",
+        "merchant": "Target",
+        "category": "Shopping",
+        "description": "Purchase at Target"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-04-11T11:03:39.668706Z",
+        "amount": "-2776",
+        "merchant": "Starbucks",
+        "category": "Shopping",
+        "description": "Purchase at Starbucks"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-04-14T00:00:34.578440Z",
+        "amount": "-3467",
+        "merchant": "Amazon",
+        "category": "Entertainment",
+        "description": "Purchase at Amazon"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-04-14T23:17:34.300614Z",
+        "amount": "-575",
+        "merchant": "Target",
+        "category": "Food & Drink",
+        "description": "Purchase at Target"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-04-15T05:06:58.100992Z",
+        "amount": "-4128",
+        "merchant": "Starbucks",
+        "category": "Entertainment",
+        "description": "Purchase at Starbucks"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-04-15T19:33:16.854814Z",
+        "amount": "-1584",
+        "merchant": "Amazon",
+        "category": "Shopping",
+        "description": "Purchase at Amazon"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-04-16T02:23:25.481294Z",
+        "amount": "-4077",
+        "merchant": "CVS",
+        "category": "Transportation",
+        "description": "Purchase at CVS"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-04-16T07:19:43.868286Z",
+        "amount": "-4956",
+        "merchant": "Amazon",
+        "category": "Shopping",
+        "description": "Purchase at Amazon"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-04-17T12:24:35.499127Z",
+        "amount": "-921",
+        "merchant": "Starbucks",
+        "category": "Food & Drink",
+        "description": "Purchase at Starbucks"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-04-17T02:31:54.454987Z",
+        "amount": "-3663",
+        "merchant": "Starbucks",
+        "category": "Food & Drink",
+        "description": "Purchase at Starbucks"
+      }
+    },
+    {
+      "paycheck": {
+        "userId": "testuser",
+        "timestamp": "2025-04-18T20:50:21.593343Z",
+        "amount": "250000",
+        "employer": "Acme Corp",
+        "description": "Bi-weekly paycheck"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-04-18T22:56:36.498598Z",
+        "amount": "-1534",
+        "merchant": "Starbucks",
+        "category": "Food & Drink",
+        "description": "Purchase at Starbucks"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-04-18T21:59:17.942996Z",
+        "amount": "-4659",
+        "merchant": "CVS",
+        "category": "Food & Drink",
+        "description": "Purchase at CVS"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-04-21T10:01:13.615551Z",
+        "amount": "-1307",
+        "merchant": "Amazon",
+        "category": "Food & Drink",
+        "description": "Purchase at Amazon"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-04-21T09:10:36.252153Z",
+        "amount": "-4680",
+        "merchant": "Subway",
+        "category": "Entertainment",
+        "description": "Purchase at Subway"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-04-22T17:21:24.792313Z",
+        "amount": "-3547",
+        "merchant": "Amazon",
+        "category": "Entertainment",
+        "description": "Purchase at Amazon"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-04-22T11:03:06.458320Z",
+        "amount": "-2754",
+        "merchant": "Subway",
+        "category": "Food & Drink",
+        "description": "Purchase at Subway"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-04-23T19:38:25.811131Z",
+        "amount": "-2033",
+        "merchant": "Subway",
+        "category": "Food & Drink",
+        "description": "Purchase at Subway"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-04-23T14:31:14.373095Z",
+        "amount": "-3354",
+        "merchant": "CVS",
+        "category": "Food & Drink",
+        "description": "Purchase at CVS"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-04-24T21:37:42.398535Z",
+        "amount": "-2443",
+        "merchant": "Amazon",
+        "category": "Entertainment",
+        "description": "Purchase at Amazon"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-04-24T22:04:05.280989Z",
+        "amount": "-4091",
+        "merchant": "Starbucks",
+        "category": "Transportation",
+        "description": "Purchase at Starbucks"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-04-25T20:09:47.408548Z",
+        "amount": "-3703",
+        "merchant": "Subway",
+        "category": "Entertainment",
+        "description": "Purchase at Subway"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-04-25T00:19:28.377400Z",
+        "amount": "-979",
+        "merchant": "CVS",
+        "category": "Transportation",
+        "description": "Purchase at CVS"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-04-28T05:27:28.584041Z",
+        "amount": "-1096",
+        "merchant": "CVS",
+        "category": "Food & Drink",
+        "description": "Purchase at CVS"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-04-28T02:22:35.097584Z",
+        "amount": "-965",
+        "merchant": "Amazon",
+        "category": "Entertainment",
+        "description": "Purchase at Amazon"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-04-29T00:18:26.406637Z",
+        "amount": "-4387",
+        "merchant": "Amazon",
+        "category": "Transportation",
+        "description": "Purchase at Amazon"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-04-29T05:43:24.177735Z",
+        "amount": "-3074",
+        "merchant": "Starbucks",
+        "category": "Shopping",
+        "description": "Purchase at Starbucks"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-04-30T15:09:04.175329Z",
+        "amount": "-1855",
+        "merchant": "Subway",
+        "category": "Transportation",
+        "description": "Purchase at Subway"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-04-30T15:50:04.378666Z",
+        "amount": "-2395",
+        "merchant": "Target",
+        "category": "Transportation",
+        "description": "Purchase at Target"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-05-01T15:38:39.205047Z",
+        "amount": "-3744",
+        "merchant": "CVS",
+        "category": "Shopping",
+        "description": "Purchase at CVS"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-05-01T00:25:21.882495Z",
+        "amount": "-1110",
+        "merchant": "Target",
+        "category": "Food & Drink",
+        "description": "Purchase at Target"
+      }
+    },
+    {
+      "paycheck": {
+        "userId": "testuser",
+        "timestamp": "2025-05-02T19:24:51.904080Z",
+        "amount": "250000",
+        "employer": "Acme Corp",
+        "description": "Bi-weekly paycheck"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-05-02T20:38:08.315029Z",
+        "amount": "-2006",
+        "merchant": "CVS",
+        "category": "Entertainment",
+        "description": "Purchase at CVS"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-05-02T05:25:20.305605Z",
+        "amount": "-2656",
+        "merchant": "CVS",
+        "category": "Shopping",
+        "description": "Purchase at CVS"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-05-05T08:52:50.412022Z",
+        "amount": "-1966",
+        "merchant": "Target",
+        "category": "Shopping",
+        "description": "Purchase at Target"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-05-05T06:37:34.188667Z",
+        "amount": "-4694",
+        "merchant": "CVS",
+        "category": "Food & Drink",
+        "description": "Purchase at CVS"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-05-06T14:45:13.459753Z",
+        "amount": "-4789",
+        "merchant": "Amazon",
+        "category": "Food & Drink",
+        "description": "Purchase at Amazon"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-05-06T13:43:31.145939Z",
+        "amount": "-4185",
+        "merchant": "CVS",
+        "category": "Food & Drink",
+        "description": "Purchase at CVS"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-05-07T04:45:27.827406Z",
+        "amount": "-1637",
+        "merchant": "CVS",
+        "category": "Shopping",
+        "description": "Purchase at CVS"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-05-07T19:30:37.420274Z",
+        "amount": "-2521",
+        "merchant": "Target",
+        "category": "Food & Drink",
+        "description": "Purchase at Target"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-05-08T11:44:57.851755Z",
+        "amount": "-2946",
+        "merchant": "Amazon",
+        "category": "Entertainment",
+        "description": "Purchase at Amazon"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-05-08T07:42:42.372253Z",
+        "amount": "-992",
+        "merchant": "Amazon",
+        "category": "Food & Drink",
+        "description": "Purchase at Amazon"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-05-09T20:43:41.419029Z",
+        "amount": "-3034",
+        "merchant": "Subway",
+        "category": "Food & Drink",
+        "description": "Purchase at Subway"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-05-09T03:16:14.535482Z",
+        "amount": "-977",
+        "merchant": "CVS",
+        "category": "Entertainment",
+        "description": "Purchase at CVS"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-05-12T12:29:49.712565Z",
+        "amount": "-2506",
+        "merchant": "Amazon",
+        "category": "Shopping",
+        "description": "Purchase at Amazon"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-05-12T00:30:06.309783Z",
+        "amount": "-2052",
+        "merchant": "Amazon",
+        "category": "Shopping",
+        "description": "Purchase at Amazon"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-05-13T23:09:22.327040Z",
+        "amount": "-1022",
+        "merchant": "Target",
+        "category": "Food & Drink",
+        "description": "Purchase at Target"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-05-13T16:30:22.499292Z",
+        "amount": "-4029",
+        "merchant": "CVS",
+        "category": "Entertainment",
+        "description": "Purchase at CVS"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-05-14T14:20:04.314849Z",
+        "amount": "-3749",
+        "merchant": "Starbucks",
+        "category": "Entertainment",
+        "description": "Purchase at Starbucks"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-05-14T10:41:06.710032Z",
+        "amount": "-602",
+        "merchant": "Starbucks",
+        "category": "Food & Drink",
+        "description": "Purchase at Starbucks"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-05-15T17:10:21.587044Z",
+        "amount": "-2822",
+        "merchant": "Subway",
+        "category": "Shopping",
+        "description": "Purchase at Subway"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-05-15T12:40:11.195440Z",
+        "amount": "-1543",
+        "merchant": "Target",
+        "category": "Entertainment",
+        "description": "Purchase at Target"
+      }
+    },
+    {
+      "paycheck": {
+        "userId": "testuser",
+        "timestamp": "2025-05-16T20:42:27.414798Z",
+        "amount": "250000",
+        "employer": "Acme Corp",
+        "description": "Bi-weekly paycheck"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-05-16T13:24:00.738968Z",
+        "amount": "-2523",
+        "merchant": "Starbucks",
+        "category": "Shopping",
+        "description": "Purchase at Starbucks"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-05-16T22:51:50.065602Z",
+        "amount": "-1753",
+        "merchant": "Subway",
+        "category": "Shopping",
+        "description": "Purchase at Subway"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-05-19T17:11:23.341819Z",
+        "amount": "-4098",
+        "merchant": "Amazon",
+        "category": "Food & Drink",
+        "description": "Purchase at Amazon"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-05-19T21:55:31.553349Z",
+        "amount": "-1013",
+        "merchant": "Subway",
+        "category": "Entertainment",
+        "description": "Purchase at Subway"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-05-20T18:07:22.369082Z",
+        "amount": "-3251",
+        "merchant": "CVS",
+        "category": "Entertainment",
+        "description": "Purchase at CVS"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-05-20T22:51:19.963308Z",
+        "amount": "-4162",
+        "merchant": "Target",
+        "category": "Shopping",
+        "description": "Purchase at Target"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-05-21T10:07:15.320214Z",
+        "amount": "-3524",
+        "merchant": "Amazon",
+        "category": "Food & Drink",
+        "description": "Purchase at Amazon"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-05-21T04:32:24.438555Z",
+        "amount": "-2180",
+        "merchant": "Starbucks",
+        "category": "Shopping",
+        "description": "Purchase at Starbucks"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-05-22T13:11:31.666371Z",
+        "amount": "-3087",
+        "merchant": "Amazon",
+        "category": "Shopping",
+        "description": "Purchase at Amazon"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-05-22T15:18:08.196187Z",
+        "amount": "-2997",
+        "merchant": "Amazon",
+        "category": "Shopping",
+        "description": "Purchase at Amazon"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-05-23T11:00:31.143167Z",
+        "amount": "-3287",
+        "merchant": "CVS",
+        "category": "Entertainment",
+        "description": "Purchase at CVS"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-05-23T16:41:31.429008Z",
+        "amount": "-4837",
+        "merchant": "Subway",
+        "category": "Entertainment",
+        "description": "Purchase at Subway"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-05-26T14:31:10.086686Z",
+        "amount": "-3696",
+        "merchant": "Target",
+        "category": "Entertainment",
+        "description": "Purchase at Target"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-05-26T07:18:02.288204Z",
+        "amount": "-4081",
+        "merchant": "Amazon",
+        "category": "Food & Drink",
+        "description": "Purchase at Amazon"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-05-27T14:36:47.810074Z",
+        "amount": "-1257",
+        "merchant": "Subway",
+        "category": "Transportation",
+        "description": "Purchase at Subway"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-05-27T08:49:34.863274Z",
+        "amount": "-3077",
+        "merchant": "Target",
+        "category": "Food & Drink",
+        "description": "Purchase at Target"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-05-28T14:34:13.445807Z",
+        "amount": "-3920",
+        "merchant": "CVS",
+        "category": "Food & Drink",
+        "description": "Purchase at CVS"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-05-28T01:28:16.365509Z",
+        "amount": "-1840",
+        "merchant": "Starbucks",
+        "category": "Shopping",
+        "description": "Purchase at Starbucks"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-05-29T03:49:51.248455Z",
+        "amount": "-4394",
+        "merchant": "Starbucks",
+        "category": "Entertainment",
+        "description": "Purchase at Starbucks"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-05-29T19:40:27.174044Z",
+        "amount": "-4375",
+        "merchant": "Subway",
+        "category": "Transportation",
+        "description": "Purchase at Subway"
+      }
+    },
+    {
+      "paycheck": {
+        "userId": "testuser",
+        "timestamp": "2025-05-30T19:08:50.216656Z",
+        "amount": "250000",
+        "employer": "Acme Corp",
+        "description": "Bi-weekly paycheck"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-05-30T17:17:38.564939Z",
+        "amount": "-3065",
+        "merchant": "Subway",
+        "category": "Food & Drink",
+        "description": "Purchase at Subway"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-05-30T09:18:36.280329Z",
+        "amount": "-4906",
+        "merchant": "Subway",
+        "category": "Transportation",
+        "description": "Purchase at Subway"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-06-02T13:58:03.290794Z",
+        "amount": "-1110",
+        "merchant": "Amazon",
+        "category": "Food & Drink",
+        "description": "Purchase at Amazon"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-06-02T22:20:53.259579Z",
+        "amount": "-1624",
+        "merchant": "Subway",
+        "category": "Shopping",
+        "description": "Purchase at Subway"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-06-03T20:17:40.434346Z",
+        "amount": "-1140",
+        "merchant": "Target",
+        "category": "Entertainment",
+        "description": "Purchase at Target"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-06-03T02:25:32.786224Z",
+        "amount": "-840",
+        "merchant": "Target",
+        "category": "Entertainment",
+        "description": "Purchase at Target"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-06-04T15:20:37.002593Z",
+        "amount": "-2546",
+        "merchant": "CVS",
+        "category": "Transportation",
+        "description": "Purchase at CVS"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-06-04T22:22:54.066407Z",
+        "amount": "-3357",
+        "merchant": "Starbucks",
+        "category": "Entertainment",
+        "description": "Purchase at Starbucks"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-06-05T13:52:13.518746Z",
+        "amount": "-1480",
+        "merchant": "Amazon",
+        "category": "Entertainment",
+        "description": "Purchase at Amazon"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-06-05T10:35:36.136937Z",
+        "amount": "-4228",
+        "merchant": "CVS",
+        "category": "Transportation",
+        "description": "Purchase at CVS"
+      }
+    },
+    {
+      "paycheck": {
+        "userId": "testuser",
+        "timestamp": "2025-06-06T18:54:31.826596Z",
+        "amount": "250000",
+        "employer": "Acme Corp",
+        "description": "Bi-weekly paycheck"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-06-06T20:50:53.481906Z",
+        "amount": "-707",
+        "merchant": "CVS",
+        "category": "Food & Drink",
+        "description": "Purchase at CVS"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-06-06T05:28:29.000708Z",
+        "amount": "-4682",
+        "merchant": "Starbucks",
+        "category": "Food & Drink",
+        "description": "Purchase at Starbucks"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-06-09T04:56:41.316528Z",
+        "amount": "-4981",
+        "merchant": "Target",
+        "category": "Shopping",
+        "description": "Purchase at Target"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-06-09T11:16:05.389906Z",
+        "amount": "-920",
+        "merchant": "Subway",
+        "category": "Transportation",
+        "description": "Purchase at Subway"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-06-10T09:46:44.791918Z",
+        "amount": "-2284",
+        "merchant": "Subway",
+        "category": "Food & Drink",
+        "description": "Purchase at Subway"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-06-10T22:06:00.223788Z",
+        "amount": "-3450",
+        "merchant": "Subway",
+        "category": "Entertainment",
+        "description": "Purchase at Subway"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-06-11T07:33:43.466686Z",
+        "amount": "-1097",
+        "merchant": "Target",
+        "category": "Food & Drink",
+        "description": "Purchase at Target"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-06-11T03:55:27.727744Z",
+        "amount": "-3630",
+        "merchant": "Starbucks",
+        "category": "Food & Drink",
+        "description": "Purchase at Starbucks"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-06-12T12:05:46.845106Z",
+        "amount": "-819",
+        "merchant": "Subway",
+        "category": "Entertainment",
+        "description": "Purchase at Subway"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-06-12T09:08:24.811032Z",
+        "amount": "-1910",
+        "merchant": "Starbucks",
+        "category": "Food & Drink",
+        "description": "Purchase at Starbucks"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-06-13T18:00:39.681595Z",
+        "amount": "-808",
+        "merchant": "Subway",
+        "category": "Shopping",
+        "description": "Purchase at Subway"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-06-13T06:40:47.158727Z",
+        "amount": "-2080",
+        "merchant": "Subway",
+        "category": "Entertainment",
+        "description": "Purchase at Subway"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-06-16T02:57:06.146814Z",
+        "amount": "-4370",
+        "merchant": "Target",
+        "category": "Entertainment",
+        "description": "Purchase at Target"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-06-16T13:20:50.146622Z",
+        "amount": "-2082",
+        "merchant": "Starbucks",
+        "category": "Entertainment",
+        "description": "Purchase at Starbucks"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-06-17T07:35:38.629153Z",
+        "amount": "-3401",
+        "merchant": "Subway",
+        "category": "Transportation",
+        "description": "Purchase at Subway"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-06-17T22:01:54.888217Z",
+        "amount": "-4005",
+        "merchant": "Amazon",
+        "category": "Transportation",
+        "description": "Purchase at Amazon"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-06-18T16:12:47.410780Z",
+        "amount": "-2830",
+        "merchant": "CVS",
+        "category": "Shopping",
+        "description": "Purchase at CVS"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-06-18T07:31:24.118220Z",
+        "amount": "-4027",
+        "merchant": "CVS",
+        "category": "Food & Drink",
+        "description": "Purchase at CVS"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-06-19T02:33:56.012653Z",
+        "amount": "-3371",
+        "merchant": "Subway",
+        "category": "Entertainment",
+        "description": "Purchase at Subway"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-06-19T18:26:23.572896Z",
+        "amount": "-1094",
+        "merchant": "CVS",
+        "category": "Transportation",
+        "description": "Purchase at CVS"
+      }
+    },
+    {
+      "paycheck": {
+        "userId": "testuser",
+        "timestamp": "2025-06-20T21:11:48.493894Z",
+        "amount": "250000",
+        "employer": "Acme Corp",
+        "description": "Bi-weekly paycheck"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-06-20T00:16:13.041761Z",
+        "amount": "-3143",
+        "merchant": "Starbucks",
+        "category": "Food & Drink",
+        "description": "Purchase at Starbucks"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-06-20T20:45:32.804373Z",
+        "amount": "-2780",
+        "merchant": "Starbucks",
+        "category": "Entertainment",
+        "description": "Purchase at Starbucks"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-06-23T02:40:34.563772Z",
+        "amount": "-3658",
+        "merchant": "Target",
+        "category": "Entertainment",
+        "description": "Purchase at Target"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-06-23T09:05:32.965659Z",
+        "amount": "-1749",
+        "merchant": "Amazon",
+        "category": "Shopping",
+        "description": "Purchase at Amazon"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-06-24T12:37:40.800298Z",
+        "amount": "-2914",
+        "merchant": "Subway",
+        "category": "Shopping",
+        "description": "Purchase at Subway"
+      }
+    },
+    {
+      "cardSwipe": {
+        "userId": "testuser",
+        "timestamp": "2025-06-24T23:54:15.060718Z",
+        "amount": "-3644",
+        "merchant": "Starbucks",
+        "category": "Transportation",
+        "description": "Purchase at Starbucks"
+      }
+    }
+  ]
+}

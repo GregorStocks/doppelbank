@@ -1,3 +1,34 @@
+# Keep this file up to date as you do stuff.
+
+## Current State
+- Barebones MVP probably works end-to-end, from "generating a fake user" through to "serving up their data via Plaid API".
+- Probably ~100% test coverage.
+
+## TODOs / Unfinished Work
+- [ ] **Veneer**
+    - Serve in exactly the same API format as Plaid.
+    - Support for timestamps in the query ("tell me what the transactions would have looked like yesterday")
+    - Better tests:
+      - Actually stand up a full server and query it via curl, to ensure our coverage is truly end-to-end
+      - Single test that goes from Bedrock to Veneer
+    - Use account_id (not filename) to select ledger file; map account_id to file internally.
+    - Remove 'format' and 'file' params from API.
+    - Error handling.
+    - Documentation for everything different from Plaid.
+    - Support for other endpoints, such that a regular Plaid client could talk to Veneer and not get too confused.
+    - Fully support the data model in the Detritus protobuf.
+- [ ] **Detritus**
+    - Add CSV support
+    - Implement RemovePending and UpdateBalance BankEvent types in transformation logic.
+    - Add validation for Bedrock events (don't just skip events with missing fields).
+    - Fully support the data model in the Bedrock protobuf.
+    - Support more strangeness (duplicate transactions, merchant/memo problems, etc etc etc)
+- [ ] **Bedrock**
+    - Better user-psychology modeling
+    - Pull stuff out of cli.py
+    - Clean up serde.py mess (why are there two of them?)
+    - Clean up protobuf docstrings (ensure we don't have so much duplication around amounts/timestamps/etc)
+
 # Claude Coding Standards
 
 ## Import Rules

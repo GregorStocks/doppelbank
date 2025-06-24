@@ -57,6 +57,7 @@ def bedrock_to_detritus(bedrock_collection: EventCollection) -> BankLedger:
                     pending_event_id=pending_id,
                 )
             ))
+    # TODO: Not yet handling RemovePending or UpdateBalance BankEvent types from the detritus proto. Implement these as needed for full ledger support.
     return BankLedger(events=events)
 
 def main():
