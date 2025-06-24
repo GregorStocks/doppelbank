@@ -1,13 +1,10 @@
 #!/usr/bin/env python3
 """
-Script to compile all .proto files in bedrock to the generated directory.
+Script to compile all .proto files in bedrock to the generated directory using protoc and the betterproto plugin.
+Requires: protoc (brew install protobuf)
 """
-
-# Standard library
 import subprocess
-import sys
 from pathlib import Path
-
 
 def main():
     proto_dir = Path("src/doppelbank/bedrock")
@@ -18,15 +15,14 @@ def main():
         print("No .proto files found.")
         return
     for proto_file in proto_files:
-        print(f"Compiling {proto_file}...")
+        print(f"Compiling {proto_file} with protoc + betterproto plugin...")
         subprocess.run([
-            sys.executable, "-m", "grpc_tools.protoc",
-            f"--python_out={out_dir}",
+            "protoc",
+            f"--python_betterproto_out={out_dir}",
             f"--proto_path={proto_dir}",
             str(proto_file)
         ], check=True)
     print(f"✓ Compiled {len(proto_files)} proto file(s) to {out_dir}")
-
 
 if __name__ == "__main__":
     main() 

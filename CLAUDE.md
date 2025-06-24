@@ -34,7 +34,3 @@ from doppelbank.bedrock.generated import events_pb2
 - **Absolute imports** are more explicit and work better with IDEs and linters
 - **Top-level imports** make code more readable and avoid import-time side effects
 - **Consistent structure** makes the codebase easier to navigate and maintain
-
-## Notes
-
-- **Protobuf linter issues**: The linter may show errors for protobuf-generated classes (like `events_pb2.Event`), but the code works correctly at runtime. This is a known limitation with protobuf-generated code and type checkers. 

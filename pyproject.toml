@@ -9,9 +9,8 @@ readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
     "pytest (>=8.4.1,<9.0.0)",
-    "mypy (>=1.16.1,<2.0.0)",
-    "black>=25.1.0",
-    "protobuf>=4.25.0",
+    "pytz>=2024.1",
+    "betterproto>=1.2.5",
 ]
 
 [project.scripts]
@@ -19,7 +18,15 @@ bedrock = "doppelbank.bedrock.cli:main"
 detritus = "doppelbank.detritus.cli:main"
 veneer = "doppelbank.veneer.cli:main"
 format = "black:main"
-buildproto = "scripts.buildproto:main"
+
+[project.optional-dependencies]
+dev = [
+    "types-pytz>=2025.2.0.20250516",
+    "ruff>=0.3.0",
+    "black>=25.1.0",
+    "mypy>=1.16.1,<2.0.0",
+    "betterproto[compiler]>=1.2.5",
+]
 
 [build-system]
 requires = ["hatchling"]
@@ -27,3 +34,15 @@ build-backend = "hatchling.build"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/doppelbank"]
+
+[tool.ruff]
+target-version = "py313"
+line-length = 88
+select = ["E", "F", "I", "N", "W"]
+ignore = ["E501", "N802", "N803", "N806"]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+skip-magic-trailing-comma = false
+line-ending = "auto"
