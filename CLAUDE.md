@@ -6,7 +6,7 @@
 
 ## TODOs / Unfinished Work
 - [ ] **Veneer**
-    - Serve in exactly the same API format as Plaid.
+    - Support the exact same request/response format as the Plaid API (though likely with additional parameters and metadata, and perhaps missing some params and fields)
     - Support for timestamps in the query ("tell me what the transactions would have looked like yesterday")
     - Better tests:
       - Actually stand up a full server and query it via curl, to ensure our coverage is truly end-to-end
@@ -30,6 +30,8 @@
     - Clean up protobuf docstrings (ensure we don't have so much duplication around amounts/timestamps/etc)
 - [ ] **General**
     - Clean up CLAUDE.md and move the stuff that isn't Claude-specific to more general developer documentation
+    - Enforce import standards in a linter
+    - Github commit hooks?
 
 # Claude Coding Standards
 
