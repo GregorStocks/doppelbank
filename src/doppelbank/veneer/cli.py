@@ -39,21 +39,14 @@ class TransactionsSyncOptions(BaseModel):
 
 class TransactionsSyncRequest(BaseModel):
     options: Optional[TransactionsSyncOptions] = None
-    format: Optional[str] = "json"
 
 
-# TODO: Add authentication
 # TODO: Support more endpoints (e.g., /accounts, /balances)
 
 
 @app.post("/transactions/sync")
 # TODO: Transform BankLedger to Plaid API format before returning (not the real Plaid format)
-# TODO: Always serve as JSON (this is fake-Plaid, not a real protobuf API)
 # TODO: Accept a timestamp query param (e.g., 'as_of') to support Plaid-style sync semantics
-# TODO: Use account_id (not filename) to select the ledger file; map account_id to file internally
-# TODO: Remove 'format' param, only support JSON
-# TODO: Remove 'file' param, only support account_id
-# TODO: Add proper error handling for missing/invalid account_id
 # TODO: Add tests for Plaid-style sync behavior
 # TODO: Document all API quirks and differences from real Plaid
 
@@ -76,17 +69,9 @@ def transactions_sync(request: TransactionsSyncRequest):
             status_code=404, detail=f"Ledger file not found for account {account_id}"
         )
 
-    format = request.format or "json"
-    # Linter workaround: use BankLedger.from_json and .parse for binary
-    if format == "json":
-        with open(ledger_path, "r") as f:
-            ledger = BankLedger().from_json(f.read())
-    elif format == "binary":
-        with open(ledger_path, "rb") as f:
-            ledger = BankLedger()
-            ledger.parse(f.read())
-    else:
-        raise HTTPException(status_code=400, detail="Unsupported format")
+    
+    with open(ledger_path, "r") as f:
+        ledger = BankLedger().from_json(f.read())
     return ledger.to_dict()
 
 
