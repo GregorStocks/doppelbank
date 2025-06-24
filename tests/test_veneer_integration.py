@@ -143,10 +143,14 @@ class TestVeneerIntegration:
         test_ledger_path = veneer_data_dir / "integration_test_ledger.json"
         default_ledger_path = veneer_data_dir / "test_ledger_detritus.json"
 
+        # Copy the default test data from organized location
+        detritus_test_data_dir = Path(__file__).parent.parent / "data" / "detritus"
+        source_default_ledger = detritus_test_data_dir / "test_ledger_detritus.json"
+
         # Copy the generated detritus file to veneer data directory
         shutil.copy2(detritus_path, test_ledger_path)
-        # Also copy as default file for basic health check
-        shutil.copy2(detritus_path, default_ledger_path)
+        # Also copy default test data for basic health check
+        shutil.copy2(source_default_ledger, default_ledger_path)
 
         try:
             # Step 4: Test the API with real HTTP requests (like curl)

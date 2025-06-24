@@ -1,14 +1,22 @@
 import os
 from pathlib import Path
 
+import uvicorn
 from fastapi import FastAPI, HTTPException
 
 from generated.detritus import BankLedger
 
 app = FastAPI()
 
-DATA_DIR = Path(os.path.dirname(__file__)) / "data"
-DATA_DIR.mkdir(exist_ok=True)
+
+def get_data_dir() -> Path:
+    """Get the data directory, configurable via environment variable."""
+    data_dir = Path(
+        os.environ.get("VENEER_DATA_DIR", Path(os.path.dirname(__file__)) / "data")
+    )
+    data_dir.mkdir(exist_ok=True)
+    return data_dir
+
 
 # TODO: Add authentication
 # TODO: Support more endpoints (e.g., /accounts, /balances)
@@ -28,7 +36,8 @@ DATA_DIR.mkdir(exist_ok=True)
 
 def transactions_sync(file: str = "test_ledger_detritus.json", format: str = "json"):
     """Serve transactions from a detritus ledger file in the data directory."""
-    ledger_path = DATA_DIR / file
+    data_dir = get_data_dir()
+    ledger_path = data_dir / file
     if not ledger_path.exists():
         raise HTTPException(status_code=404, detail="Ledger file not found")
     # Linter workaround: use BankLedger.from_json and .parse for binary
@@ -45,7 +54,7 @@ def transactions_sync(file: str = "test_ledger_detritus.json", format: str = "js
 
 
 def main():
-    print("hello, veneer")
+    uvicorn.run(app, host="127.0.0.1", port=8000)
 
 
 if __name__ == "__main__":

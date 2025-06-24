@@ -5,7 +5,7 @@ These tests use FastAPI's TestClient for fast unit-style testing
 without needing a real HTTP server.
 """
 
-import json
+import os
 from pathlib import Path
 
 import pytest
@@ -13,39 +13,23 @@ from fastapi.testclient import TestClient
 
 from doppelbank.veneer.cli import app
 
-# Add this fixture at the top-level of the file
-data_dir = Path(__file__).parent.parent / "src" / "doppelbank" / "veneer" / "data"
-
 
 @pytest.fixture(scope="module", autouse=True)
-def setup_test_ledger():
-    """Create a minimal test_ledger_detritus.json in the veneer data directory for TestClient."""
-    data_dir.mkdir(exist_ok=True)
-    test_ledger_path = data_dir / "test_ledger_detritus.json"
-    # Minimal valid detritus ledger
-    ledger = {
-        "events": [
-            {
-                "addPending": {
-                    "eventId": "1",
-                    "transactionId": "t1",
-                    "accountId": "acc_dummy",
-                    "amount": 1000,
-                    "description": "Test transaction",
-                    "merchant": "Test Merchant",
-                    "category": "Test Category",
-                },
-                "event_id": "1",
-                "timestamp": "2024-01-01T00:00:00.000000Z",
-            }
-        ]
-    }
-    with open(test_ledger_path, "w") as f:
-        json.dump(ledger, f)
+def setup_test_environment():
+    """Configure VENEER_DATA_DIR to point to organized test data."""
+    detritus_test_data_dir = Path(__file__).parent.parent / "data" / "detritus"
+    original_env = os.environ.get("VENEER_DATA_DIR")
+
+    # Set environment variable to point to organized test data
+    os.environ["VENEER_DATA_DIR"] = str(detritus_test_data_dir)
+
     yield
-    # Cleanup
-    if test_ledger_path.exists():
-        test_ledger_path.unlink()
+
+    # Restore original environment
+    if original_env is not None:
+        os.environ["VENEER_DATA_DIR"] = original_env
+    else:
+        os.environ.pop("VENEER_DATA_DIR", None)
 
 
 class TestVeneerAPI:
