@@ -7,6 +7,7 @@ without needing a real HTTP server.
 
 import os
 from pathlib import Path
+from typing import Generator
 
 import pytest
 from fastapi.testclient import TestClient
@@ -15,7 +16,7 @@ from doppelbank.veneer.cli import app
 
 
 @pytest.fixture(scope="module", autouse=True)
-def setup_test_environment():
+def setup_test_environment() -> Generator[None, None, None]:
     """Configure VENEER_DATA_DIR to point to organized test data."""
     detritus_test_data_dir = Path(__file__).parent / "data" / "detritus"
     original_env = os.environ.get("VENEER_DATA_DIR")
@@ -35,7 +36,7 @@ def setup_test_environment():
 class TestVeneerAPI:
     """Test the Veneer API using FastAPI TestClient."""
 
-    def test_transactions_sync_basic(self):
+    def test_transactions_sync_basic(self) -> None:
         """Test basic transactions sync endpoint using FastAPI TestClient."""
         client = TestClient(app)
         response = client.post(
@@ -49,7 +50,7 @@ class TestVeneerAPI:
         assert isinstance(data["events"], list)
         assert len(data["events"]) > 0
 
-    def test_transactions_sync_with_format_param(self):
+    def test_transactions_sync_with_format_param(self) -> None:
         """Test transactions sync with format parameter."""
         client = TestClient(app)
         response = client.post(
@@ -61,7 +62,7 @@ class TestVeneerAPI:
         assert isinstance(data, dict)
         assert "events" in data
 
-    def test_transactions_sync_with_account_id(self):
+    def test_transactions_sync_with_account_id(self) -> None:
         """Test transactions sync with specific account_id parameter."""
         client = TestClient(app)
         response = client.post(
@@ -73,7 +74,7 @@ class TestVeneerAPI:
         assert isinstance(data, dict)
         assert "events" in data
 
-    def test_transactions_sync_account_not_found(self):
+    def test_transactions_sync_account_not_found(self) -> None:
         """Test error handling for non-existent account."""
         client = TestClient(app)
         response = client.post(
@@ -86,7 +87,7 @@ class TestVeneerAPI:
         assert "detail" in data
         assert "not found" in data["detail"].lower()
 
-    def test_validate_account_id_empty(self):
+    def test_validate_account_id_empty(self) -> None:
         """Test validation rejects empty account_id."""
         client = TestClient(app)
         response = client.post(
@@ -99,7 +100,7 @@ class TestVeneerAPI:
         assert "detail" in data
         assert "cannot be empty" in data["detail"]
 
-    def test_validate_account_id_valid_characters(self):
+    def test_validate_account_id_valid_characters(self) -> None:
         """Test validation accepts valid account_id characters."""
         client = TestClient(app)
         valid_accounts = [
@@ -125,7 +126,7 @@ class TestVeneerAPI:
                 404,
             ], f"Account ID '{account_id}' failed validation"
 
-    def test_validate_account_id_invalid_characters(self):
+    def test_validate_account_id_invalid_characters(self) -> None:
         """Test validation rejects invalid characters."""
         client = TestClient(app)
         invalid_accounts = [
@@ -163,7 +164,7 @@ class TestVeneerAPI:
             assert "detail" in data
             assert "letters, numbers, underscores, and hyphens" in data["detail"]
 
-    def test_validate_account_id_directory_traversal(self):
+    def test_validate_account_id_directory_traversal(self) -> None:
         """Test validation rejects directory traversal attempts."""
         client = TestClient(app)
         traversal_attempts = [
@@ -193,7 +194,7 @@ class TestVeneerAPI:
             assert "detail" in data
             assert "letters, numbers, underscores, and hyphens" in data["detail"]
 
-    def test_validate_account_id_length_limit(self):
+    def test_validate_account_id_length_limit(self) -> None:
         """Test validation enforces length limits."""
         client = TestClient(app)
 
@@ -221,7 +222,7 @@ class TestVeneerAPI:
         assert "detail" in data
         assert "1-64 characters" in data["detail"]
 
-    def test_validate_account_id_edge_cases(self):
+    def test_validate_account_id_edge_cases(self) -> None:
         """Test validation with edge cases."""
         client = TestClient(app)
 

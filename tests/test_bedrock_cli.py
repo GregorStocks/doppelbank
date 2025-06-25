@@ -13,7 +13,7 @@ from doppelbank.bedrock.cli import UserInfo, generate_events, generate_random_ti
 class TestUserInfo:
     """Test UserInfo class."""
 
-    def test_to_dict(self):
+    def test_to_dict(self) -> None:
         """Test to_dict method."""
         user_info = UserInfo(
             user_id="42",
@@ -37,7 +37,7 @@ class TestUserInfo:
 class TestGenerateRandomTimestamp:
     """Test timestamp generation."""
 
-    def test_generate_random_timestamp(self):
+    def test_generate_random_timestamp(self) -> None:
         """Test random timestamp generation."""
         from datetime import datetime
 
@@ -58,7 +58,7 @@ class TestGenerateRandomTimestamp:
 class TestGenerateEvents:
     """Test event generation."""
 
-    def test_generate_events_with_seed(self):
+    def test_generate_events_with_seed(self) -> None:
         """Test event generation with seed for deterministic output."""
         user_info = UserInfo("42")
 
@@ -75,7 +75,7 @@ class TestGenerateEvents:
         for i in range(len(events.events)):
             assert events.events[i].to_dict() == events2.events[i].to_dict()
 
-    def test_generate_events_no_seed(self):
+    def test_generate_events_no_seed(self) -> None:
         """Test event generation without seed."""
         user_info = UserInfo("42")
 
@@ -83,7 +83,7 @@ class TestGenerateEvents:
 
         assert len(events.events) > 0
 
-    def test_generate_events_paycheck_amount(self):
+    def test_generate_events_paycheck_amount(self) -> None:
         """Test that paycheck amounts are calculated correctly."""
         user_info = UserInfo("42", salary=52000.0)  # $52k/year
 
@@ -101,7 +101,7 @@ class TestGenerateEvents:
             assert event.paycheck.amount == expected_pay
             assert event.paycheck.employer == "Acme Corp"
 
-    def test_generate_events_card_swipe_negative_amounts(self):
+    def test_generate_events_card_swipe_negative_amounts(self) -> None:
         """Test that card swipe events have negative amounts."""
         user_info = UserInfo("42")
 
@@ -128,7 +128,7 @@ class TestGenerateEvents:
                 "Entertainment",
             ]
 
-    def test_generate_events_timestamps(self):
+    def test_generate_events_timestamps(self) -> None:
         """Test that events have proper timestamps."""
         user_info = UserInfo("42")
 

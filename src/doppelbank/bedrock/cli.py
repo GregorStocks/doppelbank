@@ -24,7 +24,7 @@ from doppelbank.bedrock.models import (
     create_paycheck_event,
     get_event_summary,
 )
-from doppelbank.lib.serde import load_json, save_json
+from doppelbank.lib.serde import load_binary, load_json, save_binary, save_json
 from generated.bedrock import EventCollection
 
 
@@ -45,7 +45,7 @@ class UserInfo:
         self.salary = salary
         self.spending_patterns = spending_patterns or {}
 
-    def get_timezone(self) -> Any:
+    def get_timezone(self) -> pytz.BaseTzInfo:
         """Get the timezone object for this user."""
         return pytz.timezone(self.timezone_name)
 
@@ -230,8 +230,10 @@ Examples:
             )
 
             if args.output:
-                # todo: or binary
-                save_json(events, args.output)  # type: ignore
+                if args.format == "json":
+                    save_json(events, args.output)
+                else:
+                    save_binary(events, args.output)
                 print(f"Generated {len(events.events)} events, saved to {args.output}")
             else:
                 # Output to stdout
@@ -239,7 +241,7 @@ Examples:
                     with tempfile.NamedTemporaryFile(
                         mode="w", suffix=".json", delete=False
                     ) as f:
-                        save_json(events, Path(f.name))  # type: ignore
+                        save_json(events, Path(f.name))
                         with open(f.name, "r") as f2:
                             print(f2.read())
                 else:
@@ -251,8 +253,11 @@ Examples:
                 sys.exit(1)
 
             try:
-                events = load_json(args.file, EventCollection)  # type: ignore
-                summary = get_event_summary(events.events)  # type: ignore
+                if args.format == "json":
+                    events = load_json(args.file, EventCollection)  # type: ignore
+                else:
+                    events = load_binary(args.file, EventCollection)  # type: ignore
+                summary = get_event_summary(events.events)
 
                 print(f"Validated {summary['total']} events in {args.file}")
                 print("Event type distribution:")

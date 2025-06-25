@@ -20,7 +20,7 @@ from generated.bedrock import EventCollection
 class TestJsonSerde:
     """Test JSON serialization/deserialization."""
 
-    def test_save_load_events_json(self):
+    def test_save_load_events_json(self) -> None:
         """Test saving and loading events in JSON format."""
         event_collection = EventCollection()
         event_collection.events = [
@@ -37,7 +37,7 @@ class TestJsonSerde:
             file_path = Path(f.name)
 
         try:
-            save_json(event_collection, file_path)  # type: ignore
+            save_json(event_collection, file_path)
             loaded_events = load_json(file_path, EventCollection).events  # type: ignore
 
             assert len(loaded_events) == 3
@@ -66,7 +66,7 @@ class TestJsonSerde:
 class TestBinarySerde:
     """Test binary protobuf serialization/deserialization."""
 
-    def test_save_load_events_binary(self):
+    def test_save_load_events_binary(self) -> None:
         """Test saving and loading events in binary format."""
         event_collection = EventCollection()
         event_collection.events = [
@@ -83,7 +83,7 @@ class TestBinarySerde:
             file_path = Path(f.name)
 
         try:
-            save_binary(event_collection, file_path)  # type: ignore
+            save_binary(event_collection, file_path)
             loaded_events = load_binary(file_path, EventCollection).events  # type: ignore
 
             assert len(loaded_events) == 3

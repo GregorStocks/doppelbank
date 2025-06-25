@@ -14,7 +14,7 @@ import socket
 import subprocess
 import time
 from pathlib import Path
-from typing import Generator
+from typing import Any, Generator
 
 import pytest
 import requests
@@ -23,7 +23,7 @@ import uvicorn
 from doppelbank.veneer.cli import app
 
 
-def run_test_server():
+def run_test_server() -> None:
     """Function to run test server in multiprocessing context."""
     uvicorn.run(app, host="127.0.0.1", port=8002, log_level="error")
 
@@ -72,7 +72,9 @@ class TestVeneerIntegration:
         if process.is_alive():
             process.kill()
 
-    def test_full_pipeline_with_http_requests(self, running_server, tmp_path):
+    def test_full_pipeline_with_http_requests(
+        self, running_server: Any, tmp_path: Path
+    ) -> None:
         """
         Test the complete pipeline: Bedrock -> Detritus -> Veneer with real HTTP requests.
 
@@ -205,7 +207,7 @@ class TestVeneerIntegration:
             if default_ledger_path.exists():
                 default_ledger_path.unlink()
 
-    def test_server_performance(self, running_server, tmp_path):
+    def test_server_performance(self, running_server: Any, tmp_path: Path) -> None:
         """Test server performance with multiple concurrent requests."""
         # Generate test data
         bedrock_path = tmp_path / "performance_bedrock.json"

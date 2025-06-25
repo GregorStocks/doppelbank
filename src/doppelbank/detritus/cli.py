@@ -34,9 +34,9 @@ def main() -> None:
 
     # Load bedrock events
     if args.input.suffix == ".json":
-        bedrock_collection = serde.load_json(args.input, EventCollection)  # type: ignore
+        bedrock_collection = serde.load_json(args.input, EventCollection)
     elif args.input.suffix == ".bin":
-        bedrock_collection = serde.load_binary(args.input, EventCollection)  # type: ignore
+        bedrock_collection = serde.load_binary(args.input, EventCollection)
     else:
         raise ValueError("Unsupported input format")
 
@@ -45,9 +45,9 @@ def main() -> None:
 
     # Save detritus ledger file
     if args.format == "json":
-        serde.save_json(detritus_ledger, args.output)  # type: ignore
+        serde.save_json(detritus_ledger, args.output)
     else:
-        serde.save_binary(detritus_ledger, args.output)  # type: ignore
+        serde.save_binary(detritus_ledger, args.output)
     print(f"Wrote detritus ledger file to {args.output}")
 
 

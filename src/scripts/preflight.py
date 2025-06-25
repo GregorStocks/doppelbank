@@ -13,7 +13,7 @@ from pathlib import Path
 from scripts.proto_common import GEN_DIR, compile_proto_to_directory, get_proto_files
 
 
-def compare_generated(temp_dir, gen_dir):
+def compare_generated(temp_dir: Path | str, gen_dir: Path | str) -> bool:
     dcmp = filecmp.dircmp(temp_dir, gen_dir)
     if dcmp.left_only or dcmp.right_only or dcmp.diff_files:
         return False
@@ -24,7 +24,7 @@ def compare_generated(temp_dir, gen_dir):
     return True
 
 
-def main():
+def main() -> None:
     try:
         proto_files = get_proto_files()
     except FileNotFoundError as e:
