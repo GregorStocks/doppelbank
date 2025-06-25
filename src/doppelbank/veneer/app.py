@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 
-from doppelbank.veneer.endpoints.transactions import router as transactions_router
 from doppelbank.veneer.endpoints.link import router as link_router
+from doppelbank.veneer.endpoints.transactions import router as transactions_router
 
 app = FastAPI()
 
