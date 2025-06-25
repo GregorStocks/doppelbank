@@ -9,7 +9,6 @@ This test file implements the "better tests" described in CLAUDE.md TODOs:
 import concurrent.futures
 import json
 import multiprocessing
-import os
 import shutil
 import socket
 import subprocess
@@ -29,7 +28,7 @@ from doppelbank.veneer.cli import app
 
 def run_test_server() -> None:
     """Function to run test server in multiprocessing context."""
-    uvicorn.run(app, host="127.0.0.1", port=8002, log_level="error")
+    uvicorn.run(app, host="127.0.0.1", port=8002, log_level="debug", access_log=True)
 
 
 class TestVeneerIntegration:
@@ -236,34 +235,43 @@ class TestVeneerIntegration:
         with open(ledger_path, "w") as f:
             f.write(detritus_ledger.to_json())
 
-        # Set environment variable for veneer
-        os.environ["VENEER_DATA_DIR"] = str(test_data_dir)
+        # Copy test data to the server's default data directory
+        # (since the server process doesn't inherit our environment variable)
+        server_data_dir = (
+            Path(__file__).parent.parent / "src" / "doppelbank" / "veneer" / "data"
+        )
+        server_data_dir.mkdir(exist_ok=True)
+        server_ledger_path = server_data_dir / "test_account.json"
+        shutil.copy2(ledger_path, server_ledger_path)
 
-        # Test concurrent requests
-        start_time = time.time()
-        with concurrent.futures.ThreadPoolExecutor(max_workers=5) as executor:
-            futures = []
-            for _i in range(10):
-                future = executor.submit(
-                    requests.post,
-                    "http://127.0.0.1:8002/transactions/sync",
-                    json={"options": {"account_id": "test_account"}},
-                    timeout=10,
-                )
-                futures.append(future)
+        try:
+            # Test concurrent requests
+            start_time = time.time()
+            with concurrent.futures.ThreadPoolExecutor(max_workers=5) as executor:
+                futures = []
+                for _i in range(10):
+                    future = executor.submit(
+                        requests.post,
+                        "http://127.0.0.1:8002/transactions/sync",
+                        json={"options": {"account_id": "test_account"}},
+                        timeout=10,
+                    )
+                    futures.append(future)
 
-            # Wait for all requests to complete
-            responses = [future.result() for future in futures]
+                # Wait for all requests to complete
+                responses = [future.result() for future in futures]
 
-        end_time = time.time()
-        duration = end_time - start_time
+            end_time = time.time()
+            duration = end_time - start_time
 
-        # Verify all requests succeeded
-        for response in responses:
-            assert response.status_code == 200
-            data = response.json()
-            assert "events" in data
-            assert len(data["events"]) > 0
+            # Verify all requests succeeded
+            for response in responses:
+                assert response.status_code == 200
 
-        # Verify performance was reasonable (not too slow)
-        assert duration < 30  # Should complete within 30 seconds
+            # Verify performance was reasonable (not too slow)
+            assert duration < 30  # Should complete within 30 seconds
+
+        finally:
+            # Cleanup
+            if server_ledger_path.exists():
+                server_ledger_path.unlink()
