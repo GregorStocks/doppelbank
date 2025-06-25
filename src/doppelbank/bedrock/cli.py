@@ -13,7 +13,7 @@ import sys
 import tempfile
 from datetime import datetime, timedelta
 from pathlib import Path
-from typing import Any, Dict, Optional
+from typing import Any
 
 # Third-party
 import pytz
@@ -37,7 +37,7 @@ class UserInfo:
         timezone_name: str = "US/Pacific",
         employer: str = "Acme Corp",
         salary: float = 65000.0,
-        spending_patterns: Optional[Dict[str, Any]] = None,
+        spending_patterns: dict[str, Any] | None = None,
     ):
         self.user_id = user_id
         self.timezone_name = timezone_name
@@ -49,7 +49,7 @@ class UserInfo:
         """Get the timezone object for this user."""
         return pytz.timezone(self.timezone_name)
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Convert user info to dictionary."""
         return {
             "user_id": self.user_id,
@@ -79,8 +79,7 @@ def generate_random_timestamp(base_date: datetime, user_info: UserInfo) -> datet
 def generate_events(
     user_info: UserInfo,
     months: int = 12,
-    seed: Optional[int] = None,
-    output_format: str = "json",
+    seed: int | None = None,
 ) -> EventCollection:
     """Generate a sequence of financial events for a user. All amounts are int cents."""
     events = EventCollection()
@@ -226,7 +225,6 @@ Examples:
                 user_info=user_info,
                 months=args.months,
                 seed=args.seed,
-                output_format=args.format,
             )
 
             if args.output:
@@ -242,7 +240,7 @@ Examples:
                         mode="w", suffix=".json", delete=False
                     ) as f:
                         save_json(events, Path(f.name))
-                        with open(f.name, "r") as f2:
+                        with open(f.name) as f2:
                             print(f2.read())
                 else:
                     print("Output to stdout only supported for JSON format")

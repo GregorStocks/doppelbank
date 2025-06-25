@@ -5,8 +5,6 @@ This module provides utilities for working with protobuf-generated event classes
 and core event creation functions.
 """
 
-from typing import List
-
 import betterproto
 
 from generated.bedrock import CardSwipeEvent, Event, PaycheckEvent, TransferEvent
@@ -76,7 +74,7 @@ def create_card_swipe_event(
     return event
 
 
-def get_event_summary(events: List[Event]) -> dict:
+def get_event_summary(events: list[Event]) -> dict:
     """Get a summary of event types and counts."""
     summary = {"paycheck": 0, "transfer": 0, "card_swipe": 0, "total": len(events)}
 

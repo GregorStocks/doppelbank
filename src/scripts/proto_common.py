@@ -6,7 +6,6 @@ import shutil
 import subprocess
 import tempfile
 from pathlib import Path
-from typing import List
 
 PROTO_CONFIGS = [
     {
@@ -23,7 +22,7 @@ PROTO_DIR = Path("protos")
 GEN_DIR = Path("src/generated")
 
 
-def get_proto_files() -> List[Path]:
+def get_proto_files() -> list[Path]:
     """Get list of proto files to compile. Raises error if any are missing."""
     proto_files = []
     for config in PROTO_CONFIGS:

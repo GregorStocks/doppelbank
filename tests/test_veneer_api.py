@@ -6,8 +6,8 @@ without needing a real HTTP server.
 """
 
 import os
+from collections.abc import Generator
 from pathlib import Path
-from typing import Generator
 
 import pytest
 from fastapi.testclient import TestClient
@@ -16,7 +16,7 @@ from doppelbank.veneer.cli import app
 
 
 @pytest.fixture(scope="module", autouse=True)
-def setup_test_environment() -> Generator[None, None, None]:
+def setup_test_environment() -> Generator[None]:
     """Configure VENEER_DATA_DIR to point to organized test data."""
     detritus_test_data_dir = Path(__file__).parent / "data" / "detritus"
     original_env = os.environ.get("VENEER_DATA_DIR")

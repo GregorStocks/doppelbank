@@ -9,18 +9,23 @@ This test file implements the "better tests" described in CLAUDE.md TODOs:
 import concurrent.futures
 import json
 import multiprocessing
+import os
 import shutil
 import socket
 import subprocess
 import time
+from collections.abc import Generator
 from pathlib import Path
-from typing import Any, Generator
+from typing import Any
 
 import pytest
 import requests
 import uvicorn
 
+from doppelbank.bedrock.cli import UserInfo, generate_events
+from doppelbank.detritus.transform import bedrock_to_detritus
 from doppelbank.veneer.cli import app
+from doppelbank.lib.timestamp import parse_iso8601_z
 
 
 def run_test_server() -> None:
@@ -36,11 +41,11 @@ class TestVeneerIntegration:
         try:
             with socket.create_connection((host, port), timeout=0.1):
                 return True
-        except (socket.error, OSError):
+        except OSError:
             return False
 
     @pytest.fixture
-    def running_server(self) -> Generator[None, None, None]:
+    def running_server(self) -> Generator[None]:
         """Start a real Veneer server for integration testing."""
         # Start server in a separate process
         process = multiprocessing.Process(target=run_test_server)
@@ -73,7 +78,7 @@ class TestVeneerIntegration:
             process.kill()
 
     def test_full_pipeline_with_http_requests(
-        self, running_server: Any, tmp_path: Path
+        self, _running_server: Any, tmp_path: Path
     ) -> None:
         """
         Test the complete pipeline: Bedrock -> Detritus -> Veneer with real HTTP requests.
@@ -207,92 +212,55 @@ class TestVeneerIntegration:
             if default_ledger_path.exists():
                 default_ledger_path.unlink()
 
-    def test_server_performance(self, running_server: Any, tmp_path: Path) -> None:
+    def test_server_performance(self, _running_server: Any, tmp_path: Path) -> None:
         """Test server performance with multiple concurrent requests."""
         # Generate test data
-        bedrock_path = tmp_path / "performance_bedrock.json"
-        subprocess.run(
-            [
-                "uv",
-                "run",
-                "python",
-                "-m",
-                "doppelbank.bedrock.cli",
-                "generate",
-                "--user-id",
-                "performance_test",
-                "--output",
-                str(bedrock_path),
-                "--format",
-                "json",
-                "--seed",
-                "42",
-                "--months",
-                "1",
-            ],
-            check=True,
+        user_info = UserInfo(
+            user_id="test_user",
+            timezone_name="America/New_York",
+            employer="Test Corp",
+            salary=50000.0,
         )
 
-        detritus_path = tmp_path / "performance_detritus.json"
-        subprocess.run(
-            [
-                "uv",
-                "run",
-                "python",
-                "-m",
-                "doppelbank.detritus.cli",
-                "--input",
-                str(bedrock_path),
-                "--output",
-                str(detritus_path),
-                "--format",
-                "json",
-            ],
-            check=True,
-        )
+        # Generate events
+        events = generate_events(user_info, months=1, seed=42)
+        detritus_ledger = bedrock_to_detritus(events)
 
-        # Copy to veneer data directory with the expected filename for test_account
-        veneer_data_dir = (
-            Path(__file__).parent.parent / "src" / "doppelbank" / "veneer" / "data"
-        )
-        veneer_data_dir.mkdir(exist_ok=True)
-        test_ledger_path = veneer_data_dir / "test_account.json"
+        # Save to test data directory
+        test_data_dir = tmp_path / "test_data"
+        test_data_dir.mkdir()
+        ledger_path = test_data_dir / "test_account.json"
+        with open(ledger_path, "w") as f:
+            f.write(detritus_ledger.to_json())
 
-        shutil.copy2(detritus_path, test_ledger_path)
+        # Set environment variable for veneer
+        os.environ["VENEER_DATA_DIR"] = str(test_data_dir)
 
-        try:
-            # Test multiple concurrent requests
-            base_url = "http://127.0.0.1:8002"
-            start_time = time.time()
+        # Test concurrent requests
+        start_time = time.time()
+        with concurrent.futures.ThreadPoolExecutor(max_workers=5) as executor:
+            futures = []
+            for _i in range(10):
+                future = executor.submit(
+                    requests.post,
+                    "http://127.0.0.1:8002/transactions/sync",
+                    json={"options": {"account_id": "test_account"}},
+                    timeout=10,
+                )
+                futures.append(future)
 
-            # Make 10 concurrent requests
-            with concurrent.futures.ThreadPoolExecutor(max_workers=5) as executor:
-                futures = []
-                for i in range(10):
-                    future = executor.submit(
-                        requests.post,
-                        f"{base_url}/transactions/sync",
-                        json={"options": {"account_id": "test_account"}},
-                        timeout=10,
-                    )
-                    futures.append(future)
+            # Wait for all requests to complete
+            responses = [future.result() for future in futures]
 
-                # Wait for all requests to complete
-                responses = [future.result() for future in futures]
+        end_time = time.time()
+        duration = end_time - start_time
 
-            end_time = time.time()
-            duration = end_time - start_time
+        # Verify all requests succeeded
+        for response in responses:
+            assert response.status_code == 200
+            data = response.json()
+            assert "events" in data
+            assert len(data["events"]) > 0
 
-            # Verify all requests succeeded
-            for response in responses:
-                assert response.status_code == 200
-                data = response.json()
-                assert "events" in data
-                assert len(data["events"]) > 0
-
-            # Verify performance was reasonable (not too slow)
-            assert duration < 30  # Should complete within 30 seconds
-
-        finally:
-            if test_ledger_path.exists():
-                test_ledger_path.unlink()
+        # Verify performance was reasonable (not too slow)
+        assert duration < 30  # Should complete within 30 seconds

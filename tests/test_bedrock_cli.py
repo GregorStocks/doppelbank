@@ -8,6 +8,7 @@ Unit tests for bedrock CLI.
 
 # Local project
 from doppelbank.bedrock.cli import UserInfo, generate_events, generate_random_timestamp
+from doppelbank.lib.timestamp import parse_iso8601_z
 
 
 class TestUserInfo:
@@ -151,7 +152,5 @@ class TestGenerateEvents:
             assert timestamp.endswith("Z")
 
             # Should be parseable as datetime
-            from datetime import datetime
-
-            dt = datetime.fromisoformat(timestamp.replace("Z", "+00:00"))
+            dt = parse_iso8601_z(timestamp)
             assert dt.year >= 2024  # Should be recent

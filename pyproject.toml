@@ -45,10 +45,28 @@ build-backend = "hatchling.build"
 packages = ["src/doppelbank"]
 
 [tool.ruff.lint]
-# Enable the rule that prevents imports after non-import statements
-select = ["E", "F", "W", "I"]
-# E402: Module level import not at top of file
-# This enforces that all imports are at the top of the file
+# Comprehensive linting for greenfield project
+select = [
+    "E",      # pycodestyle errors
+    "W",      # pycodestyle warnings  
+    "F",      # pyflakes
+    "I",      # isort
+    "B",      # flake8-bugbear
+    "C4",     # flake8-comprehensions
+    "SIM",    # flake8-simplify
+    "ARG",    # flake8-unused-arguments
+    "PIE",    # flake8-pie
+    "T20",    # flake8-print
+    "TCH",    # flake8-type-checking
+    "UP",     # pyupgrade
+    "FURB",   # refurb
+    "TID252", # no relative imports
+]
+
+# Ignore print statements in CLI tools and scripts where they are appropriate
+[tool.ruff.lint.per-file-ignores]
+"**/cli.py" = ["T201"]
+"**/scripts/*.py" = ["T201"]
 
 [tool.ruff]
 # Set line length to match black's default
