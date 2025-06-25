@@ -159,7 +159,9 @@ class TestVeneerIntegration:
 
             # Test 1: Basic health check
             response = requests.post(
-                f"{base_url}/transactions/sync", json={"options": {"account_id": "test_account"}}, timeout=10
+                f"{base_url}/transactions/sync",
+                json={"options": {"account_id": "test_account"}},
+                timeout=10,
             )
             assert response.status_code == 200
 

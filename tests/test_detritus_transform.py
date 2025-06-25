@@ -1,6 +1,12 @@
 from doppelbank.detritus.transform import bedrock_to_detritus
 from generated.bedrock import CardSwipeEvent, Event, EventCollection
-from generated.detritus import AddCleared, AddPending, BankEvent, BankLedger, RemovePending
+from generated.detritus import (
+    AddCleared,
+    AddPending,
+    BankEvent,
+    BankLedger,
+    RemovePending,
+)
 
 
 def test_bedrock_to_detritus_minimal():

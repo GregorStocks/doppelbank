@@ -38,7 +38,9 @@ class TestVeneerAPI:
     def test_transactions_sync_basic(self):
         """Test basic transactions sync endpoint using FastAPI TestClient."""
         client = TestClient(app)
-        response = client.post("/transactions/sync", json={"options": {"account_id": "test_account"}})
+        response = client.post(
+            "/transactions/sync", json={"options": {"account_id": "test_account"}}
+        )
 
         assert response.status_code == 200
         data = response.json()
@@ -50,7 +52,9 @@ class TestVeneerAPI:
     def test_transactions_sync_with_format_param(self):
         """Test transactions sync with format parameter."""
         client = TestClient(app)
-        response = client.post("/transactions/sync", json={"options": {"account_id": "test_account"}})
+        response = client.post(
+            "/transactions/sync", json={"options": {"account_id": "test_account"}}
+        )
 
         assert response.status_code == 200
         data = response.json()
@@ -106,16 +110,20 @@ class TestVeneerAPI:
             "ABC123def",
             "a",
             "123",
-            "test_account_123"
+            "test_account_123",
         ]
-        
+
         for account_id in valid_accounts:
             response = client.post(
                 "/transactions/sync",
                 json={"options": {"account_id": account_id}},
             )
-            # Should either succeed (200) or fail with 404 (file not found), but not 400 (validation error)
-            assert response.status_code in [200, 404], f"Account ID '{account_id}' failed validation"
+            # Should either succeed (200) or fail with 404 (file not found),
+            # but not 400 (validation error)
+            assert response.status_code in [
+                200,
+                404,
+            ], f"Account ID '{account_id}' failed validation"
 
     def test_validate_account_id_invalid_characters(self):
         """Test validation rejects invalid characters."""
@@ -140,15 +148,17 @@ class TestVeneerAPI:
             "user,name",
             "account<123>",
             "test?account",
-            "user!name"
+            "user!name",
         ]
-        
+
         for account_id in invalid_accounts:
             response = client.post(
                 "/transactions/sync",
                 json={"options": {"account_id": account_id}},
             )
-            assert response.status_code == 400, f"Account ID '{account_id}' should have failed validation"
+            assert (
+                response.status_code == 400
+            ), f"Account ID '{account_id}' should have failed validation"
             data = response.json()
             assert "detail" in data
             assert "letters, numbers, underscores, and hyphens" in data["detail"]
@@ -168,15 +178,17 @@ class TestVeneerAPI:
             "test/",
             "test\\",
             "/test",
-            "\\test"
+            "\\test",
         ]
-        
+
         for account_id in traversal_attempts:
             response = client.post(
                 "/transactions/sync",
                 json={"options": {"account_id": account_id}},
             )
-            assert response.status_code == 400, f"Account ID '{account_id}' should have failed validation"
+            assert (
+                response.status_code == 400
+            ), f"Account ID '{account_id}' should have failed validation"
             data = response.json()
             assert "detail" in data
             assert "letters, numbers, underscores, and hyphens" in data["detail"]
@@ -184,22 +196,27 @@ class TestVeneerAPI:
     def test_validate_account_id_length_limit(self):
         """Test validation enforces length limits."""
         client = TestClient(app)
-        
+
         # Test maximum valid length (64 characters)
         max_valid = "a" * 64
         response = client.post(
             "/transactions/sync",
             json={"options": {"account_id": max_valid}},
         )
-        assert response.status_code in [200, 404], "64-character account ID should be valid"
-        
+        assert response.status_code in [
+            200,
+            404,
+        ], "64-character account ID should be valid"
+
         # Test exceeding maximum length (65 characters)
         too_long = "a" * 65
         response = client.post(
             "/transactions/sync",
             json={"options": {"account_id": too_long}},
         )
-        assert response.status_code == 400, "65-character account ID should fail validation"
+        assert (
+            response.status_code == 400
+        ), "65-character account ID should fail validation"
         data = response.json()
         assert "detail" in data
         assert "1-64 characters" in data["detail"]
@@ -207,7 +224,7 @@ class TestVeneerAPI:
     def test_validate_account_id_edge_cases(self):
         """Test validation with edge cases."""
         client = TestClient(app)
-        
+
         # Test with spaces
         response = client.post(
             "/transactions/sync",
@@ -217,7 +234,7 @@ class TestVeneerAPI:
         data = response.json()
         assert "detail" in data
         assert "letters, numbers, underscores, and hyphens" in data["detail"]
-        
+
         # Test with unicode characters
         response = client.post(
             "/transactions/sync",
@@ -227,7 +244,7 @@ class TestVeneerAPI:
         data = response.json()
         assert "detail" in data
         assert "letters, numbers, underscores, and hyphens" in data["detail"]
-        
+
         # Test with null bytes
         response = client.post(
             "/transactions/sync",

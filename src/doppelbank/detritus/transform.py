@@ -1,9 +1,14 @@
 import uuid
 from datetime import datetime, timedelta
 
-import betterproto
 from generated.bedrock import EventCollection
-from generated.detritus import AddCleared, AddPending, BankEvent, BankLedger, RemovePending
+from generated.detritus import (
+    AddCleared,
+    AddPending,
+    BankEvent,
+    BankLedger,
+    RemovePending,
+)
 
 
 def to_microsecond_iso8601(ts: str) -> str:
@@ -16,15 +21,19 @@ def bedrock_to_detritus(bedrock_collection: EventCollection) -> BankLedger:
     events = []
     for event in bedrock_collection.events:
         # Check which event type is set by looking at the actual data
-        if event.card_swipe and event.card_swipe.user_id:  # Check if card_swipe has actual data
+        if (
+            event.card_swipe and event.card_swipe.user_id
+        ):  # Check if card_swipe has actual data
             cs = event.card_swipe
             if not cs.timestamp:
                 continue  # skip events with empty timestamp
-            
+
             # AddPending event
             pending_id = str(uuid.uuid4())
             pending_transaction_id = str(uuid.uuid4())
-            account_id = getattr(cs, "account_id", "acc_dummy")  # Use account_id if present
+            account_id = getattr(
+                cs, "account_id", "acc_dummy"
+            )  # Use account_id if present
             events.append(
                 BankEvent(
                     event_id=pending_id,
@@ -43,11 +52,15 @@ def bedrock_to_detritus(bedrock_collection: EventCollection) -> BankLedger:
             # AddCleared event (simulate clearing 2 days later)
             cleared_id = str(uuid.uuid4())
             cleared_transaction_id = str(uuid.uuid4())
-            cleared_dt = datetime.fromisoformat(cs.timestamp.replace("Z", "+00:00")) + timedelta(days=2)
+            cleared_dt = datetime.fromisoformat(
+                cs.timestamp.replace("Z", "+00:00")
+            ) + timedelta(days=2)
             events.append(
                 BankEvent(
                     event_id=cleared_id,
-                    timestamp=to_microsecond_iso8601(cleared_dt.strftime("%Y-%m-%dT%H:%M:%S.%fZ")),
+                    timestamp=to_microsecond_iso8601(
+                        cleared_dt.strftime("%Y-%m-%dT%H:%M:%S.%fZ")
+                    ),
                     add_cleared=AddCleared(
                         event_id=cleared_id,
                         transaction_id=cleared_transaction_id,
@@ -65,7 +78,9 @@ def bedrock_to_detritus(bedrock_collection: EventCollection) -> BankLedger:
             events.append(
                 BankEvent(
                     event_id=remove_pending_id,
-                    timestamp=to_microsecond_iso8601(cleared_dt.strftime("%Y-%m-%dT%H:%M:%S.%fZ")),
+                    timestamp=to_microsecond_iso8601(
+                        cleared_dt.strftime("%Y-%m-%dT%H:%M:%S.%fZ")
+                    ),
                     remove_pending=RemovePending(
                         event_id=remove_pending_id,
                         transaction_id=pending_transaction_id,
@@ -75,7 +90,9 @@ def bedrock_to_detritus(bedrock_collection: EventCollection) -> BankLedger:
                     ),
                 )
             )
-        elif event.paycheck and event.paycheck.user_id:  # Check if paycheck has actual data
+        elif (
+            event.paycheck and event.paycheck.user_id
+        ):  # Check if paycheck has actual data
             pc = event.paycheck
             if not pc.timestamp:
                 continue  # skip events with empty timestamp
@@ -97,7 +114,9 @@ def bedrock_to_detritus(bedrock_collection: EventCollection) -> BankLedger:
                     ),
                 )
             )
-        elif event.transfer and event.transfer.user_id:  # Check if transfer has actual data
+        elif (
+            event.transfer and event.transfer.user_id
+        ):  # Check if transfer has actual data
             tf = event.transfer
             if not tf.timestamp:
                 continue  # skip events with empty timestamp
@@ -137,5 +156,5 @@ def bedrock_to_detritus(bedrock_collection: EventCollection) -> BankLedger:
                     ),
                 )
             )
-    
-    return BankLedger(events=events) 
+
+    return BankLedger(events=events)

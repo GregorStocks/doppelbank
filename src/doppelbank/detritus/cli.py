@@ -9,7 +9,7 @@ from generated.bedrock import EventCollection
 # but the type checker may not recognize this. We use type: ignore to silence false positives.
 
 
-def main():
+def main() -> None:
     parser = argparse.ArgumentParser(
         description="Detritus - Generate Plaid-style sync data from bedrock events"
     )

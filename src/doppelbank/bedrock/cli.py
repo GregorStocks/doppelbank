@@ -13,7 +13,7 @@ import sys
 import tempfile
 from datetime import datetime, timedelta
 from pathlib import Path
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, Optional
 
 # Third-party
 import pytz
@@ -24,7 +24,8 @@ from doppelbank.bedrock.models import (
     create_paycheck_event,
     get_event_summary,
 )
-from doppelbank.bedrock.serde import load_events, save_events, save_events_json
+from doppelbank.lib.serde import load_json, save_json
+from generated.bedrock import EventCollection
 
 
 class UserInfo:
@@ -44,7 +45,7 @@ class UserInfo:
         self.salary = salary
         self.spending_patterns = spending_patterns or {}
 
-    def get_timezone(self):
+    def get_timezone(self) -> Any:
         """Get the timezone object for this user."""
         return pytz.timezone(self.timezone_name)
 
@@ -72,7 +73,6 @@ def generate_random_timestamp(base_date: datetime, user_info: UserInfo) -> datet
         hour=hour, minute=minute, second=second, microsecond=microsecond
     )
 
-    # Use pytz for timezone handling
     return user_tz.localize(local_time)
 
 
@@ -81,9 +81,9 @@ def generate_events(
     months: int = 12,
     seed: Optional[int] = None,
     output_format: str = "json",
-) -> List[Any]:
+) -> EventCollection:
     """Generate a sequence of financial events for a user. All amounts are int cents."""
-    events = []
+    events = EventCollection()
 
     # Set seed for deterministic generation
     if seed is not None:
@@ -102,7 +102,7 @@ def generate_events(
             current_date.weekday() == 4 and current_date.day % 14 < 7
         ):  # Every other Friday
             timestamp = generate_random_timestamp(current_date, user_info)
-            events.append(
+            events.events.append(
                 create_paycheck_event(
                     user_id=user_info.user_id,
                     amount=biweekly_pay,
@@ -122,7 +122,7 @@ def generate_events(
                 category = random.choice(categories)
                 amount = int(round(random.uniform(5.0, 50.0) * 100))  # int cents
                 timestamp = generate_random_timestamp(current_date, user_info)
-                events.append(
+                events.events.append(
                     create_card_swipe_event(
                         user_id=user_info.user_id,
                         amount=-amount,  # Negative for spending
@@ -143,11 +143,11 @@ def validate_args(args: argparse.Namespace) -> None:
     if args.months <= 0:
         raise ValueError("Months must be positive")
 
-    if args.format not in ["json", "csv", "binary"]:
-        raise ValueError("Output format must be 'json', 'csv', or 'binary'")
+    if args.format not in ["json", "binary"]:
+        raise ValueError("Output format must be 'json' or 'binary'")
 
 
-def main():
+def main() -> None:
     """Main CLI entry point."""
     parser = argparse.ArgumentParser(
         description="Bedrock - Generate realistic financial events",
@@ -155,7 +155,7 @@ def main():
         epilog="""
 Examples:
   %(prog)s generate --user-id 0042 --months 12 --output events.json
-  %(prog)s generate --user-id 0042 --months 6 --seed 42 --format csv
+  %(prog)s generate --user-id 0042 --months 6 --seed 42 --format binary
   %(prog)s validate events.json
         """,
     )
@@ -188,7 +188,7 @@ Examples:
     generate_parser.add_argument("--output", type=Path, help="Output file path")
     generate_parser.add_argument(
         "--format",
-        choices=["json", "csv", "binary"],
+        choices=["json", "binary"],
         default="json",
         help="Output format (default: json)",
     )
@@ -230,15 +230,16 @@ Examples:
             )
 
             if args.output:
-                save_events(events, args.output, args.format)
-                print(f"Generated {len(events)} events, saved to {args.output}")
+                # todo: or binary
+                save_json(events, args.output)  # type: ignore
+                print(f"Generated {len(events.events)} events, saved to {args.output}")
             else:
                 # Output to stdout
                 if args.format == "json":
                     with tempfile.NamedTemporaryFile(
                         mode="w", suffix=".json", delete=False
                     ) as f:
-                        save_events_json(events, Path(f.name))
+                        save_json(events, Path(f.name))  # type: ignore
                         with open(f.name, "r") as f2:
                             print(f2.read())
                 else:
@@ -250,8 +251,8 @@ Examples:
                 sys.exit(1)
 
             try:
-                events = load_events(args.file)
-                summary = get_event_summary(events)
+                events = load_json(args.file, EventCollection)  # type: ignore
+                summary = get_event_summary(events.events)  # type: ignore
 
                 print(f"Validated {summary['total']} events in {args.file}")
                 print("Event type distribution:")

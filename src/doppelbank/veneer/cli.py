@@ -1,7 +1,7 @@
 import os
 import re
 from pathlib import Path
-from typing import Optional
+from typing import Any, Optional
 
 import uvicorn
 from fastapi import FastAPI, HTTPException
@@ -25,11 +25,14 @@ def validate_account_id(account_id: str) -> None:
     """Validate account_id to prevent directory traversal and other security issues."""
     if not account_id:
         raise HTTPException(status_code=400, detail="Account ID cannot be empty")
-    
+
     if not re.match(r"^[a-zA-Z0-9_-]{1,64}$", account_id):
         raise HTTPException(
-            status_code=400, 
-            detail="Account ID must be 1-64 characters and can only contain letters, numbers, underscores, and hyphens"
+            status_code=400,
+            detail=(
+                "Account ID must be 1-64 characters and can only contain letters, "
+                "numbers, underscores, and hyphens"
+            ),
         )
 
 
@@ -51,7 +54,7 @@ class TransactionsSyncRequest(BaseModel):
 # TODO: Document all API quirks and differences from real Plaid
 
 
-def transactions_sync(request: TransactionsSyncRequest):
+def transactions_sync(request: TransactionsSyncRequest) -> Any:
     """Serve transactions from a detritus ledger file for the given account_id."""
     if not (request.options and request.options.account_id is not None):
         raise HTTPException(status_code=400, detail="account_id must be provided")
@@ -69,13 +72,12 @@ def transactions_sync(request: TransactionsSyncRequest):
             status_code=404, detail=f"Ledger file not found for account {account_id}"
         )
 
-    
     with open(ledger_path, "r") as f:
         ledger = BankLedger().from_json(f.read())
     return ledger.to_dict()
 
 
-def main():
+def main() -> None:
     uvicorn.run(app, host="127.0.0.1", port=8000)
 
 

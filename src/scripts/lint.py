@@ -3,18 +3,18 @@ import subprocess
 import sys
 
 CHECK_COMMANDS = [
-    ["uv", "run", "ruff", "check", "src/", "tests/"],
     ["uv", "run", "black", "--check", "src/", "tests/"],
-    ["uv", "run", "mypy", "src/doppelbank/bedrock/", "--ignore-missing-imports"],
+    ["uv", "run", "ruff", "check", "src/", "tests/"],
+    ["uv", "run", "mypy", "src/", "tests/"],
 ]
 
 FIX_COMMANDS = [
-    ["uv", "run", "ruff", "check", "--fix", "src/", "tests/"],
     ["uv", "run", "black", "src/", "tests/"],
+    ["uv", "run", "ruff", "check", "--fix", "src/", "tests/"],
 ]
 
 
-def run_commands(commands):
+def run_commands(commands: list[list[str]]) -> None:
     for cmd in commands:
         print(f"\n$ {' '.join(cmd)}")
         result = subprocess.run(cmd)
@@ -23,7 +23,7 @@ def run_commands(commands):
             sys.exit(result.returncode)
 
 
-def main():
+def main() -> None:
     if len(sys.argv) < 2 or sys.argv[1] not in {"check", "fix"}:
         print("Usage: uv run python src/scripts/lint.py [check|fix]")
         sys.exit(1)
@@ -34,12 +34,12 @@ def main():
         run_commands(FIX_COMMANDS)
 
 
-def check():
+def check() -> None:
     """Entry point for uv run check"""
     run_commands(CHECK_COMMANDS)
 
 
-def fix():
+def fix() -> None:
     """Entry point for uv run fix"""
     run_commands(FIX_COMMANDS)
 

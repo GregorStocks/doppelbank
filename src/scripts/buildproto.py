@@ -7,7 +7,7 @@ Requires: protoc (brew install protobuf)
 from scripts.proto_common import PROTO_CONFIGS, compile_proto_directly
 
 
-def main():
+def main() -> None:
     for config in PROTO_CONFIGS:
         proto_file = config["proto_file"]
         out_file = config["out_file"]
