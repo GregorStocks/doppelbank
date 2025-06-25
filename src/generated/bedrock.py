@@ -2,6 +2,7 @@
 # sources: bedrock.proto
 # plugin: python-betterproto
 from dataclasses import dataclass
+from typing import List
 
 import betterproto
 
@@ -62,4 +63,4 @@ class Event(betterproto.Message):
 class EventCollection(betterproto.Message):
     """A collection of events"""
 
-    events: list["Event"] = betterproto.message_field(1)
+    events: List["Event"] = betterproto.message_field(1)

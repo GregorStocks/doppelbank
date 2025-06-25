@@ -2,6 +2,7 @@
 # sources: detritus.proto
 # plugin: python-betterproto
 from dataclasses import dataclass
+from typing import List
 
 import betterproto
 
@@ -75,4 +76,4 @@ class UpdateBalance(betterproto.Message):
 
 @dataclass
 class BankLedger(betterproto.Message):
-    events: list["BankEvent"] = betterproto.message_field(1)
+    events: List["BankEvent"] = betterproto.message_field(1)

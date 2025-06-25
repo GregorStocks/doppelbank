@@ -46,9 +46,16 @@ class TestVeneerAPI:
         assert response.status_code == 200
         data = response.json()
         assert isinstance(data, dict)
-        assert "events" in data
-        assert isinstance(data["events"], list)
-        assert len(data["events"]) > 0
+        assert "accounts" in data
+        assert "added" in data
+        assert "modified" in data
+        assert "removed" in data
+        assert "next_cursor" in data
+        assert "has_more" in data
+        assert "request_id" in data
+        assert isinstance(data["accounts"], list)
+        assert isinstance(data["added"], list)
+        assert len(data["accounts"]) > 0
 
     def test_transactions_sync_with_format_param(self) -> None:
         """Test transactions sync with format parameter."""
@@ -60,7 +67,8 @@ class TestVeneerAPI:
         assert response.status_code == 200
         data = response.json()
         assert isinstance(data, dict)
-        assert "events" in data
+        assert "accounts" in data
+        assert "added" in data
 
     def test_transactions_sync_with_account_id(self) -> None:
         """Test transactions sync with specific account_id parameter."""
@@ -72,7 +80,8 @@ class TestVeneerAPI:
         assert response.status_code == 200
         data = response.json()
         assert isinstance(data, dict)
-        assert "events" in data
+        assert "accounts" in data
+        assert "added" in data
 
     def test_transactions_sync_account_not_found(self) -> None:
         """Test error handling for non-existent account."""

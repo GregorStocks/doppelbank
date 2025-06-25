@@ -1,6 +1,7 @@
 import uuid
-from datetime import datetime, timedelta
+from datetime import timedelta
 
+from doppelbank.lib.timestamp import format_iso8601_z, parse_iso8601_z
 from generated.bedrock import EventCollection
 from generated.detritus import (
     AddCleared,
@@ -9,14 +10,6 @@ from generated.detritus import (
     BankLedger,
     RemovePending,
 )
-from doppelbank.lib.timestamp import parse_iso8601_z, format_iso8601_z
-
-
-def to_microsecond_iso8601(ts: str) -> str:
-    # Accepts ISO8601 string, returns microsecond-precision ISO8601 string
-    # Handle both "Z" and "+00:00" timezone formats
-    dt = parse_iso8601_z(ts)
-    return format_iso8601_z(dt, microsecond=True)
 
 
 def bedrock_to_detritus(bedrock_collection: EventCollection) -> BankLedger:
@@ -39,7 +32,7 @@ def bedrock_to_detritus(bedrock_collection: EventCollection) -> BankLedger:
             events.append(
                 BankEvent(
                     event_id=pending_id,
-                    timestamp=to_microsecond_iso8601(cs.timestamp),
+                    timestamp=cs.timestamp,
                     add_pending=AddPending(
                         event_id=pending_id,
                         transaction_id=pending_transaction_id,
@@ -58,9 +51,7 @@ def bedrock_to_detritus(bedrock_collection: EventCollection) -> BankLedger:
             events.append(
                 BankEvent(
                     event_id=cleared_id,
-                    timestamp=to_microsecond_iso8601(
-                        format_iso8601_z(cleared_dt, microsecond=True)
-                    ),
+                    timestamp=format_iso8601_z(cleared_dt),
                     add_cleared=AddCleared(
                         event_id=cleared_id,
                         transaction_id=cleared_transaction_id,
@@ -78,9 +69,7 @@ def bedrock_to_detritus(bedrock_collection: EventCollection) -> BankLedger:
             events.append(
                 BankEvent(
                     event_id=remove_pending_id,
-                    timestamp=to_microsecond_iso8601(
-                        format_iso8601_z(cleared_dt, microsecond=True)
-                    ),
+                    timestamp=format_iso8601_z(cleared_dt),
                     remove_pending=RemovePending(
                         event_id=remove_pending_id,
                         transaction_id=pending_transaction_id,
@@ -101,7 +90,7 @@ def bedrock_to_detritus(bedrock_collection: EventCollection) -> BankLedger:
             events.append(
                 BankEvent(
                     event_id=cleared_id,
-                    timestamp=to_microsecond_iso8601(pc.timestamp),
+                    timestamp=pc.timestamp,
                     add_cleared=AddCleared(
                         event_id=cleared_id,
                         transaction_id=str(uuid.uuid4()),
@@ -125,7 +114,7 @@ def bedrock_to_detritus(bedrock_collection: EventCollection) -> BankLedger:
             events.append(
                 BankEvent(
                     event_id=out_id,
-                    timestamp=to_microsecond_iso8601(tf.timestamp),
+                    timestamp=tf.timestamp,
                     add_cleared=AddCleared(
                         event_id=out_id,
                         transaction_id=str(uuid.uuid4()),
@@ -143,7 +132,7 @@ def bedrock_to_detritus(bedrock_collection: EventCollection) -> BankLedger:
             events.append(
                 BankEvent(
                     event_id=in_id,
-                    timestamp=to_microsecond_iso8601(tf.timestamp),
+                    timestamp=tf.timestamp,
                     add_cleared=AddCleared(
                         event_id=in_id,
                         transaction_id=str(uuid.uuid4()),

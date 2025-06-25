@@ -25,7 +25,6 @@ import uvicorn
 from doppelbank.bedrock.cli import UserInfo, generate_events
 from doppelbank.detritus.transform import bedrock_to_detritus
 from doppelbank.veneer.cli import app
-from doppelbank.lib.timestamp import parse_iso8601_z
 
 
 def run_test_server() -> None:
@@ -78,13 +77,14 @@ class TestVeneerIntegration:
             process.kill()
 
     def test_full_pipeline_with_http_requests(
-        self, _running_server: Any, tmp_path: Path
+        self, running_server: Any, tmp_path: Path
     ) -> None:
         """
         Test the complete pipeline: Bedrock -> Detritus -> Veneer with real HTTP requests.
 
         This implements the TODO: "Single test that goes from Bedrock to Veneer"
         """
+        _ = running_server
         # Step 1: Generate synthetic data with Bedrock CLI
         bedrock_path = tmp_path / "integration_bedrock.json"
         subprocess.run(
@@ -182,12 +182,14 @@ class TestVeneerIntegration:
 
             api_data = response.json()
             assert isinstance(api_data, dict)
-            assert "events" in api_data
-            assert isinstance(api_data["events"], list)
-            assert len(api_data["events"]) > 0
+            assert "accounts" in api_data
+            assert "added" in api_data
+            assert isinstance(api_data["accounts"], list)
+            assert isinstance(api_data["added"], list)
+            assert len(api_data["accounts"]) > 0
 
             # Verify the API returned data (event counts may differ due to transformation)
-            assert len(api_data["events"]) > 0
+            assert len(api_data["added"]) > 0
 
             # Test 3: Test with format parameter
             response = requests.post(
@@ -212,8 +214,9 @@ class TestVeneerIntegration:
             if default_ledger_path.exists():
                 default_ledger_path.unlink()
 
-    def test_server_performance(self, _running_server: Any, tmp_path: Path) -> None:
+    def test_server_performance(self, running_server: Any, tmp_path: Path) -> None:
         """Test server performance with multiple concurrent requests."""
+        _ = running_server
         # Generate test data
         user_info = UserInfo(
             user_id="test_user",
