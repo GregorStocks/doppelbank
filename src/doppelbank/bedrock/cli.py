@@ -254,9 +254,9 @@ Examples:
 
             try:
                 if args.format == "json":
-                    events = load_json(args.file, EventCollection)  # type: ignore
+                    events = load_json(args.file, EventCollection)
                 else:
-                    events = load_binary(args.file, EventCollection)  # type: ignore
+                    events = load_binary(args.file, EventCollection)
                 summary = get_event_summary(events.events)
 
                 print(f"Validated {summary['total']} events in {args.file}")

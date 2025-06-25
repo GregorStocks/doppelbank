@@ -41,7 +41,7 @@ def main() -> None:
         raise ValueError("Unsupported input format")
 
     # Transform
-    detritus_ledger = bedrock_to_detritus(bedrock_collection)  # type: ignore
+    detritus_ledger = bedrock_to_detritus(bedrock_collection)
 
     # Save detritus ledger file
     if args.format == "json":

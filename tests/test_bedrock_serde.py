@@ -38,7 +38,7 @@ class TestJsonSerde:
 
         try:
             save_json(event_collection, file_path)
-            loaded_events = load_json(file_path, EventCollection).events  # type: ignore
+            loaded_events = load_json(file_path, EventCollection).events
 
             assert len(loaded_events) == 3
 
@@ -84,7 +84,7 @@ class TestBinarySerde:
 
         try:
             save_binary(event_collection, file_path)
-            loaded_events = load_binary(file_path, EventCollection).events  # type: ignore
+            loaded_events = load_binary(file_path, EventCollection).events
 
             assert len(loaded_events) == 3
 
