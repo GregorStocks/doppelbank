@@ -23,7 +23,7 @@ import uvicorn
 
 from doppelbank.bedrock.cli import UserInfo, generate_events
 from doppelbank.detritus.transform import bedrock_to_detritus
-from doppelbank.veneer.cli import app
+from doppelbank.veneer.app import app
 
 
 def run_test_server() -> None:

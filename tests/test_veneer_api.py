@@ -12,7 +12,7 @@ from pathlib import Path
 import pytest
 from fastapi.testclient import TestClient
 
-from doppelbank.veneer.cli import app
+from doppelbank.veneer.app import app
 
 
 @pytest.fixture(scope="module", autouse=True)
