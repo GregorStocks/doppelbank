@@ -13,7 +13,6 @@
     - Support for other endpoints, such that a regular Plaid client could talk to Veneer and not get too confused.
     - Fully support the data model in the Detritus protobuf.
 - [ ] **Detritus**
-    - Add CSV support
     - Implement RemovePending and UpdateBalance BankEvent types in transformation logic.
     - Add validation for Bedrock events (don't just skip events with missing fields).
     - Fully support the data model in the Bedrock protobuf.

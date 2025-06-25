@@ -99,9 +99,6 @@ The Bedrock component provides a CLI for generating synthetic financial events:
 # Generate events in JSON format (default)
 uv run python -m doppelbank.bedrock.cli generate --user-id 42 --months 12 --seed 42
 
-# Generate events in CSV format
-uv run python -m doppelbank.bedrock.cli generate --user-id 42 --months 6 --format csv --output events.csv
-
 # Generate events in binary protobuf format
 uv run python -m doppelbank.bedrock.cli generate --user-id 42 --months 3 --format binary --output events.bin
 

@@ -30,8 +30,6 @@ def main() -> None:
     )
     args = parser.parse_args()
 
-    # TODO: CSV output is not supported for detritus yet. Implement CSV serialization if needed.
-
     # Load bedrock events
     if args.input.suffix == ".json":
         bedrock_collection = serde.load_json(args.input, EventCollection)
