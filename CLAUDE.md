@@ -13,18 +13,15 @@
     - Support for other endpoints, such that a regular Plaid client could talk to Veneer and not get too confused.
     - Fully support the data model in the Detritus protobuf.
 - [ ] **Detritus**
-    - Implement RemovePending and UpdateBalance BankEvent types in transformation logic.
-    - Add validation for Bedrock events (don't just skip events with missing fields).
-    - Fully support the data model in the Bedrock protobuf.
     - Support more strangeness (duplicate transactions, merchant/memo problems, etc etc etc)
 - [ ] **Bedrock**
     - Better user-psychology modeling
     - Pull stuff out of cli.py
-    - Clean up serde.py mess (why are there two of them?)
-    - Clean up protobuf docstrings (ensure we don't have so much duplication around amounts/timestamps/etc)
 - [ ] **General**
     - Clean up CLAUDE.md and move the stuff that isn't Claude-specific to more general developer documentation
     - Github commit hooks?
+    - Clean up protobuf docstrings (ensure we don't have so much duplication around amounts/timestamps/etc)
+
 
 # Claude Coding Standards
 
