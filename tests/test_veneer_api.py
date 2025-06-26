@@ -297,3 +297,38 @@ class TestVeneerAPI:
         data = response.json()
         assert "detail" in data
         assert "letters, numbers, underscores, and hyphens" in data["detail"]
+
+    def test_institutions_get_by_id_with_logo(self) -> None:
+        """Test institutions/get_by_id endpoint returns logo from file."""
+        client = TestClient(app)
+        response = client.post(
+            "/institutions/get_by_id",
+            json={"institution_id": "ins_test", "country_codes": ["US"]},
+        )
+
+        assert response.status_code == 200
+        data = response.json()
+        assert "institution" in data
+        assert "request_id" in data
+
+        institution = data["institution"]
+        assert institution["institution_id"] == "ins_test"
+        assert institution["name"] == "DoppelBank"
+        assert institution["country_codes"] == ["US"]
+        assert institution["url"] == "https://doppelbank.com"
+        assert institution["primary_color"] == "#003d6b"
+        assert institution["oauth"] is True
+        assert "auth" in institution["products"]
+        assert "transactions" in institution["products"]
+
+        # Logo should be present as raw base64 string (152x152 PNG per Plaid spec)
+        assert institution["logo"] is not None
+        assert isinstance(institution["logo"], str)
+        assert len(institution["logo"]) > 100  # Should be a substantial base64 string
+        # Verify it's valid base64 by trying to decode it
+        import base64
+
+        try:
+            base64.b64decode(institution["logo"])
+        except Exception as e:
+            raise AssertionError("Logo should be valid base64 string") from e
