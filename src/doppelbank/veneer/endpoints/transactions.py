@@ -17,9 +17,6 @@ logger = logging.getLogger(__name__)
 
 def validate_account_id(account_id: str) -> None:
     """Validate account_id to prevent directory traversal and other security issues."""
-    if not account_id:
-        raise HTTPException(status_code=400, detail="Account ID cannot be empty")
-
     if not re.match(r"^[a-zA-Z0-9_-]{1,64}$", account_id):
         raise HTTPException(
             status_code=400,
@@ -141,7 +138,7 @@ def transform_ledger_to_plaid(
 
 
 def account_ids_from_access_token(access_token: str) -> list[str]:
-    return [access_token]
+    return [re.sub("[|].*", "", access_token)]
 
 
 def handle_transactions_sync(
@@ -149,6 +146,8 @@ def handle_transactions_sync(
 ) -> PlaidSyncResponse:
     """Handle transactions sync request and return Plaid-style response."""
     account_ids = account_ids_from_access_token(request.access_token)
+
+    # If account_id is provided, filter to only that account
     if request.options and request.options.account_id:
         account_ids = list(
             set.intersection(set(account_ids), {request.options.account_id})
@@ -157,27 +156,33 @@ def handle_transactions_sync(
     for account_id in account_ids:
         validate_account_id(account_id)
 
-    for account_id in account_ids:
-        filename = f"{account_id}.json"
-        ledger_path = data_dir / filename
-
     cursor = request.options.cursor if request.options else None
 
-    # Construct filename from account_id
+    if len(account_ids) != 1:
+        raise HTTPException(
+            status_code=400,
+            detail=(
+                "Zero or multiple account IDs provided"
+                "but only exactly one is supported"
+            ),
+        )
+
+    account_id = account_ids[0]
     filename = f"{account_id}.json"
     ledger_path = data_dir / filename
+
     if not ledger_path.exists():
         logger.error(
             f"Ledger file not found for account {account_id} (looked in {ledger_path})"
         )
         raise HTTPException(
-            status_code=404, detail=f"Ledger file not found for account {account_id}"
+            status_code=404,
+            detail=f"Ledger file not found for account {account_id}",
         )
 
     with open(ledger_path) as f:
         ledger = BankLedger().from_json(f.read())
 
-    # Transform to Plaid format
     return transform_ledger_to_plaid(ledger, account_id, cursor)
 
 

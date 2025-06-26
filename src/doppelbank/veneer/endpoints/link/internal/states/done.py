@@ -15,7 +15,7 @@ def create_response() -> WorkflowResponse:
 
     accounts = [
         {
-            "id": "5decd2f5-3740-499a-958a-1e836f0bb566",
+            "id": "demo_account",
             "title": {"translation": "Beep • 1111"},
             "note": None,
             "subtitle": None,
