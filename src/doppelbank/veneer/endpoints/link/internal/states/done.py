@@ -8,6 +8,10 @@ from doppelbank.veneer.endpoints.link.internal.models import WorkflowResponse
 def create_response() -> WorkflowResponse:
     data = load_example_response()
 
+    token = "beep boop token token"
+    data["next_pane"]["sink"]["public_token"] = token
+    data["next_pane"]["sink"]["result"]["public_token"] = token
+
     return WorkflowResponse(**data)
 
 

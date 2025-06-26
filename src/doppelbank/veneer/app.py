@@ -1,6 +1,7 @@
 import logging
 
 from fastapi import FastAPI, HTTPException, Request
+from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 
@@ -26,22 +27,36 @@ app.include_router(transactions_router)
 app.include_router(link_router)
 
 
-@app.exception_handler(404)
-async def not_found_handler(request: Request, _exc: HTTPException) -> JSONResponse:
-    """Handle 404 errors and log the full request details."""
-    # Get request body
-    body = None
+async def error_handler(
+    request: Request, exc: HTTPException | RequestValidationError
+) -> JSONResponse:
+    """Handle all HTTP errors and validation errors with detailed logging."""
+    # Get request body safely
     try:
         body = await request.body()
         body_str = body.decode("utf-8") if body else None
     except Exception as e:
         body_str = f"<Error reading body: {e}>"
 
-    # Log the full request details
+    # Handle validation errors (422s)
+    if isinstance(exc, RequestValidationError):
+        logger.warning(
+            f"HTTP 422 Validation Error: {request.method} {request.url} - "
+            f"Body: {body_str} - Errors: {exc.errors()}"
+        )
+        return JSONResponse(
+            status_code=422,
+            content={"detail": "Validation error", "errors": exc.errors()},
+        )
+
+    # Handle all other HTTP errors
     logger.warning(
-        f"404 Not Found: {request.method} {request.url} - "
-        f"Headers: {dict(request.headers)} - "
+        f"HTTP {exc.status_code} {exc.detail}: {request.method} {request.url} - "
         f"Body: {body_str}"
     )
+    return JSONResponse(status_code=exc.status_code, content={"detail": exc.detail})
 
-    return JSONResponse(status_code=404, content={"detail": "Not found"})
+
+# Register the handler for both exception types
+app.exception_handler(HTTPException)(error_handler)
+app.exception_handler(RequestValidationError)(error_handler)
