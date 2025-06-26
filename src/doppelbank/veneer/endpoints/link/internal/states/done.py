@@ -11,6 +11,7 @@ def create_response() -> WorkflowResponse:
     token = "beep boop token token"
     data["next_pane"]["sink"]["public_token"] = token
     data["next_pane"]["sink"]["result"]["public_token"] = token
+    data["next_pane"]["id"] = "done"
 
     accounts = [
         {

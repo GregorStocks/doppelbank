@@ -6,7 +6,6 @@ and that the correct payloads are sent to configured webhook URLs.
 """
 
 import os
-import time
 from collections.abc import Generator
 from pathlib import Path
 from unittest.mock import patch
@@ -76,6 +75,7 @@ class TestVeneerWebhooks:
             )
             assert response.status_code == 200
             start_data = response.json()
+            assert start_data["next_pane"]["id"] == "account_select"
             workflow_session_id = start_data["workflow_session_id"]
             assert workflow_session_id
 
@@ -88,6 +88,7 @@ class TestVeneerWebhooks:
                 },
             )
             assert response.status_code == 200
+            assert response.json()["next_pane"]["id"] == "account_select_success"
 
             # Step 4: Complete flow (should trigger webhook)
             response = client.post(
@@ -99,13 +100,11 @@ class TestVeneerWebhooks:
             )
             assert response.status_code == 200
             done_data = response.json()
+            assert done_data["next_pane"]["id"] == "done"
 
             # Verify public token in response
             public_token = done_data["next_pane"]["sink"]["public_token"]
             assert public_token == "beep boop token token"
-
-            # Give async webhook task time to complete
-            time.sleep(0.1)
 
             # Verify webhook was sent
             assert len(received_webhooks) == 1
