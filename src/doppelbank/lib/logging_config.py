@@ -38,20 +38,3 @@ def configure_logging(level: Optional[str] = None, module_name: Optional[str] = 
         datefmt="%Y-%m-%d %H:%M:%S",
         force=True  # Override any existing configuration
     )
-    
-    # Set specific logger levels for third-party libraries if needed
-    # logging.getLogger("uvicorn").setLevel(logging.INFO)
-    # logging.getLogger("fastapi").setLevel(logging.INFO)
-
-
-def get_logger(name: str) -> logging.Logger:
-    """
-    Get a logger with the given name.
-    
-    Args:
-        name: Logger name (typically __name__)
-        
-    Returns:
-        Configured logger instance
-    """
-    return logging.getLogger(name) 

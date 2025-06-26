@@ -21,7 +21,6 @@ logger = logging.getLogger(__name__)
 async def start_link_workflow_json(
     request: LinkWorkflowStartRequest,
 ) -> WorkflowResponse:
-    logger.info(f"Received link workflow start request: {request}")
     return account_select.create_response()
 
 
