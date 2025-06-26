@@ -28,7 +28,7 @@ def create_response() -> WorkflowResponse:
         }
     ]
 
-    data["sink"]["result"]["metadata"]["accounts"] = accounts
+    data["next_pane"]["sink"]["result"]["metadata"]["accounts"] = accounts
 
     return WorkflowResponse(**data)
 

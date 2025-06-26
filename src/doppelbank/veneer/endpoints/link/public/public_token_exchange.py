@@ -23,7 +23,7 @@ class PublicTokenExchangeResponse(VeneerResponse):
 async def public_token_exchange(
     _request: PublicTokenExchangeRequest,
 ) -> PublicTokenExchangeResponse:
-    access_token = f"test_account"
+    access_token = "test_account"
     item_id = f"item-{uuid.uuid4().hex[:32]}"
     request_id = uuid.uuid4().hex[:5]
 

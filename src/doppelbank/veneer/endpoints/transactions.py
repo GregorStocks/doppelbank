@@ -1,9 +1,9 @@
+import logging
 import re
 import uuid
 from datetime import datetime
 from pathlib import Path
 
-import logging
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
 
@@ -167,7 +167,9 @@ def handle_transactions_sync(
     filename = f"{account_id}.json"
     ledger_path = data_dir / filename
     if not ledger_path.exists():
-        logger.error(f"Ledger file not found for account {account_id} (looked in {ledger_path})")
+        logger.error(
+            f"Ledger file not found for account {account_id} (looked in {ledger_path})"
+        )
         raise HTTPException(
             status_code=404, detail=f"Ledger file not found for account {account_id}"
         )
