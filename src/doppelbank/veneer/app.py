@@ -7,6 +7,7 @@ from fastapi.responses import JSONResponse
 from starlette.exceptions import HTTPException as StarletteHTTPException
 
 from doppelbank.lib.logging_config import configure_logging
+from doppelbank.veneer.endpoints.accounts import router as accounts_router
 from doppelbank.veneer.endpoints.institutions import router as institutions_router
 from doppelbank.veneer.endpoints.link import router as link_router
 from doppelbank.veneer.endpoints.transactions import router as transactions_router
@@ -26,6 +27,7 @@ app.add_middleware(
 )
 
 app.include_router(transactions_router)
+app.include_router(accounts_router)
 app.include_router(link_router)
 app.include_router(institutions_router)
 

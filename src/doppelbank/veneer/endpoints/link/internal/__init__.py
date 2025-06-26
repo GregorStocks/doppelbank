@@ -7,7 +7,7 @@ from .workflow import router as workflow_router
 from .workflow_event import router as workflow_event_router
 from .workflow_poll import router as workflow_poll_router
 
-router = APIRouter()
+router: APIRouter = APIRouter()
 router.include_router(heartbeat_router)
 router.include_router(workflow_router)
 router.include_router(workflow_poll_router)

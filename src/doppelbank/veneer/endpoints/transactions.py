@@ -5,12 +5,18 @@ from datetime import datetime
 from pathlib import Path
 
 from fastapi import APIRouter, HTTPException
-from pydantic import BaseModel
 
-from doppelbank.veneer.model import get_data_dir
+from doppelbank.veneer.models import (
+    Account,
+    Balance,
+    Transaction,
+    TransactionsSyncRequest,
+    TransactionsSyncResponse,
+)
+from doppelbank.veneer.utils import get_data_dir
 from generated.detritus import BankLedger
 
-router = APIRouter()
+router: APIRouter = APIRouter()
 
 logger = logging.getLogger(__name__)
 
@@ -27,53 +33,9 @@ def validate_account_id(account_id: str) -> None:
         )
 
 
-class AccountBalance(BaseModel):
-    available: float
-    current: float
-    iso_currency_code: str = "USD"
-    unofficial_currency_code: str | None = None
-
-
-class Account(BaseModel):
-    account_id: str
-    name: str
-    balances: AccountBalance
-
-
-class Transaction(BaseModel):
-    transaction_id: str
-    account_id: str
-    amount: float
-    date: str
-    name: str
-    merchant_name: str | None = None
-    category: list[str] | None = None
-    pending: bool = False
-
-
-class TransactionsSyncOptions(BaseModel):
-    account_id: str | None = None
-    cursor: str | None = None
-
-
-class TransactionsSyncRequest(BaseModel):
-    access_token: str
-    options: TransactionsSyncOptions | None = None
-
-
-class PlaidSyncResponse(BaseModel):
-    accounts: list[Account]
-    added: list[Transaction]
-    modified: list[Transaction] = []
-    removed: list[Transaction] = []
-    next_cursor: str
-    has_more: bool = False
-    request_id: str
-
-
 def transform_ledger_to_plaid(
     ledger: BankLedger, account_id: str, cursor: str | None = None
-) -> PlaidSyncResponse:
+) -> TransactionsSyncResponse:
     """Transform a BankLedger to Plaid-style sync response."""
 
     # Generate unique request ID
@@ -84,13 +46,20 @@ def transform_ledger_to_plaid(
 
     # Create account with dummy balance (in real implementation, this would come from
     # balance events)
+    dummy_balance = Balance(
+        available=1000.0,
+        current=1000.0,
+        iso_currency_code="USD",
+        unofficial_currency_code=None,
+        limit=None,
+    )
     account = Account(
         account_id=account_id,
+        balances=dummy_balance,
         name=f"Account {account_id}",
-        balances=AccountBalance(
-            available=1000.0,  # Dummy balance
-            current=1000.0,
-        ),
+        mask="1111",
+        type="depository",
+        subtype="checking",
     )
 
     # Transform detritus events to Plaid transactions
@@ -110,6 +79,10 @@ def transform_ledger_to_plaid(
                 merchant_name=ac.merchant,
                 category=[ac.category] if ac.category else None,
                 pending=False,
+                location={},
+                payment_meta={},
+                payment_channel="in_store",
+                transaction_type="place",
             )
             transactions.append(transaction)
         elif event.add_pending:
@@ -126,13 +99,20 @@ def transform_ledger_to_plaid(
                 merchant_name=ap.merchant,
                 category=[ap.category] if ap.category else None,
                 pending=True,
+                location={},
+                payment_meta={},
+                payment_channel="in_store",
+                transaction_type="place",
             )
             transactions.append(transaction)
 
-    return PlaidSyncResponse(
+    return TransactionsSyncResponse(
         accounts=[account],
         added=transactions,
+        modified=[],
+        removed=[],
         next_cursor=next_cursor,
+        has_more=False,
         request_id=request_id,
     )
 
@@ -143,20 +123,20 @@ def account_ids_from_access_token(access_token: str) -> list[str]:
 
 def handle_transactions_sync(
     request: TransactionsSyncRequest, data_dir: Path
-) -> PlaidSyncResponse:
+) -> TransactionsSyncResponse:
     """Handle transactions sync request and return Plaid-style response."""
     account_ids = account_ids_from_access_token(request.access_token)
 
     # If account_id is provided, filter to only that account
-    if request.options and request.options.account_id:
+    if request.options and "account_id" in request.options:
         account_ids = list(
-            set.intersection(set(account_ids), {request.options.account_id})
+            set.intersection(set(account_ids), {request.options["account_id"]})
         )
 
     for account_id in account_ids:
         validate_account_id(account_id)
 
-    cursor = request.options.cursor if request.options else None
+    cursor = request.cursor
 
     if len(account_ids) != 1:
         raise HTTPException(
@@ -186,7 +166,7 @@ def handle_transactions_sync(
     return transform_ledger_to_plaid(ledger, account_id, cursor)
 
 
-@router.post("/transactions/sync")
-def transactions_sync(request: TransactionsSyncRequest) -> PlaidSyncResponse:
+@router.post("/transactions/sync", response_model=TransactionsSyncResponse)
+def transactions_sync(request: TransactionsSyncRequest) -> TransactionsSyncResponse:
     data_dir = get_data_dir()
     return handle_transactions_sync(request, data_dir)

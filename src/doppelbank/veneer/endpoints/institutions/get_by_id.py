@@ -11,7 +11,7 @@ from PIL import Image
 
 from doppelbank.veneer.common import VeneerRequest, VeneerResponse
 
-router = APIRouter()
+router: APIRouter = APIRouter()
 
 
 def load_doppelbank_logo() -> str:
