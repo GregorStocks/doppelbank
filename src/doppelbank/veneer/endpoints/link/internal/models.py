@@ -4,11 +4,12 @@ from doppelbank.veneer.common import VeneerRequest, VeneerResponse
 
 
 class LinkWorkflowStartRequest(VeneerRequest):
-    pass
+    link_token: str | None = None  # Link token to associate with workflow
 
 
 class WorkflowNextRequest(VeneerRequest):
     pane_outputs: list[dict[str, Any]]
+    workflow_session_id: str | None = None  # Track which workflow session this is
 
 
 class WorkflowResponse(VeneerResponse):
