@@ -19,7 +19,7 @@ logger = logging.getLogger(__name__)
 
 @router.post("/link/workflow/start")
 async def start_link_workflow_json(
-    request: LinkWorkflowStartRequest,
+    _request: LinkWorkflowStartRequest,
 ) -> WorkflowResponse:
     return account_select.create_response()
 
@@ -33,7 +33,5 @@ async def workflow_next(request: WorkflowNextRequest) -> WorkflowResponse:
         case "account_select_success":
             # Go to end
             return done.create_response()
-        case _:
-            raise ValueError(
-                f"Unknown pane rendering id: {request.pane_outputs[0]['pane_rendering_id']}"
-            )
+        case unknown:
+            raise ValueError(f"Unknown pane rendering id: {unknown}")

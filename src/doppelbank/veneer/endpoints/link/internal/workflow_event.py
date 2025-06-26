@@ -17,5 +17,5 @@ class WorkflowEventResponse(VeneerResponse):
 
 
 @router.post("/link/workflow/event")
-async def workflow_event(request: WorkflowEventRequest) -> WorkflowEventResponse:
+async def workflow_event(_request: WorkflowEventRequest) -> WorkflowEventResponse:
     return WorkflowEventResponse(request_id="ok")

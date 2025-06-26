@@ -8,6 +8,8 @@ When adding new functionality, start by writing a test that will fail (red), the
 
 Leave explicit TODOs in the code when you're leaving something unfinished.
 
+Never ignore type/lint errors (e.g. with noqa) - always actually fix them.
+
 ## TODOs / Unfinished Work
 - [ ] **Veneer**
     - Support the exact same request/response format as the Plaid API (though likely with additional parameters and metadata, and perhaps missing some params and fields)

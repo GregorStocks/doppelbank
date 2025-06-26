@@ -152,10 +152,10 @@ def main() -> None:
     """Main CLI entry point."""
     # Configure logging to show INFO level messages by default
     configure_logging(module_name="bedrock")
-    
+
     logger = logging.getLogger(__name__)
     logger.info("Starting Bedrock CLI")
-    
+
     parser = argparse.ArgumentParser(
         description="Bedrock - Generate realistic financial events",
         formatter_class=argparse.RawDescriptionHelpFormatter,
@@ -235,7 +235,7 @@ Examples:
                 months=args.months,
                 seed=args.seed,
             )
-            
+
             logger.info(f"Generated {len(events.events)} events")
 
             if args.output:

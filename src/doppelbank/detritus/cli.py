@@ -1,10 +1,9 @@
 import argparse
-import logging
 from pathlib import Path
 
 from doppelbank.detritus.transform import bedrock_to_detritus
-from doppelbank.lib.logging_config import configure_logging
 from doppelbank.lib import serde
+from doppelbank.lib.logging_config import configure_logging
 from generated.bedrock import EventCollection
 
 # Note: All betterproto messages implement the ProtoCollection protocol methods,
@@ -14,7 +13,7 @@ from generated.bedrock import EventCollection
 def main() -> None:
     # Configure logging to show INFO level messages by default
     configure_logging(module_name="detritus")
-    
+
     parser = argparse.ArgumentParser(
         description="Detritus - Generate Plaid-style sync data from bedrock events"
     )
