@@ -8,6 +8,7 @@ card-swipes, etc. that represent real-world financial activities.
 
 # Standard library
 import argparse
+import logging
 import random
 import sys
 import tempfile
@@ -24,6 +25,7 @@ from doppelbank.bedrock.models import (
     create_paycheck_event,
     get_event_summary,
 )
+from doppelbank.lib.logging_config import configure_logging
 from doppelbank.lib.serde import load_binary, load_json, save_binary, save_json
 from generated.bedrock import EventCollection
 
@@ -148,6 +150,12 @@ def validate_args(args: argparse.Namespace) -> None:
 
 def main() -> None:
     """Main CLI entry point."""
+    # Configure logging to show INFO level messages by default
+    configure_logging(module_name="bedrock")
+    
+    logger = logging.getLogger(__name__)
+    logger.info("Starting Bedrock CLI")
+    
     parser = argparse.ArgumentParser(
         description="Bedrock - Generate realistic financial events",
         formatter_class=argparse.RawDescriptionHelpFormatter,
@@ -205,6 +213,7 @@ Examples:
     try:
         if args.command == "generate":
             validate_args(args)
+            logger.info(f"Generating events for user {args.user_id}")
 
             # Create user info object
             user_info = UserInfo(
@@ -226,12 +235,15 @@ Examples:
                 months=args.months,
                 seed=args.seed,
             )
+            
+            logger.info(f"Generated {len(events.events)} events")
 
             if args.output:
                 if args.format == "json":
                     save_json(events, args.output)
                 else:
                     save_binary(events, args.output)
+                logger.info(f"Saved events to {args.output}")
                 print(f"Generated {len(events.events)} events, saved to {args.output}")
             else:
                 # Output to stdout
@@ -246,6 +258,7 @@ Examples:
                     print("Output to stdout only supported for JSON format")
 
         elif args.command == "validate":
+            logger.info(f"Validating file: {args.file}")
             if not args.file.exists():
                 print(f"Error: File {args.file} does not exist", file=sys.stderr)
                 sys.exit(1)
@@ -257,6 +270,7 @@ Examples:
                     events = load_binary(args.file, EventCollection)
                 summary = get_event_summary(events.events)
 
+                logger.info(f"Successfully validated {summary['total']} events")
                 print(f"Validated {summary['total']} events in {args.file}")
                 print("Event type distribution:")
                 for event_type, count in summary.items():
@@ -264,16 +278,20 @@ Examples:
                         print(f"  {event_type}: {count}")
 
             except Exception as e:
+                logger.error(f"Failed to validate file {args.file}: {e}")
                 print(f"Error: Invalid file {args.file}: {e}", file=sys.stderr)
                 sys.exit(1)
 
     except ValueError as e:
+        logger.error(f"Validation error: {e}")
         print(f"Error: {e}", file=sys.stderr)
         sys.exit(1)
     except KeyboardInterrupt:
+        logger.info("Operation cancelled by user")
         print("\nOperation cancelled by user", file=sys.stderr)
         sys.exit(1)
     except Exception as e:
+        logger.error(f"Unexpected error: {e}")
         print(f"Unexpected error: {e}", file=sys.stderr)
         sys.exit(1)
 
