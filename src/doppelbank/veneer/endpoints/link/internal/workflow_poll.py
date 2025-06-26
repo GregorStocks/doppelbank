@@ -1,8 +1,8 @@
 from fastapi import APIRouter
 
 from doppelbank.veneer.common import VeneerRequest
-
-from .workflow_shared import WorkflowResponse, WorkflowState
+from doppelbank.veneer.endpoints.link.internal.models import WorkflowResponse
+from doppelbank.veneer.endpoints.link.internal.states import account_select
 
 router = APIRouter()
 
@@ -12,7 +12,5 @@ class WorkflowPollRequest(VeneerRequest):
 
 
 @router.post("/link/workflow/poll")
-async def workflow_poll(request: WorkflowPollRequest) -> WorkflowResponse:
-    return WorkflowState.create_response(
-        "todo", continuation_token=request.continuation_token
-    )
+async def workflow_poll(_request: WorkflowPollRequest) -> WorkflowResponse:
+    return account_select.create_account_select_response()
