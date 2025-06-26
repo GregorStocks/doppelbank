@@ -1,16 +1,26 @@
+import uuid
+
 from fastapi import APIRouter
 
-from doppelbank.veneer.common import VeneerRequest
-from doppelbank.veneer.endpoints.link.internal.models import WorkflowResponse
-from doppelbank.veneer.endpoints.link.internal.states import account_select
+from doppelbank.veneer.common import VeneerRequest, VeneerResponse
 
 router = APIRouter()
 
 
 class WorkflowPollRequest(VeneerRequest):
-    continuation_token: str | None = None
+    workflow_session_id: str
+
+
+class WorkflowPollResponse(VeneerResponse):
+    oauth_redirect_complete: dict[str, bool]
+    request_id: str
+    workflow_session_id: str
 
 
 @router.post("/link/workflow/poll")
-async def workflow_poll(_request: WorkflowPollRequest) -> WorkflowResponse:
-    return account_select.create_account_select_response()
+async def workflow_poll(request: WorkflowPollRequest) -> WorkflowPollResponse:
+    return WorkflowPollResponse(
+        oauth_redirect_complete={"is_complete": True},
+        request_id=str(uuid.uuid4()),
+        workflow_session_id=request.workflow_session_id,
+    )

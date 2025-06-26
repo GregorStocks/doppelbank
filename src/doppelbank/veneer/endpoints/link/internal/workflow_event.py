@@ -13,10 +13,10 @@ class WorkflowEventRequest(VeneerRequest):
 
 
 class WorkflowEventResponse(VeneerResponse):
-    status: str
+    request_id: str
 
 
 @router.post("/link/workflow/event")
 async def workflow_event(request: WorkflowEventRequest) -> WorkflowEventResponse:
     logger.info(f"Telemetry event: {request}")
-    return WorkflowEventResponse(status="ok")
+    return WorkflowEventResponse(request_id="ok")

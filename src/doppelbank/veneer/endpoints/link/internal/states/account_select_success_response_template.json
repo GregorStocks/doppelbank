@@ -1,0 +1,158 @@
+{
+    "workflow_session_id": "81209c80-da28-4d7f-b016-a96fc0d5efbe",
+    "continuation_token": "default:d85dc93f-d339-4b58-93ef-477a52efa74b",
+    "next_pane": {
+        "id": "4fff107a-8dc2-4771-a3bd-d7d7f4519fd9",
+        "pane_node_id": "18b8a33a-61ad-4aae-b908-7cd38c8c8305",
+        "navigation": {
+            "exit_visible": false,
+            "exit_button_title": null,
+            "exit_action_override": null,
+            "back_visible": false,
+            "back_button_title": null,
+            "back_stack_behavior": "BACK_STACK_BEHAVIOR_TRANSIENT",
+            "transition": {
+                "fade_out_with_spinner": {
+                    "messages": []
+                }
+            },
+            "fallback_transition": null,
+            "logo": "SDK_ASSET_ILLUSTRATION_SDK_NAVBAR_PLAID_LOGO",
+            "logo_appearance": {
+                "dark_appearance": {
+                    "id": "sdk-asset-176",
+                    "expiry": null,
+                    "dimensions": null,
+                    "is_template": false,
+                    "asset": "SDK_ASSET_ILLUSTRATION_PLAID_LOGO_NAVBAR_DARK_APPEARANCE",
+                    "client_customizations": null
+                },
+                "light_appearance": {
+                    "id": "sdk-asset-150",
+                    "expiry": null,
+                    "dimensions": null,
+                    "is_template": false,
+                    "asset": "SDK_ASSET_ILLUSTRATION_SDK_NAVBAR_PLAID_LOGO",
+                    "client_customizations": null
+                }
+            },
+            "divider_visible": false,
+            "banner": null,
+            "footer": null,
+            "should_clear_back_stack": false,
+            "progress_bar": null
+        },
+        "presentation_mode": {},
+        "sandbox_message": "You are currently in Sandbox mode.",
+        "logging_metadata": {
+            "team": "0"
+        },
+        "automatic_actions": null,
+        "profile_authentication": {
+            "transient_rendering": {
+                "end_of_flow_success_pane_rendering": {
+                    "header_asset": {
+                        "dark_appearance": {
+                            "id": "sdk-asset-274",
+                            "expiry": null,
+                            "dimensions": null,
+                            "is_template": false,
+                            "asset": "SDK_ASSET_ILLUSTRATION_SUCCESS_BRUSHSTROKE",
+                            "client_customizations": null
+                        },
+                        "light_appearance": {
+                            "id": "sdk-asset-274",
+                            "expiry": null,
+                            "dimensions": null,
+                            "is_template": false,
+                            "asset": "SDK_ASSET_ILLUSTRATION_SUCCESS_BRUSHSTROKE",
+                            "client_customizations": null
+                        }
+                    },
+                    "header": {
+                        "as": "AS_H1",
+                        "size": 20,
+                        "weight": "FONT_WEIGHT_BOLD",
+                        "content": {
+                            "localized_string": {
+                                "translation": "Success"
+                            },
+                            "actions": {},
+                            "assets": {}
+                        },
+                        "align": "ALIGN_CENTER",
+                        "font": "FONT_SANS",
+                        "casing": "CASING_NONE",
+                        "contrast": "CONTRAST_HIGH",
+                        "line_height": 0
+                    },
+                    "content": {
+                        "as": "AS_P",
+                        "size": 14,
+                        "weight": "FONT_WEIGHT_NORMAL",
+                        "content": {
+                            "localized_string": {
+                                "translation": "Your account has been successfully linked to Plaid Pattern PFM"
+                            },
+                            "actions": {},
+                            "assets": {}
+                        },
+                        "align": "ALIGN_CENTER",
+                        "font": "FONT_SANS",
+                        "casing": "CASING_NONE",
+                        "contrast": "CONTRAST_LOW",
+                        "line_height": 0
+                    },
+                    "auto_transition_delay_ms": 1500
+                }
+            },
+            "events": {
+                "on_appear": [
+                    {
+                        "event_name": "TRANSITION_VIEW",
+                        "metadata": {
+                            "error_code": "",
+                            "error_message": "",
+                            "error_type": "",
+                            "exit_status": "",
+                            "institution_id": "ins_127990",
+                            "institution_name": "U.S. Bank",
+                            "institution_search_query": "",
+                            "request_id": "X6nY5sR1qM5RWPG",
+                            "link_session_id": "81209c80-da28-4d7f-b016-a96fc0d5efbe",
+                            "mfa_type": "",
+                            "view_name": "CONNECTED",
+                            "timestamp": "",
+                            "selection": "",
+                            "brand_name": "",
+                            "match_reason": "",
+                            "routing_number": "",
+                            "account_number_mask": "",
+                            "view_variant": "",
+                            "is_update_mode": "",
+                            "issue_id": "",
+                            "issue_description": "",
+                            "issue_detected_at": ""
+                        },
+                        "webview_redirect_uri": "plaidlink://event?account_number_mask=\u0026delay_ms=0\u0026error_code=\u0026error_message=\u0026error_type=\u0026event_name=TRANSITION_VIEW\u0026exit_status=\u0026institution_id=ins_127990\u0026institution_name=U.S.+Bank\u0026institution_search_query=\u0026is_update_mode=\u0026link_session_id=81209c80-da28-4d7f-b016-a96fc0d5efbe\u0026match_reason=\u0026metadata_json=%7B%22account_number_mask%22%3A%22%22%2C%22error_code%22%3A%22%22%2C%22error_message%22%3A%22%22%2C%22error_type%22%3A%22%22%2C%22exit_status%22%3A%22%22%2C%22institution_id%22%3A%22ins_127990%22%2C%22institution_name%22%3A%22U.S.+Bank%22%2C%22institution_search_query%22%3A%22%22%2C%22is_update_mode%22%3A%22%22%2C%22link_session_id%22%3A%2281209c80-da28-4d7f-b016-a96fc0d5efbe%22%2C%22match_reason%22%3A%22%22%2C%22mfa_type%22%3A%22%22%2C%22request_id%22%3A%22X6nY5sR1qM5RWPG%22%2C%22routing_number%22%3A%22%22%2C%22timestamp%22%3A%22%22%2C%22view_name%22%3A%22CONNECTED%22%7D\u0026mfa_type=\u0026queue_behavior=QUEUE_BEHAVIOR_ENQUEUE\u0026request_id=X6nY5sR1qM5RWPG\u0026routing_number=\u0026selection=\u0026timestamp=\u0026view_name=CONNECTED",
+                        "queue_behavior": "QUEUE_BEHAVIOR_ENQUEUE"
+                    }
+                ],
+                "on_submit_tap": [],
+                "on_secondary_button_tap": [],
+                "on_tertiary_button_tap": [],
+                "on_pane_body_adornment_button_tap": [],
+                "on_modal_flexible_components_button_one_tap": [],
+                "on_edit_profile_identifier": [],
+                "on_receive": [],
+                "on_profile_chip_option_select": []
+            },
+            "pane_branding": "PANE_BRANDING_DEFAULT",
+            "animations_setting": "ANIMATIONS_SETTING_FULL"
+        },
+        "rendering_property_key": "profile_authentication"
+    },
+    "additional_panes": [],
+    "request_id": "X6nY5sR1qM5RWPG",
+    "queued_sdk_events": []
+}

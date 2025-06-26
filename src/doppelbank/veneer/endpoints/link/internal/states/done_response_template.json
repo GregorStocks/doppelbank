@@ -1,0 +1,234 @@
+{
+    "workflow_session_id": "2553f9d6-84c3-4de1-b8d1-eb67e759e3ec",
+    "continuation_token": "default:8a78e331-1030-45fa-9dc7-ff40b07b6d4f",
+    "next_pane": {
+        "id": "176b3b16-e575-40e0-9a4e-f66bf5c9493a",
+        "pane_node_id": "sink_node_id",
+        "navigation": {
+            "exit_visible": false,
+            "exit_button_title": null,
+            "exit_action_override": null,
+            "back_visible": false,
+            "back_button_title": null,
+            "back_stack_behavior": "BACK_STACK_BEHAVIOR_TRANSIENT",
+            "transition": {
+                "fade_out_with_spinner": {
+                    "messages": []
+                }
+            },
+            "fallback_transition": null,
+            "logo": "SDK_ASSET_ILLUSTRATION_SDK_NAVBAR_PLAID_LOGO",
+            "logo_appearance": {
+                "dark_appearance": {
+                    "id": "sdk-asset-176",
+                    "expiry": null,
+                    "dimensions": null,
+                    "is_template": false,
+                    "asset": "SDK_ASSET_ILLUSTRATION_PLAID_LOGO_NAVBAR_DARK_APPEARANCE",
+                    "client_customizations": null
+                },
+                "light_appearance": {
+                    "id": "sdk-asset-150",
+                    "expiry": null,
+                    "dimensions": null,
+                    "is_template": false,
+                    "asset": "SDK_ASSET_ILLUSTRATION_SDK_NAVBAR_PLAID_LOGO",
+                    "client_customizations": null
+                }
+            },
+            "divider_visible": false,
+            "banner": null,
+            "footer": null,
+            "should_clear_back_stack": false,
+            "progress_bar": null
+        },
+        "presentation_mode": {},
+        "sandbox_message": "You are currently in Sandbox mode.",
+        "logging_metadata": {
+            "team": "0"
+        },
+        "automatic_actions": null,
+        "sink": {
+            "result": {
+                "callback": "SDK_RESULT_CALLBACK_SUCCESS",
+                "public_token": "public-sandbox-192b906e-47e3-48dd-8d34-d70dcaf24622",
+                "error": null,
+                "metadata": {
+                    "status": "",
+                    "link_session_id": "2553f9d6-84c3-4de1-b8d1-eb67e759e3ec",
+                    "request_id": "",
+                    "institution": {
+                        "name": "USAA",
+                        "institution_id": "ins_7"
+                    },
+                    "accounts": [
+                        {
+                            "id": "EZnZZZbljPcqQP4bEBQQCP4P3rQmdBc48QbGN",
+                            "name": "Plaid Checking",
+                            "mask": "0000",
+                            "type": "depository",
+                            "subtype": "checking",
+                            "verification_status": "",
+                            "class_type": ""
+                        },
+                        {
+                            "id": "WrprrrVqmbt1qLMBnZqqFbJbx3eVaAt63Mgn5",
+                            "name": "Plaid Saving",
+                            "mask": "1111",
+                            "type": "depository",
+                            "subtype": "savings",
+                            "verification_status": "",
+                            "class_type": ""
+                        },
+                        {
+                            "id": "Aj4jjj6yadczXdPyvxXXUZxZo7dlzwC9LwzZV",
+                            "name": "Plaid CD",
+                            "mask": "2222",
+                            "type": "depository",
+                            "subtype": "cd",
+                            "verification_status": "",
+                            "class_type": ""
+                        },
+                        {
+                            "id": "G1R111AKe7Trb7WXGnbbSwnwEPkMjas6K9kmJ",
+                            "name": "Plaid Credit Card",
+                            "mask": "3333",
+                            "type": "credit",
+                            "subtype": "credit card",
+                            "verification_status": "",
+                            "class_type": ""
+                        },
+                        {
+                            "id": "nWbWWWexZNh5RkJPjLRRCozo5EQeNjSA9kvr8",
+                            "name": "Plaid Money Market",
+                            "mask": "4444",
+                            "type": "depository",
+                            "subtype": "money market",
+                            "verification_status": "",
+                            "class_type": ""
+                        },
+                        {
+                            "id": "b7w777rPB5i5jP8l9djjC4m4aKMeAZimnL8aV",
+                            "name": "Plaid IRA",
+                            "mask": "5555",
+                            "type": "investment",
+                            "subtype": "ira",
+                            "verification_status": "",
+                            "class_type": ""
+                        },
+                        {
+                            "id": "mEaEEE73Q4srAzjNn1AAS1w1rNJmnDugej6xg",
+                            "name": "Plaid 401k",
+                            "mask": "6666",
+                            "type": "investment",
+                            "subtype": "401k",
+                            "verification_status": "",
+                            "class_type": ""
+                        },
+                        {
+                            "id": "EZnZZZbljPcqQP4bEBQQCP4PxlyVlkf48QbGg",
+                            "name": "Plaid Student Loan",
+                            "mask": "7777",
+                            "type": "loan",
+                            "subtype": "student",
+                            "verification_status": "",
+                            "class_type": ""
+                        },
+                        {
+                            "id": "WrprrrVqmbt1qLMBnZqqFbJbMPBDPnF63Mgnw",
+                            "name": "Plaid Mortgage",
+                            "mask": "8888",
+                            "type": "loan",
+                            "subtype": "mortgage",
+                            "verification_status": "",
+                            "class_type": ""
+                        },
+                        {
+                            "id": "Aj4jjj6yadczXdPyvxXXUZxZNX84Xru9LwzZo",
+                            "name": "Plaid HSA",
+                            "mask": "9001",
+                            "type": "depository",
+                            "subtype": "hsa",
+                            "verification_status": "",
+                            "class_type": ""
+                        },
+                        {
+                            "id": "G1R111AKe7Trb7WXGnbbSwnw5G8VG7i6K9km8",
+                            "name": "Plaid Cash Management",
+                            "mask": "9002",
+                            "type": "depository",
+                            "subtype": "cash management",
+                            "verification_status": "",
+                            "class_type": ""
+                        },
+                        {
+                            "id": "nWbWWWexZNh5RkJPjLRRCozoKXGBXbtA9kvrZ",
+                            "name": "Plaid Business Credit Card",
+                            "mask": "9999",
+                            "type": "credit",
+                            "subtype": "credit card",
+                            "verification_status": "",
+                            "class_type": ""
+                        }
+                    ],
+                    "account": {
+                        "id": "EZnZZZbljPcqQP4bEBQQCP4P3rQmdBc48QbGN",
+                        "name": "Plaid Checking",
+                        "mask": "0000",
+                        "type": "depository",
+                        "subtype": "checking",
+                        "verification_status": "",
+                        "class_type": ""
+                    },
+                    "account_id": "EZnZZZbljPcqQP4bEBQQCP4P3rQmdBc48QbGN",
+                    "transfer_status": "",
+                    "wallet": null
+                }
+            },
+            "public_token": "public-sandbox-192b906e-47e3-48dd-8d34-d70dcaf24622",
+            "error_json": "",
+            "metadata_json": "{\"account\":{\"id\":\"EZnZZZbljPcqQP4bEBQQCP4P3rQmdBc48QbGN\",\"mask\":\"0000\",\"name\":\"Plaid Checking\",\"subtype\":\"checking\",\"type\":\"depository\"},\"account_id\":\"EZnZZZbljPcqQP4bEBQQCP4P3rQmdBc48QbGN\",\"accounts\":[{\"id\":\"EZnZZZbljPcqQP4bEBQQCP4P3rQmdBc48QbGN\",\"mask\":\"0000\",\"name\":\"Plaid Checking\",\"subtype\":\"checking\",\"type\":\"depository\"},{\"id\":\"WrprrrVqmbt1qLMBnZqqFbJbx3eVaAt63Mgn5\",\"mask\":\"1111\",\"name\":\"Plaid Saving\",\"subtype\":\"savings\",\"type\":\"depository\"},{\"id\":\"Aj4jjj6yadczXdPyvxXXUZxZo7dlzwC9LwzZV\",\"mask\":\"2222\",\"name\":\"Plaid CD\",\"subtype\":\"cd\",\"type\":\"depository\"},{\"id\":\"G1R111AKe7Trb7WXGnbbSwnwEPkMjas6K9kmJ\",\"mask\":\"3333\",\"name\":\"Plaid Credit Card\",\"subtype\":\"credit card\",\"type\":\"credit\"},{\"id\":\"nWbWWWexZNh5RkJPjLRRCozo5EQeNjSA9kvr8\",\"mask\":\"4444\",\"name\":\"Plaid Money Market\",\"subtype\":\"money market\",\"type\":\"depository\"},{\"id\":\"b7w777rPB5i5jP8l9djjC4m4aKMeAZimnL8aV\",\"mask\":\"5555\",\"name\":\"Plaid IRA\",\"subtype\":\"ira\",\"type\":\"investment\"},{\"id\":\"mEaEEE73Q4srAzjNn1AAS1w1rNJmnDugej6xg\",\"mask\":\"6666\",\"name\":\"Plaid 401k\",\"subtype\":\"401k\",\"type\":\"investment\"},{\"id\":\"EZnZZZbljPcqQP4bEBQQCP4PxlyVlkf48QbGg\",\"mask\":\"7777\",\"name\":\"Plaid Student Loan\",\"subtype\":\"student\",\"type\":\"loan\"},{\"id\":\"WrprrrVqmbt1qLMBnZqqFbJbMPBDPnF63Mgnw\",\"mask\":\"8888\",\"name\":\"Plaid Mortgage\",\"subtype\":\"mortgage\",\"type\":\"loan\"},{\"id\":\"Aj4jjj6yadczXdPyvxXXUZxZNX84Xru9LwzZo\",\"mask\":\"9001\",\"name\":\"Plaid HSA\",\"subtype\":\"hsa\",\"type\":\"depository\"},{\"id\":\"G1R111AKe7Trb7WXGnbbSwnw5G8VG7i6K9km8\",\"mask\":\"9002\",\"name\":\"Plaid Cash Management\",\"subtype\":\"cash management\",\"type\":\"depository\"},{\"id\":\"nWbWWWexZNh5RkJPjLRRCozoKXGBXbtA9kvrZ\",\"mask\":\"9999\",\"name\":\"Plaid Business Credit Card\",\"subtype\":\"credit card\",\"type\":\"credit\"}],\"institution\":{\"institution_id\":\"ins_7\",\"name\":\"USAA\"},\"link_session_id\":\"2553f9d6-84c3-4de1-b8d1-eb67e759e3ec\",\"public_token\":\"public-sandbox-192b906e-47e3-48dd-8d34-d70dcaf24622\",\"transfer_status\":\"\"}",
+            "events": {
+                "on_appear": [
+                    {
+                        "event_name": "HANDOFF",
+                        "metadata": {
+                            "error_code": "",
+                            "error_message": "",
+                            "error_type": "",
+                            "exit_status": "",
+                            "institution_id": "ins_7",
+                            "institution_name": "USAA",
+                            "institution_search_query": "",
+                            "request_id": "27FHwX25uIXS5U0",
+                            "link_session_id": "2553f9d6-84c3-4de1-b8d1-eb67e759e3ec",
+                            "mfa_type": "",
+                            "view_name": "",
+                            "timestamp": "",
+                            "selection": "",
+                            "brand_name": "",
+                            "match_reason": "",
+                            "routing_number": "",
+                            "account_number_mask": "",
+                            "view_variant": "",
+                            "is_update_mode": "",
+                            "issue_id": "",
+                            "issue_description": "",
+                            "issue_detected_at": ""
+                        },
+                        "webview_redirect_uri": "plaidlink://event?account_number_mask=\u0026delay_ms=0\u0026error_code=\u0026error_message=\u0026error_type=\u0026event_name=HANDOFF\u0026exit_status=\u0026institution_id=ins_7\u0026institution_name=USAA\u0026institution_search_query=\u0026is_update_mode=\u0026link_session_id=2553f9d6-84c3-4de1-b8d1-eb67e759e3ec\u0026match_reason=\u0026metadata_json=%7B%22account_number_mask%22%3A%22%22%2C%22error_code%22%3A%22%22%2C%22error_message%22%3A%22%22%2C%22error_type%22%3A%22%22%2C%22exit_status%22%3A%22%22%2C%22institution_id%22%3A%22ins_7%22%2C%22institution_name%22%3A%22USAA%22%2C%22institution_search_query%22%3A%22%22%2C%22is_update_mode%22%3A%22%22%2C%22link_session_id%22%3A%222553f9d6-84c3-4de1-b8d1-eb67e759e3ec%22%2C%22match_reason%22%3A%22%22%2C%22mfa_type%22%3A%22%22%2C%22request_id%22%3A%2227FHwX25uIXS5U0%22%2C%22routing_number%22%3A%22%22%2C%22timestamp%22%3A%22%22%2C%22view_name%22%3A%22%22%7D\u0026mfa_type=\u0026queue_behavior=QUEUE_BEHAVIOR_ENQUEUE_AND_FLUSH\u0026request_id=27FHwX25uIXS5U0\u0026routing_number=\u0026selection=\u0026timestamp=\u0026view_name=",
+                        "queue_behavior": "QUEUE_BEHAVIOR_ENQUEUE_AND_FLUSH"
+                    }
+                ]
+            },
+            "redirect_uri": null,
+            "hosted_link_completion_redirect_uri": null,
+            "webview_redirect_uri": "plaidlink://connected?public_token=public-sandbox-192b906e-47e3-48dd-8d34-d70dcaf24622\u0026account_id=EZnZZZbljPcqQP4bEBQQCP4P3rQmdBc48QbGN\u0026account_mask=0000\u0026account_name=Plaid+Checking\u0026account_subtype=checking\u0026account_type=depository\u0026accounts=%5B%7B%22_id%22%3A%22EZnZZZbljPcqQP4bEBQQCP4P3rQmdBc48QbGN%22%2C%22meta%22%3A%7B%22name%22%3A%22Plaid+Checking%22%2C%22number%22%3A%220000%22%7D%2C%22subtype%22%3A%22checking%22%2C%22type%22%3A%22depository%22%7D%2C%7B%22_id%22%3A%22WrprrrVqmbt1qLMBnZqqFbJbx3eVaAt63Mgn5%22%2C%22meta%22%3A%7B%22name%22%3A%22Plaid+Saving%22%2C%22number%22%3A%221111%22%7D%2C%22subtype%22%3A%22savings%22%2C%22type%22%3A%22depository%22%7D%2C%7B%22_id%22%3A%22Aj4jjj6yadczXdPyvxXXUZxZo7dlzwC9LwzZV%22%2C%22meta%22%3A%7B%22name%22%3A%22Plaid+CD%22%2C%22number%22%3A%222222%22%7D%2C%22subtype%22%3A%22cd%22%2C%22type%22%3A%22depository%22%7D%2C%7B%22_id%22%3A%22G1R111AKe7Trb7WXGnbbSwnwEPkMjas6K9kmJ%22%2C%22meta%22%3A%7B%22name%22%3A%22Plaid+Credit+Card%22%2C%22number%22%3A%223333%22%7D%2C%22subtype%22%3A%22credit+card%22%2C%22type%22%3A%22credit%22%7D%2C%7B%22_id%22%3A%22nWbWWWexZNh5RkJPjLRRCozo5EQeNjSA9kvr8%22%2C%22meta%22%3A%7B%22name%22%3A%22Plaid+Money+Market%22%2C%22number%22%3A%224444%22%7D%2C%22subtype%22%3A%22money+market%22%2C%22type%22%3A%22depository%22%7D%2C%7B%22_id%22%3A%22b7w777rPB5i5jP8l9djjC4m4aKMeAZimnL8aV%22%2C%22meta%22%3A%7B%22name%22%3A%22Plaid+IRA%22%2C%22number%22%3A%225555%22%7D%2C%22subtype%22%3A%22ira%22%2C%22type%22%3A%22investment%22%7D%2C%7B%22_id%22%3A%22mEaEEE73Q4srAzjNn1AAS1w1rNJmnDugej6xg%22%2C%22meta%22%3A%7B%22name%22%3A%22Plaid+401k%22%2C%22number%22%3A%226666%22%7D%2C%22subtype%22%3A%22401k%22%2C%22type%22%3A%22investment%22%7D%2C%7B%22_id%22%3A%22EZnZZZbljPcqQP4bEBQQCP4PxlyVlkf48QbGg%22%2C%22meta%22%3A%7B%22name%22%3A%22Plaid+Student+Loan%22%2C%22number%22%3A%227777%22%7D%2C%22subtype%22%3A%22student%22%2C%22type%22%3A%22loan%22%7D%2C%7B%22_id%22%3A%22WrprrrVqmbt1qLMBnZqqFbJbMPBDPnF63Mgnw%22%2C%22meta%22%3A%7B%22name%22%3A%22Plaid+Mortgage%22%2C%22number%22%3A%228888%22%7D%2C%22subtype%22%3A%22mortgage%22%2C%22type%22%3A%22loan%22%7D%2C%7B%22_id%22%3A%22Aj4jjj6yadczXdPyvxXXUZxZNX84Xru9LwzZo%22%2C%22meta%22%3A%7B%22name%22%3A%22Plaid+HSA%22%2C%22number%22%3A%229001%22%7D%2C%22subtype%22%3A%22hsa%22%2C%22type%22%3A%22depository%22%7D%2C%7B%22_id%22%3A%22G1R111AKe7Trb7WXGnbbSwnw5G8VG7i6K9km8%22%2C%22meta%22%3A%7B%22name%22%3A%22Plaid+Cash+Management%22%2C%22number%22%3A%229002%22%7D%2C%22subtype%22%3A%22cash+management%22%2C%22type%22%3A%22depository%22%7D%2C%7B%22_id%22%3A%22nWbWWWexZNh5RkJPjLRRCozoKXGBXbtA9kvrZ%22%2C%22meta%22%3A%7B%22name%22%3A%22Plaid+Business+Credit+Card%22%2C%22number%22%3A%229999%22%7D%2C%22subtype%22%3A%22credit+card%22%2C%22type%22%3A%22credit%22%7D%5D\u0026institution_id=ins_7\u0026institution_name=USAA\u0026link_session_id=2553f9d6-84c3-4de1-b8d1-eb67e759e3ec",
+            "omit_known_null_fields": false
+        },
+        "rendering_property_key": "sink"
+    },
+    "additional_panes": [],
+    "request_id": "27FHwX25uIXS5U0",
+    "queued_sdk_events": []
+}
