@@ -40,7 +40,11 @@ class TestVeneerAPI:
         """Test basic transactions sync endpoint using FastAPI TestClient."""
         client = TestClient(app)
         response = client.post(
-            "/transactions/sync", json={"options": {"account_id": "test_account"}}
+            "/transactions/sync",
+            json={
+                "access_token": "test_account",
+                "options": {"account_id": "test_account"},
+            },
         )
 
         assert response.status_code == 200
@@ -61,7 +65,11 @@ class TestVeneerAPI:
         """Test transactions sync with format parameter."""
         client = TestClient(app)
         response = client.post(
-            "/transactions/sync", json={"options": {"account_id": "test_account"}}
+            "/transactions/sync",
+            json={
+                "access_token": "test_account",
+                "options": {"account_id": "test_account"},
+            },
         )
 
         assert response.status_code == 200
@@ -74,7 +82,11 @@ class TestVeneerAPI:
         """Test transactions sync with specific account_id parameter."""
         client = TestClient(app)
         response = client.post(
-            "/transactions/sync", json={"options": {"account_id": "test_account"}}
+            "/transactions/sync",
+            json={
+                "access_token": "test_account",
+                "options": {"account_id": "test_account"},
+            },
         )
 
         assert response.status_code == 200
@@ -88,7 +100,10 @@ class TestVeneerAPI:
         client = TestClient(app)
         response = client.post(
             "/transactions/sync",
-            json={"options": {"account_id": "nonexistent_account"}},
+            json={
+                "access_token": "nonexistent_account",
+                "options": {"account_id": "nonexistent_account"},
+            },
         )
 
         assert response.status_code == 404
@@ -101,7 +116,7 @@ class TestVeneerAPI:
         client = TestClient(app)
         response = client.post(
             "/transactions/sync",
-            json={"options": {"account_id": ""}},
+            json={"access_token": "", "options": {"account_id": ""}},
         )
 
         assert response.status_code == 400
@@ -126,7 +141,10 @@ class TestVeneerAPI:
         for account_id in valid_accounts:
             response = client.post(
                 "/transactions/sync",
-                json={"options": {"account_id": account_id}},
+                json={
+                    "access_token": account_id,
+                    "options": {"account_id": account_id},
+                },
             )
             # Should either succeed (200) or fail with 404 (file not found),
             # but not 400 (validation error)
@@ -164,7 +182,10 @@ class TestVeneerAPI:
         for account_id in invalid_accounts:
             response = client.post(
                 "/transactions/sync",
-                json={"options": {"account_id": account_id}},
+                json={
+                    "access_token": account_id,
+                    "options": {"account_id": account_id},
+                },
             )
             assert (
                 response.status_code == 400
@@ -194,7 +215,10 @@ class TestVeneerAPI:
         for account_id in traversal_attempts:
             response = client.post(
                 "/transactions/sync",
-                json={"options": {"account_id": account_id}},
+                json={
+                    "access_token": account_id,
+                    "options": {"account_id": account_id},
+                },
             )
             assert (
                 response.status_code == 400
@@ -211,7 +235,7 @@ class TestVeneerAPI:
         max_valid = "a" * 64
         response = client.post(
             "/transactions/sync",
-            json={"options": {"account_id": max_valid}},
+            json={"access_token": max_valid, "options": {"account_id": max_valid}},
         )
         assert response.status_code in [
             200,
@@ -222,7 +246,7 @@ class TestVeneerAPI:
         too_long = "a" * 65
         response = client.post(
             "/transactions/sync",
-            json={"options": {"account_id": too_long}},
+            json={"access_token": too_long, "options": {"account_id": too_long}},
         )
         assert (
             response.status_code == 400
@@ -238,7 +262,10 @@ class TestVeneerAPI:
         # Test with spaces
         response = client.post(
             "/transactions/sync",
-            json={"options": {"account_id": "test account"}},
+            json={
+                "access_token": "test account",
+                "options": {"account_id": "test account"},
+            },
         )
         assert response.status_code == 400
         data = response.json()
@@ -248,7 +275,10 @@ class TestVeneerAPI:
         # Test with unicode characters
         response = client.post(
             "/transactions/sync",
-            json={"options": {"account_id": "tëst_åccount"}},
+            json={
+                "access_token": "tëst_åccount",
+                "options": {"account_id": "tëst_åccount"},
+            },
         )
         assert response.status_code == 400
         data = response.json()
@@ -258,7 +288,10 @@ class TestVeneerAPI:
         # Test with null bytes
         response = client.post(
             "/transactions/sync",
-            json={"options": {"account_id": "test\x00account"}},
+            json={
+                "access_token": "test\x00account",
+                "options": {"account_id": "test\x00account"},
+            },
         )
         assert response.status_code == 400
         data = response.json()

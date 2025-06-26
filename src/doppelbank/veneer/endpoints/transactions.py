@@ -57,6 +57,7 @@ class TransactionsSyncOptions(BaseModel):
 
 
 class TransactionsSyncRequest(BaseModel):
+    access_token: str
     options: TransactionsSyncOptions | None = None
 
 
@@ -136,17 +137,28 @@ def transform_ledger_to_plaid(
     )
 
 
+def account_ids_from_access_token(access_token: str) -> list[str]:
+    return [access_token]
+
+
 def handle_transactions_sync(
     request: TransactionsSyncRequest, data_dir: Path
 ) -> PlaidSyncResponse:
     """Handle transactions sync request and return Plaid-style response."""
-    if not (request.options and request.options.account_id is not None):
-        raise HTTPException(status_code=400, detail="account_id must be provided")
-    account_id = request.options.account_id
-    cursor = request.options.cursor
+    account_ids = account_ids_from_access_token(request.access_token)
+    if request.options and request.options.account_id:
+        account_ids = list(
+            set.intersection(set(account_ids), {request.options.account_id})
+        )
 
-    # Validate account_id for security
-    validate_account_id(account_id)
+    for account_id in account_ids:
+        validate_account_id(account_id)
+
+    for account_id in account_ids:
+        filename = f"{account_id}.json"
+        ledger_path = data_dir / filename
+
+    cursor = request.options.cursor if request.options else None
 
     # Construct filename from account_id
     filename = f"{account_id}.json"

@@ -166,7 +166,10 @@ class TestVeneerIntegration:
             # Test 1: Basic health check
             response = requests.post(
                 f"{base_url}/transactions/sync",
-                json={"options": {"account_id": "test_account"}},
+                json={
+                    "access_token": "test_account",
+                    "options": {"account_id": "test_account"},
+                },
                 timeout=10,
             )
             assert response.status_code == 200
@@ -174,7 +177,10 @@ class TestVeneerIntegration:
             # Test 2: Query with specific account_id
             response = requests.post(
                 f"{base_url}/transactions/sync",
-                json={"options": {"account_id": "test_account"}},
+                json={
+                    "access_token": "test_account",
+                    "options": {"account_id": "test_account"},
+                },
                 timeout=10,
             )
             assert response.status_code == 200
@@ -193,7 +199,11 @@ class TestVeneerIntegration:
             # Test 3: Test with format parameter
             response = requests.post(
                 f"{base_url}/transactions/sync",
-                json={"options": {"account_id": "test_account"}, "format": "json"},
+                json={
+                    "access_token": "test_account",
+                    "options": {"account_id": "test_account"},
+                    "format": "json",
+                },
                 timeout=10,
             )
             assert response.status_code == 200
@@ -201,7 +211,10 @@ class TestVeneerIntegration:
             # Test 4: Test error handling for non-existent account
             response = requests.post(
                 f"{base_url}/transactions/sync",
-                json={"options": {"account_id": "nonexistent_account"}},
+                json={
+                    "access_token": "nonexistent_account",
+                    "options": {"account_id": "nonexistent_account"},
+                },
                 timeout=10,
             )
             assert response.status_code == 404
@@ -253,7 +266,10 @@ class TestVeneerIntegration:
                     future = executor.submit(
                         requests.post,
                         "http://127.0.0.1:8002/transactions/sync",
-                        json={"options": {"account_id": "test_account"}},
+                        json={
+                            "access_token": "test_account",
+                            "options": {"account_id": "test_account"},
+                        },
                         timeout=10,
                     )
                     futures.append(future)
