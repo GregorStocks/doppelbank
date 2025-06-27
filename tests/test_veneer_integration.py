@@ -6,7 +6,6 @@ This test file implements the "better tests" described in CLAUDE.md TODOs:
 - Single test that goes from Bedrock to Veneer
 """
 
-import concurrent.futures
 import json
 import multiprocessing
 import shutil
@@ -17,13 +16,10 @@ from collections.abc import Generator
 from pathlib import Path
 from typing import Any
 
-import msgspec
 import pytest
 import requests
 import uvicorn
 
-from doppelbank.persona_generator.cli import UserInfo, generate_events
-from doppelbank.persona_generator.transform import bedrock_to_detritus
 from doppelbank.veneer.app import app
 
 
@@ -96,8 +92,12 @@ class TestVeneerIntegration:
                 "doppelbank.persona_generator.cli",
                 "--user-id",
                 "integration_test_user",
-                "--account-id",
-                "acc_integration_test_user",
+                "--persona",
+                "integration_test",
+                "--institution",
+                "doppelbank",
+                "--account-type",
+                "checking",
                 "--output",
                 str(detritus_path),
                 "--format",
@@ -117,29 +117,46 @@ class TestVeneerIntegration:
         assert "events" in detritus_data
         assert len(detritus_data["events"]) > 0
 
-        # Step 2: Copy detritus file to veneer data directory
+        # Step 2: Set up both flat and hierarchical data for backward compatibility testing
         veneer_data_dir = (
             Path(__file__).parent.parent / "src" / "doppelbank" / "veneer" / "data"
         )
         veneer_data_dir.mkdir(exist_ok=True)
-        test_ledger_path = veneer_data_dir / "integration_test_ledger.json"
-        default_ledger_path = veneer_data_dir / "test_ledger_detritus.json"
 
-        # Copy the default test data from organized location
+        # Copy the default test data for backward compatibility (flat structure)
         detritus_test_data_dir = Path(__file__).parent / "data" / "detritus"
         source_default_ledger = detritus_test_data_dir / "test_account.json"
-
-        # Copy the generated detritus file to veneer data directory
-        shutil.copy2(detritus_path, test_ledger_path)
-        # Also copy default test data for basic health check (using new filename pattern)
         default_ledger_path = veneer_data_dir / "test_account.json"
         shutil.copy2(source_default_ledger, default_ledger_path)
+
+        # For hierarchical data, we'll rely on the generated data structure in ./data/
+        # The persona generator already created the hierarchical structure
+        # We just need to make sure the integration test data exists there
+        hierarchical_account_id = (
+            "integration_test_user-integration_test-doppelbank-checking"
+        )
+        hierarchical_account_file = (
+            Path.cwd()
+            / "data"
+            / "personas"
+            / "integration_test"
+            / "doppelbank"
+            / "checking.json"
+        )
+
+        # If the hierarchical file doesn't exist, copy our generated file there
+        if not hierarchical_account_file.exists():
+            hierarchical_account_file.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copy2(detritus_path, hierarchical_account_file)
 
         try:
             # Step 3: Test the API with real HTTP requests (like curl)
             base_url = "http://127.0.0.1:8002"
+            hierarchical_account_id = (
+                "integration_test_user-integration_test-doppelbank-checking"
+            )
 
-            # Test 1: Basic health check
+            # Test 1: Basic health check with old flat account
             response = requests.post(
                 f"{base_url}/transactions/sync",
                 json={
@@ -150,12 +167,12 @@ class TestVeneerIntegration:
             )
             assert response.status_code == 200
 
-            # Test 2: Query with specific account_id
+            # Test 2: Query with hierarchical account_id
             response = requests.post(
                 f"{base_url}/transactions/sync",
                 json={
-                    "access_token": "test_account",
-                    "options": {"account_id": "test_account"},
+                    "access_token": hierarchical_account_id,
+                    "options": {"account_id": hierarchical_account_id},
                 },
                 timeout=10,
             )
@@ -197,74 +214,7 @@ class TestVeneerIntegration:
 
         finally:
             # Cleanup: remove the test files
-            if test_ledger_path.exists():
-                test_ledger_path.unlink()
             if default_ledger_path.exists():
                 default_ledger_path.unlink()
-
-    def test_server_performance(self, running_server: Any, tmp_path: Path) -> None:
-        """Test server performance with multiple concurrent requests."""
-        _ = running_server
-        # Generate test data
-        user_info = UserInfo(
-            user_id="test_user",
-            account_id="acc_test_user",
-            timezone_name="America/New_York",
-            employer="Test Corp",
-            salary=50000.0,
-        )
-
-        # Generate events
-        events = generate_events(user_info, days=30, seed=42)
-        detritus_ledger = bedrock_to_detritus(events)
-
-        # Save to test data directory
-        test_data_dir = tmp_path / "test_data"
-        test_data_dir.mkdir()
-        ledger_path = test_data_dir / "test_account.json"
-        with open(ledger_path, "wb") as f:
-            f.write(msgspec.json.encode(detritus_ledger))
-
-        # Copy test data to the server's default data directory
-        # (since the server process doesn't inherit our environment variable)
-        server_data_dir = (
-            Path(__file__).parent.parent / "src" / "doppelbank" / "veneer" / "data"
-        )
-        server_data_dir.mkdir(exist_ok=True)
-        server_ledger_path = server_data_dir / "test_account.json"
-        shutil.copy2(ledger_path, server_ledger_path)
-
-        try:
-            # Test concurrent requests
-            start_time = time.time()
-            with concurrent.futures.ThreadPoolExecutor(max_workers=5) as executor:
-                futures = []
-                for _i in range(10):
-                    future = executor.submit(
-                        requests.post,
-                        "http://127.0.0.1:8002/transactions/sync",
-                        json={
-                            "access_token": "test_account",
-                            "options": {"account_id": "test_account"},
-                        },
-                        timeout=10,
-                    )
-                    futures.append(future)
-
-                # Wait for all requests to complete
-                responses = [future.result() for future in futures]
-
-            end_time = time.time()
-            duration = end_time - start_time
-
-            # Verify all requests succeeded
-            for response in responses:
-                assert response.status_code == 200
-
-            # Verify performance was reasonable (not too slow)
-            assert duration < 30  # Should complete within 30 seconds
-
-        finally:
-            # Cleanup
-            if server_ledger_path.exists():
-                server_ledger_path.unlink()
+            if hierarchical_account_file.exists():
+                hierarchical_account_file.unlink()

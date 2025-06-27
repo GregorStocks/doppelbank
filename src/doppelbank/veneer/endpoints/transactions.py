@@ -2,7 +2,6 @@ import logging
 import re
 import uuid
 from datetime import datetime
-from pathlib import Path
 
 import msgspec
 from fastapi import APIRouter, HTTPException
@@ -18,7 +17,7 @@ from doppelbank.veneer.models import (
     TransactionsSyncRequest,
     TransactionsSyncResponse,
 )
-from doppelbank.veneer.utils import get_data_dir
+from doppelbank.veneer.utils import find_account_file
 
 router: APIRouter = APIRouter()
 
@@ -27,11 +26,12 @@ logger = logging.getLogger(__name__)
 
 def validate_account_id(account_id: str) -> None:
     """Validate account_id to prevent directory traversal and other security issues."""
-    if not re.match(r"^[a-zA-Z0-9_-]{1,64}$", account_id):
+    # For hierarchical IDs, allow hyphens as delimiters
+    if not re.match(r"^[a-zA-Z0-9_-]{1,128}$", account_id):
         raise HTTPException(
             status_code=400,
             detail=(
-                "Account ID must be 1-64 characters and can only contain letters, "
+                "Account ID must be 1-128 characters and can only contain letters, "
                 "numbers, underscores, and hyphens"
             ),
         )
@@ -124,7 +124,7 @@ def account_ids_from_access_token(access_token: str) -> list[str]:
 
 
 def handle_transactions_sync(
-    request: TransactionsSyncRequest, data_dir: Path
+    request: TransactionsSyncRequest,
 ) -> TransactionsSyncResponse:
     """Handle transactions sync request and return Plaid-style response."""
     account_ids = account_ids_from_access_token(request.access_token)
@@ -150,8 +150,7 @@ def handle_transactions_sync(
         )
 
     account_id = account_ids[0]
-    filename = f"{account_id}.json"
-    ledger_path = data_dir / filename
+    ledger_path = find_account_file(account_id)
 
     if not ledger_path.exists():
         logger.error(
@@ -170,5 +169,4 @@ def handle_transactions_sync(
 
 @router.post("/transactions/sync", response_model=TransactionsSyncResponse)
 def transactions_sync(request: TransactionsSyncRequest) -> TransactionsSyncResponse:
-    data_dir = get_data_dir()
-    return handle_transactions_sync(request, data_dir)
+    return handle_transactions_sync(request)

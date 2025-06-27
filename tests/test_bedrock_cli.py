@@ -9,32 +9,30 @@ Unit tests for bedrock CLI.
 # Local project
 from doppelbank.lib.timestamp import parse_iso8601_z
 from doppelbank.persona_generator.cli import (
-    UserInfo,
+    PersonaInfo,
     generate_events,
     generate_random_timestamp,
 )
 from doppelbank.schemas.bedrock import CardSwipeEvent, PaycheckEvent
 
 
-class TestUserInfo:
-    """Test UserInfo class."""
+class TestPersonaInfo:
+    """Test PersonaInfo class."""
 
     def test_to_dict(self) -> None:
         """Test to_dict method."""
-        user_info = UserInfo(
-            user_id="42",
-            account_id="acc_42",
+        persona_info = PersonaInfo(
+            persona_name="test_persona",
             timezone_name="US/Pacific",
             employer="Acme Corp",
             salary=65000.0,
             spending_patterns={"food": 0.3},
         )
 
-        result = user_info.to_dict()
+        result = persona_info.to_dict()
 
         assert result == {
-            "user_id": "42",
-            "account_id": "acc_42",
+            "persona_name": "test_persona",
             "timezone_name": "US/Pacific",
             "employer": "Acme Corp",
             "salary": 65000.0,
@@ -49,10 +47,10 @@ class TestGenerateRandomTimestamp:
         """Test random timestamp generation."""
         from datetime import datetime
 
-        user_info = UserInfo("42", "acc_42", timezone_name="US/Pacific")
+        persona_info = PersonaInfo("test_persona", timezone_name="US/Pacific")
         base_date = datetime(2025, 1, 1)
 
-        timestamp = generate_random_timestamp(base_date, user_info)
+        timestamp = generate_random_timestamp(base_date, persona_info)
 
         assert timestamp.year == 2025
         assert timestamp.month == 1
@@ -68,14 +66,24 @@ class TestGenerateEvents:
 
     def test_generate_events_with_seed(self) -> None:
         """Test event generation with seed for deterministic output."""
-        user_info = UserInfo("42", "acc_42")
+        persona_info = PersonaInfo("test_persona")
 
-        events = generate_events(user_info, days=30, seed=42)
+        events = generate_events(
+            persona_info,
+            account_id="user42-test_persona-test_bank-checking",
+            days=30,
+            seed=42,
+        )
 
         assert len(events.events) > 0
 
         # With the same seed, we should get the same events
-        events2 = generate_events(user_info, days=30, seed=42)
+        events2 = generate_events(
+            persona_info,
+            account_id="user42-test_persona-test_bank-checking",
+            days=30,
+            seed=42,
+        )
 
         assert len(events.events) == len(events2.events)
 
@@ -85,17 +93,24 @@ class TestGenerateEvents:
 
     def test_generate_events_no_seed(self) -> None:
         """Test event generation without seed."""
-        user_info = UserInfo("42", "acc_42")
+        persona_info = PersonaInfo("test_persona")
 
-        events = generate_events(user_info, days=30)
+        events = generate_events(
+            persona_info, account_id="user42-test_persona-test_bank-checking", days=30
+        )
 
         assert len(events.events) > 0
 
     def test_generate_events_paycheck_amount(self) -> None:
         """Test that paycheck amounts are calculated correctly."""
-        user_info = UserInfo("42", "acc_42", salary=52000.0)  # $52k/year
+        persona_info = PersonaInfo("test_persona", salary=52000.0)  # $52k/year
 
-        events = generate_events(user_info, days=30, seed=42)
+        events = generate_events(
+            persona_info,
+            account_id="user42-test_persona-test_bank-checking",
+            days=30,
+            seed=42,
+        )
 
         # Find paycheck events
         paycheck_events = [e for e in events.events if isinstance(e, PaycheckEvent)]
@@ -112,9 +127,14 @@ class TestGenerateEvents:
 
     def test_generate_events_card_swipe_negative_amounts(self) -> None:
         """Test that card swipe events have negative amounts."""
-        user_info = UserInfo("42", "acc_42")
+        persona_info = PersonaInfo("test_persona")
 
-        events = generate_events(user_info, days=30, seed=42)
+        events = generate_events(
+            persona_info,
+            account_id="user42-test_persona-test_bank-checking",
+            days=30,
+            seed=42,
+        )
 
         # Find card swipe events
         card_swipe_events = [e for e in events.events if isinstance(e, CardSwipeEvent)]
@@ -140,9 +160,14 @@ class TestGenerateEvents:
 
     def test_generate_events_timestamps(self) -> None:
         """Test that events have proper timestamps."""
-        user_info = UserInfo("42", "acc_42")
+        persona_info = PersonaInfo("test_persona")
 
-        events = generate_events(user_info, days=30, seed=42)
+        events = generate_events(
+            persona_info,
+            account_id="user42-test_persona-test_bank-checking",
+            days=30,
+            seed=42,
+        )
 
         assert len(events.events) > 0
 

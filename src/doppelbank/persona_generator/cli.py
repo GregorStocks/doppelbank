@@ -7,6 +7,7 @@ Generates structured, human-readable events and transforms them into Plaid-style
 
 # Standard library
 import argparse
+import json
 import logging
 import random
 import sys
@@ -17,6 +18,7 @@ from typing import Any
 # Third-party
 import pytz
 
+from doppelbank.lib.ids import AccountId, ItemId, UserId
 from doppelbank.lib.logging_config import configure_logging
 from doppelbank.lib.serde import save_binary, save_json
 
@@ -29,34 +31,31 @@ from doppelbank.persona_generator.transform import bedrock_to_detritus
 from doppelbank.schemas.bedrock import EventCollection
 
 
-class UserInfo:
-    """User information for generating personalized financial events."""
+class PersonaInfo:
+    """Persona information for generating personalized financial events."""
 
     def __init__(
         self,
-        user_id: str,
-        account_id: str,
+        persona_name: str,
         timezone_name: str = "US/Pacific",
         employer: str = "Acme Corp",
         salary: float = 65000.0,
         spending_patterns: dict[str, Any] | None = None,
     ):
-        self.user_id = user_id
-        self.account_id = account_id
+        self.persona_name = persona_name
         self.timezone_name = timezone_name
         self.employer = employer
         self.salary = salary
         self.spending_patterns = spending_patterns or {}
 
     def get_timezone(self) -> pytz.BaseTzInfo:
-        """Get the timezone object for this user."""
+        """Get the timezone object for this persona."""
         return pytz.timezone(self.timezone_name)
 
     def to_dict(self) -> dict[str, Any]:
-        """Convert user info to dictionary."""
+        """Convert persona info to dictionary."""
         return {
-            "user_id": self.user_id,
-            "account_id": self.account_id,
+            "persona_name": self.persona_name,
             "timezone_name": self.timezone_name,
             "employer": self.employer,
             "salary": self.salary,
@@ -64,7 +63,9 @@ class UserInfo:
         }
 
 
-def generate_random_timestamp(base_date: datetime, user_info: UserInfo) -> datetime:
+def generate_random_timestamp(
+    base_date: datetime, persona_info: PersonaInfo
+) -> datetime:
     """Generate a random timestamp within the given date."""
     # Generate random time components
     hour = random.randint(0, 23)
@@ -72,20 +73,21 @@ def generate_random_timestamp(base_date: datetime, user_info: UserInfo) -> datet
     second = random.randint(0, 59)
     microsecond = random.randint(0, 999999)
 
-    user_tz = user_info.get_timezone()
+    persona_tz = persona_info.get_timezone()
     local_time = base_date.replace(
         hour=hour, minute=minute, second=second, microsecond=microsecond
     )
 
-    return user_tz.localize(local_time)
+    return persona_tz.localize(local_time)
 
 
 def generate_events(
-    user_info: UserInfo,
+    persona_info: PersonaInfo,
+    account_id: str,
     days: int = 30,
     seed: int | None = None,
 ) -> EventCollection:
-    """Generate a sequence of financial events for a user. All amounts are int cents."""
+    """Generate a sequence of financial events for a persona. All amounts are int cents."""
     events_list = []
 
     # Set seed for deterministic generation
@@ -96,7 +98,7 @@ def generate_events(
     start_date = datetime.now() - timedelta(days=days)
 
     # Calculate bi-weekly paycheck amount (int cents)
-    biweekly_pay = int(round(user_info.salary * 100 / 26))  # 26 pay periods per year
+    biweekly_pay = int(round(persona_info.salary * 100 / 26))  # 26 pay periods per year
 
     current_date = start_date
     while current_date <= datetime.now():
@@ -104,14 +106,13 @@ def generate_events(
         if (
             current_date.weekday() == 4 and current_date.day % 14 < 7
         ):  # Every other Friday
-            timestamp = generate_random_timestamp(current_date, user_info)
+            timestamp = generate_random_timestamp(current_date, persona_info)
             events_list.append(
                 create_paycheck_event(
-                    user_id=user_info.user_id,
-                    account_id=user_info.account_id,
+                    account_id=account_id,
                     amount=biweekly_pay,
                     timestamp=timestamp.strftime("%Y-%m-%dT%H:%M:%S.%fZ"),
-                    employer=user_info.employer,
+                    employer=persona_info.employer,
                     description="Bi-weekly paycheck",
                 )
             )
@@ -125,11 +126,10 @@ def generate_events(
                 merchant = random.choice(merchants)
                 category = random.choice(categories)
                 amount = int(round(random.uniform(5.0, 50.0) * 100))  # int cents
-                timestamp = generate_random_timestamp(current_date, user_info)
+                timestamp = generate_random_timestamp(current_date, persona_info)
                 events_list.append(
                     create_card_swipe_event(
-                        user_id=user_info.user_id,
-                        account_id=user_info.account_id,
+                        account_id=account_id,
                         amount=-amount,  # Negative for spending
                         timestamp=timestamp.strftime("%Y-%m-%dT%H:%M:%S.%fZ"),
                         merchant=merchant,
@@ -151,6 +151,16 @@ def validate_args(args: argparse.Namespace) -> None:
     if args.format not in ["json", "binary"]:
         raise ValueError("Output format must be 'json' or 'binary'")
 
+    # Validate hierarchical ID components
+    if not args.user_id:
+        raise ValueError("User ID cannot be empty")
+    if not args.persona:
+        raise ValueError("Persona name cannot be empty")
+    if not args.institution:
+        raise ValueError("Institution ID cannot be empty")
+    if not args.account_type:
+        raise ValueError("Account type cannot be empty")
+
 
 def main() -> None:
     """Main CLI entry point."""
@@ -165,14 +175,26 @@ def main() -> None:
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Examples:
-  %(prog)s --user-id 0042 --account-id test_account --days 30 --output ledger.json
-  %(prog)s --user-id john_doe --account-id checking --days 60 --seed 12345 --output persona.json
+  %(prog)s --user-id user_123 --persona jimmy --institution doppelbank \\
+      --account-type checking --days 30
+  %(prog)s --user-id client_user --persona claude --institution doppelfirstbank \\
+      --account-type savings --days 60 --seed 12345
         """,
     )
 
     # Main command - create complete persona data (generate + transform in one step)
-    parser.add_argument("--user-id", required=True, help="User ID for events")
-    parser.add_argument("--account-id", required=True, help="Account ID for events")
+    parser.add_argument(
+        "--user-id", required=True, help="User ID for hierarchical structure"
+    )
+    parser.add_argument(
+        "--persona", required=True, help="Persona name (e.g., jimmy, claude)"
+    )
+    parser.add_argument(
+        "--institution", required=True, help="Institution ID (e.g., doppelbank)"
+    )
+    parser.add_argument(
+        "--account-type", required=True, help="Account type (e.g., checking, savings)"
+    )
     parser.add_argument(
         "--timezone", default="US/Pacific", help="User timezone (default: US/Pacific)"
     )
@@ -192,7 +214,9 @@ Examples:
         "--seed", type=int, help="Random seed for deterministic generation"
     )
     parser.add_argument(
-        "--output", required=True, type=Path, help="Output detritus ledger file"
+        "--output",
+        type=Path,
+        help="Output detritus ledger file (optional, defaults to data/ structure)",
     )
     parser.add_argument(
         "--format",
@@ -205,25 +229,38 @@ Examples:
 
     try:
         validate_args(args)
-        logger.info(f"Creating complete persona data for user {args.user_id}")
 
-        # Create user info object
-        user_info = UserInfo(
-            user_id=args.user_id,
-            account_id=args.account_id,
+        # Create hierarchical IDs
+        user_id = UserId(args.user_id)
+        item_id = ItemId(args.user_id, args.persona, args.institution)
+        account_id = AccountId(
+            args.user_id, args.persona, args.institution, args.account_type
+        )
+
+        logger.info(f"Creating persona data for {item_id.to_wire()}")
+        logger.info(f"Account: {account_id.to_wire()}")
+
+        # Create persona info object
+        persona_info = PersonaInfo(
+            persona_name=args.persona,
             timezone_name=args.timezone,
             employer=args.employer,
             salary=args.salary,
         )
 
-        print(f"Generating {args.days} days of events for user {args.user_id}...")
+        print(f"Generating {args.days} days of events for persona {args.persona}...")
+        print(f"  User ID: {user_id.to_wire()}")
+        print(f"  Item ID: {item_id.to_wire()}")
+        print(f"  Account ID: {account_id.to_wire()}")
+        print(f"  Institution: {args.institution}")
         print(f"  Timezone: {args.timezone}")
         print(f"  Employer: {args.employer}")
         print(f"  Annual Salary: ${args.salary:,.2f}")
 
         # Generate events
         events = generate_events(
-            user_info=user_info,
+            persona_info=persona_info,
+            account_id=account_id.to_wire(),
             days=args.days,
             seed=args.seed,
         )
@@ -233,17 +270,45 @@ Examples:
         # Transform to detritus ledger
         detritus_ledger = bedrock_to_detritus(events)
 
-        # Save detritus ledger file
-        if args.format == "json":
-            save_json(detritus_ledger, args.output)
+        # Create directory structure and save files
+        if args.output:
+            # Use specified output file
+            if args.format == "json":
+                save_json(detritus_ledger, args.output)
+            else:
+                save_binary(detritus_ledger, args.output)
+            logger.info(f"Saved detritus ledger to {args.output}")
+            print(f"Saved ledger to {args.output}")
         else:
-            save_binary(detritus_ledger, args.output)
+            # Use hierarchical data structure
+            data_root = Path("data")
+            persona_dir = data_root / "personas" / args.persona
+            institution_dir = persona_dir / args.institution
 
-        logger.info(f"Saved detritus ledger to {args.output}")
-        print(
-            f"Generated {len(events.events)} events and transformed to detritus ledger, "
-            f"saved to {args.output}"
-        )
+            # Create directories
+            institution_dir.mkdir(parents=True, exist_ok=True)
+
+            # Save persona metadata
+            persona_file = persona_dir / "persona.json"
+            if not persona_file.exists():
+                persona_metadata = persona_info.to_dict()
+                with open(persona_file, "w") as f:
+                    json.dump(persona_metadata, f, indent=2)
+                logger.info(f"Created persona metadata: {persona_file}")
+
+            # Save account ledger
+            account_file = institution_dir / f"{args.account_type}.json"
+            if args.format == "json":
+                save_json(detritus_ledger, account_file)
+            else:
+                save_binary(detritus_ledger, account_file)
+
+            logger.info(f"Saved account ledger to {account_file}")
+            print(
+                f"Generated {len(events.events)} events and saved to hierarchical data structure:"
+            )
+            print(f"  Persona: {persona_file}")
+            print(f"  Account: {account_file}")
 
     except ValueError as e:
         logger.error(f"Validation error: {e}")

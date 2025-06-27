@@ -4,10 +4,10 @@ API endpoints for fetching account information.
 
 import logging
 import uuid
-from pathlib import Path
 
 from fastapi import APIRouter, HTTPException
 
+from doppelbank.lib.ids import AccountId
 from doppelbank.lib.serde import load_json
 from doppelbank.schemas.detritus import BankLedger
 from doppelbank.veneer.models import (
@@ -17,16 +17,16 @@ from doppelbank.veneer.models import (
     Balance,
     Item,
 )
-from doppelbank.veneer.utils import get_data_dir
+from doppelbank.veneer.utils import find_account_file
 
 logger = logging.getLogger(__name__)
 
 router: APIRouter = APIRouter()
 
 
-def read_account_data(account_id: str, data_dir: Path) -> BankLedger:
-    """Read account data from the configured data directory."""
-    file_path = data_dir / f"{account_id}.json"
+def read_account_data(account_id: str) -> BankLedger:
+    """Read account data using hierarchical or flat file structure."""
+    file_path = find_account_file(account_id)
     if not file_path.exists():
         raise HTTPException(status_code=404, detail=f"Account '{account_id}' not found")
     return load_json(file_path, BankLedger)
@@ -36,10 +36,23 @@ def read_account_data(account_id: str, data_dir: Path) -> BankLedger:
 def accounts_get(request: AccountsGetRequest) -> AccountsGetResponse:
     """Handle /accounts/get endpoint."""
     account_id = request.access_token.split("|")[0]
-    # TODO: unify with access token/account id handling in transactions sync
-    data_dir = get_data_dir()
-    read_account_data(account_id, data_dir)
-    # TODO: actually do something with the account data...
+
+    # Read account data to validate it exists
+    read_account_data(account_id)
+
+    # Try to parse hierarchical account ID for richer metadata
+    try:
+        parsed_account = AccountId.from_wire(account_id)
+        institution_id = parsed_account.institution_id
+        account_name = (
+            f"{parsed_account.persona_id.title()} {parsed_account.account_type.title()}"
+        )
+        item_id = parsed_account.item_id.to_wire()
+    except Exception:
+        # Fall back to simple account info
+        institution_id = "doppelbank"
+        account_name = f"Account {account_id}"
+        item_id = f"{account_id}|item"
 
     accounts = [
         Account(
@@ -49,7 +62,7 @@ def accounts_get(request: AccountsGetRequest) -> AccountsGetResponse:
                 current=110.0,
                 iso_currency_code="USD",
             ),
-            name=f"Account {account_id}",
+            name=account_name,
             mask="1111",
             type="depository",
             subtype="checking",
@@ -57,8 +70,8 @@ def accounts_get(request: AccountsGetRequest) -> AccountsGetResponse:
     ]
 
     item = Item(
-        item_id=f"{account_id}|123",
-        institution_id="default_institution_id",
+        item_id=item_id,
+        institution_id=institution_id,
         webhook="",
     )
 

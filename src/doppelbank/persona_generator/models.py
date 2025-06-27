@@ -14,7 +14,6 @@ from doppelbank.schemas.bedrock import (
 
 
 def create_paycheck_event(
-    user_id: str,
     account_id: str,
     amount: int,  # int cents
     timestamp: str,
@@ -24,7 +23,7 @@ def create_paycheck_event(
     """Create a paycheck event. Amount is int cents."""
     return PaycheckEvent(
         event_id="",  # can be set by caller if needed
-        user_id=user_id,
+        user_id="",  # derived from account_id when needed
         account_id=account_id,
         amount=amount,
         timestamp=timestamp,
@@ -34,7 +33,6 @@ def create_paycheck_event(
 
 
 def create_transfer_event(
-    user_id: str,
     amount: int,  # int cents
     timestamp: str,
     from_account: str,
@@ -44,7 +42,7 @@ def create_transfer_event(
     """Create a transfer event. Amount is int cents."""
     return TransferEvent(
         event_id="",
-        user_id=user_id,
+        user_id="",  # derived from account_id when needed
         amount=amount,
         timestamp=timestamp,
         from_account=from_account,
@@ -54,7 +52,6 @@ def create_transfer_event(
 
 
 def create_card_swipe_event(
-    user_id: str,
     account_id: str,
     amount: int,  # int cents
     timestamp: str,
@@ -65,7 +62,7 @@ def create_card_swipe_event(
     """Create a card swipe event. Amount is int cents."""
     return CardSwipeEvent(
         event_id="",
-        user_id=user_id,
+        user_id="",  # derived from account_id when needed
         account_id=account_id,
         amount=amount,
         timestamp=timestamp,
