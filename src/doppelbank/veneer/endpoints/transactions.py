@@ -4,8 +4,10 @@ import uuid
 from datetime import datetime
 from pathlib import Path
 
+import msgspec
 from fastapi import APIRouter, HTTPException
 
+from doppelbank.schemas.detritus import AddCleared, AddPending, BankLedger
 from doppelbank.veneer.models import (
     Account,
     Balance,
@@ -17,7 +19,6 @@ from doppelbank.veneer.models import (
     TransactionsSyncResponse,
 )
 from doppelbank.veneer.utils import get_data_dir
-from generated.detritus import BankLedger
 
 router: APIRouter = APIRouter()
 
@@ -67,22 +68,24 @@ def transform_ledger_to_plaid(
 
     # Transform detritus events to Plaid transactions
     transactions = []
-    for event in ledger.events:
-        ev = None
-        if (event.add_cleared and event.add_cleared.account_id == account_id):
-            ev = event.add_cleared
-        elif (
-            event.add_pending and event.add_pending.account_id == account_id
-        ):
-            ev = event.add_pending
-            # Convert cleared transaction
-        else:
-            continue
-        transaction = Transaction(
+    for bank_event in ledger.events:
+        # Check event type using isinstance with Tagged unions
+        ev: AddCleared | AddPending | None = None
+        is_pending = False
+
+        if isinstance(bank_event.event, AddCleared):
+            ev = bank_event.event
+            is_pending = False
+        elif isinstance(bank_event.event, AddPending):
+            ev = bank_event.event
+            is_pending = True
+
+        if ev is not None:
+            transaction = Transaction(
                 transaction_id=ev.transaction_id,
                 account_id=ev.account_id,
                 amount=ev.amount / 100.0,  # Convert cents to dollars
-                date=event.timestamp.split("T")[
+                date=bank_event.timestamp.split("T")[
                     0
                 ],  # Extract date part from event timestamp
                 name=ev.description,
@@ -90,20 +93,20 @@ def transform_ledger_to_plaid(
                 personal_finance_category=PersonalFinanceCategory(
                     primary=ev.category, detailed=ev.category, confidence_level="high"
                 ),
-                pending=bool(event.add_pending and event.add_pending.account_id),
+                pending=is_pending,
                 location=Location(),
                 payment_meta=PaymentMeta(),
                 payment_channel="in_store",
                 transaction_type="place",
                 iso_currency_code="USD",
-                authorized_date=event.timestamp.split("T")[0],
-                authorized_datetime=event.timestamp,
-                datetime=event.timestamp,
+                authorized_date=bank_event.timestamp.split("T")[0],
+                authorized_datetime=bank_event.timestamp,
+                datetime=bank_event.timestamp,
                 counterparties=[],
                 personal_finance_category_icon_url=None,
                 transaction_code=None,
             )
-        transactions.append(transaction)
+            transactions.append(transaction)
 
     return TransactionsSyncResponse(
         accounts=[account],
@@ -159,8 +162,8 @@ def handle_transactions_sync(
             detail=f"Ledger file not found for account {account_id}",
         )
 
-    with open(ledger_path) as f:
-        ledger = BankLedger().from_json(f.read())
+    with open(ledger_path, "rb") as f:
+        ledger = msgspec.json.decode(f.read(), type=BankLedger)
 
     return transform_ledger_to_plaid(ledger, account_id, cursor)
 

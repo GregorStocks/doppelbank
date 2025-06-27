@@ -1,34 +1,36 @@
 """
-Generic serialization/deserialization utilities for betterproto models.
-Handles JSON and binary protobuf for any generated collection.
+Generic serialization/deserialization utilities for msgspec models.
+Handles JSON and binary msgpack for any msgspec Struct.
 """
 
 from pathlib import Path
 
-from betterproto import Message
+import msgspec
 
 
-def save_json(collection: Message, file_path: Path) -> None:
-    with open(file_path, "w") as f:
-        f.write(collection.to_json(indent=2))
-
-
-def load_json[T: Message](file_path: Path, collection_type: type[T]) -> T:
-    with open(file_path) as f:
-        json_str = f.read()
-    collection = collection_type()
-    collection.from_json(json_str)
-    return collection
-
-
-def save_binary(collection: Message, file_path: Path) -> None:
+def save_json(collection: msgspec.Struct, file_path: Path) -> None:
+    """Save a msgspec Struct to JSON file."""
+    json_bytes = msgspec.json.encode(collection)
     with open(file_path, "wb") as f:
-        f.write(bytes(collection))
+        f.write(json_bytes)
 
 
-def load_binary[T: Message](file_path: Path, collection_type: type[T]) -> T:
+def load_json[T](file_path: Path, collection_type: type[T]) -> T:
+    """Load a msgspec Struct from JSON file."""
     with open(file_path, "rb") as f:
-        data = f.read()
-    collection = collection_type()
-    collection.parse(data)
-    return collection
+        json_bytes = f.read()
+    return msgspec.json.decode(json_bytes, type=collection_type)
+
+
+def save_binary(collection: msgspec.Struct, file_path: Path) -> None:
+    """Save a msgspec Struct to binary msgpack file."""
+    binary_data = msgspec.msgpack.encode(collection)
+    with open(file_path, "wb") as f:
+        f.write(binary_data)
+
+
+def load_binary[T](file_path: Path, collection_type: type[T]) -> T:
+    """Load a msgspec Struct from binary msgpack file."""
+    with open(file_path, "rb") as f:
+        binary_data = f.read()
+    return msgspec.msgpack.decode(binary_data, type=collection_type)

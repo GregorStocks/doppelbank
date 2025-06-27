@@ -1,13 +1,16 @@
 """
-Data models for bedrock financial events using protobuf.
+Data models for bedrock financial events using msgspec.
 
-This module provides utilities for working with protobuf-generated event classes
+This module provides utilities for working with msgspec event classes
 and core event creation functions.
 """
 
-import betterproto
-
-from generated.bedrock import CardSwipeEvent, Event, PaycheckEvent, TransferEvent
+from doppelbank.schemas.bedrock import (
+    CardSwipeEvent,
+    Event,
+    PaycheckEvent,
+    TransferEvent,
+)
 
 
 def create_paycheck_event(
@@ -19,8 +22,7 @@ def create_paycheck_event(
     description: str = "Bi-weekly paycheck",
 ) -> Event:
     """Create a paycheck event. Amount is int cents."""
-    event = Event()
-    event.paycheck = PaycheckEvent(
+    return PaycheckEvent(
         event_id="",  # can be set by caller if needed
         user_id=user_id,
         account_id=account_id,
@@ -29,7 +31,6 @@ def create_paycheck_event(
         employer=employer,
         description=description,
     )
-    return event
 
 
 def create_transfer_event(
@@ -41,8 +42,7 @@ def create_transfer_event(
     description: str = "",
 ) -> Event:
     """Create a transfer event. Amount is int cents."""
-    event = Event()
-    event.transfer = TransferEvent(
+    return TransferEvent(
         event_id="",
         user_id=user_id,
         amount=amount,
@@ -51,7 +51,6 @@ def create_transfer_event(
         to_account=to_account,
         description=description or f"Transfer from {from_account} to {to_account}",
     )
-    return event
 
 
 def create_card_swipe_event(
@@ -64,8 +63,7 @@ def create_card_swipe_event(
     description: str = "",
 ) -> Event:
     """Create a card swipe event. Amount is int cents."""
-    event = Event()
-    event.card_swipe = CardSwipeEvent(
+    return CardSwipeEvent(
         event_id="",
         user_id=user_id,
         account_id=account_id,
@@ -75,7 +73,6 @@ def create_card_swipe_event(
         category=category,
         description=description or f"Purchase at {merchant}",
     )
-    return event
 
 
 def get_event_summary(events: list[Event]) -> dict:
@@ -83,8 +80,12 @@ def get_event_summary(events: list[Event]) -> dict:
     summary = {"paycheck": 0, "transfer": 0, "card_swipe": 0, "total": len(events)}
 
     for event in events:
-        field_name, _ = betterproto.which_one_of(event, "event_data")
-        if field_name:
-            summary[field_name] += 1
+        # Check event type using isinstance with Tagged unions
+        if isinstance(event, PaycheckEvent):
+            summary["paycheck"] += 1
+        elif isinstance(event, TransferEvent):
+            summary["transfer"] += 1
+        elif isinstance(event, CardSwipeEvent):
+            summary["card_swipe"] += 1
 
     return summary

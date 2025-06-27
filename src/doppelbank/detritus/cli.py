@@ -4,7 +4,7 @@ from pathlib import Path
 from doppelbank.detritus.transform import bedrock_to_detritus
 from doppelbank.lib import serde
 from doppelbank.lib.logging_config import configure_logging
-from generated.bedrock import EventCollection
+from doppelbank.schemas.bedrock import EventCollection
 
 # Note: All betterproto messages implement the ProtoCollection protocol methods,
 # but the type checker may not recognize this. We use type: ignore to silence false positives.

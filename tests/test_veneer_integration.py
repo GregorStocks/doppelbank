@@ -17,6 +17,7 @@ from collections.abc import Generator
 from pathlib import Path
 from typing import Any
 
+import msgspec
 import pytest
 import requests
 import uvicorn
@@ -248,8 +249,8 @@ class TestVeneerIntegration:
         test_data_dir = tmp_path / "test_data"
         test_data_dir.mkdir()
         ledger_path = test_data_dir / "test_account.json"
-        with open(ledger_path, "w") as f:
-            f.write(detritus_ledger.to_json())
+        with open(ledger_path, "wb") as f:
+            f.write(msgspec.json.encode(detritus_ledger))
 
         # Copy test data to the server's default data directory
         # (since the server process doesn't inherit our environment variable)

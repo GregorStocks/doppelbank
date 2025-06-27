@@ -9,6 +9,7 @@ Unit tests for bedrock CLI.
 # Local project
 from doppelbank.bedrock.cli import UserInfo, generate_events, generate_random_timestamp
 from doppelbank.lib.timestamp import parse_iso8601_z
+from doppelbank.schemas.bedrock import CardSwipeEvent, PaycheckEvent
 
 
 class TestUserInfo:
@@ -76,7 +77,7 @@ class TestGenerateEvents:
 
         # Check that the events are identical
         for i in range(len(events.events)):
-            assert events.events[i].to_dict() == events2.events[i].to_dict()
+            assert events.events[i] == events2.events[i]
 
     def test_generate_events_no_seed(self) -> None:
         """Test event generation without seed."""
@@ -93,7 +94,7 @@ class TestGenerateEvents:
         events = generate_events(user_info, days=30, seed=42)
 
         # Find paycheck events
-        paycheck_events = [e for e in events.events if e.paycheck.user_id]
+        paycheck_events = [e for e in events.events if isinstance(e, PaycheckEvent)]
 
         assert len(paycheck_events) > 0
 
@@ -101,8 +102,9 @@ class TestGenerateEvents:
         expected_pay = int(round(52000.0 * 100 / 26))
 
         for event in paycheck_events:
-            assert event.paycheck.amount == expected_pay
-            assert event.paycheck.employer == "Acme Corp"
+            assert isinstance(event, PaycheckEvent)
+            assert event.amount == expected_pay
+            assert event.employer == "Acme Corp"
 
     def test_generate_events_card_swipe_negative_amounts(self) -> None:
         """Test that card swipe events have negative amounts."""
@@ -111,20 +113,21 @@ class TestGenerateEvents:
         events = generate_events(user_info, days=30, seed=42)
 
         # Find card swipe events
-        card_swipe_events = [e for e in events.events if e.card_swipe.user_id]
+        card_swipe_events = [e for e in events.events if isinstance(e, CardSwipeEvent)]
 
         assert len(card_swipe_events) > 0
 
         for event in card_swipe_events:
-            assert event.card_swipe.amount < 0  # Should be negative for spending
-            assert event.card_swipe.merchant in [
+            assert isinstance(event, CardSwipeEvent)
+            assert event.amount < 0  # Should be negative for spending
+            assert event.merchant in [
                 "Starbucks",
                 "Subway",
                 "CVS",
                 "Target",
                 "Amazon",
             ]
-            assert event.card_swipe.category in [
+            assert event.category in [
                 "Food & Drink",
                 "Shopping",
                 "Transportation",
@@ -140,15 +143,7 @@ class TestGenerateEvents:
         assert len(events.events) > 0
 
         for event in events.events:
-            # Check that timestamp is in the expected format
-            if event.paycheck.user_id:
-                timestamp = event.paycheck.timestamp
-            elif event.transfer.user_id:
-                timestamp = event.transfer.timestamp
-            elif event.card_swipe.user_id:
-                timestamp = event.card_swipe.timestamp
-            else:
-                continue
+            timestamp = event.timestamp
 
             # Should end with Z (UTC)
             assert timestamp.endswith("Z")

@@ -49,14 +49,6 @@ This project uses [betterproto](https://github.com/betterproto/betterproto) for 
   - On Linux: `sudo apt-get install protobuf-compiler`
   - On Windows: [Download from releases](https://github.com/protocolbuffers/protobuf/releases)
 
-**To regenerate Python code from .proto files:**
-
-```bash
-uv run buildproto
-```
-
-This will generate Python files in `src/doppelbank/bedrock/generated/` using the `protoc-gen-python_betterproto` plugin from your uv environment.
-
 ### Linting, formatting, and type checking
 
 - **Check only (no changes):**

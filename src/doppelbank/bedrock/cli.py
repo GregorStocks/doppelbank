@@ -27,7 +27,7 @@ from doppelbank.bedrock.models import (
 )
 from doppelbank.lib.logging_config import configure_logging
 from doppelbank.lib.serde import load_binary, load_json, save_binary, save_json
-from generated.bedrock import EventCollection
+from doppelbank.schemas.bedrock import EventCollection
 
 
 class UserInfo:
@@ -87,7 +87,7 @@ def generate_events(
     seed: int | None = None,
 ) -> EventCollection:
     """Generate a sequence of financial events for a user. All amounts are int cents."""
-    events = EventCollection()
+    events_list = []
 
     # Set seed for deterministic generation
     if seed is not None:
@@ -106,7 +106,7 @@ def generate_events(
             current_date.weekday() == 4 and current_date.day % 14 < 7
         ):  # Every other Friday
             timestamp = generate_random_timestamp(current_date, user_info)
-            events.events.append(
+            events_list.append(
                 create_paycheck_event(
                     user_id=user_info.user_id,
                     account_id=user_info.account_id,
@@ -127,7 +127,7 @@ def generate_events(
                 category = random.choice(categories)
                 amount = int(round(random.uniform(5.0, 50.0) * 100))  # int cents
                 timestamp = generate_random_timestamp(current_date, user_info)
-                events.events.append(
+                events_list.append(
                     create_card_swipe_event(
                         user_id=user_info.user_id,
                         account_id=user_info.account_id,
@@ -141,7 +141,7 @@ def generate_events(
 
         current_date += timedelta(days=1)
 
-    return events
+    return EventCollection(events=events_list)
 
 
 def validate_args(args: argparse.Namespace) -> None:

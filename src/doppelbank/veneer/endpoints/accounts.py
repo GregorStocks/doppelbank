@@ -9,6 +9,7 @@ from pathlib import Path
 from fastapi import APIRouter, HTTPException
 
 from doppelbank.lib.serde import load_json
+from doppelbank.schemas.detritus import BankLedger
 from doppelbank.veneer.models import (
     Account,
     AccountsGetRequest,
@@ -17,7 +18,6 @@ from doppelbank.veneer.models import (
     Item,
 )
 from doppelbank.veneer.utils import get_data_dir
-from generated.detritus import BankLedger
 
 logger = logging.getLogger(__name__)
 

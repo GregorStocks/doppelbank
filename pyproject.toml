@@ -10,7 +10,7 @@ requires-python = ">=3.13"
 dependencies = [
     "pytest (>=8.4.1,<9.0.0)",
     "pytz>=2024.1",
-    "betterproto>=1.2.5",
+    "msgspec>=0.18.0",
     "fastapi>=0.104.0",
     "uvicorn>=0.24.0",
     "requests>=2.31.0",
@@ -26,7 +26,6 @@ format = "black:main"
 lint = "scripts.lint:main"
 check = "scripts.lint:check"
 fix = "scripts.lint:fix"
-buildproto = "scripts.buildproto:main"
 preflight = "scripts.preflight:main"
 
 [project.optional-dependencies]
@@ -35,7 +34,6 @@ dev = [
     "ruff>=0.3.0",
     "black>=25.1.0",
     "mypy>=1.16.1,<2.0.0",
-    "betterproto[compiler]>=1.2.5",
     "types-requests>=2.32.4.20250611",
 ]
 
@@ -69,7 +67,6 @@ select = [
 [tool.ruff.lint.per-file-ignores]
 "**/cli.py" = ["T201"]
 "**/scripts/*.py" = ["T201"]
-"src/generated/*.py" = ["ALL"]
 
 [tool.ruff]
 # Set line length to match black's default
@@ -91,7 +88,3 @@ warn_no_return = true
 warn_unreachable = true
 strict_equality = true
 
-# Ignore missing stubs for generated modules
-[[tool.mypy.overrides]]
-module = "generated.*"
-ignore_missing_imports = true

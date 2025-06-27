@@ -14,7 +14,12 @@ from doppelbank.bedrock.models import (
     create_transfer_event,
 )
 from doppelbank.lib.serde import load_binary, load_json, save_binary, save_json
-from generated.bedrock import EventCollection
+from doppelbank.schemas.bedrock import (
+    CardSwipeEvent,
+    EventCollection,
+    PaycheckEvent,
+    TransferEvent,
+)
 
 
 class TestJsonSerde:
@@ -22,29 +27,30 @@ class TestJsonSerde:
 
     def test_save_load_events_json(self) -> None:
         """Test saving and loading events in JSON format."""
-        event_collection = EventCollection()
-        event_collection.events = [
-            create_paycheck_event(
-                "42",
-                "acc_42",
-                250000,
-                "2025-01-01T12:00:00Z",
-                "Acme Corp",
-                "Bi-weekly paycheck",
-            ),
-            create_transfer_event(
-                "42", 10000, "2025-01-01T12:00:00Z", "checking", "savings"
-            ),
-            create_card_swipe_event(
-                "42",
-                "acc_42",
-                -2550,
-                "2025-01-01T12:00:00Z",
-                "Starbucks",
-                "Food & Drink",
-                "Purchase at Starbucks",
-            ),
-        ]
+        event_collection = EventCollection(
+            events=[
+                create_paycheck_event(
+                    "42",
+                    "acc_42",
+                    250000,
+                    "2025-01-01T12:00:00Z",
+                    "Acme Corp",
+                    "Bi-weekly paycheck",
+                ),
+                create_transfer_event(
+                    "42", 10000, "2025-01-01T12:00:00Z", "checking", "savings"
+                ),
+                create_card_swipe_event(
+                    "42",
+                    "acc_42",
+                    -2550,
+                    "2025-01-01T12:00:00Z",
+                    "Starbucks",
+                    "Food & Drink",
+                    "Purchase at Starbucks",
+                ),
+            ]
+        )
 
         with tempfile.NamedTemporaryFile(suffix=".json", delete=False) as f:
             file_path = Path(f.name)
@@ -56,21 +62,24 @@ class TestJsonSerde:
             assert len(loaded_events) == 3
 
             # Check paycheck event
-            assert loaded_events[0].paycheck.user_id == "42"
-            assert loaded_events[0].paycheck.amount == 250000
-            assert loaded_events[0].paycheck.employer == "Acme Corp"
+            assert isinstance(loaded_events[0], PaycheckEvent)
+            assert loaded_events[0].user_id == "42"
+            assert loaded_events[0].amount == 250000
+            assert loaded_events[0].employer == "Acme Corp"
 
             # Check transfer event
-            assert loaded_events[1].transfer.user_id == "42"
-            assert loaded_events[1].transfer.amount == 10000
-            assert loaded_events[1].transfer.from_account == "checking"
-            assert loaded_events[1].transfer.to_account == "savings"
+            assert isinstance(loaded_events[1], TransferEvent)
+            assert loaded_events[1].user_id == "42"
+            assert loaded_events[1].amount == 10000
+            assert loaded_events[1].from_account == "checking"
+            assert loaded_events[1].to_account == "savings"
 
             # Check card swipe event
-            assert loaded_events[2].card_swipe.user_id == "42"
-            assert loaded_events[2].card_swipe.amount == -2550
-            assert loaded_events[2].card_swipe.merchant == "Starbucks"
-            assert loaded_events[2].card_swipe.category == "Food & Drink"
+            assert isinstance(loaded_events[2], CardSwipeEvent)
+            assert loaded_events[2].user_id == "42"
+            assert loaded_events[2].amount == -2550
+            assert loaded_events[2].merchant == "Starbucks"
+            assert loaded_events[2].category == "Food & Drink"
 
         finally:
             file_path.unlink()
@@ -81,29 +90,30 @@ class TestBinarySerde:
 
     def test_save_load_events_binary(self) -> None:
         """Test saving and loading events in binary format."""
-        event_collection = EventCollection()
-        event_collection.events = [
-            create_paycheck_event(
-                "42",
-                "acc_42",
-                250000,
-                "2025-01-01T12:00:00Z",
-                "Acme Corp",
-                "Bi-weekly paycheck",
-            ),
-            create_transfer_event(
-                "42", 10000, "2025-01-01T12:00:00Z", "checking", "savings"
-            ),
-            create_card_swipe_event(
-                "42",
-                "acc_42",
-                -2550,
-                "2025-01-01T12:00:00Z",
-                "Starbucks",
-                "Food & Drink",
-                "Purchase at Starbucks",
-            ),
-        ]
+        event_collection = EventCollection(
+            events=[
+                create_paycheck_event(
+                    "42",
+                    "acc_42",
+                    250000,
+                    "2025-01-01T12:00:00Z",
+                    "Acme Corp",
+                    "Bi-weekly paycheck",
+                ),
+                create_transfer_event(
+                    "42", 10000, "2025-01-01T12:00:00Z", "checking", "savings"
+                ),
+                create_card_swipe_event(
+                    "42",
+                    "acc_42",
+                    -2550,
+                    "2025-01-01T12:00:00Z",
+                    "Starbucks",
+                    "Food & Drink",
+                    "Purchase at Starbucks",
+                ),
+            ]
+        )
 
         with tempfile.NamedTemporaryFile(suffix=".bin", delete=False) as f:
             file_path = Path(f.name)
@@ -115,21 +125,24 @@ class TestBinarySerde:
             assert len(loaded_events) == 3
 
             # Check paycheck event
-            assert loaded_events[0].paycheck.user_id == "42"
-            assert loaded_events[0].paycheck.amount == 250000
-            assert loaded_events[0].paycheck.employer == "Acme Corp"
+            assert isinstance(loaded_events[0], PaycheckEvent)
+            assert loaded_events[0].user_id == "42"
+            assert loaded_events[0].amount == 250000
+            assert loaded_events[0].employer == "Acme Corp"
 
             # Check transfer event
-            assert loaded_events[1].transfer.user_id == "42"
-            assert loaded_events[1].transfer.amount == 10000
-            assert loaded_events[1].transfer.from_account == "checking"
-            assert loaded_events[1].transfer.to_account == "savings"
+            assert isinstance(loaded_events[1], TransferEvent)
+            assert loaded_events[1].user_id == "42"
+            assert loaded_events[1].amount == 10000
+            assert loaded_events[1].from_account == "checking"
+            assert loaded_events[1].to_account == "savings"
 
             # Check card swipe event
-            assert loaded_events[2].card_swipe.user_id == "42"
-            assert loaded_events[2].card_swipe.amount == -2550
-            assert loaded_events[2].card_swipe.merchant == "Starbucks"
-            assert loaded_events[2].card_swipe.category == "Food & Drink"
+            assert isinstance(loaded_events[2], CardSwipeEvent)
+            assert loaded_events[2].user_id == "42"
+            assert loaded_events[2].amount == -2550
+            assert loaded_events[2].merchant == "Starbucks"
+            assert loaded_events[2].category == "Food & Drink"
 
         finally:
             file_path.unlink()

@@ -5,8 +5,6 @@ Unit tests for bedrock models.
 # Standard library
 
 # Third-party
-import betterproto
-
 # Local project
 from doppelbank.bedrock.models import (
     create_card_swipe_event,
@@ -14,7 +12,11 @@ from doppelbank.bedrock.models import (
     create_transfer_event,
     get_event_summary,
 )
-from generated.bedrock import Event
+from doppelbank.schemas.bedrock import (
+    CardSwipeEvent,
+    PaycheckEvent,
+    TransferEvent,
+)
 
 
 class TestEventCreation:
@@ -31,18 +33,12 @@ class TestEventCreation:
             description="Test paycheck",
         )
 
-        assert event.paycheck is not None
-        assert event.paycheck.user_id == "42"
-        assert event.paycheck.amount == 250000
-        assert event.paycheck.timestamp == "2025-01-01T12:00:00Z"
-        assert event.paycheck.employer == "Acme Corp"
-        assert event.paycheck.description == "Test paycheck"
-
-        # Check that other fields are empty
-        assert event.transfer is not None
-        assert event.transfer.user_id == ""
-        assert event.card_swipe is not None
-        assert event.card_swipe.user_id == ""
+        assert isinstance(event, PaycheckEvent)
+        assert event.user_id == "42"
+        assert event.amount == 250000
+        assert event.timestamp == "2025-01-01T12:00:00Z"
+        assert event.employer == "Acme Corp"
+        assert event.description == "Test paycheck"
 
     def test_create_transfer_event(self) -> None:
         """Test transfer event creation."""
@@ -55,19 +51,13 @@ class TestEventCreation:
             description="Test transfer",
         )
 
-        assert event.transfer is not None
-        assert event.transfer.user_id == "42"
-        assert event.transfer.amount == 10000
-        assert event.transfer.timestamp == "2025-01-01T12:00:00Z"
-        assert event.transfer.from_account == "checking"
-        assert event.transfer.to_account == "savings"
-        assert event.transfer.description == "Test transfer"
-
-        # Check that other fields are empty
-        assert event.paycheck is not None
-        assert event.paycheck.user_id == ""
-        assert event.card_swipe is not None
-        assert event.card_swipe.user_id == ""
+        assert isinstance(event, TransferEvent)
+        assert event.user_id == "42"
+        assert event.amount == 10000
+        assert event.timestamp == "2025-01-01T12:00:00Z"
+        assert event.from_account == "checking"
+        assert event.to_account == "savings"
+        assert event.description == "Test transfer"
 
     def test_create_transfer_event_default_description(self) -> None:
         """Test transfer event creation with default description."""
@@ -79,7 +69,8 @@ class TestEventCreation:
             to_account="savings",
         )
 
-        assert event.transfer.description == "Transfer from checking to savings"
+        assert isinstance(event, TransferEvent)
+        assert event.description == "Transfer from checking to savings"
 
     def test_create_card_swipe_event(self) -> None:
         """Test card swipe event creation."""
@@ -93,19 +84,13 @@ class TestEventCreation:
             description="Test purchase",
         )
 
-        assert event.card_swipe is not None
-        assert event.card_swipe.user_id == "42"
-        assert event.card_swipe.amount == -2550
-        assert event.card_swipe.timestamp == "2025-01-01T12:00:00Z"
-        assert event.card_swipe.merchant == "Starbucks"
-        assert event.card_swipe.category == "Food & Drink"
-        assert event.card_swipe.description == "Test purchase"
-
-        # Check that other fields are empty
-        assert event.paycheck is not None
-        assert event.paycheck.user_id == ""
-        assert event.transfer is not None
-        assert event.transfer.user_id == ""
+        assert isinstance(event, CardSwipeEvent)
+        assert event.user_id == "42"
+        assert event.amount == -2550
+        assert event.timestamp == "2025-01-01T12:00:00Z"
+        assert event.merchant == "Starbucks"
+        assert event.category == "Food & Drink"
+        assert event.description == "Test purchase"
 
     def test_create_card_swipe_event_default_description(self) -> None:
         """Test card swipe event creation with default description."""
@@ -118,7 +103,8 @@ class TestEventCreation:
             category="Food & Drink",
         )
 
-        assert event.card_swipe.description == "Purchase at Starbucks"
+        assert isinstance(event, CardSwipeEvent)
+        assert event.description == "Purchase at Starbucks"
 
 
 class TestEventSummary:
@@ -202,11 +188,11 @@ class TestEventSummary:
         assert summary["total"] == 2
 
 
-class TestOneOfBehavior:
-    """Test oneof field behavior."""
+class TestEventTypeBehavior:
+    """Test event type detection behavior."""
 
-    def test_which_one_of_with_paycheck(self) -> None:
-        """Test which_one_of with paycheck event."""
+    def test_event_type_detection_with_paycheck(self) -> None:
+        """Test event type detection with paycheck event."""
         event = create_paycheck_event(
             "42",
             "acc_42",
@@ -215,25 +201,21 @@ class TestOneOfBehavior:
             "Acme Corp",
             "Bi-weekly paycheck",
         )
-        field_name, value = betterproto.which_one_of(event, "event_data")
 
-        assert field_name == "paycheck"
-        assert value is not None
-        assert value.user_id == "42"
+        assert isinstance(event, PaycheckEvent)
+        assert event.user_id == "42"
 
-    def test_which_one_of_with_transfer(self) -> None:
-        """Test which_one_of with transfer event."""
+    def test_event_type_detection_with_transfer(self) -> None:
+        """Test event type detection with transfer event."""
         event = create_transfer_event(
             "42", 10000, "2025-01-01T12:00:00Z", "checking", "savings"
         )
-        field_name, value = betterproto.which_one_of(event, "event_data")
 
-        assert field_name == "transfer"
-        assert value is not None
-        assert value.user_id == "42"
+        assert isinstance(event, TransferEvent)
+        assert event.user_id == "42"
 
-    def test_which_one_of_with_card_swipe(self) -> None:
-        """Test which_one_of with card swipe event."""
+    def test_event_type_detection_with_card_swipe(self) -> None:
+        """Test event type detection with card swipe event."""
         event = create_card_swipe_event(
             "42",
             "acc_42",
@@ -243,16 +225,24 @@ class TestOneOfBehavior:
             "Food & Drink",
             "Purchase at Starbucks",
         )
-        field_name, value = betterproto.which_one_of(event, "event_data")
 
-        assert field_name == "card_swipe"
-        assert value is not None
-        assert value.user_id == "42"
+        assert isinstance(event, CardSwipeEvent)
+        assert event.user_id == "42"
 
-    def test_which_one_of_empty_event(self) -> None:
-        """Test which_one_of with empty event."""
-        event = Event()
-        field_name, value = betterproto.which_one_of(event, "event_data")
+    def test_event_union_structure(self) -> None:
+        """Test that Event is a proper union type."""
+        # Event is now a union type, so we can't create empty instances
+        # Instead, test that our create functions return the right types
+        paycheck = create_paycheck_event(
+            "42", "acc_42", 250000, "2025-01-01T12:00:00Z", "Acme Corp"
+        )
+        transfer = create_transfer_event(
+            "42", 10000, "2025-01-01T12:00:00Z", "checking", "savings"
+        )
+        card_swipe = create_card_swipe_event(
+            "42", "acc_42", -2550, "2025-01-01T12:00:00Z", "Starbucks", "Food & Drink"
+        )
 
-        assert field_name == ""
-        assert value is None
+        assert isinstance(paycheck, PaycheckEvent)
+        assert isinstance(transfer, TransferEvent)
+        assert isinstance(card_swipe, CardSwipeEvent)
