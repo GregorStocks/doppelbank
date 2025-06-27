@@ -3,16 +3,26 @@ Generic serialization/deserialization utilities for msgspec models.
 Handles JSON and binary msgpack for any msgspec Struct.
 """
 
+import json
 from pathlib import Path
 
 import msgspec
 
 
-def save_json(collection: msgspec.Struct, file_path: Path) -> None:
+def save_json(collection: msgspec.Struct, file_path: Path, pretty: bool = True) -> None:
     """Save a msgspec Struct to JSON file."""
-    json_bytes = msgspec.json.encode(collection)
-    with open(file_path, "wb") as f:
-        f.write(json_bytes)
+    if pretty:
+        # Use standard json library for pretty printing
+        # First convert to dict using msgspec, then pretty print with json
+        data = msgspec.to_builtins(collection)
+        json_str = json.dumps(data, indent=2, sort_keys=False)
+        with open(file_path, "w") as f:
+            f.write(json_str)
+    else:
+        # Use msgspec for compact output
+        json_bytes = msgspec.json.encode(collection)
+        with open(file_path, "wb") as f:
+            f.write(json_bytes)
 
 
 def load_json[T](file_path: Path, collection_type: type[T]) -> T:

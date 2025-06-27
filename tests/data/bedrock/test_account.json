@@ -1,1 +1,212 @@
-{"events":[{"type":"card_swipe","event_id":"","user_id":"test_account","timestamp":"2025-06-17T07:14:08.772246Z","amount":-3837,"merchant":"Starbucks","category":"Food & Drink","description":"Purchase at Starbucks","account_id":"test_account_id"},{"type":"card_swipe","event_id":"","user_id":"test_account","timestamp":"2025-06-17T01:01:05.229258Z","amount":-3157,"merchant":"Starbucks","category":"Food & Drink","description":"Purchase at Starbucks","account_id":"test_account_id"},{"type":"card_swipe","event_id":"","user_id":"test_account","timestamp":"2025-06-18T22:41:44.571412Z","amount":-3026,"merchant":"Subway","category":"Food & Drink","description":"Purchase at Subway","account_id":"test_account_id"},{"type":"card_swipe","event_id":"","user_id":"test_account","timestamp":"2025-06-18T08:51:55.006814Z","amount":-2521,"merchant":"Target","category":"Shopping","description":"Purchase at Target","account_id":"test_account_id"},{"type":"card_swipe","event_id":"","user_id":"test_account","timestamp":"2025-06-19T04:13:48.352944Z","amount":-2031,"merchant":"Subway","category":"Entertainment","description":"Purchase at Subway","account_id":"test_account_id"},{"type":"card_swipe","event_id":"","user_id":"test_account","timestamp":"2025-06-19T11:54:22.633052Z","amount":-2210,"merchant":"Starbucks","category":"Food & Drink","description":"Purchase at Starbucks","account_id":"test_account_id"},{"type":"paycheck","event_id":"","user_id":"test_account","timestamp":"2025-06-20T08:51:02.765179Z","amount":250000,"employer":"Acme Corp","description":"Bi-weekly paycheck","account_id":"test_account_id"},{"type":"card_swipe","event_id":"","user_id":"test_account","timestamp":"2025-06-20T12:05:35.307419Z","amount":-4879,"merchant":"Target","category":"Food & Drink","description":"Purchase at Target","account_id":"test_account_id"},{"type":"card_swipe","event_id":"","user_id":"test_account","timestamp":"2025-06-20T22:04:02.693384Z","amount":-3098,"merchant":"Amazon","category":"Transportation","description":"Purchase at Amazon","account_id":"test_account_id"},{"type":"card_swipe","event_id":"","user_id":"test_account","timestamp":"2025-06-23T07:55:06.398591Z","amount":-4933,"merchant":"Subway","category":"Transportation","description":"Purchase at Subway","account_id":"test_account_id"},{"type":"card_swipe","event_id":"","user_id":"test_account","timestamp":"2025-06-23T11:10:23.372528Z","amount":-3361,"merchant":"CVS","category":"Entertainment","description":"Purchase at CVS","account_id":"test_account_id"},{"type":"card_swipe","event_id":"","user_id":"test_account","timestamp":"2025-06-24T21:41:04.638720Z","amount":-3658,"merchant":"Subway","category":"Transportation","description":"Purchase at Subway","account_id":"test_account_id"},{"type":"card_swipe","event_id":"","user_id":"test_account","timestamp":"2025-06-24T12:17:59.671088Z","amount":-1235,"merchant":"Subway","category":"Shopping","description":"Purchase at Subway","account_id":"test_account_id"},{"type":"card_swipe","event_id":"","user_id":"test_account","timestamp":"2025-06-25T01:14:52.033659Z","amount":-3581,"merchant":"Amazon","category":"Shopping","description":"Purchase at Amazon","account_id":"test_account_id"},{"type":"card_swipe","event_id":"","user_id":"test_account","timestamp":"2025-06-25T06:58:36.918938Z","amount":-1705,"merchant":"CVS","category":"Entertainment","description":"Purchase at CVS","account_id":"test_account_id"},{"type":"card_swipe","event_id":"","user_id":"test_account","timestamp":"2025-06-26T12:56:58.674079Z","amount":-3449,"merchant":"CVS","category":"Shopping","description":"Purchase at CVS","account_id":"test_account_id"},{"type":"card_swipe","event_id":"","user_id":"test_account","timestamp":"2025-06-26T07:47:35.565158Z","amount":-1692,"merchant":"Target","category":"Shopping","description":"Purchase at Target","account_id":"test_account_id"},{"type":"card_swipe","event_id":"","user_id":"test_account","timestamp":"2025-06-27T12:23:14.145051Z","amount":-4540,"merchant":"CVS","category":"Entertainment","description":"Purchase at CVS","account_id":"test_account_id"},{"type":"card_swipe","event_id":"","user_id":"test_account","timestamp":"2025-06-27T01:55:07.160265Z","amount":-909,"merchant":"Amazon","category":"Entertainment","description":"Purchase at Amazon","account_id":"test_account_id"}]}
+{
+  "events": [
+    {
+      "type": "card_swipe",
+      "event_id": "",
+      "user_id": "test_account",
+      "timestamp": "2025-06-17T07:14:08.772246Z",
+      "amount": -3837,
+      "merchant": "Starbucks",
+      "category": "Food & Drink",
+      "description": "Purchase at Starbucks",
+      "account_id": "test_account_id"
+    },
+    {
+      "type": "card_swipe",
+      "event_id": "",
+      "user_id": "test_account",
+      "timestamp": "2025-06-17T01:01:05.229258Z",
+      "amount": -3157,
+      "merchant": "Starbucks",
+      "category": "Food & Drink",
+      "description": "Purchase at Starbucks",
+      "account_id": "test_account_id"
+    },
+    {
+      "type": "card_swipe",
+      "event_id": "",
+      "user_id": "test_account",
+      "timestamp": "2025-06-18T22:41:44.571412Z",
+      "amount": -3026,
+      "merchant": "Subway",
+      "category": "Food & Drink",
+      "description": "Purchase at Subway",
+      "account_id": "test_account_id"
+    },
+    {
+      "type": "card_swipe",
+      "event_id": "",
+      "user_id": "test_account",
+      "timestamp": "2025-06-18T08:51:55.006814Z",
+      "amount": -2521,
+      "merchant": "Target",
+      "category": "Shopping",
+      "description": "Purchase at Target",
+      "account_id": "test_account_id"
+    },
+    {
+      "type": "card_swipe",
+      "event_id": "",
+      "user_id": "test_account",
+      "timestamp": "2025-06-19T04:13:48.352944Z",
+      "amount": -2031,
+      "merchant": "Subway",
+      "category": "Entertainment",
+      "description": "Purchase at Subway",
+      "account_id": "test_account_id"
+    },
+    {
+      "type": "card_swipe",
+      "event_id": "",
+      "user_id": "test_account",
+      "timestamp": "2025-06-19T11:54:22.633052Z",
+      "amount": -2210,
+      "merchant": "Starbucks",
+      "category": "Food & Drink",
+      "description": "Purchase at Starbucks",
+      "account_id": "test_account_id"
+    },
+    {
+      "type": "paycheck",
+      "event_id": "",
+      "user_id": "test_account",
+      "timestamp": "2025-06-20T08:51:02.765179Z",
+      "amount": 250000,
+      "employer": "Acme Corp",
+      "description": "Bi-weekly paycheck",
+      "account_id": "test_account_id"
+    },
+    {
+      "type": "card_swipe",
+      "event_id": "",
+      "user_id": "test_account",
+      "timestamp": "2025-06-20T12:05:35.307419Z",
+      "amount": -4879,
+      "merchant": "Target",
+      "category": "Food & Drink",
+      "description": "Purchase at Target",
+      "account_id": "test_account_id"
+    },
+    {
+      "type": "card_swipe",
+      "event_id": "",
+      "user_id": "test_account",
+      "timestamp": "2025-06-20T22:04:02.693384Z",
+      "amount": -3098,
+      "merchant": "Amazon",
+      "category": "Transportation",
+      "description": "Purchase at Amazon",
+      "account_id": "test_account_id"
+    },
+    {
+      "type": "card_swipe",
+      "event_id": "",
+      "user_id": "test_account",
+      "timestamp": "2025-06-23T07:55:06.398591Z",
+      "amount": -4933,
+      "merchant": "Subway",
+      "category": "Transportation",
+      "description": "Purchase at Subway",
+      "account_id": "test_account_id"
+    },
+    {
+      "type": "card_swipe",
+      "event_id": "",
+      "user_id": "test_account",
+      "timestamp": "2025-06-23T11:10:23.372528Z",
+      "amount": -3361,
+      "merchant": "CVS",
+      "category": "Entertainment",
+      "description": "Purchase at CVS",
+      "account_id": "test_account_id"
+    },
+    {
+      "type": "card_swipe",
+      "event_id": "",
+      "user_id": "test_account",
+      "timestamp": "2025-06-24T21:41:04.638720Z",
+      "amount": -3658,
+      "merchant": "Subway",
+      "category": "Transportation",
+      "description": "Purchase at Subway",
+      "account_id": "test_account_id"
+    },
+    {
+      "type": "card_swipe",
+      "event_id": "",
+      "user_id": "test_account",
+      "timestamp": "2025-06-24T12:17:59.671088Z",
+      "amount": -1235,
+      "merchant": "Subway",
+      "category": "Shopping",
+      "description": "Purchase at Subway",
+      "account_id": "test_account_id"
+    },
+    {
+      "type": "card_swipe",
+      "event_id": "",
+      "user_id": "test_account",
+      "timestamp": "2025-06-25T01:14:52.033659Z",
+      "amount": -3581,
+      "merchant": "Amazon",
+      "category": "Shopping",
+      "description": "Purchase at Amazon",
+      "account_id": "test_account_id"
+    },
+    {
+      "type": "card_swipe",
+      "event_id": "",
+      "user_id": "test_account",
+      "timestamp": "2025-06-25T06:58:36.918938Z",
+      "amount": -1705,
+      "merchant": "CVS",
+      "category": "Entertainment",
+      "description": "Purchase at CVS",
+      "account_id": "test_account_id"
+    },
+    {
+      "type": "card_swipe",
+      "event_id": "",
+      "user_id": "test_account",
+      "timestamp": "2025-06-26T12:56:58.674079Z",
+      "amount": -3449,
+      "merchant": "CVS",
+      "category": "Shopping",
+      "description": "Purchase at CVS",
+      "account_id": "test_account_id"
+    },
+    {
+      "type": "card_swipe",
+      "event_id": "",
+      "user_id": "test_account",
+      "timestamp": "2025-06-26T07:47:35.565158Z",
+      "amount": -1692,
+      "merchant": "Target",
+      "category": "Shopping",
+      "description": "Purchase at Target",
+      "account_id": "test_account_id"
+    },
+    {
+      "type": "card_swipe",
+      "event_id": "",
+      "user_id": "test_account",
+      "timestamp": "2025-06-27T12:23:14.145051Z",
+      "amount": -4540,
+      "merchant": "CVS",
+      "category": "Entertainment",
+      "description": "Purchase at CVS",
+      "account_id": "test_account_id"
+    },
+    {
+      "type": "card_swipe",
+      "event_id": "",
+      "user_id": "test_account",
+      "timestamp": "2025-06-27T01:55:07.160265Z",
+      "amount": -909,
+      "merchant": "Amazon",
+      "category": "Entertainment",
+      "description": "Purchase at Amazon",
+      "account_id": "test_account_id"
+    }
+  ]
+}
