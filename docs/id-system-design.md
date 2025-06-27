@@ -78,15 +78,11 @@ data/
     second_bank_of_doppel.json
 ```
 
-## High Level Changes
+## Implementation Plan
 
-- We combine bedrock and detritus into a single service, persona-generator, which generates a new persona in data/personas. It won't take very many parameters for now. Ultimately it will be very configurable, so you can run it to generate a high-income spendthrift and then run it again with different parameters to generate a low-income disciplined person, etc. The data in personas/ will be pretty similar to what detritus outputs today. (We combine them because the bank-level information needs to be able to inform actual spending decisions, i.e. Jimmy gets an overdraft - Bedrock doesn't really have enough information to do that properly.)
-- We add explicit persona.json metadata (generated based on inputs) and institution metadata (written by hand). One institution is fine for now, we'll add more later.
-- We ensure that we're always passing the relevant IDs up and down the stack to respect what the user passed in. We get rid of all defaults, since those have bitten us a bunch - the default is "we return an error and our tests fail" so we know we're not done.
-- We parse account IDs in the fancy new way when deciding what transactions to return, etc.
-- We get rid of the Bedrock-only data types.
+0. **Combine Bedrock and Detritus**
 
-## Detailed implementation plan
+Lift-and shift everything from Bedrock and Detritus into a single `persona-generator` service, whose entrypoint combines the "generate" and "transform" behavior. No changes to the output of detritus are expected - this is just an internal refactor to those two services. No changes to veneer's code should be required, though we will have to tweak the end-to-end tests to invoke the CLI in the new way.
 
 1.  **Define ID Parsing Logic:**
     *   Create a utility module (e.g., `src/doppelbank/lib/ids.py`) to handle parsing and construction of User, Item, and Account IDs.
