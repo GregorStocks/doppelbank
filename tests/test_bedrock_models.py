@@ -6,7 +6,7 @@ Unit tests for bedrock models.
 
 # Third-party
 # Local project
-from doppelbank.bedrock.models import (
+from doppelbank.persona_generator.models import (
     create_card_swipe_event,
     create_paycheck_event,
     create_transfer_event,

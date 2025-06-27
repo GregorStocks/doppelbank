@@ -7,8 +7,12 @@ Unit tests for bedrock CLI.
 # Third-party
 
 # Local project
-from doppelbank.bedrock.cli import UserInfo, generate_events, generate_random_timestamp
 from doppelbank.lib.timestamp import parse_iso8601_z
+from doppelbank.persona_generator.cli import (
+    UserInfo,
+    generate_events,
+    generate_random_timestamp,
+)
 from doppelbank.schemas.bedrock import CardSwipeEvent, PaycheckEvent
 
 

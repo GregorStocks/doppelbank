@@ -6,14 +6,15 @@ Unit tests for bedrock serialization/deserialization.
 import tempfile
 from pathlib import Path
 
+from doppelbank.lib.serde import load_binary, load_json, save_binary, save_json
+
 # Third-party
 # Local project
-from doppelbank.bedrock.models import (
+from doppelbank.persona_generator.models import (
     create_card_swipe_event,
     create_paycheck_event,
     create_transfer_event,
 )
-from doppelbank.lib.serde import load_binary, load_json, save_binary, save_json
 from doppelbank.schemas.bedrock import (
     CardSwipeEvent,
     EventCollection,

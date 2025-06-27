@@ -22,8 +22,8 @@ import pytest
 import requests
 import uvicorn
 
-from doppelbank.bedrock.cli import UserInfo, generate_events
-from doppelbank.detritus.transform import bedrock_to_detritus
+from doppelbank.persona_generator.cli import UserInfo, generate_events
+from doppelbank.persona_generator.transform import bedrock_to_detritus
 from doppelbank.veneer.app import app
 
 
@@ -85,40 +85,7 @@ class TestVeneerIntegration:
         This implements the TODO: "Single test that goes from Bedrock to Veneer"
         """
         _ = running_server
-        # Step 1: Generate synthetic data with Bedrock CLI
-        bedrock_path = tmp_path / "integration_bedrock.json"
-        subprocess.run(
-            [
-                "uv",
-                "run",
-                "python",
-                "-m",
-                "doppelbank.bedrock.cli",
-                "generate",
-                "--user-id",
-                "integration_test_user",
-                "--account-id",
-                "acc_integration_test_user",
-                "--output",
-                str(bedrock_path),
-                "--format",
-                "json",
-                "--seed",
-                "12345",
-                "--days",
-                "60",  # Generate 60 days of data
-            ],
-            check=True,
-        )
-
-        # Verify bedrock file was created and has data
-        assert bedrock_path.exists()
-        with open(bedrock_path) as f:
-            bedrock_data = json.load(f)
-        assert "events" in bedrock_data
-        assert len(bedrock_data["events"]) > 0
-
-        # Step 2: Transform to Detritus format
+        # Step 1: Generate complete persona data in one step
         detritus_path = tmp_path / "integration_detritus.json"
         subprocess.run(
             [
@@ -126,13 +93,19 @@ class TestVeneerIntegration:
                 "run",
                 "python",
                 "-m",
-                "doppelbank.detritus.cli",
-                "--input",
-                str(bedrock_path),
+                "doppelbank.persona_generator.cli",
+                "--user-id",
+                "integration_test_user",
+                "--account-id",
+                "acc_integration_test_user",
                 "--output",
                 str(detritus_path),
                 "--format",
                 "json",
+                "--seed",
+                "12345",
+                "--days",
+                "60",  # Generate 60 days of data
             ],
             check=True,
         )
@@ -144,7 +117,7 @@ class TestVeneerIntegration:
         assert "events" in detritus_data
         assert len(detritus_data["events"]) > 0
 
-        # Step 3: Copy detritus file to veneer data directory
+        # Step 2: Copy detritus file to veneer data directory
         veneer_data_dir = (
             Path(__file__).parent.parent / "src" / "doppelbank" / "veneer" / "data"
         )
@@ -163,7 +136,7 @@ class TestVeneerIntegration:
         shutil.copy2(source_default_ledger, default_ledger_path)
 
         try:
-            # Step 4: Test the API with real HTTP requests (like curl)
+            # Step 3: Test the API with real HTTP requests (like curl)
             base_url = "http://127.0.0.1:8002"
 
             # Test 1: Basic health check

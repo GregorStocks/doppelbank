@@ -82,7 +82,7 @@ data/
 
 0. **Combine Bedrock and Detritus**
 
-Lift-and shift everything from Bedrock and Detritus into a single `persona-generator` service, whose entrypoint combines the "generate" and "transform" behavior. No changes to the output of detritus are expected - this is just an internal refactor to those two services. No changes to veneer's code should be required, though we will have to tweak the end-to-end tests to invoke the CLI in the new way.
+Lift-and shift everything from Bedrock and Detritus into a single `persona-generator` service, whose entrypoint combines the "generate" and "transform" behavior. No changes to the output of detritus are expected - this is just an internal refactor to those two services. No changes to veneer's code should be required, though we will have to tweak the end-to-end tests to invoke the CLI in the new way. There won't be any "transform" command any more, just a single command that goes from nothing to the final detritus output. And no intermediate bedrock files either.
 
 1.  **Define ID Parsing Logic:**
     *   Create a utility module (e.g., `src/doppelbank/lib/ids.py`) to handle parsing and construction of User, Item, and Account IDs.

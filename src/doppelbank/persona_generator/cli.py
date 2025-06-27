@@ -1,9 +1,8 @@
 #!/usr/bin/env python3
 """
-Bedrock CLI - Simulates the "real world" financial events.
+Persona Generator CLI - Combines Bedrock (event generation) and Detritus (event transformation).
 
-Generates structured, human-readable events such as paychecks, transfers,
-card-swipes, etc. that represent real-world financial activities.
+Generates structured, human-readable events and transforms them into Plaid-style sync data.
 """
 
 # Standard library
@@ -11,7 +10,6 @@ import argparse
 import logging
 import random
 import sys
-import tempfile
 from datetime import datetime, timedelta
 from pathlib import Path
 from typing import Any
@@ -19,14 +17,15 @@ from typing import Any
 # Third-party
 import pytz
 
+from doppelbank.lib.logging_config import configure_logging
+from doppelbank.lib.serde import save_binary, save_json
+
 # Local project
-from doppelbank.bedrock.models import (
+from doppelbank.persona_generator.models import (
     create_card_swipe_event,
     create_paycheck_event,
-    get_event_summary,
 )
-from doppelbank.lib.logging_config import configure_logging
-from doppelbank.lib.serde import load_binary, load_json, save_binary, save_json
+from doppelbank.persona_generator.transform import bedrock_to_detritus
 from doppelbank.schemas.bedrock import EventCollection
 
 
@@ -156,138 +155,95 @@ def validate_args(args: argparse.Namespace) -> None:
 def main() -> None:
     """Main CLI entry point."""
     # Configure logging to show INFO level messages by default
-    configure_logging(module_name="bedrock")
+    configure_logging(module_name="persona_generator")
 
     logger = logging.getLogger(__name__)
-    logger.info("Starting Bedrock CLI")
+    logger.info("Starting Persona Generator CLI")
 
     parser = argparse.ArgumentParser(
-        description="Bedrock - Generate realistic financial events",
+        description="Persona Generator - Generate and transform financial events",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Examples:
-  %(prog)s generate --user-id 0042 --days 30 --output events.json
-  %(prog)s generate --user-id 0042 --days 365 --seed 42 --format binary
-  %(prog)s validate events.json
+  %(prog)s --user-id 0042 --account-id test_account --days 30 --output ledger.json
+  %(prog)s --user-id john_doe --account-id checking --days 60 --seed 12345 --output persona.json
         """,
     )
 
-    subparsers = parser.add_subparsers(dest="command", help="Available commands")
-
-    # Generate command
-    generate_parser = subparsers.add_parser(
-        "generate", help="Generate financial events"
-    )
-    generate_parser.add_argument("--user-id", required=True, help="User ID for events")
-    generate_parser.add_argument(
-        "--account-id", required=True, help="Account ID for events"
-    )
-    generate_parser.add_argument(
+    # Main command - create complete persona data (generate + transform in one step)
+    parser.add_argument("--user-id", required=True, help="User ID for events")
+    parser.add_argument("--account-id", required=True, help="Account ID for events")
+    parser.add_argument(
         "--timezone", default="US/Pacific", help="User timezone (default: US/Pacific)"
     )
-    generate_parser.add_argument(
+    parser.add_argument(
         "--employer", default="Acme Corp", help="Employer name (default: Acme Corp)"
     )
-    generate_parser.add_argument(
+    parser.add_argument(
         "--salary", type=float, default=65000.0, help="Annual salary (default: 65000)"
     )
-    generate_parser.add_argument(
+    parser.add_argument(
         "--days",
         type=int,
         default=30,
         help="Number of days to generate (default: 30)",
     )
-    generate_parser.add_argument(
+    parser.add_argument(
         "--seed", type=int, help="Random seed for deterministic generation"
     )
-    generate_parser.add_argument("--output", type=Path, help="Output file path")
-    generate_parser.add_argument(
+    parser.add_argument(
+        "--output", required=True, type=Path, help="Output detritus ledger file"
+    )
+    parser.add_argument(
         "--format",
         choices=["json", "binary"],
         default="json",
         help="Output format (default: json)",
     )
 
-    # Validate command
-    validate_parser = subparsers.add_parser("validate", help="Validate event file")
-    validate_parser.add_argument("file", type=Path, help="Event file to validate")
-
     args = parser.parse_args()
 
-    if not args.command:
-        parser.print_help()
-        sys.exit(1)
-
     try:
-        if args.command == "generate":
-            validate_args(args)
-            logger.info(f"Generating events for user {args.user_id}")
+        validate_args(args)
+        logger.info(f"Creating complete persona data for user {args.user_id}")
 
-            # Create user info object
-            user_info = UserInfo(
-                user_id=args.user_id,
-                account_id=args.account_id,
-                timezone_name=args.timezone,
-                employer=args.employer,
-                salary=args.salary,
-            )
+        # Create user info object
+        user_info = UserInfo(
+            user_id=args.user_id,
+            account_id=args.account_id,
+            timezone_name=args.timezone,
+            employer=args.employer,
+            salary=args.salary,
+        )
 
-            print(f"Generating {args.days} days of events for user {args.user_id}...")
-            print(f"  Timezone: {args.timezone}")
-            print(f"  Employer: {args.employer}")
-            print(f"  Annual Salary: ${args.salary:,.2f}")
+        print(f"Generating {args.days} days of events for user {args.user_id}...")
+        print(f"  Timezone: {args.timezone}")
+        print(f"  Employer: {args.employer}")
+        print(f"  Annual Salary: ${args.salary:,.2f}")
 
-            events = generate_events(
-                user_info=user_info,
-                days=args.days,
-                seed=args.seed,
-            )
+        # Generate events
+        events = generate_events(
+            user_info=user_info,
+            days=args.days,
+            seed=args.seed,
+        )
 
-            logger.info(f"Generated {len(events.events)} events")
+        logger.info(f"Generated {len(events.events)} events")
 
-            if args.output:
-                if args.format == "json":
-                    save_json(events, args.output)
-                else:
-                    save_binary(events, args.output)
-                logger.info(f"Saved events to {args.output}")
-                print(f"Generated {len(events.events)} events, saved to {args.output}")
-            else:
-                # Output to stdout
-                if args.format == "json":
-                    with tempfile.NamedTemporaryFile(
-                        mode="w", suffix=".json", delete=False
-                    ) as f:
-                        save_json(events, Path(f.name))
-                        with open(f.name) as f2:
-                            print(f2.read())
-                else:
-                    print("Output to stdout only supported for JSON format")
+        # Transform to detritus ledger
+        detritus_ledger = bedrock_to_detritus(events)
 
-        elif args.command == "validate":
-            logger.info(f"Validating file: {args.file}")
-            if not args.file.exists():
-                print(f"Error: File {args.file} does not exist", file=sys.stderr)
-                sys.exit(1)
+        # Save detritus ledger file
+        if args.format == "json":
+            save_json(detritus_ledger, args.output)
+        else:
+            save_binary(detritus_ledger, args.output)
 
-            try:
-                if args.format == "json":
-                    events = load_json(args.file, EventCollection)
-                else:
-                    events = load_binary(args.file, EventCollection)
-                summary = get_event_summary(events.events)
-
-                logger.info(f"Successfully validated {summary['total']} events")
-                print(f"Validated {summary['total']} events in {args.file}")
-                print("Event type distribution:")
-                for event_type, count in summary.items():
-                    if event_type != "total":
-                        print(f"  {event_type}: {count}")
-
-            except Exception as e:
-                logger.error(f"Failed to validate file {args.file}: {e}")
-                print(f"Error: Invalid file {args.file}: {e}", file=sys.stderr)
-                sys.exit(1)
+        logger.info(f"Saved detritus ledger to {args.output}")
+        print(
+            f"Generated {len(events.events)} events and transformed to detritus ledger, "
+            f"saved to {args.output}"
+        )
 
     except ValueError as e:
         logger.error(f"Validation error: {e}")
