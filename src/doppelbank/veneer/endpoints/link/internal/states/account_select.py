@@ -3,10 +3,10 @@ import uuid
 from pathlib import Path
 from typing import Any
 
-from doppelbank.veneer.endpoints.link.internal.models import WorkflowResponse
+from doppelbank.veneer.endpoints.link.internal.models import WorkflowNextRequest, WorkflowResponse
 
 
-def create_response() -> WorkflowResponse:
+def create_response(_request: WorkflowNextRequest) -> WorkflowResponse:
     data = load_example_response()
 
     accounts = [

@@ -57,7 +57,7 @@ async def send_webhook(webhook_url: str, payload: dict) -> bool:
 
 
 async def send_item_add_result_webhook(
-    workflow_session_id: str, public_token: str
+    workflow_session_id: str, item_id: str
 ) -> None:
     """Send ITEM_ADD_RESULT webhook for completed Link flow."""
     webhook_url = get_webhook_for_workflow(workflow_session_id)
@@ -67,13 +67,13 @@ async def send_item_add_result_webhook(
         )
         return
 
-    # Plaid ITEM_ADD_RESULT webhook payload
     payload = {
-        "webhook_type": "ITEM",
-        "webhook_code": "ITEM_ADD_RESULT",
-        "public_token": public_token,
-        "workflow_session_id": workflow_session_id,
-        "environment": "sandbox",  # TODO: Make this configurable
+        "webhook_type": "TRANSACTIONS",
+        "webhook_code": "SYNC_UPDATES_AVAILABLE",
+        "item_id": item_id,
+        "initial_update_complete": True,
+        "historical_update_complete": True,
+        "environment": "sandbox",
     }
 
     # Send webhook asynchronously (don't block the response)

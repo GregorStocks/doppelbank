@@ -27,11 +27,13 @@ async def start_link_workflow_json(
     request: LinkWorkflowStartRequest,
 ) -> WorkflowResponse:
     logger.info(f"Starting Link workflow: {request}")
-    response = account_select.create_response()
+    response = account_select.create_response(request)
 
     # Associate webhook with this workflow session if link token provided
     if t := request.link_token_configuration.link_token:
-        associate_webhook_with_workflow(t, response.workflow_session_id)
+        associate_webhook_with_workflow(
+            t, response.workflow_session_id
+        )
 
     return response
 
@@ -42,10 +44,10 @@ async def workflow_next(request: WorkflowNextRequest) -> WorkflowResponse:
     match request.pane_outputs[0]["pane_rendering_id"]:
         case "account_select":
             # Accounts confirmed, go to success
-            return account_select_success.create_response()
+            return account_select_success.create_response(request)
         case "account_select_success":
             # Go to end - this is where Link flow completes
-            response = done.create_response()
+            response = done.create_response(request)
 
             # Trigger ITEM_ADD_RESULT webhook if configured
             if request.workflow_session_id:
@@ -53,7 +55,7 @@ async def workflow_next(request: WorkflowNextRequest) -> WorkflowResponse:
                 public_token = response.next_pane.get("sink", {}).get("public_token")
                 if public_token:
                     await send_item_add_result_webhook(
-                        request.workflow_session_id, public_token
+                        request.workflow_session_id, "default_item_id"
                     )
                     cleanup_completed_flow(request.workflow_session_id)
 
