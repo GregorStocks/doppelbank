@@ -24,12 +24,25 @@ class TestJsonSerde:
         """Test saving and loading events in JSON format."""
         event_collection = EventCollection()
         event_collection.events = [
-            create_paycheck_event("42", "acc_42", 250000, "2025-01-01T12:00:00Z", "Acme Corp", "Bi-weekly paycheck"),
+            create_paycheck_event(
+                "42",
+                "acc_42",
+                250000,
+                "2025-01-01T12:00:00Z",
+                "Acme Corp",
+                "Bi-weekly paycheck",
+            ),
             create_transfer_event(
                 "42", 10000, "2025-01-01T12:00:00Z", "checking", "savings"
             ),
             create_card_swipe_event(
-                "42", "acc_42", -2550, "2025-01-01T12:00:00Z", "Starbucks", "Food & Drink", "Purchase at Starbucks"
+                "42",
+                "acc_42",
+                -2550,
+                "2025-01-01T12:00:00Z",
+                "Starbucks",
+                "Food & Drink",
+                "Purchase at Starbucks",
             ),
         ]
 
@@ -70,12 +83,25 @@ class TestBinarySerde:
         """Test saving and loading events in binary format."""
         event_collection = EventCollection()
         event_collection.events = [
-            create_paycheck_event("42", "acc_42", 250000, "2025-01-01T12:00:00Z", "Acme Corp", "Bi-weekly paycheck"),
+            create_paycheck_event(
+                "42",
+                "acc_42",
+                250000,
+                "2025-01-01T12:00:00Z",
+                "Acme Corp",
+                "Bi-weekly paycheck",
+            ),
             create_transfer_event(
                 "42", 10000, "2025-01-01T12:00:00Z", "checking", "savings"
             ),
             create_card_swipe_event(
-                "42", "acc_42", -2550, "2025-01-01T12:00:00Z", "Starbucks", "Food & Drink", "Purchase at Starbucks"
+                "42",
+                "acc_42",
+                -2550,
+                "2025-01-01T12:00:00Z",
+                "Starbucks",
+                "Food & Drink",
+                "Purchase at Starbucks",
             ),
         ]
 

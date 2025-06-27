@@ -96,14 +96,16 @@ class TestVeneerIntegration:
                 "generate",
                 "--user-id",
                 "integration_test_user",
+                "--account-id",
+                "acc_integration_test_user",
                 "--output",
                 str(bedrock_path),
                 "--format",
                 "json",
                 "--seed",
                 "12345",
-                "--months",
-                "2",  # Generate 2 months of data
+                "--days",
+                "60",  # Generate 60 days of data
             ],
             check=True,
         )
@@ -232,13 +234,14 @@ class TestVeneerIntegration:
         # Generate test data
         user_info = UserInfo(
             user_id="test_user",
+            account_id="acc_test_user",
             timezone_name="America/New_York",
             employer="Test Corp",
             salary=50000.0,
         )
 
         # Generate events
-        events = generate_events(user_info, months=1, seed=42)
+        events = generate_events(user_info, days=30, seed=42)
         detritus_ledger = bedrock_to_detritus(events)
 
         # Save to test data directory

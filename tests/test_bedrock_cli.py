@@ -18,6 +18,7 @@ class TestUserInfo:
         """Test to_dict method."""
         user_info = UserInfo(
             user_id="42",
+            account_id="acc_42",
             timezone_name="US/Pacific",
             employer="Acme Corp",
             salary=65000.0,
@@ -28,6 +29,7 @@ class TestUserInfo:
 
         assert result == {
             "user_id": "42",
+            "account_id": "acc_42",
             "timezone_name": "US/Pacific",
             "employer": "Acme Corp",
             "salary": 65000.0,
@@ -42,7 +44,7 @@ class TestGenerateRandomTimestamp:
         """Test random timestamp generation."""
         from datetime import datetime
 
-        user_info = UserInfo("42", timezone_name="US/Pacific")
+        user_info = UserInfo("42", "acc_42", timezone_name="US/Pacific")
         base_date = datetime(2025, 1, 1)
 
         timestamp = generate_random_timestamp(base_date, user_info)
@@ -61,14 +63,14 @@ class TestGenerateEvents:
 
     def test_generate_events_with_seed(self) -> None:
         """Test event generation with seed for deterministic output."""
-        user_info = UserInfo("42")
+        user_info = UserInfo("42", "acc_42")
 
-        events = generate_events(user_info, months=1, seed=42)
+        events = generate_events(user_info, days=30, seed=42)
 
         assert len(events.events) > 0
 
         # With the same seed, we should get the same events
-        events2 = generate_events(user_info, months=1, seed=42)
+        events2 = generate_events(user_info, days=30, seed=42)
 
         assert len(events.events) == len(events2.events)
 
@@ -78,17 +80,17 @@ class TestGenerateEvents:
 
     def test_generate_events_no_seed(self) -> None:
         """Test event generation without seed."""
-        user_info = UserInfo("42")
+        user_info = UserInfo("42", "acc_42")
 
-        events = generate_events(user_info, months=1)
+        events = generate_events(user_info, days=30)
 
         assert len(events.events) > 0
 
     def test_generate_events_paycheck_amount(self) -> None:
         """Test that paycheck amounts are calculated correctly."""
-        user_info = UserInfo("42", salary=52000.0)  # $52k/year
+        user_info = UserInfo("42", "acc_42", salary=52000.0)  # $52k/year
 
-        events = generate_events(user_info, months=1, seed=42)
+        events = generate_events(user_info, days=30, seed=42)
 
         # Find paycheck events
         paycheck_events = [e for e in events.events if e.paycheck.user_id]
@@ -104,9 +106,9 @@ class TestGenerateEvents:
 
     def test_generate_events_card_swipe_negative_amounts(self) -> None:
         """Test that card swipe events have negative amounts."""
-        user_info = UserInfo("42")
+        user_info = UserInfo("42", "acc_42")
 
-        events = generate_events(user_info, months=1, seed=42)
+        events = generate_events(user_info, days=30, seed=42)
 
         # Find card swipe events
         card_swipe_events = [e for e in events.events if e.card_swipe.user_id]
@@ -131,9 +133,9 @@ class TestGenerateEvents:
 
     def test_generate_events_timestamps(self) -> None:
         """Test that events have proper timestamps."""
-        user_info = UserInfo("42")
+        user_info = UserInfo("42", "acc_42")
 
-        events = generate_events(user_info, months=1, seed=42)
+        events = generate_events(user_info, days=30, seed=42)
 
         assert len(events.events) > 0
 
