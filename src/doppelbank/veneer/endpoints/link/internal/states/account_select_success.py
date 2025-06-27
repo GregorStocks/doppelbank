@@ -2,7 +2,10 @@ import json
 from pathlib import Path
 from typing import Any
 
-from doppelbank.veneer.endpoints.link.internal.models import WorkflowNextRequest, WorkflowResponse
+from doppelbank.veneer.endpoints.link.internal.models import (
+    WorkflowNextRequest,
+    WorkflowResponse,
+)
 
 
 def create_response(request: WorkflowNextRequest) -> WorkflowResponse:
@@ -10,7 +13,6 @@ def create_response(request: WorkflowNextRequest) -> WorkflowResponse:
 
     data["next_pane"]["id"] = "account_select_success"
     data["workflow_session_id"] = request.workflow_session_id
-
 
     return WorkflowResponse(**data)
 

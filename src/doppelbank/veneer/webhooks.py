@@ -56,9 +56,7 @@ async def send_webhook(webhook_url: str, payload: dict) -> bool:
         return False
 
 
-async def send_item_add_result_webhook(
-    workflow_session_id: str, item_id: str
-) -> None:
+async def send_item_add_result_webhook(workflow_session_id: str, item_id: str) -> None:
     """Send ITEM_ADD_RESULT webhook for completed Link flow."""
     webhook_url = get_webhook_for_workflow(workflow_session_id)
     if not webhook_url:

@@ -117,11 +117,10 @@ class TestVeneerWebhooks:
 
             assert webhook_call["url"] == webhook_url
             payload: dict = webhook_call["payload"]
-            assert payload["webhook_type"] == "ITEM"
-            assert payload["webhook_code"] == "ITEM_ADD_RESULT"
-            assert payload["public_token"] == "beep boop token token"
-            assert payload["workflow_session_id"] == workflow_session_id
+            assert payload["webhook_type"] == "TRANSACTIONS"
+            assert payload["webhook_code"] == "SYNC_UPDATES_AVAILABLE"
             assert payload["environment"] == "sandbox"
+            assert payload["item_id"] == "default_item_id"
 
     def test_link_flow_without_webhook(self) -> None:
         """Test Link flow completes normally when no webhook is configured."""

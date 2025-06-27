@@ -27,13 +27,11 @@ async def start_link_workflow_json(
     request: LinkWorkflowStartRequest,
 ) -> WorkflowResponse:
     logger.info(f"Starting Link workflow: {request}")
-    response = account_select.create_response(request)
+    response = account_select.create_response()
 
     # Associate webhook with this workflow session if link token provided
     if t := request.link_token_configuration.link_token:
-        associate_webhook_with_workflow(
-            t, response.workflow_session_id
-        )
+        associate_webhook_with_workflow(t, response.workflow_session_id)
 
     return response
 

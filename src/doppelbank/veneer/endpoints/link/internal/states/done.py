@@ -2,7 +2,10 @@ import json
 from pathlib import Path
 from typing import Any
 
-from doppelbank.veneer.endpoints.link.internal.models import WorkflowNextRequest, WorkflowResponse
+from doppelbank.veneer.endpoints.link.internal.models import (
+    WorkflowNextRequest,
+    WorkflowResponse,
+)
 
 
 def create_response(request: WorkflowNextRequest) -> WorkflowResponse:
