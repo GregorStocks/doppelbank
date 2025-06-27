@@ -1,3 +1,5 @@
+Please refer to docs/coding-standards.md for general coding standards.
+
 Check lint: `uv run check`
 
 Autofix: `uv run fix`

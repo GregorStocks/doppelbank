@@ -26,7 +26,7 @@ user_123  item_456   acct_789
 
 ### ID Encoding Schemes
 
-- will be used to delimit different sections of the ID. The only valid characters in the sections will be alphanumeric and _.
+Hyphens (`-`) will be used to delimit different sections of the ID. The only valid characters within the sections themselves will be alphanumeric and underscores (`_`).
 
 Users will not be explicitly stored anywhere - we could have 500 different users that are views on the same 5 personas. Personas will be checked into the repo and have their own metadata (though probably not a lot of it.)
 
@@ -88,4 +88,35 @@ data/
 
 ## Detailed implementation plan
 
-TODO
+1.  **Define ID Parsing Logic:**
+    *   Create a utility module (e.g., `src/doppelbank/lib/ids.py`) to handle parsing and construction of User, Item, and Account IDs.
+    *   Implement functions like `parse_user_id(id_string)`, `parse_item_id(id_string)`, `parse_account_id(id_string)` that return structured objects (e.g., dataclasses) containing the parsed components.
+    *   Implement functions like `build_item_id(user_id, persona_id, institution_id)` and `build_account_id(item_id, account_type)` to construct IDs from their components.
+    *   Ensure robust error handling for malformed IDs.
+    *   **Unit Tests:** Add comprehensive unit tests for the new ID parsing and building utility functions (`src/doppelbank/lib/ids.py`).
+
+2.  **Refactor Data Storage and Generation (Bedrock/Detritus - Persona Generator):**
+    *   **New Data Directory Structure:** Create the `data/` directory at the project root.
+    *   **Persona Data:**
+        *   Modify the `persona-generator` (combination of bedrock and detritus) to generate persona data into `data/personas/{persona_name}/persona.json`.
+        *   Update existing data generation scripts/logic to use the new ID and file system conventions.
+    *   **Institution Data:**
+        *   Create `data/institutions/{institution_name}.json` for institution metadata.
+        *   Update any code that currently hardcodes institution details to read from these files.
+    *   **Account Data:**
+        *   Modify the `persona-generator` to store account data under `data/personas/{persona_name}/{institution_name}/{account_type}.json`.
+        *   Update all data loading logic (e.g., in `src/doppelbank/veneer/endpoints/accounts.py`, `src/doppelbank/veneer/endpoints/transactions.py`) to traverse this new hierarchical structure and construct/parse IDs accordingly.
+    *   **Data Cleanup and Regeneration:**
+        *   All existing test data (`tests/data/detritus/test_account.json`, `tests/data/detritus/demo_account.json`, etc.) will be deleted.
+        *   New persona and institution data will be generated from scratch using the updated `persona-generator` into the `data/` directory.
+    *   **Integration Tests (Phase 1 - Bedrock/Detritus):** Focus on testing the `persona-generator`'s ability to create and manage persona data in the new `data/` directory structure. Ensure the generated data conforms to the new ID formats.
+
+3.  **Update API Endpoints and Internal Logic (Veneer Service):**
+    *   Review all endpoints in `src/doppelbank/veneer/endpoints/` (e.g., `accounts.py`, `transactions.py`, `link/public/link_token_create.py`, `link/public/public_token_exchange.py`) that deal with Item or Account IDs.
+    *   Modify these endpoints to expect and return the new globally unique ID formats.
+    *   Integrate the ID parsing/building utility functions.
+    *   **Integration Tests (Phase 2 - Veneer):** Update existing integration tests (e.g., `tests/test_veneer_integration.py`, `tests/test_veneer_link.py`) to reflect the new ID formats and data storage, directly using the `data/personas` directory for test data.
+
+4.  **Documentation:**
+    *   Update any internal documentation or READMEs that describe the data structure or ID conventions.
+    *   Ensure the `id-system-design.md` file is up-to-date with the final implementation details.
