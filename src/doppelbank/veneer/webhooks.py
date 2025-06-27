@@ -16,7 +16,7 @@ _workflow_session_to_webhook: dict[str, str] = {}
 def store_webhook_for_link_token(link_token: str, webhook_url: str) -> None:
     """Store webhook URL associated with a link token."""
     _link_token_to_webhook[link_token] = webhook_url
-    logger.info(f"Stored webhook for link token: {link_token[:20]}...")
+    logger.info(f"Stored webhook for link token: {link_token}")
 
 
 def associate_webhook_with_workflow(link_token: str, workflow_session_id: str) -> None:
@@ -24,7 +24,12 @@ def associate_webhook_with_workflow(link_token: str, workflow_session_id: str) -
     webhook_url = _link_token_to_webhook.get(link_token)
     if webhook_url:
         _workflow_session_to_webhook[workflow_session_id] = webhook_url
-        logger.info(f"Associated webhook with workflow session: {workflow_session_id}")
+        logger.info(
+            f"Associated webhook for link token {link_token} with workflow session:"
+            f"{workflow_session_id}"
+        )
+    else:
+        logger.warning(f"No webhook found for link token {link_token}")
 
 
 def get_webhook_for_workflow(workflow_session_id: str) -> str | None:
@@ -38,6 +43,7 @@ async def send_webhook(webhook_url: str, payload: dict) -> bool:
     Returns True if successful, False otherwise.
     """
     try:
+        logger.info(f"Sending webhook to {webhook_url}")
         async with httpx.AsyncClient(timeout=10.0) as client:
             response = await client.post(
                 webhook_url, json=payload, headers={"Content-Type": "application/json"}
@@ -56,7 +62,7 @@ async def send_item_add_result_webhook(
     """Send ITEM_ADD_RESULT webhook for completed Link flow."""
     webhook_url = get_webhook_for_workflow(workflow_session_id)
     if not webhook_url:
-        logger.debug(
+        logger.warning(
             f"No webhook configured for workflow session: {workflow_session_id}"
         )
         return
@@ -67,7 +73,7 @@ async def send_item_add_result_webhook(
         "webhook_code": "ITEM_ADD_RESULT",
         "public_token": public_token,
         "workflow_session_id": workflow_session_id,
-        "environment": "sandbox",
+        "environment": "sandbox",  # TODO: Make this configurable
     }
 
     # Send webhook asynchronously (don't block the response)

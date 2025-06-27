@@ -71,7 +71,12 @@ class TestVeneerWebhooks:
             # Step 2: Start workflow
             response = client.post(
                 "/link/workflow/start",
-                json={"link_token": link_token},
+                json={
+                    "link_token_configuration": {
+                        "link_token": link_token,
+                        "institution_id": None,
+                    }
+                },
             )
             assert response.status_code == 200
             start_data = response.json()
@@ -150,7 +155,12 @@ class TestVeneerWebhooks:
             # Start workflow
             response = client.post(
                 "/link/workflow/start",
-                json={"link_token": link_token},
+                json={
+                    "link_token_configuration": {
+                        "link_token": link_token,
+                        "institution_id": None,
+                    }
+                },
             )
             assert response.status_code == 200
             start_data = response.json()

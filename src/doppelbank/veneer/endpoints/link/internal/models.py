@@ -3,8 +3,13 @@ from typing import Any
 from doppelbank.veneer.common import VeneerRequest, VeneerResponse
 
 
+class LinkTokenConfiguration(VeneerRequest):
+    link_token: str
+    institution_id: str | None = None
+
+
 class LinkWorkflowStartRequest(VeneerRequest):
-    link_token: str | None = None  # Link token to associate with workflow
+    link_token_configuration: LinkTokenConfiguration
 
 
 class WorkflowNextRequest(VeneerRequest):

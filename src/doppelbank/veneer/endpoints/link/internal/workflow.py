@@ -26,19 +26,19 @@ logger = logging.getLogger(__name__)
 async def start_link_workflow_json(
     request: LinkWorkflowStartRequest,
 ) -> WorkflowResponse:
+    logger.info(f"Starting Link workflow: {request}")
     response = account_select.create_response()
 
     # Associate webhook with this workflow session if link token provided
-    if request.link_token:
-        associate_webhook_with_workflow(
-            request.link_token, response.workflow_session_id
-        )
+    if t := request.link_token_configuration.link_token:
+        associate_webhook_with_workflow(t, response.workflow_session_id)
 
     return response
 
 
 @router.post("/link/workflow/next")
 async def workflow_next(request: WorkflowNextRequest) -> WorkflowResponse:
+    logger.info(f"Link workflow next: {request}")
     match request.pane_outputs[0]["pane_rendering_id"]:
         case "account_select":
             # Accounts confirmed, go to success

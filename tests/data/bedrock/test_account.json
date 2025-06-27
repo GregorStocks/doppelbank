@@ -9,7 +9,7 @@
       "merchant": "Starbucks",
       "category": "Food & Drink",
       "description": "Purchase at Starbucks",
-      "account_id": "test_account_id"
+      "account_id": "test_account"
     },
     {
       "type": "card_swipe",
@@ -20,7 +20,7 @@
       "merchant": "Starbucks",
       "category": "Food & Drink",
       "description": "Purchase at Starbucks",
-      "account_id": "test_account_id"
+      "account_id": "test_account"
     },
     {
       "type": "card_swipe",
@@ -31,7 +31,7 @@
       "merchant": "Subway",
       "category": "Food & Drink",
       "description": "Purchase at Subway",
-      "account_id": "test_account_id"
+      "account_id": "test_account"
     },
     {
       "type": "card_swipe",
@@ -42,7 +42,7 @@
       "merchant": "Target",
       "category": "Shopping",
       "description": "Purchase at Target",
-      "account_id": "test_account_id"
+      "account_id": "test_account"
     },
     {
       "type": "card_swipe",
@@ -53,7 +53,7 @@
       "merchant": "Subway",
       "category": "Entertainment",
       "description": "Purchase at Subway",
-      "account_id": "test_account_id"
+      "account_id": "test_account"
     },
     {
       "type": "card_swipe",
@@ -64,7 +64,7 @@
       "merchant": "Starbucks",
       "category": "Food & Drink",
       "description": "Purchase at Starbucks",
-      "account_id": "test_account_id"
+      "account_id": "test_account"
     },
     {
       "type": "paycheck",
@@ -74,7 +74,7 @@
       "amount": 250000,
       "employer": "Acme Corp",
       "description": "Bi-weekly paycheck",
-      "account_id": "test_account_id"
+      "account_id": "test_account"
     },
     {
       "type": "card_swipe",
@@ -85,7 +85,7 @@
       "merchant": "Target",
       "category": "Food & Drink",
       "description": "Purchase at Target",
-      "account_id": "test_account_id"
+      "account_id": "test_account"
     },
     {
       "type": "card_swipe",
@@ -96,7 +96,7 @@
       "merchant": "Amazon",
       "category": "Transportation",
       "description": "Purchase at Amazon",
-      "account_id": "test_account_id"
+      "account_id": "test_account"
     },
     {
       "type": "card_swipe",
@@ -107,7 +107,7 @@
       "merchant": "Subway",
       "category": "Transportation",
       "description": "Purchase at Subway",
-      "account_id": "test_account_id"
+      "account_id": "test_account"
     },
     {
       "type": "card_swipe",
@@ -118,7 +118,7 @@
       "merchant": "CVS",
       "category": "Entertainment",
       "description": "Purchase at CVS",
-      "account_id": "test_account_id"
+      "account_id": "test_account"
     },
     {
       "type": "card_swipe",
@@ -129,7 +129,7 @@
       "merchant": "Subway",
       "category": "Transportation",
       "description": "Purchase at Subway",
-      "account_id": "test_account_id"
+      "account_id": "test_account"
     },
     {
       "type": "card_swipe",
@@ -140,7 +140,7 @@
       "merchant": "Subway",
       "category": "Shopping",
       "description": "Purchase at Subway",
-      "account_id": "test_account_id"
+      "account_id": "test_account"
     },
     {
       "type": "card_swipe",
@@ -151,7 +151,7 @@
       "merchant": "Amazon",
       "category": "Shopping",
       "description": "Purchase at Amazon",
-      "account_id": "test_account_id"
+      "account_id": "test_account"
     },
     {
       "type": "card_swipe",
@@ -162,7 +162,7 @@
       "merchant": "CVS",
       "category": "Entertainment",
       "description": "Purchase at CVS",
-      "account_id": "test_account_id"
+      "account_id": "test_account"
     },
     {
       "type": "card_swipe",
@@ -173,7 +173,7 @@
       "merchant": "CVS",
       "category": "Shopping",
       "description": "Purchase at CVS",
-      "account_id": "test_account_id"
+      "account_id": "test_account"
     },
     {
       "type": "card_swipe",
@@ -184,7 +184,7 @@
       "merchant": "Target",
       "category": "Shopping",
       "description": "Purchase at Target",
-      "account_id": "test_account_id"
+      "account_id": "test_account"
     },
     {
       "type": "card_swipe",
@@ -195,7 +195,7 @@
       "merchant": "CVS",
       "category": "Entertainment",
       "description": "Purchase at CVS",
-      "account_id": "test_account_id"
+      "account_id": "test_account"
     },
     {
       "type": "card_swipe",
@@ -206,7 +206,7 @@
       "merchant": "Amazon",
       "category": "Entertainment",
       "description": "Purchase at Amazon",
-      "account_id": "test_account_id"
+      "account_id": "test_account"
     }
   ]
 }
