@@ -46,30 +46,70 @@ class TransactionsSyncRequest(VeneerRequest):
     options: dict[str, Any] | None = None
 
 
-class Transaction(VeneerResponse):
-    transaction_id: str
-    account_id: str
-    amount: float
-    iso_currency_code: str | None = None
-    unofficial_currency_code: str | None = None
-    category: list[str] | None = None
-    category_id: str | None = None
-    check_number: str | None = None
-    date: str
-    location: dict[str, Any]
+class Counterparty(VeneerResponse):
     name: str
-    merchant_name: str | None = None
-    original_description: str | None = None
-    payment_meta: dict[str, Any]
-    payment_channel: str
+    type: str
+    logo_url: str | None = None
+    website: str | None = None
+    entity_id: str
+    confidence_level: str
+
+
+class Location(VeneerResponse):
+    address: str | None = None
+    city: str | None = None
+    region: str | None = None
+    postal_code: str | None = None
+    country: str | None = None
+    lat: float | None = None
+    lon: float | None = None
+    store_number: str | None = None
+
+
+class PaymentMeta(VeneerResponse):
+    by_order_of: str | None = None
+    payee: str | None = None
+    payer: str | None = None
+    payment_method: str | None = None
+    payment_processor: str | None = None
+    ppd_id: str | None = None
+    reason: str | None = None
+    reference_number: str | None = None
+
+
+class PersonalFinanceCategory(VeneerResponse):
+    primary: str
+    detailed: str
+    confidence_level: str
+
+
+class Transaction(VeneerResponse):
+    account_id: str
+    account_owner: str | None = None
+    amount: float
+    iso_currency_code: str
+    unofficial_currency_code: str | None = None
+    check_number: str | None = None
+    counterparties: list[Counterparty]
+    date: str
+    datetime: str
+    authorized_date: str
+    authorized_datetime: str
+    location: Location
+    name: str
+    merchant_name: str
+    merchant_entity_id: str | None = None
+    logo_url: str | None = None
+    website: str | None = None
+    payment_meta: PaymentMeta
+    payment_channel: str | None = None
     pending: bool
     pending_transaction_id: str | None = None
-    account_owner: str | None = None
+    personal_finance_category: PersonalFinanceCategory
+    personal_finance_category_icon_url: str | None = None
+    transaction_id: str
+    transaction_code: str | None = None
     transaction_type: str
-    logo_url: str | None = None
-    authorized_date: str | None = None
-    authorized_datetime: str | None = None
-    datetime: str | None = None
 
 
 class TransactionsSyncResponse(VeneerResponse):

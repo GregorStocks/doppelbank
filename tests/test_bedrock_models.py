@@ -24,6 +24,7 @@ class TestEventCreation:
         """Test paycheck event creation."""
         event = create_paycheck_event(
             user_id="42",
+            account_id="acc_42",
             amount=250000,  # $2500.00 in cents
             timestamp="2025-01-01T12:00:00Z",
             employer="Acme Corp",
@@ -84,6 +85,7 @@ class TestEventCreation:
         """Test card swipe event creation."""
         event = create_card_swipe_event(
             user_id="42",
+            account_id="acc_42",
             amount=-2550,  # -$25.50 in cents
             timestamp="2025-01-01T12:00:00Z",
             merchant="Starbucks",
@@ -109,6 +111,7 @@ class TestEventCreation:
         """Test card swipe event creation with default description."""
         event = create_card_swipe_event(
             user_id="42",
+            account_id="acc_42",
             amount=-2550,  # -$25.50 in cents
             timestamp="2025-01-01T12:00:00Z",
             merchant="Starbucks",
@@ -133,14 +136,14 @@ class TestEventSummary:
     def test_get_event_summary_mixed_events(self) -> None:
         """Test event summary with mixed event types."""
         events = [
-            create_paycheck_event("42", 250000, "2025-01-01T12:00:00Z", "Acme Corp"),
+            create_paycheck_event("42", "acc_42", 250000, "2025-01-01T12:00:00Z", "Acme Corp", "Bi-weekly paycheck"),
             create_transfer_event(
                 "42", 10000, "2025-01-01T12:00:00Z", "checking", "savings"
             ),
             create_card_swipe_event(
-                "42", -2550, "2025-01-01T12:00:00Z", "Starbucks", "Food & Drink"
+                "42", "acc_42", -2550, "2025-01-01T12:00:00Z", "Starbucks", "Food & Drink", "Purchase at Starbucks"
             ),
-            create_paycheck_event("42", 250000, "2025-01-02T12:00:00Z", "Acme Corp"),
+            create_paycheck_event("42", "acc_42", 250000, "2025-01-02T12:00:00Z", "Acme Corp", "Bi-weekly paycheck"),
         ]
 
         summary = get_event_summary(events)
@@ -153,8 +156,8 @@ class TestEventSummary:
     def test_get_event_summary_only_paychecks(self) -> None:
         """Test event summary with only paycheck events."""
         events = [
-            create_paycheck_event("42", 250000, "2025-01-01T12:00:00Z", "Acme Corp"),
-            create_paycheck_event("42", 250000, "2025-01-02T12:00:00Z", "Acme Corp"),
+            create_paycheck_event("42", "acc_42", 250000, "2025-01-01T12:00:00Z", "Acme Corp", "Bi-weekly paycheck"),
+            create_paycheck_event("42", "acc_42", 250000, "2025-01-02T12:00:00Z", "Acme Corp", "Bi-weekly paycheck"),
         ]
 
         summary = get_event_summary(events)
@@ -170,7 +173,7 @@ class TestOneOfBehavior:
 
     def test_which_one_of_with_paycheck(self) -> None:
         """Test which_one_of with paycheck event."""
-        event = create_paycheck_event("42", 250000, "2025-01-01T12:00:00Z", "Acme Corp")
+        event = create_paycheck_event("42", "acc_42", 250000, "2025-01-01T12:00:00Z", "Acme Corp", "Bi-weekly paycheck")
         field_name, value = betterproto.which_one_of(event, "event_data")
 
         assert field_name == "paycheck"
@@ -191,7 +194,7 @@ class TestOneOfBehavior:
     def test_which_one_of_with_card_swipe(self) -> None:
         """Test which_one_of with card swipe event."""
         event = create_card_swipe_event(
-            "42", -2550, "2025-01-01T12:00:00Z", "Starbucks", "Food & Drink"
+            "42", "acc_42", -2550, "2025-01-01T12:00:00Z", "Starbucks", "Food & Drink", "Purchase at Starbucks"
         )
         field_name, value = betterproto.which_one_of(event, "event_data")
 

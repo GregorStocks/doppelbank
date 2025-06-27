@@ -9,6 +9,9 @@ from fastapi import APIRouter, HTTPException
 from doppelbank.veneer.models import (
     Account,
     Balance,
+    Location,
+    PaymentMeta,
+    PersonalFinanceCategory,
     Transaction,
     TransactionsSyncRequest,
     TransactionsSyncResponse,
@@ -65,9 +68,9 @@ def transform_ledger_to_plaid(
     # Transform detritus events to Plaid transactions
     transactions = []
     for event in ledger.events:
-        if event.add_cleared:
+        if event.add_cleared or event.add_pending:
             # Convert cleared transaction
-            ac = event.add_cleared
+            ac = event.add_cleared or event.add_pending
             transaction = Transaction(
                 transaction_id=ac.transaction_id,
                 account_id=ac.account_id,
@@ -77,32 +80,21 @@ def transform_ledger_to_plaid(
                 ],  # Extract date part from event timestamp
                 name=ac.description or "Transaction",
                 merchant_name=ac.merchant,
-                category=[ac.category] if ac.category else None,
-                pending=False,
-                location={},
-                payment_meta={},
+                personal_finance_category=PersonalFinanceCategory(
+                    primary=ac.category, detailed=ac.category, confidence_level="high"
+                ),
+                pending=event.add_pending is not None,
+                location=Location(),
+                payment_meta=PaymentMeta(),
                 payment_channel="in_store",
                 transaction_type="place",
-            )
-            transactions.append(transaction)
-        elif event.add_pending:
-            # Convert pending transaction
-            ap = event.add_pending
-            transaction = Transaction(
-                transaction_id=ap.transaction_id,
-                account_id=ap.account_id,
-                amount=ap.amount / 100.0,  # Convert cents to dollars
-                date=event.timestamp.split("T")[
-                    0
-                ],  # Extract date part from event timestamp
-                name=ap.description or "Transaction",
-                merchant_name=ap.merchant,
-                category=[ap.category] if ap.category else None,
-                pending=True,
-                location={},
-                payment_meta={},
-                payment_channel="in_store",
-                transaction_type="place",
+                iso_currency_code="USD",
+                authorized_date=event.timestamp.split("T")[0],
+                authorized_datetime=event.timestamp,
+                datetime=event.timestamp,
+                counterparties=[],
+                personal_finance_category_icon_url=None,
+                transaction_code=None,
             )
             transactions.append(transaction)
 

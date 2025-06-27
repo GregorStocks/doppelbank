@@ -22,6 +22,7 @@ class PaycheckEvent(betterproto.Message):
     amount: int = betterproto.int64_field(4)
     employer: str = betterproto.string_field(5)
     description: str = betterproto.string_field(6)
+    account_id: str = betterproto.string_field(7)
 
 
 @dataclass
@@ -48,6 +49,7 @@ class CardSwipeEvent(betterproto.Message):
     merchant: str = betterproto.string_field(5)
     category: str = betterproto.string_field(6)
     description: str = betterproto.string_field(7)
+    account_id: str = betterproto.string_field(8)
 
 
 @dataclass

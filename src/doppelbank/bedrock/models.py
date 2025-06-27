@@ -12,6 +12,7 @@ from generated.bedrock import CardSwipeEvent, Event, PaycheckEvent, TransferEven
 
 def create_paycheck_event(
     user_id: str,
+    account_id: str,
     amount: int,  # int cents
     timestamp: str,
     employer: str,
@@ -22,6 +23,7 @@ def create_paycheck_event(
     event.paycheck = PaycheckEvent(
         event_id="",  # can be set by caller if needed
         user_id=user_id,
+        account_id=account_id,
         amount=amount,
         timestamp=timestamp,
         employer=employer,
@@ -54,6 +56,7 @@ def create_transfer_event(
 
 def create_card_swipe_event(
     user_id: str,
+    account_id: str,
     amount: int,  # int cents
     timestamp: str,
     merchant: str,
@@ -65,6 +68,7 @@ def create_card_swipe_event(
     event.card_swipe = CardSwipeEvent(
         event_id="",
         user_id=user_id,
+        account_id=account_id,
         amount=amount,
         timestamp=timestamp,
         merchant=merchant,

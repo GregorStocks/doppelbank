@@ -36,12 +36,14 @@ class UserInfo:
     def __init__(
         self,
         user_id: str,
+        account_id: str,
         timezone_name: str = "US/Pacific",
         employer: str = "Acme Corp",
         salary: float = 65000.0,
         spending_patterns: dict[str, Any] | None = None,
     ):
         self.user_id = user_id
+        self.account_id = account_id
         self.timezone_name = timezone_name
         self.employer = employer
         self.salary = salary
@@ -55,6 +57,7 @@ class UserInfo:
         """Convert user info to dictionary."""
         return {
             "user_id": self.user_id,
+            "account_id": self.account_id,
             "timezone_name": self.timezone_name,
             "employer": self.employer,
             "salary": self.salary,
@@ -80,7 +83,7 @@ def generate_random_timestamp(base_date: datetime, user_info: UserInfo) -> datet
 
 def generate_events(
     user_info: UserInfo,
-    months: int = 12,
+    days: int = 30,
     seed: int | None = None,
 ) -> EventCollection:
     """Generate a sequence of financial events for a user. All amounts are int cents."""
@@ -90,8 +93,8 @@ def generate_events(
     if seed is not None:
         random.seed(seed)
 
-    # Generate events for the specified number of months
-    start_date = datetime.now() - timedelta(days=months * 30)
+    # Generate events for the specified number of days
+    start_date = datetime.now() - timedelta(days=days)
 
     # Calculate bi-weekly paycheck amount (int cents)
     biweekly_pay = int(round(user_info.salary * 100 / 26))  # 26 pay periods per year
@@ -106,6 +109,7 @@ def generate_events(
             events.events.append(
                 create_paycheck_event(
                     user_id=user_info.user_id,
+                    account_id=user_info.account_id,
                     amount=biweekly_pay,
                     timestamp=timestamp.strftime("%Y-%m-%dT%H:%M:%S.%fZ"),
                     employer=user_info.employer,
@@ -126,6 +130,7 @@ def generate_events(
                 events.events.append(
                     create_card_swipe_event(
                         user_id=user_info.user_id,
+                        account_id=user_info.account_id,
                         amount=-amount,  # Negative for spending
                         timestamp=timestamp.strftime("%Y-%m-%dT%H:%M:%S.%fZ"),
                         merchant=merchant,
@@ -141,8 +146,8 @@ def generate_events(
 
 def validate_args(args: argparse.Namespace) -> None:
     """Validate command line arguments."""
-    if args.months <= 0:
-        raise ValueError("Months must be positive")
+    if args.days <= 0:
+        raise ValueError("Days must be positive")
 
     if args.format not in ["json", "binary"]:
         raise ValueError("Output format must be 'json' or 'binary'")
@@ -161,8 +166,8 @@ def main() -> None:
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Examples:
-  %(prog)s generate --user-id 0042 --months 12 --output events.json
-  %(prog)s generate --user-id 0042 --months 6 --seed 42 --format binary
+  %(prog)s generate --user-id 0042 --days 30 --output events.json
+  %(prog)s generate --user-id 0042 --days 365 --seed 42 --format binary
   %(prog)s validate events.json
         """,
     )
@@ -175,6 +180,9 @@ Examples:
     )
     generate_parser.add_argument("--user-id", required=True, help="User ID for events")
     generate_parser.add_argument(
+        "--account-id", required=True, help="Account ID for events"
+    )
+    generate_parser.add_argument(
         "--timezone", default="US/Pacific", help="User timezone (default: US/Pacific)"
     )
     generate_parser.add_argument(
@@ -184,10 +192,10 @@ Examples:
         "--salary", type=float, default=65000.0, help="Annual salary (default: 65000)"
     )
     generate_parser.add_argument(
-        "--months",
+        "--days",
         type=int,
-        default=12,
-        help="Number of months to generate (default: 12)",
+        default=30,
+        help="Number of days to generate (default: 30)",
     )
     generate_parser.add_argument(
         "--seed", type=int, help="Random seed for deterministic generation"
@@ -218,21 +226,20 @@ Examples:
             # Create user info object
             user_info = UserInfo(
                 user_id=args.user_id,
+                account_id=args.account_id,
                 timezone_name=args.timezone,
                 employer=args.employer,
                 salary=args.salary,
             )
 
-            print(
-                f"Generating {args.months} months of events for user {args.user_id}..."
-            )
+            print(f"Generating {args.days} days of events for user {args.user_id}...")
             print(f"  Timezone: {args.timezone}")
             print(f"  Employer: {args.employer}")
             print(f"  Annual Salary: ${args.salary:,.2f}")
 
             events = generate_events(
                 user_info=user_info,
-                months=args.months,
+                days=args.days,
                 seed=args.seed,
             )
 

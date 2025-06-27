@@ -26,9 +26,7 @@ def bedrock_to_detritus(bedrock_collection: EventCollection) -> BankLedger:
             # AddPending event
             pending_id = str(uuid.uuid4())
             pending_transaction_id = str(uuid.uuid4())
-            account_id = getattr(
-                cs, "account_id", "acc_dummy"
-            )  # Use account_id if present
+            account_id = cs.account_id
             events.append(
                 BankEvent(
                     event_id=pending_id,
@@ -86,7 +84,7 @@ def bedrock_to_detritus(bedrock_collection: EventCollection) -> BankLedger:
             if not pc.timestamp:
                 continue  # skip events with empty timestamp
             cleared_id = str(uuid.uuid4())
-            account_id = getattr(pc, "account_id", "acc_dummy")
+            account_id = pc.account_id
             events.append(
                 BankEvent(
                     event_id=cleared_id,
@@ -118,7 +116,7 @@ def bedrock_to_detritus(bedrock_collection: EventCollection) -> BankLedger:
                     add_cleared=AddCleared(
                         event_id=out_id,
                         transaction_id=str(uuid.uuid4()),
-                        account_id=tf.from_account or "acc_dummy",
+                        account_id=tf.from_account,
                         amount=-abs(tf.amount),  # negative for outgoing
                         description=tf.description,
                         merchant="transfer_out",
@@ -136,7 +134,7 @@ def bedrock_to_detritus(bedrock_collection: EventCollection) -> BankLedger:
                     add_cleared=AddCleared(
                         event_id=in_id,
                         transaction_id=str(uuid.uuid4()),
-                        account_id=tf.to_account or "acc_dummy",
+                        account_id=tf.to_account,
                         amount=abs(tf.amount),  # positive for incoming
                         description=tf.description,
                         merchant="transfer_in",
