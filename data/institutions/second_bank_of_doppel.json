@@ -1,0 +1,10 @@
+{
+  "institution_id": "second_bank_of_doppel",
+  "name": "Second Bank of Doppel",
+  "products": ["auth", "transactions", "assets"],
+  "country_codes": ["US"],
+  "url": "https://secondbankofdoppel.com",
+  "primary_color": "#2d4a5c",
+  "oauth": false,
+  "description": "Second Bank of Doppel - alternative banking institution"
+}

@@ -1,0 +1,332 @@
+{
+  "events": [
+    {
+      "event_id": "7cb0a1d0-dc29-4791-84ad-d32223cd76f4",
+      "timestamp": "2025-06-24T00:09:39.901786Z",
+      "event": {
+        "type": "add_pending",
+        "event_id": "7cb0a1d0-dc29-4791-84ad-d32223cd76f4",
+        "transaction_id": "ae78d335-3cc2-4944-99eb-97c6742e90c7",
+        "account_id": "client_user-claude-doppelfirstbank-checking",
+        "amount": -3805,
+        "description": "Purchase at Starbucks",
+        "merchant": "Starbucks",
+        "category": "Shopping"
+      }
+    },
+    {
+      "event_id": "a399d4cd-37a7-46c1-b2fa-a335aa020e8e",
+      "timestamp": "2025-06-26T00:09:39.901786Z",
+      "event": {
+        "type": "add_cleared",
+        "event_id": "a399d4cd-37a7-46c1-b2fa-a335aa020e8e",
+        "transaction_id": "102ade72-09fc-4711-af8f-5074b3f3471e",
+        "account_id": "client_user-claude-doppelfirstbank-checking",
+        "amount": -3805,
+        "description": "Purchase at Starbucks",
+        "merchant": "Starbucks",
+        "category": "Shopping",
+        "pending_event_id": "7cb0a1d0-dc29-4791-84ad-d32223cd76f4"
+      }
+    },
+    {
+      "event_id": "0a90f81c-03d7-4d84-875a-2053f956f6ca",
+      "timestamp": "2025-06-26T00:09:39.901786Z",
+      "event": {
+        "type": "remove_pending",
+        "event_id": "0a90f81c-03d7-4d84-875a-2053f956f6ca",
+        "transaction_id": "ae78d335-3cc2-4944-99eb-97c6742e90c7",
+        "account_id": "client_user-claude-doppelfirstbank-checking",
+        "reason": "cleared",
+        "related_event_id": "a399d4cd-37a7-46c1-b2fa-a335aa020e8e"
+      }
+    },
+    {
+      "event_id": "7b5cc011-7037-4c03-a877-d162e4a09d72",
+      "timestamp": "2025-06-24T22:10:45.017014Z",
+      "event": {
+        "type": "add_pending",
+        "event_id": "7b5cc011-7037-4c03-a877-d162e4a09d72",
+        "transaction_id": "21710109-a652-442c-b079-f37534cfc031",
+        "account_id": "client_user-claude-doppelfirstbank-checking",
+        "amount": -3613,
+        "description": "Purchase at CVS",
+        "merchant": "CVS",
+        "category": "Food & Drink"
+      }
+    },
+    {
+      "event_id": "5e2b939d-e485-407a-a81b-6ac55761018a",
+      "timestamp": "2025-06-26T22:10:45.017014Z",
+      "event": {
+        "type": "add_cleared",
+        "event_id": "5e2b939d-e485-407a-a81b-6ac55761018a",
+        "transaction_id": "bc93bd5b-2147-47cb-bf0a-cf3b93bd5a38",
+        "account_id": "client_user-claude-doppelfirstbank-checking",
+        "amount": -3613,
+        "description": "Purchase at CVS",
+        "merchant": "CVS",
+        "category": "Food & Drink",
+        "pending_event_id": "7b5cc011-7037-4c03-a877-d162e4a09d72"
+      }
+    },
+    {
+      "event_id": "9812d0e5-d315-4c11-ac14-f5e2d09a0c7f",
+      "timestamp": "2025-06-26T22:10:45.017014Z",
+      "event": {
+        "type": "remove_pending",
+        "event_id": "9812d0e5-d315-4c11-ac14-f5e2d09a0c7f",
+        "transaction_id": "21710109-a652-442c-b079-f37534cfc031",
+        "account_id": "client_user-claude-doppelfirstbank-checking",
+        "reason": "cleared",
+        "related_event_id": "5e2b939d-e485-407a-a81b-6ac55761018a"
+      }
+    },
+    {
+      "event_id": "43383aa7-75ad-4d70-bc62-0fb35bae5dac",
+      "timestamp": "2025-06-25T07:12:41.894251Z",
+      "event": {
+        "type": "add_pending",
+        "event_id": "43383aa7-75ad-4d70-bc62-0fb35bae5dac",
+        "transaction_id": "36cf79a2-74e0-4d25-8502-30e6d2d102cb",
+        "account_id": "client_user-claude-doppelfirstbank-checking",
+        "amount": -2477,
+        "description": "Purchase at Target",
+        "merchant": "Target",
+        "category": "Transportation"
+      }
+    },
+    {
+      "event_id": "29a46fd1-f400-4ddd-9b47-70ced7e03710",
+      "timestamp": "2025-06-27T07:12:41.894251Z",
+      "event": {
+        "type": "add_cleared",
+        "event_id": "29a46fd1-f400-4ddd-9b47-70ced7e03710",
+        "transaction_id": "3eaa2b6e-3402-481e-b545-e255a1b0d16e",
+        "account_id": "client_user-claude-doppelfirstbank-checking",
+        "amount": -2477,
+        "description": "Purchase at Target",
+        "merchant": "Target",
+        "category": "Transportation",
+        "pending_event_id": "43383aa7-75ad-4d70-bc62-0fb35bae5dac"
+      }
+    },
+    {
+      "event_id": "d2d3a8d1-0786-494d-979c-afdfb5022df4",
+      "timestamp": "2025-06-27T07:12:41.894251Z",
+      "event": {
+        "type": "remove_pending",
+        "event_id": "d2d3a8d1-0786-494d-979c-afdfb5022df4",
+        "transaction_id": "36cf79a2-74e0-4d25-8502-30e6d2d102cb",
+        "account_id": "client_user-claude-doppelfirstbank-checking",
+        "reason": "cleared",
+        "related_event_id": "29a46fd1-f400-4ddd-9b47-70ced7e03710"
+      }
+    },
+    {
+      "event_id": "be627fe9-3354-4067-be00-f73d8c17828a",
+      "timestamp": "2025-06-25T12:22:41.105845Z",
+      "event": {
+        "type": "add_pending",
+        "event_id": "be627fe9-3354-4067-be00-f73d8c17828a",
+        "transaction_id": "c3ca1244-e4e5-45a7-9781-97bbc7f50221",
+        "account_id": "client_user-claude-doppelfirstbank-checking",
+        "amount": -3670,
+        "description": "Purchase at Starbucks",
+        "merchant": "Starbucks",
+        "category": "Transportation"
+      }
+    },
+    {
+      "event_id": "523ae4da-77fa-4bdd-9507-1560fcecf2ca",
+      "timestamp": "2025-06-27T12:22:41.105845Z",
+      "event": {
+        "type": "add_cleared",
+        "event_id": "523ae4da-77fa-4bdd-9507-1560fcecf2ca",
+        "transaction_id": "2a9f171e-990d-47bd-a773-eda54a7713c5",
+        "account_id": "client_user-claude-doppelfirstbank-checking",
+        "amount": -3670,
+        "description": "Purchase at Starbucks",
+        "merchant": "Starbucks",
+        "category": "Transportation",
+        "pending_event_id": "be627fe9-3354-4067-be00-f73d8c17828a"
+      }
+    },
+    {
+      "event_id": "c825ca1a-ff62-4e0a-bad0-e006444970e2",
+      "timestamp": "2025-06-27T12:22:41.105845Z",
+      "event": {
+        "type": "remove_pending",
+        "event_id": "c825ca1a-ff62-4e0a-bad0-e006444970e2",
+        "transaction_id": "c3ca1244-e4e5-45a7-9781-97bbc7f50221",
+        "account_id": "client_user-claude-doppelfirstbank-checking",
+        "reason": "cleared",
+        "related_event_id": "523ae4da-77fa-4bdd-9507-1560fcecf2ca"
+      }
+    },
+    {
+      "event_id": "9e03cc7d-688c-4d5f-a2f8-287f98f830d0",
+      "timestamp": "2025-06-26T15:18:41.750239Z",
+      "event": {
+        "type": "add_pending",
+        "event_id": "9e03cc7d-688c-4d5f-a2f8-287f98f830d0",
+        "transaction_id": "6b9b40c1-404b-48fd-b056-f103d9c65b9a",
+        "account_id": "client_user-claude-doppelfirstbank-checking",
+        "amount": -1534,
+        "description": "Purchase at Target",
+        "merchant": "Target",
+        "category": "Entertainment"
+      }
+    },
+    {
+      "event_id": "e0cd0a1f-13cd-4789-84c9-02ffc8adad62",
+      "timestamp": "2025-06-28T15:18:41.750239Z",
+      "event": {
+        "type": "add_cleared",
+        "event_id": "e0cd0a1f-13cd-4789-84c9-02ffc8adad62",
+        "transaction_id": "dd209034-482e-46ab-8f57-d82cedc3aafb",
+        "account_id": "client_user-claude-doppelfirstbank-checking",
+        "amount": -1534,
+        "description": "Purchase at Target",
+        "merchant": "Target",
+        "category": "Entertainment",
+        "pending_event_id": "9e03cc7d-688c-4d5f-a2f8-287f98f830d0"
+      }
+    },
+    {
+      "event_id": "0b2fee85-dac7-45ca-af9c-0ffd11285e6f",
+      "timestamp": "2025-06-28T15:18:41.750239Z",
+      "event": {
+        "type": "remove_pending",
+        "event_id": "0b2fee85-dac7-45ca-af9c-0ffd11285e6f",
+        "transaction_id": "6b9b40c1-404b-48fd-b056-f103d9c65b9a",
+        "account_id": "client_user-claude-doppelfirstbank-checking",
+        "reason": "cleared",
+        "related_event_id": "e0cd0a1f-13cd-4789-84c9-02ffc8adad62"
+      }
+    },
+    {
+      "event_id": "4ec2bddf-777b-4e0d-856f-9b48eeff49b9",
+      "timestamp": "2025-06-26T15:31:10.902805Z",
+      "event": {
+        "type": "add_pending",
+        "event_id": "4ec2bddf-777b-4e0d-856f-9b48eeff49b9",
+        "transaction_id": "805bda18-e15b-4641-bb01-216aacb9c86a",
+        "account_id": "client_user-claude-doppelfirstbank-checking",
+        "amount": -4383,
+        "description": "Purchase at Starbucks",
+        "merchant": "Starbucks",
+        "category": "Shopping"
+      }
+    },
+    {
+      "event_id": "447fac6d-9bb3-42d8-973e-eae8ab392ead",
+      "timestamp": "2025-06-28T15:31:10.902805Z",
+      "event": {
+        "type": "add_cleared",
+        "event_id": "447fac6d-9bb3-42d8-973e-eae8ab392ead",
+        "transaction_id": "c2292fee-4373-4d7a-bc1a-5b7e0a60858a",
+        "account_id": "client_user-claude-doppelfirstbank-checking",
+        "amount": -4383,
+        "description": "Purchase at Starbucks",
+        "merchant": "Starbucks",
+        "category": "Shopping",
+        "pending_event_id": "4ec2bddf-777b-4e0d-856f-9b48eeff49b9"
+      }
+    },
+    {
+      "event_id": "f769731b-dc70-43b7-87e4-39acdede7200",
+      "timestamp": "2025-06-28T15:31:10.902805Z",
+      "event": {
+        "type": "remove_pending",
+        "event_id": "f769731b-dc70-43b7-87e4-39acdede7200",
+        "transaction_id": "805bda18-e15b-4641-bb01-216aacb9c86a",
+        "account_id": "client_user-claude-doppelfirstbank-checking",
+        "reason": "cleared",
+        "related_event_id": "447fac6d-9bb3-42d8-973e-eae8ab392ead"
+      }
+    },
+    {
+      "event_id": "824cf7c8-393e-44d6-a433-7cc9d7c0a3bc",
+      "timestamp": "2025-06-27T03:36:14.573727Z",
+      "event": {
+        "type": "add_pending",
+        "event_id": "824cf7c8-393e-44d6-a433-7cc9d7c0a3bc",
+        "transaction_id": "d11105f2-7030-47b9-b439-9e7e2e07953e",
+        "account_id": "client_user-claude-doppelfirstbank-checking",
+        "amount": -2694,
+        "description": "Purchase at Subway",
+        "merchant": "Subway",
+        "category": "Entertainment"
+      }
+    },
+    {
+      "event_id": "0b31bc2d-8140-4922-ae2a-6444066fa3bd",
+      "timestamp": "2025-06-29T03:36:14.573727Z",
+      "event": {
+        "type": "add_cleared",
+        "event_id": "0b31bc2d-8140-4922-ae2a-6444066fa3bd",
+        "transaction_id": "8de5526d-d0a8-44bb-b45b-ff4aa8bbe2f0",
+        "account_id": "client_user-claude-doppelfirstbank-checking",
+        "amount": -2694,
+        "description": "Purchase at Subway",
+        "merchant": "Subway",
+        "category": "Entertainment",
+        "pending_event_id": "824cf7c8-393e-44d6-a433-7cc9d7c0a3bc"
+      }
+    },
+    {
+      "event_id": "dd3855d9-e7aa-4f75-a389-90b6645db38b",
+      "timestamp": "2025-06-29T03:36:14.573727Z",
+      "event": {
+        "type": "remove_pending",
+        "event_id": "dd3855d9-e7aa-4f75-a389-90b6645db38b",
+        "transaction_id": "d11105f2-7030-47b9-b439-9e7e2e07953e",
+        "account_id": "client_user-claude-doppelfirstbank-checking",
+        "reason": "cleared",
+        "related_event_id": "0b31bc2d-8140-4922-ae2a-6444066fa3bd"
+      }
+    },
+    {
+      "event_id": "b6a24cbf-fc3c-46f4-b9f8-a00758cf22b1",
+      "timestamp": "2025-06-27T17:41:15.657688Z",
+      "event": {
+        "type": "add_pending",
+        "event_id": "b6a24cbf-fc3c-46f4-b9f8-a00758cf22b1",
+        "transaction_id": "288882d5-2384-4386-bbf3-53a9b3719803",
+        "account_id": "client_user-claude-doppelfirstbank-checking",
+        "amount": -1156,
+        "description": "Purchase at CVS",
+        "merchant": "CVS",
+        "category": "Food & Drink"
+      }
+    },
+    {
+      "event_id": "78fd06a4-38b9-4ec1-a79b-ef0450195637",
+      "timestamp": "2025-06-29T17:41:15.657688Z",
+      "event": {
+        "type": "add_cleared",
+        "event_id": "78fd06a4-38b9-4ec1-a79b-ef0450195637",
+        "transaction_id": "ed2171ea-6de3-4c3d-afdf-e7d016195453",
+        "account_id": "client_user-claude-doppelfirstbank-checking",
+        "amount": -1156,
+        "description": "Purchase at CVS",
+        "merchant": "CVS",
+        "category": "Food & Drink",
+        "pending_event_id": "b6a24cbf-fc3c-46f4-b9f8-a00758cf22b1"
+      }
+    },
+    {
+      "event_id": "2b591bc3-3e89-42ad-9fb7-6e092c32e82e",
+      "timestamp": "2025-06-29T17:41:15.657688Z",
+      "event": {
+        "type": "remove_pending",
+        "event_id": "2b591bc3-3e89-42ad-9fb7-6e092c32e82e",
+        "transaction_id": "288882d5-2384-4386-bbf3-53a9b3719803",
+        "account_id": "client_user-claude-doppelfirstbank-checking",
+        "reason": "cleared",
+        "related_event_id": "78fd06a4-38b9-4ec1-a79b-ef0450195637"
+      }
+    }
+  ]
+}

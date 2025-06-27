@@ -1,0 +1,10 @@
+{
+  "institution_id": "second_bank",
+  "name": "Second Bank",
+  "products": ["auth", "transactions"],
+  "country_codes": ["US"],
+  "url": "https://secondbank.com",
+  "primary_color": "#4a5c2d",
+  "oauth": true,
+  "description": "Second Bank - streamlined banking services"
+}

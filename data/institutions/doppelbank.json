@@ -1,0 +1,10 @@
+{
+  "institution_id": "doppelbank",
+  "name": "DoppelBank",
+  "products": ["auth", "transactions", "identity", "assets"],
+  "country_codes": ["US"],
+  "url": "https://doppelbank.com",
+  "primary_color": "#003d6b",
+  "oauth": true,
+  "description": "The primary DoppelBank institution for testing and demo purposes"
+}

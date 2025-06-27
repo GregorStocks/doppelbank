@@ -1,0 +1,10 @@
+{
+  "institution_id": "doppelfirstbank",
+  "name": "DoppelFirst Bank",
+  "products": ["auth", "transactions", "identity"],
+  "country_codes": ["US"],
+  "url": "https://doppelfirstbank.com",
+  "primary_color": "#1a5490",
+  "oauth": true,
+  "description": "DoppelFirst Bank - a subsidiary financial institution"
+}
