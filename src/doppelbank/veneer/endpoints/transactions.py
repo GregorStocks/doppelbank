@@ -68,22 +68,29 @@ def transform_ledger_to_plaid(
     # Transform detritus events to Plaid transactions
     transactions = []
     for event in ledger.events:
-        if event.add_cleared or event.add_pending:
+        ev = None
+        if (event.add_cleared and event.add_cleared.account_id == account_id):
+            ev = event.add_cleared
+        elif (
+            event.add_pending and event.add_pending.account_id == account_id
+        ):
+            ev = event.add_pending
             # Convert cleared transaction
-            ac = event.add_cleared or event.add_pending
-            transaction = Transaction(
-                transaction_id=ac.transaction_id,
-                account_id=ac.account_id,
-                amount=ac.amount / 100.0,  # Convert cents to dollars
+        else:
+            continue
+        transaction = Transaction(
+                transaction_id=ev.transaction_id,
+                account_id=ev.account_id,
+                amount=ev.amount / 100.0,  # Convert cents to dollars
                 date=event.timestamp.split("T")[
                     0
                 ],  # Extract date part from event timestamp
-                name=ac.description or "Transaction",
-                merchant_name=ac.merchant,
+                name=ev.description,
+                merchant_name=ev.merchant,
                 personal_finance_category=PersonalFinanceCategory(
-                    primary=ac.category, detailed=ac.category, confidence_level="high"
+                    primary=ev.category, detailed=ev.category, confidence_level="high"
                 ),
-                pending=event.add_pending is not None,
+                pending=bool(event.add_pending and event.add_pending.account_id),
                 location=Location(),
                 payment_meta=PaymentMeta(),
                 payment_channel="in_store",
@@ -96,7 +103,7 @@ def transform_ledger_to_plaid(
                 personal_finance_category_icon_url=None,
                 transaction_code=None,
             )
-            transactions.append(transaction)
+        transactions.append(transaction)
 
     return TransactionsSyncResponse(
         accounts=[account],
