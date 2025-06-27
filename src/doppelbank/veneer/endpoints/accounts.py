@@ -57,7 +57,7 @@ def accounts_get(request: AccountsGetRequest) -> AccountsGetResponse:
     ]
 
     item = Item(
-        item_id="default_item_id",
+        item_id=f"{account_id}|123",
         institution_id="default_institution_id",
         webhook="",
     )
