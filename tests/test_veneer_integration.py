@@ -17,7 +17,7 @@ from pathlib import Path
 import requests
 import uvicorn
 
-from doppelbank.lib.ids import ItemId
+from doppelbank.lib.ids import AccountId, ItemId
 from doppelbank.veneer.app import app
 
 
@@ -94,14 +94,14 @@ class TestVeneerIntegration:
                 # Create hierarchical IDs and access token for testing
                 item_id = ItemId("user_test", "integration_test", "doppelbank")
                 access_token = item_id.create_access_token()
-                hierarchical_account_id = f"{item_id.to_wire()}-checking"
+                account_id = AccountId("user_test", "integration_test", "doppelbank", "checking")
 
                 # Test 1: Query with hierarchical account_id
                 response = requests.post(
                     f"{base_url}/transactions/sync",
                     json={
                         "access_token": access_token,
-                        "options": {"account_id": hierarchical_account_id},
+                        "options": {"account_id": account_id.to_wire()},
                     },
                     timeout=10,
                 )
@@ -121,13 +121,15 @@ class TestVeneerIntegration:
                 # Test error handling for non-existent account
                 nonexistent_item_id = ItemId("user_test", "nonexistent", "nonexistent")
                 nonexistent_access_token = nonexistent_item_id.create_access_token()
-                nonexistent_account_id = f"{nonexistent_item_id.to_wire()}-nonexistent"
+                nonexistent_account_id = AccountId(
+                    "user_test", "nonexistent", "nonexistent", "nonexistent"
+                )
 
                 response = requests.post(
                     f"{base_url}/transactions/sync",
                     json={
                         "access_token": nonexistent_access_token,
-                        "options": {"account_id": nonexistent_account_id},
+                        "options": {"account_id": nonexistent_account_id.to_wire()},
                     },
                     timeout=10,
                 )

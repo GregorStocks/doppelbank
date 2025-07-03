@@ -17,35 +17,44 @@ class TestUserId:
 
     def test_from_wire_valid_simple(self) -> None:
         """Test creating from a simple user wire ID."""
-        user_id = UserId.from_wire("user_abc123")
+        user_id = UserId.from_wire("user:user_abc123")
         assert user_id.user_id == "user_abc123"
-        assert user_id.to_wire() == "user_abc123"
+        assert user_id.to_wire() == "user:user_abc123"
 
     def test_from_wire_valid_client_provided(self) -> None:
         """Test creating from a client-provided user wire ID."""
-        user_id = UserId.from_wire("client_user_john_doe")
+        user_id = UserId.from_wire("user:client_user_john_doe")
         assert user_id.user_id == "client_user_john_doe"
-        assert user_id.to_wire() == "client_user_john_doe"
+        assert user_id.to_wire() == "user:client_user_john_doe"
 
     def test_from_wire_valid_with_numbers(self) -> None:
         """Test creating from user wire ID with numbers."""
-        user_id = UserId.from_wire("user_123_abc_456")
+        user_id = UserId.from_wire("user:user_123_abc_456")
         assert user_id.user_id == "user_123_abc_456"
 
     def test_from_wire_with_hyphens(self) -> None:
         """Test creating from user wire ID with hyphens raises error."""
-        with pytest.raises(InvalidIdError, match="contains invalid characters"):
-            UserId.from_wire("user-with-hyphens")
+        with pytest.raises(
+            InvalidIdError,
+            match="where user_id contains only alphanumeric characters and underscores",
+        ):
+            UserId.from_wire("user:user-with-hyphens")
 
     def test_from_wire_with_spaces(self) -> None:
         """Test creating from user wire ID with spaces raises error."""
-        with pytest.raises(InvalidIdError, match="contains invalid characters"):
-            UserId.from_wire("user with spaces")
+        with pytest.raises(
+            InvalidIdError,
+            match="where user_id contains only alphanumeric characters and underscores",
+        ):
+            UserId.from_wire("user:user with spaces")
 
     def test_from_wire_with_special_chars(self) -> None:
         """Test creating from user wire ID with special characters raises error."""
-        with pytest.raises(InvalidIdError, match="contains invalid characters"):
-            UserId.from_wire("user@domain.com")
+        with pytest.raises(
+            InvalidIdError,
+            match="where user_id contains only alphanumeric characters and underscores",
+        ):
+            UserId.from_wire("user:user@domain.com")
 
     def test_constructor_validation(self) -> None:
         """Test direct constructor validates input."""
@@ -63,55 +72,73 @@ class TestItemId:
 
     def test_from_wire_valid(self) -> None:
         """Test creating from a valid item wire ID."""
-        item_id = ItemId.from_wire("user_abc123-jimmy-doppelbank")
+        item_id = ItemId.from_wire("item:user_abc123-jimmy-doppelbank")
         assert item_id.user_id == "user_abc123"
         assert item_id.persona_id == "jimmy"
         assert item_id.institution_id == "doppelbank"
-        assert item_id.to_wire() == "user_abc123-jimmy-doppelbank"
+        assert item_id.to_wire() == "item:user_abc123-jimmy-doppelbank"
 
     def test_from_wire_client_user(self) -> None:
         """Test creating from item wire ID with client user."""
-        item_id = ItemId.from_wire("client_user-claude-doppelfirstbank")
+        item_id = ItemId.from_wire("item:client_user-claude-doppelfirstbank")
         assert item_id.user_id == "client_user"
         assert item_id.persona_id == "claude"
         assert item_id.institution_id == "doppelfirstbank"
 
     def test_from_wire_complex(self) -> None:
         """Test creating from item wire ID with complex names."""
-        item_id = ItemId.from_wire("user_xyz789-john_doe-second_bank_of_doppel")
+        item_id = ItemId.from_wire("item:user_xyz789-john_doe-second_bank_of_doppel")
         assert item_id.user_id == "user_xyz789"
         assert item_id.persona_id == "john_doe"
         assert item_id.institution_id == "second_bank_of_doppel"
 
     def test_from_wire_too_few_parts(self) -> None:
         """Test creating from item wire ID with too few parts raises error."""
-        with pytest.raises(InvalidIdError, match="must have exactly 3 parts separated by hyphens"):
-            ItemId.from_wire("user_abc123-jimmy")
+        with pytest.raises(
+            InvalidIdError,
+            match=r"must have format 'item:\{user_id\}-\{persona_id\}-\{institution_id\}'",
+        ):
+            ItemId.from_wire("item:user_abc123-jimmy")
 
     def test_from_wire_too_many_parts(self) -> None:
         """Test creating from item wire ID with too many parts raises error."""
-        with pytest.raises(InvalidIdError, match="must have exactly 3 parts separated by hyphens"):
-            ItemId.from_wire("user_abc123-jimmy-doppelbank-extra")
+        with pytest.raises(
+            InvalidIdError,
+            match=r"must have format 'item:\{user_id\}-\{persona_id\}-\{institution_id\}'",
+        ):
+            ItemId.from_wire("item:user_abc123-jimmy-doppelbank-extra")
 
     def test_from_wire_empty_section(self) -> None:
         """Test creating from item wire ID with empty section raises error."""
-        with pytest.raises(InvalidIdError, match="cannot be empty"):
-            ItemId.from_wire("user_abc123--doppelbank")
+        with pytest.raises(
+            InvalidIdError,
+            match=r"must have format 'item:\{user_id\}-\{persona_id\}-\{institution_id\}'",
+        ):
+            ItemId.from_wire("item:user_abc123--doppelbank")
 
     def test_from_wire_invalid_user_section(self) -> None:
         """Test creating from item wire ID with invalid user section raises error."""
-        with pytest.raises(InvalidIdError, match="User ID.*contains invalid characters"):
-            ItemId.from_wire("user@domain-jimmy-doppelbank")
+        with pytest.raises(
+            InvalidIdError,
+            match="where all components contain only alphanumeric characters and underscores",
+        ):
+            ItemId.from_wire("item:user@domain-jimmy-doppelbank")
 
     def test_from_wire_invalid_persona_section(self) -> None:
         """Test creating from item wire ID with invalid persona section raises error."""
-        with pytest.raises(InvalidIdError, match="Persona ID.*contains invalid characters"):
-            ItemId.from_wire("user_abc123-jimmy!-doppelbank")
+        with pytest.raises(
+            InvalidIdError,
+            match="where all components contain only alphanumeric characters and underscores",
+        ):
+            ItemId.from_wire("item:user_abc123-jimmy!-doppelbank")
 
     def test_from_wire_invalid_institution_section(self) -> None:
         """Test creating from item wire ID with invalid institution section raises error."""
-        with pytest.raises(InvalidIdError, match="Institution ID.*contains invalid characters"):
-            ItemId.from_wire("user_abc123-jimmy-doppel bank")
+        with pytest.raises(
+            InvalidIdError,
+            match="where all components contain only alphanumeric characters and underscores",
+        ):
+            ItemId.from_wire("item:user_abc123-jimmy-doppel bank")
 
     def test_constructor_validation(self) -> None:
         """Test direct constructor validates input."""
@@ -131,16 +158,16 @@ class TestAccountId:
 
     def test_from_wire_valid(self) -> None:
         """Test creating from a valid account wire ID."""
-        account_id = AccountId.from_wire("user_abc123-jimmy-doppelbank-checking")
+        account_id = AccountId.from_wire("account:user_abc123-jimmy-doppelbank-checking")
         assert account_id.user_id == "user_abc123"
         assert account_id.persona_id == "jimmy"
         assert account_id.institution_id == "doppelbank"
         assert account_id.account_type == "checking"
-        assert account_id.to_wire() == "user_abc123-jimmy-doppelbank-checking"
+        assert account_id.to_wire() == "account:user_abc123-jimmy-doppelbank-checking"
 
     def test_from_wire_complex(self) -> None:
         """Test creating from account wire ID with complex names."""
-        account_id = AccountId.from_wire("user_xyz789-john_doe-second_bank-checking2")
+        account_id = AccountId.from_wire("account:user_xyz789-john_doe-second_bank-checking2")
         assert account_id.user_id == "user_xyz789"
         assert account_id.persona_id == "john_doe"
         assert account_id.institution_id == "second_bank"
@@ -148,7 +175,7 @@ class TestAccountId:
 
     def test_account_id_item_id_property(self) -> None:
         """Test the item_id property of AccountId."""
-        account_id = AccountId.from_wire("user_abc123-jimmy-doppelbank-checking")
+        account_id = AccountId.from_wire("account:user_abc123-jimmy-doppelbank-checking")
         item_id = account_id.item_id
         assert isinstance(item_id, ItemId)
         assert item_id.user_id == "user_abc123"
@@ -157,28 +184,43 @@ class TestAccountId:
 
     def test_account_id_item_wire_id_property(self) -> None:
         """Test the item_wire_id property of AccountId."""
-        account_id = AccountId.from_wire("user_abc123-jimmy-doppelbank-checking")
-        assert account_id.item_id.to_wire() == "user_abc123-jimmy-doppelbank"
+        account_id = AccountId.from_wire("account:user_abc123-jimmy-doppelbank-checking")
+        assert account_id.item_id.to_wire() == "item:user_abc123-jimmy-doppelbank"
 
     def test_from_wire_too_few_parts(self) -> None:
         """Test creating from account wire ID with too few parts raises error."""
-        with pytest.raises(InvalidIdError, match="must have exactly 4 parts separated by hyphens"):
-            AccountId.from_wire("user_abc123-jimmy-doppelbank")
+        with pytest.raises(
+            InvalidIdError,
+            match=r"must have format 'account:\{user_id\}-\{persona_id\}-"
+            r"\{institution_id\}-\{account_type\}'",
+        ):
+            AccountId.from_wire("account:user_abc123-jimmy-doppelbank")
 
     def test_from_wire_too_many_parts(self) -> None:
         """Test creating from account wire ID with too many parts raises error."""
-        with pytest.raises(InvalidIdError, match="must have exactly 4 parts separated by hyphens"):
-            AccountId.from_wire("user_abc123-jimmy-doppelbank-checking-extra")
+        with pytest.raises(
+            InvalidIdError,
+            match=r"must have format 'account:\{user_id\}-\{persona_id\}-"
+            r"\{institution_id\}-\{account_type\}'",
+        ):
+            AccountId.from_wire("account:user_abc123-jimmy-doppelbank-checking-extra")
 
     def test_from_wire_empty_section(self) -> None:
         """Test creating from account wire ID with empty section raises error."""
-        with pytest.raises(InvalidIdError, match="cannot be empty"):
-            AccountId.from_wire("user_abc123-jimmy-doppelbank-")
+        with pytest.raises(
+            InvalidIdError,
+            match=r"must have format 'account:\{user_id\}-\{persona_id\}-"
+            r"\{institution_id\}-\{account_type\}'",
+        ):
+            AccountId.from_wire("account:user_abc123-jimmy-doppelbank-")
 
     def test_from_wire_invalid_account_type(self) -> None:
         """Test creating from account wire ID with invalid account type raises error."""
-        with pytest.raises(InvalidIdError, match="Account type.*contains invalid characters"):
-            AccountId.from_wire("user_abc123-jimmy-doppelbank-checking!")
+        with pytest.raises(
+            InvalidIdError,
+            match="where all components contain only alphanumeric characters and underscores",
+        ):
+            AccountId.from_wire("account:user_abc123-jimmy-doppelbank-checking!")
 
     def test_constructor_validation(self) -> None:
         """Test direct constructor validates input."""
@@ -200,12 +242,12 @@ class TestConstructorBuilding:
     def test_build_item_id_with_constructor(self) -> None:
         """Test building an item ID with constructor."""
         item_id = ItemId("user_abc123", "jimmy", "doppelbank")
-        assert item_id.to_wire() == "user_abc123-jimmy-doppelbank"
+        assert item_id.to_wire() == "item:user_abc123-jimmy-doppelbank"
 
     def test_build_account_id_with_constructor(self) -> None:
         """Test building an account ID with constructor."""
         account_id = AccountId("user_abc123", "jimmy", "doppelbank", "checking")
-        assert account_id.to_wire() == "user_abc123-jimmy-doppelbank-checking"
+        assert account_id.to_wire() == "account:user_abc123-jimmy-doppelbank-checking"
 
     def test_build_account_id_from_item_id(self) -> None:
         """Test building account ID from existing item ID."""
@@ -213,7 +255,7 @@ class TestConstructorBuilding:
         account_id = AccountId(
             item_id.user_id, item_id.persona_id, item_id.institution_id, "checking"
         )
-        assert account_id.to_wire() == "user_abc123-jimmy-doppelbank-checking"
+        assert account_id.to_wire() == "account:user_abc123-jimmy-doppelbank-checking"
 
 
 class TestRoundTripParsing:
@@ -221,22 +263,22 @@ class TestRoundTripParsing:
 
     def test_item_wire_id_round_trip(self) -> None:
         """Test that parsing and building item wire IDs is reversible."""
-        original = "user_abc123-jimmy-doppelbank"
+        original = "item:user_abc123-jimmy-doppelbank"
         parsed = ItemId.from_wire(original)
         assert parsed.to_wire() == original
 
     def test_account_wire_id_round_trip(self) -> None:
         """Test that parsing and building account wire IDs is reversible."""
-        original = "user_abc123-jimmy-doppelbank-checking"
+        original = "account:user_abc123-jimmy-doppelbank-checking"
         parsed = AccountId.from_wire(original)
         assert parsed.to_wire() == original
 
     def test_account_wire_id_round_trip_via_item_wire_id(self) -> None:
         """Test building account wire ID via item wire ID property."""
-        original = "user_abc123-jimmy-doppelbank-checking"
+        original = "account:user_abc123-jimmy-doppelbank-checking"
         parsed = AccountId.from_wire(original)
         # Can reconstruct from item_wire_id + account_type
-        rebuilt_wire_id = f"{parsed.item_id.to_wire()}-{parsed.account_type}"
+        rebuilt_wire_id = f"account:{parsed.item_id.to_wire()[5:]}-{parsed.account_type}"
         assert rebuilt_wire_id == original
 
 
@@ -282,17 +324,17 @@ class TestToWireMethods:
     def test_user_id_to_wire(self) -> None:
         """Test UserId.to_wire() method."""
         user_id = UserId("user_abc123")
-        assert user_id.to_wire() == "user_abc123"
+        assert user_id.to_wire() == "user:user_abc123"
 
     def test_item_id_to_wire(self) -> None:
         """Test ItemId.to_wire() method."""
         item_id = ItemId("user_abc123", "jimmy", "doppelbank")
-        assert item_id.to_wire() == "user_abc123-jimmy-doppelbank"
+        assert item_id.to_wire() == "item:user_abc123-jimmy-doppelbank"
 
     def test_account_id_to_wire(self) -> None:
         """Test AccountId.to_wire() method."""
         account_id = AccountId("user_abc123", "jimmy", "doppelbank", "checking")
-        assert account_id.to_wire() == "user_abc123-jimmy-doppelbank-checking"
+        assert account_id.to_wire() == "account:user_abc123-jimmy-doppelbank-checking"
 
 
 class TestFromWireMethods:
@@ -300,13 +342,13 @@ class TestFromWireMethods:
 
     def test_user_id_from_wire(self) -> None:
         """Test UserId.from_wire static method."""
-        user_id = UserId.from_wire("user_abc123")
+        user_id = UserId.from_wire("user:user_abc123")
         assert isinstance(user_id, UserId)
         assert user_id.user_id == "user_abc123"
 
     def test_item_id_from_wire(self) -> None:
         """Test ItemId.from_wire static method."""
-        item_id = ItemId.from_wire("user_abc123-jimmy-doppelbank")
+        item_id = ItemId.from_wire("item:user_abc123-jimmy-doppelbank")
         assert isinstance(item_id, ItemId)
         assert item_id.user_id == "user_abc123"
         assert item_id.persona_id == "jimmy"
@@ -314,7 +356,7 @@ class TestFromWireMethods:
 
     def test_account_id_from_wire(self) -> None:
         """Test AccountId.from_wire static method."""
-        account_id = AccountId.from_wire("user_abc123-jimmy-doppelbank-checking")
+        account_id = AccountId.from_wire("account:user_abc123-jimmy-doppelbank-checking")
         assert isinstance(account_id, AccountId)
         assert account_id.user_id == "user_abc123"
         assert account_id.persona_id == "jimmy"
@@ -351,15 +393,17 @@ class TestValidationEdgeCases:
         """Test complex but valid ID constructions."""
         # Complex user ID
         user_id = UserId("complex_client_user_name_123_with_underscores")
-        assert user_id.to_wire() == "complex_client_user_name_123_with_underscores"
+        assert user_id.to_wire() == "user:complex_client_user_name_123_with_underscores"
 
         # Complex item ID
         item_id = ItemId("user_123", "persona_name_with_underscores", "bank_name_2024")
-        assert item_id.to_wire() == "user_123-persona_name_with_underscores-bank_name_2024"
+        assert item_id.to_wire() == "item:user_123-persona_name_with_underscores-bank_name_2024"
 
         # Complex account ID
         account_id = AccountId("user_123", "persona_name", "bank_name", "savings_premium_2024")
-        assert account_id.to_wire() == "user_123-persona_name-bank_name-savings_premium_2024"
+        assert (
+            account_id.to_wire() == "account:user_123-persona_name-bank_name-savings_premium_2024"
+        )
 
 
 class TestAccessTokenHelpers:
@@ -370,17 +414,19 @@ class TestAccessTokenHelpers:
         item_id = ItemId("user_123", "jimmy", "doppelbank")
         access_token = item_id.create_access_token()
 
-        # Should have format: {item_id}|{uuid}
-        assert "|" in access_token
-        parts = access_token.split("|")
-        assert len(parts) == 2
-        assert parts[0] == "user_123-jimmy-doppelbank"
-        assert len(parts[1]) == 32  # UUID hex without dashes
+        # Should have format: token:{user_id}-{persona_id}-{institution_id}-{uuid}
+        assert access_token.startswith("token:")
+        parts = access_token.split("-")
+        assert len(parts) == 4
+        assert parts[0] == "token:user_123"
+        assert parts[1] == "jimmy"
+        assert parts[2] == "doppelbank"
+        assert len(parts[3]) == 32  # UUID hex without dashes
 
     def test_from_access_token(self) -> None:
         """Test extracting ItemId from access token."""
         original_item = ItemId("user_123", "jimmy", "doppelbank")
-        access_token = f"{original_item.to_wire()}|abc123def456"
+        access_token = "token:user_123-jimmy-doppelbank-abc123def456"
 
         extracted_item = ItemId.from_access_token(access_token)
         assert extracted_item == original_item
@@ -395,17 +441,29 @@ class TestAccessTokenHelpers:
 
     def test_from_access_token_invalid_format(self) -> None:
         """Test that invalid access token format raises error."""
-        with pytest.raises(InvalidIdError, match="must have format 'item_id|uuid'"):
+        with pytest.raises(
+            InvalidIdError,
+            match=r"must have format 'token:\{user_id\}-\{persona_id\}-"
+            r"\{institution_id\}\-\{uuid\}'",
+        ):
             ItemId.from_access_token("invalid_token_without_separator")
 
     def test_from_access_token_invalid_item_id(self) -> None:
         """Test that invalid item ID in access token raises error."""
-        with pytest.raises(InvalidIdError, match="must have exactly 3 parts"):
-            ItemId.from_access_token("invalid-item|uuid")
+        with pytest.raises(
+            InvalidIdError,
+            match=r"must have format 'token:\{user_id\}-\{persona_id\}-"
+            r"\{institution_id\}\-\{uuid\}'",
+        ):
+            ItemId.from_access_token("invalid-token-format")
 
     def test_from_access_token_multiple_separators(self) -> None:
         """Test access token with multiple separators raises error."""
-        access_token = "user_123-jimmy-doppelbank|uuid|extra"
+        access_token = "token:user_123-jimmy-doppelbank-uuid-extra"
 
-        with pytest.raises(InvalidIdError, match="must have format 'item_id|uuid'"):
+        with pytest.raises(
+            InvalidIdError,
+            match=r"must have format 'token:\{user_id\}-\{persona_id\}-"
+            r"\{institution_id\}\-\{uuid\}'",
+        ):
             ItemId.from_access_token(access_token)
