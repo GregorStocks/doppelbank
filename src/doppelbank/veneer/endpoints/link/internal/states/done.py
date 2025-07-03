@@ -2,6 +2,8 @@ import json
 from pathlib import Path
 from typing import Any
 
+from fastapi import HTTPException
+
 from doppelbank.veneer.endpoints.accounts import get_accounts
 from doppelbank.veneer.endpoints.link.internal.models import (
     WorkflowNextRequest,
@@ -21,6 +23,16 @@ def create_response(request: WorkflowNextRequest) -> WorkflowResponse:
     data["workflow_session_id"] = request.workflow_session_id
 
     workflow = get_workflow_session(request.workflow_session_id)
+    if not workflow:
+        raise HTTPException(
+            status_code=404, detail=f"Workflow session {request.workflow_session_id} not found"
+        )
+
+    if not workflow.item_id:
+        raise HTTPException(
+            status_code=404, detail=f"Workflow session {request.workflow_session_id} has no item ID"
+        )
+
     accounts = get_accounts(workflow.item_id)
 
     data["next_pane"]["sink"]["result"]["metadata"]["accounts"] = [

@@ -12,7 +12,6 @@ class AddPending(msgspec.Struct, tag="add_pending"):
 
     event_id: str
     transaction_id: str
-    account_id: str
     # Amount in integer cents (e.g., USD 12.34 = 1234). Positive = credit to
     # account, negative = debit from account.
     amount: int
@@ -26,7 +25,6 @@ class RemovePending(msgspec.Struct, tag="remove_pending"):
 
     event_id: str
     transaction_id: str
-    account_id: str
     reason: str
     related_event_id: str
 
@@ -36,7 +34,6 @@ class AddCleared(msgspec.Struct, tag="add_cleared"):
 
     event_id: str
     transaction_id: str
-    account_id: str
     amount: int
     description: str
     merchant: str
@@ -48,7 +45,6 @@ class UpdateBalance(msgspec.Struct, tag="update_balance"):
     """The available balance is updated."""
 
     event_id: str
-    account_id: str
     new_balance: int
     reason: str
     related_event_id: str

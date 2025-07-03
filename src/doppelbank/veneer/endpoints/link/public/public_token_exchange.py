@@ -2,12 +2,12 @@
 
 import random
 import uuid
-from pathlib import Path
 
 from fastapi import APIRouter
 
 from doppelbank.lib.ids import ItemId
 from doppelbank.veneer.common import VeneerRequest, VeneerResponse
+from doppelbank.veneer.data import get_available_institutions_for_persona, get_available_personas
 
 router = APIRouter()
 
@@ -20,22 +20,6 @@ class PublicTokenExchangeResponse(VeneerResponse):
     access_token: str
     item_id: str
     request_id: str
-
-
-def get_available_personas() -> list[str]:
-    """Get list of available personas from data directory."""
-    personas_dir = Path("data/personas")
-    if not personas_dir.exists():
-        raise ValueError("No personas found")
-    return [p.name for p in personas_dir.iterdir() if p.is_dir()]
-
-
-def get_available_institutions_for_persona(persona_id: str) -> list[str]:
-    """Get list of institutions available for a given persona."""
-    persona_dir = Path("data/personas") / persona_id
-    if not persona_dir.exists():
-        raise ValueError("Persona not found")
-    return [inst.name for inst in persona_dir.iterdir() if inst.is_dir()]
 
 
 @router.post("/item/public_token/exchange", response_model=PublicTokenExchangeResponse)

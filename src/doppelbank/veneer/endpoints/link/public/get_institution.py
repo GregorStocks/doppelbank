@@ -16,6 +16,7 @@ class InstitutionResponse(VeneerResponse):
 @router.get("/api/institution/{institution_id}")
 async def get_institution(institution_id: str) -> InstitutionResponse:
     # Mock institution data
+    # TODO: Get from data dir
     institution = {
         "institution_id": institution_id,
         "name": "Demo Bank",

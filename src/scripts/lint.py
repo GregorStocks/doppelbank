@@ -11,6 +11,7 @@ CHECK_COMMANDS = [
 FIX_COMMANDS = [
     ["uv", "run", "ruff", "format", "src/", "tests/"],
     ["uv", "run", "ruff", "check", "--fix", "src/", "tests/"],
+    ["uv", "run", "mypy", "src/", "tests/"],
 ]
 
 

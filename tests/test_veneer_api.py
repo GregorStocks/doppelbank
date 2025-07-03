@@ -13,18 +13,18 @@ from pathlib import Path
 import pytest
 from fastapi.testclient import TestClient
 
-from doppelbank.lib.ids import ItemId
+from doppelbank.lib.ids import AccountId, ItemId
 from doppelbank.veneer.app import app
 
 
 @pytest.fixture(scope="module", autouse=True)
 def setup_test_environment() -> Generator[None]:
     """Configure VENEER_DATA_DIR to point to organized test data."""
-    detritus_test_data_dir = Path(__file__).parent / "data" / "detritus"
+    test_data_dir = Path(__file__).parent / "data"
     original_env = os.environ.get("VENEER_DATA_DIR")
 
     # Set environment variable to point to organized test data
-    os.environ["VENEER_DATA_DIR"] = str(detritus_test_data_dir)
+    os.environ["VENEER_DATA_DIR"] = str(test_data_dir)
 
     yield
 
@@ -40,17 +40,21 @@ class TestVeneerAPI:
 
     def test_transactions_sync_basic(self) -> None:
         """Test basic transactions sync endpoint using FastAPI TestClient."""
-        # Create hierarchical ItemId and account ID
         item_id = ItemId("user_test", "jimmy", "doppelbank")
         access_token = item_id.create_access_token()
-        account_id = f"{item_id.to_wire()}-checking"
+        account_id = AccountId(
+            user_id="user_test",
+            persona_id="jimmy",
+            institution_id="doppelbank",
+            account_type="checking",
+        )
 
         client = TestClient(app)
         response = client.post(
             "/transactions/sync",
             json={
                 "access_token": access_token,
-                "options": {"account_id": account_id},
+                "options": {"account_id": account_id.to_wire()},
             },
         )
 

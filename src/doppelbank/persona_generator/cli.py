@@ -18,9 +18,8 @@ from typing import Any
 # Third-party
 import pytz
 
-from doppelbank.lib.ids import AccountId, ItemId, UserId
 from doppelbank.lib.logging_config import configure_logging
-from doppelbank.lib.serde import save_binary, save_json
+from doppelbank.lib.serde import save_json
 
 # Local project
 from doppelbank.persona_generator.models import (
@@ -79,16 +78,10 @@ def generate_random_timestamp(base_date: datetime, persona_info: PersonaInfo) ->
 
 def generate_events(
     persona_info: PersonaInfo,
-    account_id: str,
     days: int = 30,
-    seed: int | None = None,
 ) -> EventCollection:
     """Generate a sequence of financial events for a persona. All amounts are int cents."""
     events_list = []
-
-    # Set seed for deterministic generation
-    if seed is not None:
-        random.seed(seed)
 
     # Generate events for the specified number of days
     start_date = datetime.now() - timedelta(days=days)
@@ -103,7 +96,6 @@ def generate_events(
             timestamp = generate_random_timestamp(current_date, persona_info)
             events_list.append(
                 create_paycheck_event(
-                    account_id=account_id,
                     amount=biweekly_pay,
                     timestamp=timestamp.strftime("%Y-%m-%dT%H:%M:%S.%fZ"),
                     employer=persona_info.employer,
@@ -123,7 +115,6 @@ def generate_events(
                 timestamp = generate_random_timestamp(current_date, persona_info)
                 events_list.append(
                     create_card_swipe_event(
-                        account_id=account_id,
                         amount=-amount,  # Negative for spending
                         timestamp=timestamp.strftime("%Y-%m-%dT%H:%M:%S.%fZ"),
                         merchant=merchant,
@@ -142,12 +133,7 @@ def validate_args(args: argparse.Namespace) -> None:
     if args.days <= 0:
         raise ValueError("Days must be positive")
 
-    if args.format not in ["json", "binary"]:
-        raise ValueError("Output format must be 'json' or 'binary'")
-
     # Validate hierarchical ID components
-    if not args.user_id:
-        raise ValueError("User ID cannot be empty")
     if not args.persona:
         raise ValueError("Persona name cannot be empty")
     if not args.institution:
@@ -169,15 +155,14 @@ def main() -> None:
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Examples:
-  %(prog)s --user-id user_123 --persona jimmy --institution doppelbank \\
+  %(prog)s --persona jimmy --institution doppelbank \\
       --account-type checking --days 30
-  %(prog)s --user-id client_user --persona claude --institution doppelfirstbank \\
-      --account-type savings --days 60 --seed 12345
+  %(prog)s --persona claude --institution doppelfirstbank \\
+      --account-type savings --days 60
         """,
     )
 
     # Main command - create complete persona data (generate + transform in one step)
-    parser.add_argument("--user-id", required=True, help="User ID for hierarchical structure")
     parser.add_argument("--persona", required=True, help="Persona name (e.g., jimmy, claude)")
     parser.add_argument("--institution", required=True, help="Institution ID (e.g., doppelbank)")
     parser.add_argument(
@@ -198,31 +183,16 @@ Examples:
         default=30,
         help="Number of days to generate (default: 30)",
     )
-    parser.add_argument("--seed", type=int, help="Random seed for deterministic generation")
     parser.add_argument(
-        "--output",
+        "--output-dir",
         type=Path,
-        help="Output detritus ledger file (optional, defaults to data/ structure)",
-    )
-    parser.add_argument(
-        "--format",
-        choices=["json", "binary"],
-        default="json",
-        help="Output format (default: json)",
+        help="Output root directory (default: data/)",
     )
 
     args = parser.parse_args()
 
     try:
         validate_args(args)
-
-        # Create hierarchical IDs
-        user_id = UserId(args.user_id)
-        item_id = ItemId(args.user_id, args.persona, args.institution)
-        account_id = AccountId(args.user_id, args.persona, args.institution, args.account_type)
-
-        logger.info(f"Creating persona data for {item_id.to_wire()}")
-        logger.info(f"Account: {account_id.to_wire()}")
 
         # Create persona info object
         persona_info = PersonaInfo(
@@ -232,11 +202,7 @@ Examples:
             salary=args.salary,
         )
 
-        print(f"Generating {args.days} days of events for persona {args.persona}...")
-        print(f"  User ID: {user_id.to_wire()}")
-        print(f"  Item ID: {item_id.to_wire()}")
-        print(f"  Account ID: {account_id.to_wire()}")
-        print(f"  Institution: {args.institution}")
+        print(f"Generating {args.days} days of events for persona {persona_info}...")
         print(f"  Timezone: {args.timezone}")
         print(f"  Employer: {args.employer}")
         print(f"  Annual Salary: ${args.salary:,.2f}")
@@ -244,9 +210,7 @@ Examples:
         # Generate events
         events = generate_events(
             persona_info=persona_info,
-            account_id=account_id.to_wire(),
             days=args.days,
-            seed=args.seed,
         )
 
         logger.info(f"Generated {len(events.events)} events")
@@ -255,44 +219,30 @@ Examples:
         detritus_ledger = bedrock_to_detritus(events)
 
         # Create directory structure and save files
-        if args.output:
-            # Use specified output file
-            if args.format == "json":
-                save_json(detritus_ledger, args.output)
-            else:
-                save_binary(detritus_ledger, args.output)
-            logger.info(f"Saved detritus ledger to {args.output}")
-            print(f"Saved ledger to {args.output}")
-        else:
-            # Use hierarchical data structure
-            data_root = Path("data")
-            persona_dir = data_root / "personas" / args.persona
-            institution_dir = persona_dir / args.institution
+        data_root = Path(args.output_dir or "data")
 
-            # Create directories
-            institution_dir.mkdir(parents=True, exist_ok=True)
+        persona_dir = data_root / "personas" / args.persona
+        institution_dir = persona_dir / args.institution
 
-            # Save persona metadata
-            persona_file = persona_dir / "persona.json"
-            if not persona_file.exists():
-                persona_metadata = persona_info.to_dict()
-                with open(persona_file, "w") as f:
-                    json.dump(persona_metadata, f, indent=2)
-                logger.info(f"Created persona metadata: {persona_file}")
+        # Create directories
+        institution_dir.mkdir(parents=True, exist_ok=True)
 
-            # Save account ledger
-            account_file = institution_dir / f"{args.account_type}.json"
-            if args.format == "json":
-                save_json(detritus_ledger, account_file)
-            else:
-                save_binary(detritus_ledger, account_file)
+        # Save persona metadata
+        persona_file = persona_dir / "persona.json"
+        if not persona_file.exists():
+            persona_metadata = persona_info.to_dict()
+            with open(persona_file, "w") as f:
+                json.dump(persona_metadata, f, indent=2)
+            logger.info(f"Created persona metadata: {persona_file}")
 
-            logger.info(f"Saved account ledger to {account_file}")
-            print(
-                f"Generated {len(events.events)} events and saved to hierarchical data structure:"
-            )
-            print(f"  Persona: {persona_file}")
-            print(f"  Account: {account_file}")
+        # Save account ledger
+        account_file = institution_dir / f"{args.account_type}.json"
+        save_json(detritus_ledger, account_file)
+
+        logger.info(f"Saved account ledger to {account_file}")
+        print(f"Generated {len(events.events)} events and saved to hierarchical data structure:")
+        print(f"  Persona: {persona_file}")
+        print(f"  Account: {account_file}")
 
     except ValueError as e:
         logger.error(f"Validation error: {e}")

@@ -11,7 +11,6 @@ class PaycheckEvent(msgspec.Struct, tag="paycheck"):
     """A paycheck event representing regular income from employment."""
 
     event_id: str
-    user_id: str
     # Timestamp in UTC, ISO8601 format with microsecond precision (e.g.,
     # 2024-07-01T12:00:00.123456Z). All timestamps in this schema use this format
     # and precision.
@@ -21,36 +20,21 @@ class PaycheckEvent(msgspec.Struct, tag="paycheck"):
     amount: int
     employer: str
     description: str
-    account_id: str
-
-
-class TransferEvent(msgspec.Struct, tag="transfer"):
-    """A transfer event representing money movement between accounts."""
-
-    event_id: str
-    user_id: str
-    timestamp: str
-    amount: int
-    from_account: str
-    to_account: str
-    description: str
 
 
 class CardSwipeEvent(msgspec.Struct, tag="card_swipe"):
     """A card swipe event representing credit/debit card transactions."""
 
     event_id: str
-    user_id: str
     timestamp: str
     amount: int
     merchant: str
     category: str
     description: str
-    account_id: str
 
 
 # Tagged union for events
-Event = PaycheckEvent | TransferEvent | CardSwipeEvent
+Event = PaycheckEvent | CardSwipeEvent
 
 
 class EventCollection(msgspec.Struct):

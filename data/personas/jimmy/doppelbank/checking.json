@@ -1,413 +1,1779 @@
 {
   "events": [
     {
-      "event_id": "3a1dbc04-265c-4b1a-86a7-8c984f0ac2f9",
-      "timestamp": "2025-06-23T07:14:08.772246Z",
+      "event_id": "dced4c93-94c5-4f83-92f4-e5d749872a69",
+      "timestamp": "2025-06-03T11:53:39.100992Z",
       "event": {
         "type": "add_pending",
-        "event_id": "3a1dbc04-265c-4b1a-86a7-8c984f0ac2f9",
-        "transaction_id": "ebb6afe2-adae-44dc-9d69-6e7c0d160515",
-        "account_id": "user_test-jimmy-doppelbank-checking",
-        "amount": -3837,
-        "description": "Purchase at Starbucks",
-        "merchant": "Starbucks",
-        "category": "Food & Drink"
+        "event_id": "dced4c93-94c5-4f83-92f4-e5d749872a69",
+        "transaction_id": "267848b3-1301-4227-9579-70294d5b2e6e",
+        "amount": -1785,
+        "description": "Purchase at CVS",
+        "merchant": "CVS",
+        "category": "Entertainment"
       }
     },
     {
-      "event_id": "f0de3714-b050-48ff-aa69-dacd1200d189",
-      "timestamp": "2025-06-25T07:14:08.772246Z",
+      "event_id": "524fffdb-6899-4d0c-b2e7-c2234b7b4cd6",
+      "timestamp": "2025-06-05T11:53:39.100992Z",
       "event": {
         "type": "add_cleared",
-        "event_id": "f0de3714-b050-48ff-aa69-dacd1200d189",
-        "transaction_id": "72ada4fb-adc0-4c1b-b5db-9f85527c23ac",
-        "account_id": "user_test-jimmy-doppelbank-checking",
-        "amount": -3837,
-        "description": "Purchase at Starbucks",
-        "merchant": "Starbucks",
-        "category": "Food & Drink",
-        "pending_event_id": "3a1dbc04-265c-4b1a-86a7-8c984f0ac2f9"
+        "event_id": "524fffdb-6899-4d0c-b2e7-c2234b7b4cd6",
+        "transaction_id": "d5472428-8973-4c21-8e17-102efe10bedd",
+        "amount": -1785,
+        "description": "Purchase at CVS",
+        "merchant": "CVS",
+        "category": "Entertainment",
+        "pending_event_id": "dced4c93-94c5-4f83-92f4-e5d749872a69"
       }
     },
     {
-      "event_id": "07f38049-e6cf-4adb-833d-0f4590273c7d",
-      "timestamp": "2025-06-25T07:14:08.772246Z",
+      "event_id": "14ef4464-e7c7-4ca8-b55f-b7f363d851bf",
+      "timestamp": "2025-06-05T11:53:39.100992Z",
       "event": {
         "type": "remove_pending",
-        "event_id": "07f38049-e6cf-4adb-833d-0f4590273c7d",
-        "transaction_id": "ebb6afe2-adae-44dc-9d69-6e7c0d160515",
-        "account_id": "user_test-jimmy-doppelbank-checking",
+        "event_id": "14ef4464-e7c7-4ca8-b55f-b7f363d851bf",
+        "transaction_id": "267848b3-1301-4227-9579-70294d5b2e6e",
         "reason": "cleared",
-        "related_event_id": "f0de3714-b050-48ff-aa69-dacd1200d189"
+        "related_event_id": "524fffdb-6899-4d0c-b2e7-c2234b7b4cd6"
       }
     },
     {
-      "event_id": "27d5cb09-9d67-4896-a46f-a5eb1c816e7e",
-      "timestamp": "2025-06-23T01:01:05.229258Z",
+      "event_id": "25349f36-7dca-496a-95d4-95d9332275fb",
+      "timestamp": "2025-06-03T13:27:57.593833Z",
       "event": {
         "type": "add_pending",
-        "event_id": "27d5cb09-9d67-4896-a46f-a5eb1c816e7e",
-        "transaction_id": "b4b4fb71-4668-4732-8013-40439a1f6c1f",
-        "account_id": "user_test-jimmy-doppelbank-checking",
-        "amount": -3157,
-        "description": "Purchase at Starbucks",
-        "merchant": "Starbucks",
-        "category": "Food & Drink"
-      }
-    },
-    {
-      "event_id": "ae66e3bb-b91a-4793-a960-1ed0ccdc7552",
-      "timestamp": "2025-06-25T01:01:05.229258Z",
-      "event": {
-        "type": "add_cleared",
-        "event_id": "ae66e3bb-b91a-4793-a960-1ed0ccdc7552",
-        "transaction_id": "806ecff3-4251-410e-84ec-3e1a82b3d6ab",
-        "account_id": "user_test-jimmy-doppelbank-checking",
-        "amount": -3157,
-        "description": "Purchase at Starbucks",
-        "merchant": "Starbucks",
-        "category": "Food & Drink",
-        "pending_event_id": "27d5cb09-9d67-4896-a46f-a5eb1c816e7e"
-      }
-    },
-    {
-      "event_id": "d98baab0-00e7-4192-800c-bc785c751464",
-      "timestamp": "2025-06-25T01:01:05.229258Z",
-      "event": {
-        "type": "remove_pending",
-        "event_id": "d98baab0-00e7-4192-800c-bc785c751464",
-        "transaction_id": "b4b4fb71-4668-4732-8013-40439a1f6c1f",
-        "account_id": "user_test-jimmy-doppelbank-checking",
-        "reason": "cleared",
-        "related_event_id": "ae66e3bb-b91a-4793-a960-1ed0ccdc7552"
-      }
-    },
-    {
-      "event_id": "bab3ab7c-d00b-4d31-ac7e-441b693b4a75",
-      "timestamp": "2025-06-24T22:41:44.571412Z",
-      "event": {
-        "type": "add_pending",
-        "event_id": "bab3ab7c-d00b-4d31-ac7e-441b693b4a75",
-        "transaction_id": "34171f22-3b18-4cff-a109-519b2209260f",
-        "account_id": "user_test-jimmy-doppelbank-checking",
-        "amount": -3026,
-        "description": "Purchase at Subway",
-        "merchant": "Subway",
-        "category": "Food & Drink"
-      }
-    },
-    {
-      "event_id": "96ac3145-8535-41b5-bf7b-c87ba89dceb9",
-      "timestamp": "2025-06-26T22:41:44.571412Z",
-      "event": {
-        "type": "add_cleared",
-        "event_id": "96ac3145-8535-41b5-bf7b-c87ba89dceb9",
-        "transaction_id": "39360b84-b88d-4f6c-ae80-5aa2483f38a9",
-        "account_id": "user_test-jimmy-doppelbank-checking",
-        "amount": -3026,
-        "description": "Purchase at Subway",
-        "merchant": "Subway",
-        "category": "Food & Drink",
-        "pending_event_id": "bab3ab7c-d00b-4d31-ac7e-441b693b4a75"
-      }
-    },
-    {
-      "event_id": "d90c00ce-a545-4484-b716-d9b90211e642",
-      "timestamp": "2025-06-26T22:41:44.571412Z",
-      "event": {
-        "type": "remove_pending",
-        "event_id": "d90c00ce-a545-4484-b716-d9b90211e642",
-        "transaction_id": "34171f22-3b18-4cff-a109-519b2209260f",
-        "account_id": "user_test-jimmy-doppelbank-checking",
-        "reason": "cleared",
-        "related_event_id": "96ac3145-8535-41b5-bf7b-c87ba89dceb9"
-      }
-    },
-    {
-      "event_id": "282aa30e-8878-4666-8669-4bd11f9ebedd",
-      "timestamp": "2025-06-24T08:51:55.006814Z",
-      "event": {
-        "type": "add_pending",
-        "event_id": "282aa30e-8878-4666-8669-4bd11f9ebedd",
-        "transaction_id": "77877755-083c-4495-8341-912c4c4dc9cc",
-        "account_id": "user_test-jimmy-doppelbank-checking",
-        "amount": -2521,
-        "description": "Purchase at Target",
-        "merchant": "Target",
+        "event_id": "25349f36-7dca-496a-95d4-95d9332275fb",
+        "transaction_id": "348df20b-2046-4a7b-b891-4a6d310b8ada",
+        "amount": -1476,
+        "description": "Purchase at Amazon",
+        "merchant": "Amazon",
         "category": "Shopping"
       }
     },
     {
-      "event_id": "829e6889-717a-4cc8-adae-f8d306ec82bc",
-      "timestamp": "2025-06-26T08:51:55.006814Z",
+      "event_id": "cb990a0b-966e-4f02-a0f6-0806058871d4",
+      "timestamp": "2025-06-05T13:27:57.593833Z",
       "event": {
         "type": "add_cleared",
-        "event_id": "829e6889-717a-4cc8-adae-f8d306ec82bc",
-        "transaction_id": "ab508749-144d-4d9c-97d0-625b25bbb618",
-        "account_id": "user_test-jimmy-doppelbank-checking",
-        "amount": -2521,
-        "description": "Purchase at Target",
-        "merchant": "Target",
+        "event_id": "cb990a0b-966e-4f02-a0f6-0806058871d4",
+        "transaction_id": "4ba096dc-aef9-47ab-b2ed-bc553bfa3595",
+        "amount": -1476,
+        "description": "Purchase at Amazon",
+        "merchant": "Amazon",
         "category": "Shopping",
-        "pending_event_id": "282aa30e-8878-4666-8669-4bd11f9ebedd"
+        "pending_event_id": "25349f36-7dca-496a-95d4-95d9332275fb"
       }
     },
     {
-      "event_id": "ec1e9ffb-0273-4fbc-8c30-1fb7f4a128d5",
-      "timestamp": "2025-06-26T08:51:55.006814Z",
+      "event_id": "6996423b-5f3e-4387-8d65-96ebfdc2649f",
+      "timestamp": "2025-06-05T13:27:57.593833Z",
       "event": {
         "type": "remove_pending",
-        "event_id": "ec1e9ffb-0273-4fbc-8c30-1fb7f4a128d5",
-        "transaction_id": "77877755-083c-4495-8341-912c4c4dc9cc",
-        "account_id": "user_test-jimmy-doppelbank-checking",
+        "event_id": "6996423b-5f3e-4387-8d65-96ebfdc2649f",
+        "transaction_id": "348df20b-2046-4a7b-b891-4a6d310b8ada",
         "reason": "cleared",
-        "related_event_id": "829e6889-717a-4cc8-adae-f8d306ec82bc"
+        "related_event_id": "cb990a0b-966e-4f02-a0f6-0806058871d4"
       }
     },
     {
-      "event_id": "9cf7a09b-34a6-43e1-a7e5-289eafdf6adc",
-      "timestamp": "2025-06-25T04:13:48.352944Z",
+      "event_id": "974a95f2-4652-40d6-8536-6d6c3ffbeb15",
+      "timestamp": "2025-06-04T03:09:33.373457Z",
       "event": {
         "type": "add_pending",
-        "event_id": "9cf7a09b-34a6-43e1-a7e5-289eafdf6adc",
-        "transaction_id": "31c7046b-3e8a-4506-9b8d-707c8fd1a631",
-        "account_id": "user_test-jimmy-doppelbank-checking",
-        "amount": -2031,
+        "event_id": "974a95f2-4652-40d6-8536-6d6c3ffbeb15",
+        "transaction_id": "d68d1a60-8e0a-4566-9efd-8dead7016c1a",
+        "amount": -4995,
+        "description": "Purchase at Subway",
+        "merchant": "Subway",
+        "category": "Shopping"
+      }
+    },
+    {
+      "event_id": "a93ca4a9-191e-4328-9107-0c0d5716aa96",
+      "timestamp": "2025-06-06T03:09:33.373457Z",
+      "event": {
+        "type": "add_cleared",
+        "event_id": "a93ca4a9-191e-4328-9107-0c0d5716aa96",
+        "transaction_id": "b3443bf0-83b3-4622-b938-1d911fb56278",
+        "amount": -4995,
+        "description": "Purchase at Subway",
+        "merchant": "Subway",
+        "category": "Shopping",
+        "pending_event_id": "974a95f2-4652-40d6-8536-6d6c3ffbeb15"
+      }
+    },
+    {
+      "event_id": "a8793448-069e-4d3b-b736-d97703412473",
+      "timestamp": "2025-06-06T03:09:33.373457Z",
+      "event": {
+        "type": "remove_pending",
+        "event_id": "a8793448-069e-4d3b-b736-d97703412473",
+        "transaction_id": "d68d1a60-8e0a-4566-9efd-8dead7016c1a",
+        "reason": "cleared",
+        "related_event_id": "a93ca4a9-191e-4328-9107-0c0d5716aa96"
+      }
+    },
+    {
+      "event_id": "2d386f0a-a7dc-426e-b8b9-5a54aa280f61",
+      "timestamp": "2025-06-04T03:27:06.666722Z",
+      "event": {
+        "type": "add_pending",
+        "event_id": "2d386f0a-a7dc-426e-b8b9-5a54aa280f61",
+        "transaction_id": "79755b0c-21ed-4346-a886-b688f668cabb",
+        "amount": -1608,
+        "description": "Purchase at CVS",
+        "merchant": "CVS",
+        "category": "Entertainment"
+      }
+    },
+    {
+      "event_id": "e20a9085-bd12-448a-9db0-fa53a78a90fc",
+      "timestamp": "2025-06-06T03:27:06.666722Z",
+      "event": {
+        "type": "add_cleared",
+        "event_id": "e20a9085-bd12-448a-9db0-fa53a78a90fc",
+        "transaction_id": "684b4439-a6cc-4e63-ba3d-43e15c5603f4",
+        "amount": -1608,
+        "description": "Purchase at CVS",
+        "merchant": "CVS",
+        "category": "Entertainment",
+        "pending_event_id": "2d386f0a-a7dc-426e-b8b9-5a54aa280f61"
+      }
+    },
+    {
+      "event_id": "d29a50fc-eff1-4f4e-a6bd-ccba2b00593e",
+      "timestamp": "2025-06-06T03:27:06.666722Z",
+      "event": {
+        "type": "remove_pending",
+        "event_id": "d29a50fc-eff1-4f4e-a6bd-ccba2b00593e",
+        "transaction_id": "79755b0c-21ed-4346-a886-b688f668cabb",
+        "reason": "cleared",
+        "related_event_id": "e20a9085-bd12-448a-9db0-fa53a78a90fc"
+      }
+    },
+    {
+      "event_id": "df37263a-ab96-4161-ac76-3dbbf060ef98",
+      "timestamp": "2025-06-05T04:10:24.442492Z",
+      "event": {
+        "type": "add_pending",
+        "event_id": "df37263a-ab96-4161-ac76-3dbbf060ef98",
+        "transaction_id": "1850daf8-0c0e-4db2-b038-c8e5c02ee171",
+        "amount": -3589,
+        "description": "Purchase at Target",
+        "merchant": "Target",
+        "category": "Entertainment"
+      }
+    },
+    {
+      "event_id": "8b08e166-183d-41ed-9b13-e0371ef09c7c",
+      "timestamp": "2025-06-07T04:10:24.442492Z",
+      "event": {
+        "type": "add_cleared",
+        "event_id": "8b08e166-183d-41ed-9b13-e0371ef09c7c",
+        "transaction_id": "34ad2e29-7bcc-4af6-a6af-1edbf1ab42e8",
+        "amount": -3589,
+        "description": "Purchase at Target",
+        "merchant": "Target",
+        "category": "Entertainment",
+        "pending_event_id": "df37263a-ab96-4161-ac76-3dbbf060ef98"
+      }
+    },
+    {
+      "event_id": "e577cc96-0a5b-4934-a206-198c3bcab8e3",
+      "timestamp": "2025-06-07T04:10:24.442492Z",
+      "event": {
+        "type": "remove_pending",
+        "event_id": "e577cc96-0a5b-4934-a206-198c3bcab8e3",
+        "transaction_id": "1850daf8-0c0e-4db2-b038-c8e5c02ee171",
+        "reason": "cleared",
+        "related_event_id": "8b08e166-183d-41ed-9b13-e0371ef09c7c"
+      }
+    },
+    {
+      "event_id": "8b4f6a92-7fa3-42d9-a6ad-6f87a9f5ea01",
+      "timestamp": "2025-06-05T18:48:25.953706Z",
+      "event": {
+        "type": "add_pending",
+        "event_id": "8b4f6a92-7fa3-42d9-a6ad-6f87a9f5ea01",
+        "transaction_id": "b4e7382e-cd4e-4679-9477-a08c4609de5d",
+        "amount": -1176,
+        "description": "Purchase at Amazon",
+        "merchant": "Amazon",
+        "category": "Food & Drink"
+      }
+    },
+    {
+      "event_id": "d0807809-004c-4293-a1c6-8b33ec57f653",
+      "timestamp": "2025-06-07T18:48:25.953706Z",
+      "event": {
+        "type": "add_cleared",
+        "event_id": "d0807809-004c-4293-a1c6-8b33ec57f653",
+        "transaction_id": "56b73b4d-28ad-4dac-9bd4-928ef1d63539",
+        "amount": -1176,
+        "description": "Purchase at Amazon",
+        "merchant": "Amazon",
+        "category": "Food & Drink",
+        "pending_event_id": "8b4f6a92-7fa3-42d9-a6ad-6f87a9f5ea01"
+      }
+    },
+    {
+      "event_id": "7bf41eed-7b22-466f-bc4c-d117f4f755f0",
+      "timestamp": "2025-06-07T18:48:25.953706Z",
+      "event": {
+        "type": "remove_pending",
+        "event_id": "7bf41eed-7b22-466f-bc4c-d117f4f755f0",
+        "transaction_id": "b4e7382e-cd4e-4679-9477-a08c4609de5d",
+        "reason": "cleared",
+        "related_event_id": "d0807809-004c-4293-a1c6-8b33ec57f653"
+      }
+    },
+    {
+      "event_id": "19c97a89-f8a0-4a7c-bf7f-20ca58a3e3f0",
+      "timestamp": "2025-06-06T02:46:30.875810Z",
+      "event": {
+        "type": "add_cleared",
+        "event_id": "19c97a89-f8a0-4a7c-bf7f-20ca58a3e3f0",
+        "transaction_id": "72c92374-4eb1-465e-9119-b83960b1be32",
+        "amount": 250000,
+        "description": "Bi-weekly paycheck",
+        "merchant": "Acme Corp",
+        "category": "paycheck",
+        "pending_event_id": ""
+      }
+    },
+    {
+      "event_id": "1524a765-c1f9-4154-b7d2-7f7c0e851073",
+      "timestamp": "2025-06-06T03:50:23.609412Z",
+      "event": {
+        "type": "add_pending",
+        "event_id": "1524a765-c1f9-4154-b7d2-7f7c0e851073",
+        "transaction_id": "0f4d50b6-77d7-42fc-a20f-04d02527bc38",
+        "amount": -2888,
+        "description": "Purchase at Subway",
+        "merchant": "Subway",
+        "category": "Shopping"
+      }
+    },
+    {
+      "event_id": "306ec900-7eda-4819-9fb8-5c15965b17de",
+      "timestamp": "2025-06-08T03:50:23.609412Z",
+      "event": {
+        "type": "add_cleared",
+        "event_id": "306ec900-7eda-4819-9fb8-5c15965b17de",
+        "transaction_id": "75c1cb0a-7510-4d2c-b05f-c3e668483973",
+        "amount": -2888,
+        "description": "Purchase at Subway",
+        "merchant": "Subway",
+        "category": "Shopping",
+        "pending_event_id": "1524a765-c1f9-4154-b7d2-7f7c0e851073"
+      }
+    },
+    {
+      "event_id": "a2769a6d-a839-47a6-93e0-a07032b054df",
+      "timestamp": "2025-06-08T03:50:23.609412Z",
+      "event": {
+        "type": "remove_pending",
+        "event_id": "a2769a6d-a839-47a6-93e0-a07032b054df",
+        "transaction_id": "0f4d50b6-77d7-42fc-a20f-04d02527bc38",
+        "reason": "cleared",
+        "related_event_id": "306ec900-7eda-4819-9fb8-5c15965b17de"
+      }
+    },
+    {
+      "event_id": "a58160b6-b01e-4f85-ad59-5a5e55b1a69e",
+      "timestamp": "2025-06-06T17:39:54.713421Z",
+      "event": {
+        "type": "add_pending",
+        "event_id": "a58160b6-b01e-4f85-ad59-5a5e55b1a69e",
+        "transaction_id": "5d5332d9-df2f-45aa-9aae-19d07569d2d8",
+        "amount": -4719,
+        "description": "Purchase at CVS",
+        "merchant": "CVS",
+        "category": "Food & Drink"
+      }
+    },
+    {
+      "event_id": "3008edc4-a8af-45be-af45-f273e8d405ce",
+      "timestamp": "2025-06-08T17:39:54.713421Z",
+      "event": {
+        "type": "add_cleared",
+        "event_id": "3008edc4-a8af-45be-af45-f273e8d405ce",
+        "transaction_id": "8124e6f4-fcb2-4e07-8bac-3f9984f0aed4",
+        "amount": -4719,
+        "description": "Purchase at CVS",
+        "merchant": "CVS",
+        "category": "Food & Drink",
+        "pending_event_id": "a58160b6-b01e-4f85-ad59-5a5e55b1a69e"
+      }
+    },
+    {
+      "event_id": "4bbb50ee-7be0-4325-a49b-dbea74b407f7",
+      "timestamp": "2025-06-08T17:39:54.713421Z",
+      "event": {
+        "type": "remove_pending",
+        "event_id": "4bbb50ee-7be0-4325-a49b-dbea74b407f7",
+        "transaction_id": "5d5332d9-df2f-45aa-9aae-19d07569d2d8",
+        "reason": "cleared",
+        "related_event_id": "3008edc4-a8af-45be-af45-f273e8d405ce"
+      }
+    },
+    {
+      "event_id": "1e720469-19a8-416a-bdbc-d972a7df4ec6",
+      "timestamp": "2025-06-09T04:23:56.834179Z",
+      "event": {
+        "type": "add_pending",
+        "event_id": "1e720469-19a8-416a-bdbc-d972a7df4ec6",
+        "transaction_id": "1828a8fe-3c10-4a12-96e4-c323945aa139",
+        "amount": -3593,
+        "description": "Purchase at Starbucks",
+        "merchant": "Starbucks",
+        "category": "Food & Drink"
+      }
+    },
+    {
+      "event_id": "81c4c57e-80ce-4de9-833e-254c3816678b",
+      "timestamp": "2025-06-11T04:23:56.834179Z",
+      "event": {
+        "type": "add_cleared",
+        "event_id": "81c4c57e-80ce-4de9-833e-254c3816678b",
+        "transaction_id": "e7e8b9db-4f77-42c5-b2aa-1f42cc548667",
+        "amount": -3593,
+        "description": "Purchase at Starbucks",
+        "merchant": "Starbucks",
+        "category": "Food & Drink",
+        "pending_event_id": "1e720469-19a8-416a-bdbc-d972a7df4ec6"
+      }
+    },
+    {
+      "event_id": "eaf3b664-443f-41bf-86e6-7119597a9cbb",
+      "timestamp": "2025-06-11T04:23:56.834179Z",
+      "event": {
+        "type": "remove_pending",
+        "event_id": "eaf3b664-443f-41bf-86e6-7119597a9cbb",
+        "transaction_id": "1828a8fe-3c10-4a12-96e4-c323945aa139",
+        "reason": "cleared",
+        "related_event_id": "81c4c57e-80ce-4de9-833e-254c3816678b"
+      }
+    },
+    {
+      "event_id": "78f9ad48-6e2c-42e9-9f1c-176314029fa2",
+      "timestamp": "2025-06-09T19:39:11.151965Z",
+      "event": {
+        "type": "add_pending",
+        "event_id": "78f9ad48-6e2c-42e9-9f1c-176314029fa2",
+        "transaction_id": "605faa5b-53e7-49cb-aedc-5d6da641d9c8",
+        "amount": -4215,
+        "description": "Purchase at Target",
+        "merchant": "Target",
+        "category": "Entertainment"
+      }
+    },
+    {
+      "event_id": "195a3bc5-79d0-4a73-bfc6-04920c398059",
+      "timestamp": "2025-06-11T19:39:11.151965Z",
+      "event": {
+        "type": "add_cleared",
+        "event_id": "195a3bc5-79d0-4a73-bfc6-04920c398059",
+        "transaction_id": "a7a44320-4162-44f9-b05e-563f062804f2",
+        "amount": -4215,
+        "description": "Purchase at Target",
+        "merchant": "Target",
+        "category": "Entertainment",
+        "pending_event_id": "78f9ad48-6e2c-42e9-9f1c-176314029fa2"
+      }
+    },
+    {
+      "event_id": "e69f7541-b9ae-43cf-95d7-586c6a83adc4",
+      "timestamp": "2025-06-11T19:39:11.151965Z",
+      "event": {
+        "type": "remove_pending",
+        "event_id": "e69f7541-b9ae-43cf-95d7-586c6a83adc4",
+        "transaction_id": "605faa5b-53e7-49cb-aedc-5d6da641d9c8",
+        "reason": "cleared",
+        "related_event_id": "195a3bc5-79d0-4a73-bfc6-04920c398059"
+      }
+    },
+    {
+      "event_id": "d03be084-842c-4916-ba53-d47ab6077a9b",
+      "timestamp": "2025-06-10T20:39:11.338722Z",
+      "event": {
+        "type": "add_pending",
+        "event_id": "d03be084-842c-4916-ba53-d47ab6077a9b",
+        "transaction_id": "059cfbdd-8c82-43e8-8c7d-ae4c528084da",
+        "amount": -4195,
+        "description": "Purchase at Target",
+        "merchant": "Target",
+        "category": "Transportation"
+      }
+    },
+    {
+      "event_id": "765b461d-805b-400d-ba60-bfde8121600c",
+      "timestamp": "2025-06-12T20:39:11.338722Z",
+      "event": {
+        "type": "add_cleared",
+        "event_id": "765b461d-805b-400d-ba60-bfde8121600c",
+        "transaction_id": "1737775d-ca88-474c-9e16-127a0aa7d141",
+        "amount": -4195,
+        "description": "Purchase at Target",
+        "merchant": "Target",
+        "category": "Transportation",
+        "pending_event_id": "d03be084-842c-4916-ba53-d47ab6077a9b"
+      }
+    },
+    {
+      "event_id": "b4aae7a8-e4a1-4193-9bb7-030f9df684b5",
+      "timestamp": "2025-06-12T20:39:11.338722Z",
+      "event": {
+        "type": "remove_pending",
+        "event_id": "b4aae7a8-e4a1-4193-9bb7-030f9df684b5",
+        "transaction_id": "059cfbdd-8c82-43e8-8c7d-ae4c528084da",
+        "reason": "cleared",
+        "related_event_id": "765b461d-805b-400d-ba60-bfde8121600c"
+      }
+    },
+    {
+      "event_id": "1fed3985-cbfb-4d73-89e9-51c7aa543e15",
+      "timestamp": "2025-06-10T11:27:53.884954Z",
+      "event": {
+        "type": "add_pending",
+        "event_id": "1fed3985-cbfb-4d73-89e9-51c7aa543e15",
+        "transaction_id": "5ed83963-c162-4188-901d-cb329b9fe7ce",
+        "amount": -2687,
+        "description": "Purchase at Target",
+        "merchant": "Target",
+        "category": "Transportation"
+      }
+    },
+    {
+      "event_id": "789de1a3-d345-4de0-b366-fd0d9143d621",
+      "timestamp": "2025-06-12T11:27:53.884954Z",
+      "event": {
+        "type": "add_cleared",
+        "event_id": "789de1a3-d345-4de0-b366-fd0d9143d621",
+        "transaction_id": "baca6610-3a15-48b4-aa22-ce2347563f11",
+        "amount": -2687,
+        "description": "Purchase at Target",
+        "merchant": "Target",
+        "category": "Transportation",
+        "pending_event_id": "1fed3985-cbfb-4d73-89e9-51c7aa543e15"
+      }
+    },
+    {
+      "event_id": "e7209e32-73f2-449a-a942-c7f9a3ce0658",
+      "timestamp": "2025-06-12T11:27:53.884954Z",
+      "event": {
+        "type": "remove_pending",
+        "event_id": "e7209e32-73f2-449a-a942-c7f9a3ce0658",
+        "transaction_id": "5ed83963-c162-4188-901d-cb329b9fe7ce",
+        "reason": "cleared",
+        "related_event_id": "789de1a3-d345-4de0-b366-fd0d9143d621"
+      }
+    },
+    {
+      "event_id": "e97fd27a-5e7b-4b41-8cd8-e7fe4d49d06f",
+      "timestamp": "2025-06-11T16:47:07.710289Z",
+      "event": {
+        "type": "add_pending",
+        "event_id": "e97fd27a-5e7b-4b41-8cd8-e7fe4d49d06f",
+        "transaction_id": "250cf74f-b70e-4f4c-9c0f-f45bee65ea3c",
+        "amount": -3131,
+        "description": "Purchase at Target",
+        "merchant": "Target",
+        "category": "Food & Drink"
+      }
+    },
+    {
+      "event_id": "2705e4a5-4689-4f39-bf42-d4b28271115b",
+      "timestamp": "2025-06-13T16:47:07.710289Z",
+      "event": {
+        "type": "add_cleared",
+        "event_id": "2705e4a5-4689-4f39-bf42-d4b28271115b",
+        "transaction_id": "d50d6fb9-8891-446e-8956-335ab2098c16",
+        "amount": -3131,
+        "description": "Purchase at Target",
+        "merchant": "Target",
+        "category": "Food & Drink",
+        "pending_event_id": "e97fd27a-5e7b-4b41-8cd8-e7fe4d49d06f"
+      }
+    },
+    {
+      "event_id": "7605da3f-8020-4e10-bd8b-777aceb76f31",
+      "timestamp": "2025-06-13T16:47:07.710289Z",
+      "event": {
+        "type": "remove_pending",
+        "event_id": "7605da3f-8020-4e10-bd8b-777aceb76f31",
+        "transaction_id": "250cf74f-b70e-4f4c-9c0f-f45bee65ea3c",
+        "reason": "cleared",
+        "related_event_id": "2705e4a5-4689-4f39-bf42-d4b28271115b"
+      }
+    },
+    {
+      "event_id": "17423657-b956-4f74-b351-317e6bd0b467",
+      "timestamp": "2025-06-11T08:33:03.941842Z",
+      "event": {
+        "type": "add_pending",
+        "event_id": "17423657-b956-4f74-b351-317e6bd0b467",
+        "transaction_id": "e3c796b6-c591-4daf-a99b-93c5eb37db74",
+        "amount": -3556,
+        "description": "Purchase at Starbucks",
+        "merchant": "Starbucks",
+        "category": "Shopping"
+      }
+    },
+    {
+      "event_id": "4a51845a-1a33-4f9c-ba49-1309b76c4d72",
+      "timestamp": "2025-06-13T08:33:03.941842Z",
+      "event": {
+        "type": "add_cleared",
+        "event_id": "4a51845a-1a33-4f9c-ba49-1309b76c4d72",
+        "transaction_id": "f4b5535c-7ee4-4c9a-8f21-6b2ac4bf006a",
+        "amount": -3556,
+        "description": "Purchase at Starbucks",
+        "merchant": "Starbucks",
+        "category": "Shopping",
+        "pending_event_id": "17423657-b956-4f74-b351-317e6bd0b467"
+      }
+    },
+    {
+      "event_id": "51d197b6-e563-4066-9a3c-ae045eeaf327",
+      "timestamp": "2025-06-13T08:33:03.941842Z",
+      "event": {
+        "type": "remove_pending",
+        "event_id": "51d197b6-e563-4066-9a3c-ae045eeaf327",
+        "transaction_id": "e3c796b6-c591-4daf-a99b-93c5eb37db74",
+        "reason": "cleared",
+        "related_event_id": "4a51845a-1a33-4f9c-ba49-1309b76c4d72"
+      }
+    },
+    {
+      "event_id": "2dda19e1-179f-412d-9995-da69fd1cb158",
+      "timestamp": "2025-06-12T05:24:39.205149Z",
+      "event": {
+        "type": "add_pending",
+        "event_id": "2dda19e1-179f-412d-9995-da69fd1cb158",
+        "transaction_id": "8a4f3a51-c010-4b77-8f50-ecda6c538158",
+        "amount": -4042,
+        "description": "Purchase at Starbucks",
+        "merchant": "Starbucks",
+        "category": "Shopping"
+      }
+    },
+    {
+      "event_id": "d3d19185-eb1b-48ff-b51d-f47b1e422738",
+      "timestamp": "2025-06-14T05:24:39.205149Z",
+      "event": {
+        "type": "add_cleared",
+        "event_id": "d3d19185-eb1b-48ff-b51d-f47b1e422738",
+        "transaction_id": "d5667bb2-bde6-45e1-b1f2-8b05bb0b0be7",
+        "amount": -4042,
+        "description": "Purchase at Starbucks",
+        "merchant": "Starbucks",
+        "category": "Shopping",
+        "pending_event_id": "2dda19e1-179f-412d-9995-da69fd1cb158"
+      }
+    },
+    {
+      "event_id": "46aaf6b6-c80e-4e64-8278-24b3ebd53628",
+      "timestamp": "2025-06-14T05:24:39.205149Z",
+      "event": {
+        "type": "remove_pending",
+        "event_id": "46aaf6b6-c80e-4e64-8278-24b3ebd53628",
+        "transaction_id": "8a4f3a51-c010-4b77-8f50-ecda6c538158",
+        "reason": "cleared",
+        "related_event_id": "d3d19185-eb1b-48ff-b51d-f47b1e422738"
+      }
+    },
+    {
+      "event_id": "89bc5940-3977-4232-8471-e45752a279b9",
+      "timestamp": "2025-06-12T08:57:43.401877Z",
+      "event": {
+        "type": "add_pending",
+        "event_id": "89bc5940-3977-4232-8471-e45752a279b9",
+        "transaction_id": "a0ba4b6d-d848-4313-83ac-b9462d06b5dc",
+        "amount": -1246,
+        "description": "Purchase at Subway",
+        "merchant": "Subway",
+        "category": "Shopping"
+      }
+    },
+    {
+      "event_id": "c1ff5d43-bf61-449d-8d87-c68d4e3e2d2d",
+      "timestamp": "2025-06-14T08:57:43.401877Z",
+      "event": {
+        "type": "add_cleared",
+        "event_id": "c1ff5d43-bf61-449d-8d87-c68d4e3e2d2d",
+        "transaction_id": "64a6af24-5ae2-4124-8169-be2399ca00eb",
+        "amount": -1246,
+        "description": "Purchase at Subway",
+        "merchant": "Subway",
+        "category": "Shopping",
+        "pending_event_id": "89bc5940-3977-4232-8471-e45752a279b9"
+      }
+    },
+    {
+      "event_id": "810253ce-e384-4706-9ca5-bbd9e36ea9ba",
+      "timestamp": "2025-06-14T08:57:43.401877Z",
+      "event": {
+        "type": "remove_pending",
+        "event_id": "810253ce-e384-4706-9ca5-bbd9e36ea9ba",
+        "transaction_id": "a0ba4b6d-d848-4313-83ac-b9462d06b5dc",
+        "reason": "cleared",
+        "related_event_id": "c1ff5d43-bf61-449d-8d87-c68d4e3e2d2d"
+      }
+    },
+    {
+      "event_id": "ec6762ff-b6b6-42e0-9b8d-0dea539dc809",
+      "timestamp": "2025-06-13T06:22:40.695615Z",
+      "event": {
+        "type": "add_pending",
+        "event_id": "ec6762ff-b6b6-42e0-9b8d-0dea539dc809",
+        "transaction_id": "bd363f98-cc9b-43ca-a88f-d331bb3573b1",
+        "amount": -1722,
+        "description": "Purchase at Subway",
+        "merchant": "Subway",
+        "category": "Transportation"
+      }
+    },
+    {
+      "event_id": "dd176c8c-3efd-4c74-bf6f-d09d38df095d",
+      "timestamp": "2025-06-15T06:22:40.695615Z",
+      "event": {
+        "type": "add_cleared",
+        "event_id": "dd176c8c-3efd-4c74-bf6f-d09d38df095d",
+        "transaction_id": "18335094-3606-438f-bf62-78aad881a745",
+        "amount": -1722,
+        "description": "Purchase at Subway",
+        "merchant": "Subway",
+        "category": "Transportation",
+        "pending_event_id": "ec6762ff-b6b6-42e0-9b8d-0dea539dc809"
+      }
+    },
+    {
+      "event_id": "bcfb314d-4080-4ec6-a742-8c6523195ab3",
+      "timestamp": "2025-06-15T06:22:40.695615Z",
+      "event": {
+        "type": "remove_pending",
+        "event_id": "bcfb314d-4080-4ec6-a742-8c6523195ab3",
+        "transaction_id": "bd363f98-cc9b-43ca-a88f-d331bb3573b1",
+        "reason": "cleared",
+        "related_event_id": "dd176c8c-3efd-4c74-bf6f-d09d38df095d"
+      }
+    },
+    {
+      "event_id": "1084effd-8b50-4f30-b96c-5d780effeeac",
+      "timestamp": "2025-06-13T01:18:23.689754Z",
+      "event": {
+        "type": "add_pending",
+        "event_id": "1084effd-8b50-4f30-b96c-5d780effeeac",
+        "transaction_id": "7a3d2cc6-85d5-4e00-b74d-098127a1f601",
+        "amount": -753,
+        "description": "Purchase at Amazon",
+        "merchant": "Amazon",
+        "category": "Transportation"
+      }
+    },
+    {
+      "event_id": "6df90b83-3330-4fb7-9974-94dfe1142760",
+      "timestamp": "2025-06-15T01:18:23.689754Z",
+      "event": {
+        "type": "add_cleared",
+        "event_id": "6df90b83-3330-4fb7-9974-94dfe1142760",
+        "transaction_id": "5e2d1ac5-e5e6-49fa-b01c-253fa50f239e",
+        "amount": -753,
+        "description": "Purchase at Amazon",
+        "merchant": "Amazon",
+        "category": "Transportation",
+        "pending_event_id": "1084effd-8b50-4f30-b96c-5d780effeeac"
+      }
+    },
+    {
+      "event_id": "b6a237e0-d2b5-4e8e-b291-f3fb41ebd2e7",
+      "timestamp": "2025-06-15T01:18:23.689754Z",
+      "event": {
+        "type": "remove_pending",
+        "event_id": "b6a237e0-d2b5-4e8e-b291-f3fb41ebd2e7",
+        "transaction_id": "7a3d2cc6-85d5-4e00-b74d-098127a1f601",
+        "reason": "cleared",
+        "related_event_id": "6df90b83-3330-4fb7-9974-94dfe1142760"
+      }
+    },
+    {
+      "event_id": "43867df7-9c94-4d06-86bc-47bd0efa0c50",
+      "timestamp": "2025-06-16T17:34:35.477798Z",
+      "event": {
+        "type": "add_pending",
+        "event_id": "43867df7-9c94-4d06-86bc-47bd0efa0c50",
+        "transaction_id": "6fa4e4a8-1518-4256-9336-7796fc2e03da",
+        "amount": -4780,
+        "description": "Purchase at Amazon",
+        "merchant": "Amazon",
+        "category": "Transportation"
+      }
+    },
+    {
+      "event_id": "a80ef623-b5f0-4a6f-b60c-17e3dc901532",
+      "timestamp": "2025-06-18T17:34:35.477798Z",
+      "event": {
+        "type": "add_cleared",
+        "event_id": "a80ef623-b5f0-4a6f-b60c-17e3dc901532",
+        "transaction_id": "e5d65bea-6757-4a4b-9623-88d4064c902f",
+        "amount": -4780,
+        "description": "Purchase at Amazon",
+        "merchant": "Amazon",
+        "category": "Transportation",
+        "pending_event_id": "43867df7-9c94-4d06-86bc-47bd0efa0c50"
+      }
+    },
+    {
+      "event_id": "69c4f14f-7113-47a1-a160-bd597cbb3d48",
+      "timestamp": "2025-06-18T17:34:35.477798Z",
+      "event": {
+        "type": "remove_pending",
+        "event_id": "69c4f14f-7113-47a1-a160-bd597cbb3d48",
+        "transaction_id": "6fa4e4a8-1518-4256-9336-7796fc2e03da",
+        "reason": "cleared",
+        "related_event_id": "a80ef623-b5f0-4a6f-b60c-17e3dc901532"
+      }
+    },
+    {
+      "event_id": "8a195a6d-9d0a-4879-960b-12d3c67fbb05",
+      "timestamp": "2025-06-16T10:01:32.547861Z",
+      "event": {
+        "type": "add_pending",
+        "event_id": "8a195a6d-9d0a-4879-960b-12d3c67fbb05",
+        "transaction_id": "e57c62fc-40cf-436c-88ed-0ee567e20c1a",
+        "amount": -2687,
+        "description": "Purchase at Amazon",
+        "merchant": "Amazon",
+        "category": "Food & Drink"
+      }
+    },
+    {
+      "event_id": "8ea711d9-e509-4b38-b1ff-41b410c81c35",
+      "timestamp": "2025-06-18T10:01:32.547861Z",
+      "event": {
+        "type": "add_cleared",
+        "event_id": "8ea711d9-e509-4b38-b1ff-41b410c81c35",
+        "transaction_id": "f4858ccd-8029-4d75-9528-c5a4fc8e2f02",
+        "amount": -2687,
+        "description": "Purchase at Amazon",
+        "merchant": "Amazon",
+        "category": "Food & Drink",
+        "pending_event_id": "8a195a6d-9d0a-4879-960b-12d3c67fbb05"
+      }
+    },
+    {
+      "event_id": "03e7cb61-34f8-4e87-9658-45c810a9ca1a",
+      "timestamp": "2025-06-18T10:01:32.547861Z",
+      "event": {
+        "type": "remove_pending",
+        "event_id": "03e7cb61-34f8-4e87-9658-45c810a9ca1a",
+        "transaction_id": "e57c62fc-40cf-436c-88ed-0ee567e20c1a",
+        "reason": "cleared",
+        "related_event_id": "8ea711d9-e509-4b38-b1ff-41b410c81c35"
+      }
+    },
+    {
+      "event_id": "9bfa9f3c-b918-490e-a33b-f8e0973b4c35",
+      "timestamp": "2025-06-17T00:42:42.222774Z",
+      "event": {
+        "type": "add_pending",
+        "event_id": "9bfa9f3c-b918-490e-a33b-f8e0973b4c35",
+        "transaction_id": "7128ab60-44ab-4533-87c2-0542a75ac111",
+        "amount": -3820,
+        "description": "Purchase at Starbucks",
+        "merchant": "Starbucks",
+        "category": "Shopping"
+      }
+    },
+    {
+      "event_id": "764a9a5f-7d27-4c60-a10d-c8c7e5111f10",
+      "timestamp": "2025-06-19T00:42:42.222774Z",
+      "event": {
+        "type": "add_cleared",
+        "event_id": "764a9a5f-7d27-4c60-a10d-c8c7e5111f10",
+        "transaction_id": "6cb3f3f8-ad78-4479-afb2-5233a4f9cf89",
+        "amount": -3820,
+        "description": "Purchase at Starbucks",
+        "merchant": "Starbucks",
+        "category": "Shopping",
+        "pending_event_id": "9bfa9f3c-b918-490e-a33b-f8e0973b4c35"
+      }
+    },
+    {
+      "event_id": "4cc6702b-3839-437a-8c4a-a47081ac4dfc",
+      "timestamp": "2025-06-19T00:42:42.222774Z",
+      "event": {
+        "type": "remove_pending",
+        "event_id": "4cc6702b-3839-437a-8c4a-a47081ac4dfc",
+        "transaction_id": "7128ab60-44ab-4533-87c2-0542a75ac111",
+        "reason": "cleared",
+        "related_event_id": "764a9a5f-7d27-4c60-a10d-c8c7e5111f10"
+      }
+    },
+    {
+      "event_id": "929bc47c-9fd7-413c-bde6-b8d1ee5ab266",
+      "timestamp": "2025-06-17T22:02:50.786845Z",
+      "event": {
+        "type": "add_pending",
+        "event_id": "929bc47c-9fd7-413c-bde6-b8d1ee5ab266",
+        "transaction_id": "a141bbf1-dc81-4441-8f3e-bd29fd5f142c",
+        "amount": -3293,
         "description": "Purchase at Subway",
         "merchant": "Subway",
         "category": "Entertainment"
       }
     },
     {
-      "event_id": "743c3372-a5e5-452f-9700-36bb67096f50",
-      "timestamp": "2025-06-27T04:13:48.352944Z",
+      "event_id": "6d4515df-a4be-4989-9fb9-b944318ee12c",
+      "timestamp": "2025-06-19T22:02:50.786845Z",
       "event": {
         "type": "add_cleared",
-        "event_id": "743c3372-a5e5-452f-9700-36bb67096f50",
-        "transaction_id": "c0594a39-e112-4b64-b3f5-13d54c2c68c6",
-        "account_id": "user_test-jimmy-doppelbank-checking",
-        "amount": -2031,
+        "event_id": "6d4515df-a4be-4989-9fb9-b944318ee12c",
+        "transaction_id": "0ea08eae-e226-404e-95c7-869b3acad446",
+        "amount": -3293,
         "description": "Purchase at Subway",
         "merchant": "Subway",
         "category": "Entertainment",
-        "pending_event_id": "9cf7a09b-34a6-43e1-a7e5-289eafdf6adc"
+        "pending_event_id": "929bc47c-9fd7-413c-bde6-b8d1ee5ab266"
       }
     },
     {
-      "event_id": "cbfc59ba-e794-4e49-8eff-e38cfd90e77a",
-      "timestamp": "2025-06-27T04:13:48.352944Z",
+      "event_id": "d762253d-e8da-4d67-96bc-60b42b257d0d",
+      "timestamp": "2025-06-19T22:02:50.786845Z",
       "event": {
         "type": "remove_pending",
-        "event_id": "cbfc59ba-e794-4e49-8eff-e38cfd90e77a",
-        "transaction_id": "31c7046b-3e8a-4506-9b8d-707c8fd1a631",
-        "account_id": "user_test-jimmy-doppelbank-checking",
+        "event_id": "d762253d-e8da-4d67-96bc-60b42b257d0d",
+        "transaction_id": "a141bbf1-dc81-4441-8f3e-bd29fd5f142c",
         "reason": "cleared",
-        "related_event_id": "743c3372-a5e5-452f-9700-36bb67096f50"
+        "related_event_id": "6d4515df-a4be-4989-9fb9-b944318ee12c"
       }
     },
     {
-      "event_id": "fa0593f1-777f-4c6c-9546-46ae4bd6d2d3",
-      "timestamp": "2025-06-25T11:54:22.633052Z",
+      "event_id": "f4de4e1c-7dd0-4565-ae5b-b9c076a161d2",
+      "timestamp": "2025-06-18T16:42:39.400513Z",
       "event": {
         "type": "add_pending",
-        "event_id": "fa0593f1-777f-4c6c-9546-46ae4bd6d2d3",
-        "transaction_id": "f73898c5-78a6-4474-b437-0c8308299647",
-        "account_id": "user_test-jimmy-doppelbank-checking",
-        "amount": -2210,
-        "description": "Purchase at Starbucks",
-        "merchant": "Starbucks",
-        "category": "Food & Drink"
-      }
-    },
-    {
-      "event_id": "e175f9a6-7eb9-4fab-a5aa-1c75f1feb55d",
-      "timestamp": "2025-06-27T11:54:22.633052Z",
-      "event": {
-        "type": "add_cleared",
-        "event_id": "e175f9a6-7eb9-4fab-a5aa-1c75f1feb55d",
-        "transaction_id": "c4a8124e-4bff-4f23-aebb-c0bdf8f8095d",
-        "account_id": "user_test-jimmy-doppelbank-checking",
-        "amount": -2210,
-        "description": "Purchase at Starbucks",
-        "merchant": "Starbucks",
-        "category": "Food & Drink",
-        "pending_event_id": "fa0593f1-777f-4c6c-9546-46ae4bd6d2d3"
-      }
-    },
-    {
-      "event_id": "6190a2d8-b159-4b03-b1e4-3ce5361ce270",
-      "timestamp": "2025-06-27T11:54:22.633052Z",
-      "event": {
-        "type": "remove_pending",
-        "event_id": "6190a2d8-b159-4b03-b1e4-3ce5361ce270",
-        "transaction_id": "f73898c5-78a6-4474-b437-0c8308299647",
-        "account_id": "user_test-jimmy-doppelbank-checking",
-        "reason": "cleared",
-        "related_event_id": "e175f9a6-7eb9-4fab-a5aa-1c75f1feb55d"
-      }
-    },
-    {
-      "event_id": "f1f7a48e-5b82-4111-ac23-3aa5e0e4cc66",
-      "timestamp": "2025-06-26T17:07:59.396922Z",
-      "event": {
-        "type": "add_pending",
-        "event_id": "f1f7a48e-5b82-4111-ac23-3aa5e0e4cc66",
-        "transaction_id": "701a75d6-a293-48e4-a5fd-788ed6a2e5f6",
-        "account_id": "user_test-jimmy-doppelbank-checking",
-        "amount": -3784,
-        "description": "Purchase at CVS",
-        "merchant": "CVS",
-        "category": "Food & Drink"
-      }
-    },
-    {
-      "event_id": "2b97cfe9-c673-43f7-815f-a9c1b532d1ec",
-      "timestamp": "2025-06-28T17:07:59.396922Z",
-      "event": {
-        "type": "add_cleared",
-        "event_id": "2b97cfe9-c673-43f7-815f-a9c1b532d1ec",
-        "transaction_id": "f1c7ff5d-9a9f-4ea7-be26-a9166f6631e5",
-        "account_id": "user_test-jimmy-doppelbank-checking",
-        "amount": -3784,
-        "description": "Purchase at CVS",
-        "merchant": "CVS",
-        "category": "Food & Drink",
-        "pending_event_id": "f1f7a48e-5b82-4111-ac23-3aa5e0e4cc66"
-      }
-    },
-    {
-      "event_id": "46c2a5ab-6815-427d-8cf7-c51a3fada817",
-      "timestamp": "2025-06-28T17:07:59.396922Z",
-      "event": {
-        "type": "remove_pending",
-        "event_id": "46c2a5ab-6815-427d-8cf7-c51a3fada817",
-        "transaction_id": "701a75d6-a293-48e4-a5fd-788ed6a2e5f6",
-        "account_id": "user_test-jimmy-doppelbank-checking",
-        "reason": "cleared",
-        "related_event_id": "2b97cfe9-c673-43f7-815f-a9c1b532d1ec"
-      }
-    },
-    {
-      "event_id": "5ce34c83-9cb7-41df-9c12-4e2f16acc79e",
-      "timestamp": "2025-06-26T19:56:55.379201Z",
-      "event": {
-        "type": "add_pending",
-        "event_id": "5ce34c83-9cb7-41df-9c12-4e2f16acc79e",
-        "transaction_id": "e60c6007-b99f-4413-b70f-bf81cadd7a3a",
-        "account_id": "user_test-jimmy-doppelbank-checking",
-        "amount": -4232,
-        "description": "Purchase at Starbucks",
-        "merchant": "Starbucks",
-        "category": "Transportation"
-      }
-    },
-    {
-      "event_id": "456c90a4-978d-4f47-bfa2-42faf3a9f392",
-      "timestamp": "2025-06-28T19:56:55.379201Z",
-      "event": {
-        "type": "add_cleared",
-        "event_id": "456c90a4-978d-4f47-bfa2-42faf3a9f392",
-        "transaction_id": "039f8353-3c33-44e5-b063-9c8057843d81",
-        "account_id": "user_test-jimmy-doppelbank-checking",
-        "amount": -4232,
-        "description": "Purchase at Starbucks",
-        "merchant": "Starbucks",
-        "category": "Transportation",
-        "pending_event_id": "5ce34c83-9cb7-41df-9c12-4e2f16acc79e"
-      }
-    },
-    {
-      "event_id": "f04f40f7-961a-48fc-94a6-2809a3179432",
-      "timestamp": "2025-06-28T19:56:55.379201Z",
-      "event": {
-        "type": "remove_pending",
-        "event_id": "f04f40f7-961a-48fc-94a6-2809a3179432",
-        "transaction_id": "e60c6007-b99f-4413-b70f-bf81cadd7a3a",
-        "account_id": "user_test-jimmy-doppelbank-checking",
-        "reason": "cleared",
-        "related_event_id": "456c90a4-978d-4f47-bfa2-42faf3a9f392"
-      }
-    },
-    {
-      "event_id": "1a2abb5f-2f83-409d-995f-d635083b0521",
-      "timestamp": "2025-06-27T01:42:14.810620Z",
-      "event": {
-        "type": "add_pending",
-        "event_id": "1a2abb5f-2f83-409d-995f-d635083b0521",
-        "transaction_id": "1c0c916d-c073-426d-9d88-ca56930eef7f",
-        "account_id": "user_test-jimmy-doppelbank-checking",
-        "amount": -3671,
+        "event_id": "f4de4e1c-7dd0-4565-ae5b-b9c076a161d2",
+        "transaction_id": "71e53edb-1ac8-40a2-84a2-ef79c8a7c2f7",
+        "amount": -2032,
         "description": "Purchase at Amazon",
         "merchant": "Amazon",
         "category": "Shopping"
       }
     },
     {
-      "event_id": "f8fd6ece-d080-4bc1-9717-218e88d8bc8d",
-      "timestamp": "2025-06-29T01:42:14.810620Z",
+      "event_id": "6b6e0fb0-8ce4-4dba-b1b1-ac38c7263cae",
+      "timestamp": "2025-06-20T16:42:39.400513Z",
       "event": {
         "type": "add_cleared",
-        "event_id": "f8fd6ece-d080-4bc1-9717-218e88d8bc8d",
-        "transaction_id": "1194bb4e-6df4-4449-a068-4b2c14825d1b",
-        "account_id": "user_test-jimmy-doppelbank-checking",
-        "amount": -3671,
+        "event_id": "6b6e0fb0-8ce4-4dba-b1b1-ac38c7263cae",
+        "transaction_id": "f98493c6-b1b0-449f-8ec0-a939ee451ba1",
+        "amount": -2032,
         "description": "Purchase at Amazon",
         "merchant": "Amazon",
         "category": "Shopping",
-        "pending_event_id": "1a2abb5f-2f83-409d-995f-d635083b0521"
+        "pending_event_id": "f4de4e1c-7dd0-4565-ae5b-b9c076a161d2"
       }
     },
     {
-      "event_id": "fac8cef6-2a8c-4cc5-8893-e05d7582c527",
-      "timestamp": "2025-06-29T01:42:14.810620Z",
+      "event_id": "152ab298-b3d8-4122-adfe-d739d2c2c8db",
+      "timestamp": "2025-06-20T16:42:39.400513Z",
       "event": {
         "type": "remove_pending",
-        "event_id": "fac8cef6-2a8c-4cc5-8893-e05d7582c527",
-        "transaction_id": "1c0c916d-c073-426d-9d88-ca56930eef7f",
-        "account_id": "user_test-jimmy-doppelbank-checking",
+        "event_id": "152ab298-b3d8-4122-adfe-d739d2c2c8db",
+        "transaction_id": "71e53edb-1ac8-40a2-84a2-ef79c8a7c2f7",
         "reason": "cleared",
-        "related_event_id": "f8fd6ece-d080-4bc1-9717-218e88d8bc8d"
+        "related_event_id": "6b6e0fb0-8ce4-4dba-b1b1-ac38c7263cae"
       }
     },
     {
-      "event_id": "1aa5c7fc-df13-4ccf-8b45-fad046099274",
-      "timestamp": "2025-06-27T03:24:17.475435Z",
+      "event_id": "98ab2d7d-76e5-4a00-b6d2-0a48be7e042d",
+      "timestamp": "2025-06-18T01:00:58.853955Z",
       "event": {
         "type": "add_pending",
-        "event_id": "1aa5c7fc-df13-4ccf-8b45-fad046099274",
-        "transaction_id": "9bfe40ba-167f-44d7-a673-32d829c1a02a",
-        "account_id": "user_test-jimmy-doppelbank-checking",
-        "amount": -4349,
+        "event_id": "98ab2d7d-76e5-4a00-b6d2-0a48be7e042d",
+        "transaction_id": "e0816df6-570d-4594-9b36-1c2a32237953",
+        "amount": -3808,
         "description": "Purchase at CVS",
         "merchant": "CVS",
         "category": "Food & Drink"
       }
     },
     {
-      "event_id": "c00a217d-6612-425b-8e10-bd7c827f7e3a",
-      "timestamp": "2025-06-29T03:24:17.475435Z",
+      "event_id": "d0cea387-7bb6-46c9-8dd8-6e3969da2b99",
+      "timestamp": "2025-06-20T01:00:58.853955Z",
       "event": {
         "type": "add_cleared",
-        "event_id": "c00a217d-6612-425b-8e10-bd7c827f7e3a",
-        "transaction_id": "5a768444-7d42-43f7-8173-3e93ec25ac04",
-        "account_id": "user_test-jimmy-doppelbank-checking",
-        "amount": -4349,
+        "event_id": "d0cea387-7bb6-46c9-8dd8-6e3969da2b99",
+        "transaction_id": "148c564e-6816-4013-ac00-6092097831af",
+        "amount": -3808,
         "description": "Purchase at CVS",
         "merchant": "CVS",
         "category": "Food & Drink",
-        "pending_event_id": "1aa5c7fc-df13-4ccf-8b45-fad046099274"
+        "pending_event_id": "98ab2d7d-76e5-4a00-b6d2-0a48be7e042d"
       }
     },
     {
-      "event_id": "a6e97997-bc02-4c26-8a2a-820b70fa9926",
-      "timestamp": "2025-06-29T03:24:17.475435Z",
+      "event_id": "0b6701f7-2e44-492f-b135-326a7917e7ed",
+      "timestamp": "2025-06-20T01:00:58.853955Z",
       "event": {
         "type": "remove_pending",
-        "event_id": "a6e97997-bc02-4c26-8a2a-820b70fa9926",
-        "transaction_id": "9bfe40ba-167f-44d7-a673-32d829c1a02a",
-        "account_id": "user_test-jimmy-doppelbank-checking",
+        "event_id": "0b6701f7-2e44-492f-b135-326a7917e7ed",
+        "transaction_id": "e0816df6-570d-4594-9b36-1c2a32237953",
         "reason": "cleared",
-        "related_event_id": "c00a217d-6612-425b-8e10-bd7c827f7e3a"
+        "related_event_id": "d0cea387-7bb6-46c9-8dd8-6e3969da2b99"
+      }
+    },
+    {
+      "event_id": "2d875e37-a035-4cd3-8f64-89cd4ea7dd95",
+      "timestamp": "2025-06-19T06:35:09.932703Z",
+      "event": {
+        "type": "add_pending",
+        "event_id": "2d875e37-a035-4cd3-8f64-89cd4ea7dd95",
+        "transaction_id": "181ad70e-8425-4882-aa24-a9d5203a65c5",
+        "amount": -3160,
+        "description": "Purchase at Starbucks",
+        "merchant": "Starbucks",
+        "category": "Food & Drink"
+      }
+    },
+    {
+      "event_id": "73526b00-fe04-43fc-a734-acfb85af77d1",
+      "timestamp": "2025-06-21T06:35:09.932703Z",
+      "event": {
+        "type": "add_cleared",
+        "event_id": "73526b00-fe04-43fc-a734-acfb85af77d1",
+        "transaction_id": "ada81960-dc53-4b1a-89f4-771befafbff7",
+        "amount": -3160,
+        "description": "Purchase at Starbucks",
+        "merchant": "Starbucks",
+        "category": "Food & Drink",
+        "pending_event_id": "2d875e37-a035-4cd3-8f64-89cd4ea7dd95"
+      }
+    },
+    {
+      "event_id": "5ff6aae3-e7ac-4812-8df1-cb2e7b789a75",
+      "timestamp": "2025-06-21T06:35:09.932703Z",
+      "event": {
+        "type": "remove_pending",
+        "event_id": "5ff6aae3-e7ac-4812-8df1-cb2e7b789a75",
+        "transaction_id": "181ad70e-8425-4882-aa24-a9d5203a65c5",
+        "reason": "cleared",
+        "related_event_id": "73526b00-fe04-43fc-a734-acfb85af77d1"
+      }
+    },
+    {
+      "event_id": "18d0320f-90e2-4441-8792-e442a9b42ce7",
+      "timestamp": "2025-06-19T06:35:50.733669Z",
+      "event": {
+        "type": "add_pending",
+        "event_id": "18d0320f-90e2-4441-8792-e442a9b42ce7",
+        "transaction_id": "1dc53562-5085-4e5e-9e11-9633cc28ed59",
+        "amount": -3512,
+        "description": "Purchase at Target",
+        "merchant": "Target",
+        "category": "Shopping"
+      }
+    },
+    {
+      "event_id": "fe4ecb2a-77e3-4abb-8fee-626742628f92",
+      "timestamp": "2025-06-21T06:35:50.733669Z",
+      "event": {
+        "type": "add_cleared",
+        "event_id": "fe4ecb2a-77e3-4abb-8fee-626742628f92",
+        "transaction_id": "94c902ae-4759-4c46-aa64-62bd33b1a5d7",
+        "amount": -3512,
+        "description": "Purchase at Target",
+        "merchant": "Target",
+        "category": "Shopping",
+        "pending_event_id": "18d0320f-90e2-4441-8792-e442a9b42ce7"
+      }
+    },
+    {
+      "event_id": "f122d6fe-92cf-4ac9-9ebc-114437c6f30d",
+      "timestamp": "2025-06-21T06:35:50.733669Z",
+      "event": {
+        "type": "remove_pending",
+        "event_id": "f122d6fe-92cf-4ac9-9ebc-114437c6f30d",
+        "transaction_id": "1dc53562-5085-4e5e-9e11-9633cc28ed59",
+        "reason": "cleared",
+        "related_event_id": "fe4ecb2a-77e3-4abb-8fee-626742628f92"
+      }
+    },
+    {
+      "event_id": "3ad9c42a-9e81-457f-91f5-0500d58c0c7d",
+      "timestamp": "2025-06-20T07:05:48.208696Z",
+      "event": {
+        "type": "add_cleared",
+        "event_id": "3ad9c42a-9e81-457f-91f5-0500d58c0c7d",
+        "transaction_id": "0b04b0eb-4a69-412a-b91b-cb2c6639cd70",
+        "amount": 250000,
+        "description": "Bi-weekly paycheck",
+        "merchant": "Acme Corp",
+        "category": "paycheck",
+        "pending_event_id": ""
+      }
+    },
+    {
+      "event_id": "26e69f1e-9612-4c28-85ea-a7da9b875353",
+      "timestamp": "2025-06-20T12:44:36.197773Z",
+      "event": {
+        "type": "add_pending",
+        "event_id": "26e69f1e-9612-4c28-85ea-a7da9b875353",
+        "transaction_id": "0bbe4c27-ac2f-4454-9d85-d952f9230f60",
+        "amount": -3779,
+        "description": "Purchase at Target",
+        "merchant": "Target",
+        "category": "Entertainment"
+      }
+    },
+    {
+      "event_id": "100d81b2-65a1-464d-ab10-abda85790305",
+      "timestamp": "2025-06-22T12:44:36.197773Z",
+      "event": {
+        "type": "add_cleared",
+        "event_id": "100d81b2-65a1-464d-ab10-abda85790305",
+        "transaction_id": "ff365b54-c9d1-4ad5-ad79-913ecbbd3c3e",
+        "amount": -3779,
+        "description": "Purchase at Target",
+        "merchant": "Target",
+        "category": "Entertainment",
+        "pending_event_id": "26e69f1e-9612-4c28-85ea-a7da9b875353"
+      }
+    },
+    {
+      "event_id": "af68121a-aaa3-494f-8e03-670340ba1e4f",
+      "timestamp": "2025-06-22T12:44:36.197773Z",
+      "event": {
+        "type": "remove_pending",
+        "event_id": "af68121a-aaa3-494f-8e03-670340ba1e4f",
+        "transaction_id": "0bbe4c27-ac2f-4454-9d85-d952f9230f60",
+        "reason": "cleared",
+        "related_event_id": "100d81b2-65a1-464d-ab10-abda85790305"
+      }
+    },
+    {
+      "event_id": "14de8f69-dc17-4802-84d9-696f7f57cc87",
+      "timestamp": "2025-06-20T11:58:37.694870Z",
+      "event": {
+        "type": "add_pending",
+        "event_id": "14de8f69-dc17-4802-84d9-696f7f57cc87",
+        "transaction_id": "dd26aef7-6b04-4086-a6ce-8d194bc2881d",
+        "amount": -3385,
+        "description": "Purchase at CVS",
+        "merchant": "CVS",
+        "category": "Shopping"
+      }
+    },
+    {
+      "event_id": "d3bc4c2c-40a1-46e5-81de-1af8f60c9993",
+      "timestamp": "2025-06-22T11:58:37.694870Z",
+      "event": {
+        "type": "add_cleared",
+        "event_id": "d3bc4c2c-40a1-46e5-81de-1af8f60c9993",
+        "transaction_id": "d166e771-ed41-4ca7-a3ee-614fc424c849",
+        "amount": -3385,
+        "description": "Purchase at CVS",
+        "merchant": "CVS",
+        "category": "Shopping",
+        "pending_event_id": "14de8f69-dc17-4802-84d9-696f7f57cc87"
+      }
+    },
+    {
+      "event_id": "304b1208-dbd0-4f45-b57d-202b1de7c6eb",
+      "timestamp": "2025-06-22T11:58:37.694870Z",
+      "event": {
+        "type": "remove_pending",
+        "event_id": "304b1208-dbd0-4f45-b57d-202b1de7c6eb",
+        "transaction_id": "dd26aef7-6b04-4086-a6ce-8d194bc2881d",
+        "reason": "cleared",
+        "related_event_id": "d3bc4c2c-40a1-46e5-81de-1af8f60c9993"
+      }
+    },
+    {
+      "event_id": "8d063d2d-5c12-4798-a004-b1dec7c113e0",
+      "timestamp": "2025-06-23T03:42:55.009984Z",
+      "event": {
+        "type": "add_pending",
+        "event_id": "8d063d2d-5c12-4798-a004-b1dec7c113e0",
+        "transaction_id": "c34d2c6d-c63e-47aa-9de5-57fb957a7cfe",
+        "amount": -4789,
+        "description": "Purchase at CVS",
+        "merchant": "CVS",
+        "category": "Transportation"
+      }
+    },
+    {
+      "event_id": "4b979960-1def-43bf-a7a6-d40906d40bcb",
+      "timestamp": "2025-06-25T03:42:55.009984Z",
+      "event": {
+        "type": "add_cleared",
+        "event_id": "4b979960-1def-43bf-a7a6-d40906d40bcb",
+        "transaction_id": "73dac58a-2846-4368-bdd5-d17475e73117",
+        "amount": -4789,
+        "description": "Purchase at CVS",
+        "merchant": "CVS",
+        "category": "Transportation",
+        "pending_event_id": "8d063d2d-5c12-4798-a004-b1dec7c113e0"
+      }
+    },
+    {
+      "event_id": "a77e5516-83e6-4779-8929-ad7dc2c4d546",
+      "timestamp": "2025-06-25T03:42:55.009984Z",
+      "event": {
+        "type": "remove_pending",
+        "event_id": "a77e5516-83e6-4779-8929-ad7dc2c4d546",
+        "transaction_id": "c34d2c6d-c63e-47aa-9de5-57fb957a7cfe",
+        "reason": "cleared",
+        "related_event_id": "4b979960-1def-43bf-a7a6-d40906d40bcb"
+      }
+    },
+    {
+      "event_id": "e0864ce7-4456-4980-a53f-b0537f7e2649",
+      "timestamp": "2025-06-23T14:43:23.657466Z",
+      "event": {
+        "type": "add_pending",
+        "event_id": "e0864ce7-4456-4980-a53f-b0537f7e2649",
+        "transaction_id": "4ecfcfae-654c-49e3-88bb-bd382b725843",
+        "amount": -1276,
+        "description": "Purchase at Target",
+        "merchant": "Target",
+        "category": "Transportation"
+      }
+    },
+    {
+      "event_id": "458f5a75-5945-48bf-a0bf-1c07bfb4bc41",
+      "timestamp": "2025-06-25T14:43:23.657466Z",
+      "event": {
+        "type": "add_cleared",
+        "event_id": "458f5a75-5945-48bf-a0bf-1c07bfb4bc41",
+        "transaction_id": "c71537ed-a23f-4f4f-975f-013632ddc6ad",
+        "amount": -1276,
+        "description": "Purchase at Target",
+        "merchant": "Target",
+        "category": "Transportation",
+        "pending_event_id": "e0864ce7-4456-4980-a53f-b0537f7e2649"
+      }
+    },
+    {
+      "event_id": "5a91e4f5-47fc-47f4-96d8-d63996a1b9da",
+      "timestamp": "2025-06-25T14:43:23.657466Z",
+      "event": {
+        "type": "remove_pending",
+        "event_id": "5a91e4f5-47fc-47f4-96d8-d63996a1b9da",
+        "transaction_id": "4ecfcfae-654c-49e3-88bb-bd382b725843",
+        "reason": "cleared",
+        "related_event_id": "458f5a75-5945-48bf-a0bf-1c07bfb4bc41"
+      }
+    },
+    {
+      "event_id": "51ae23b6-6f94-4f60-be85-6afa104b79cf",
+      "timestamp": "2025-06-24T09:58:24.435816Z",
+      "event": {
+        "type": "add_pending",
+        "event_id": "51ae23b6-6f94-4f60-be85-6afa104b79cf",
+        "transaction_id": "f62ff4bb-f188-44ae-9e50-18b08201523a",
+        "amount": -4860,
+        "description": "Purchase at Starbucks",
+        "merchant": "Starbucks",
+        "category": "Transportation"
+      }
+    },
+    {
+      "event_id": "56a70b6c-77b0-41b6-97ae-d65d76bfb18c",
+      "timestamp": "2025-06-26T09:58:24.435816Z",
+      "event": {
+        "type": "add_cleared",
+        "event_id": "56a70b6c-77b0-41b6-97ae-d65d76bfb18c",
+        "transaction_id": "2cc1e348-7332-4cce-88b7-b76b89dbf7ec",
+        "amount": -4860,
+        "description": "Purchase at Starbucks",
+        "merchant": "Starbucks",
+        "category": "Transportation",
+        "pending_event_id": "51ae23b6-6f94-4f60-be85-6afa104b79cf"
+      }
+    },
+    {
+      "event_id": "d85e0673-a572-4ee5-9daa-5ccfd7c17b6b",
+      "timestamp": "2025-06-26T09:58:24.435816Z",
+      "event": {
+        "type": "remove_pending",
+        "event_id": "d85e0673-a572-4ee5-9daa-5ccfd7c17b6b",
+        "transaction_id": "f62ff4bb-f188-44ae-9e50-18b08201523a",
+        "reason": "cleared",
+        "related_event_id": "56a70b6c-77b0-41b6-97ae-d65d76bfb18c"
+      }
+    },
+    {
+      "event_id": "32c0d912-f4f8-41f8-ac1d-368128f4d4ab",
+      "timestamp": "2025-06-24T17:58:09.691677Z",
+      "event": {
+        "type": "add_pending",
+        "event_id": "32c0d912-f4f8-41f8-ac1d-368128f4d4ab",
+        "transaction_id": "af416a19-9cb8-41f0-bcce-3b3dde620c5d",
+        "amount": -1197,
+        "description": "Purchase at Amazon",
+        "merchant": "Amazon",
+        "category": "Shopping"
+      }
+    },
+    {
+      "event_id": "23fc7396-ddda-436e-ac86-8a82fb8e2a90",
+      "timestamp": "2025-06-26T17:58:09.691677Z",
+      "event": {
+        "type": "add_cleared",
+        "event_id": "23fc7396-ddda-436e-ac86-8a82fb8e2a90",
+        "transaction_id": "50d0f53c-5ce5-47fb-8bfb-7fe4be83e815",
+        "amount": -1197,
+        "description": "Purchase at Amazon",
+        "merchant": "Amazon",
+        "category": "Shopping",
+        "pending_event_id": "32c0d912-f4f8-41f8-ac1d-368128f4d4ab"
+      }
+    },
+    {
+      "event_id": "d9f954e4-534e-435e-855d-60582eac84b1",
+      "timestamp": "2025-06-26T17:58:09.691677Z",
+      "event": {
+        "type": "remove_pending",
+        "event_id": "d9f954e4-534e-435e-855d-60582eac84b1",
+        "transaction_id": "af416a19-9cb8-41f0-bcce-3b3dde620c5d",
+        "reason": "cleared",
+        "related_event_id": "23fc7396-ddda-436e-ac86-8a82fb8e2a90"
+      }
+    },
+    {
+      "event_id": "1e025149-e1a1-4b30-86dc-65a99c70a6f0",
+      "timestamp": "2025-06-25T12:10:39.933726Z",
+      "event": {
+        "type": "add_pending",
+        "event_id": "1e025149-e1a1-4b30-86dc-65a99c70a6f0",
+        "transaction_id": "675109b8-d88d-4241-ab20-d78d2dbc4ed3",
+        "amount": -4639,
+        "description": "Purchase at Subway",
+        "merchant": "Subway",
+        "category": "Food & Drink"
+      }
+    },
+    {
+      "event_id": "1d650d33-7344-4f5e-8be2-c21da77f936d",
+      "timestamp": "2025-06-27T12:10:39.933726Z",
+      "event": {
+        "type": "add_cleared",
+        "event_id": "1d650d33-7344-4f5e-8be2-c21da77f936d",
+        "transaction_id": "f2904eee-9b47-4c2f-8a0c-041e65db30a8",
+        "amount": -4639,
+        "description": "Purchase at Subway",
+        "merchant": "Subway",
+        "category": "Food & Drink",
+        "pending_event_id": "1e025149-e1a1-4b30-86dc-65a99c70a6f0"
+      }
+    },
+    {
+      "event_id": "f70c48e3-c5ab-4273-92f0-c3d2171806ce",
+      "timestamp": "2025-06-27T12:10:39.933726Z",
+      "event": {
+        "type": "remove_pending",
+        "event_id": "f70c48e3-c5ab-4273-92f0-c3d2171806ce",
+        "transaction_id": "675109b8-d88d-4241-ab20-d78d2dbc4ed3",
+        "reason": "cleared",
+        "related_event_id": "1d650d33-7344-4f5e-8be2-c21da77f936d"
+      }
+    },
+    {
+      "event_id": "acaa13ff-6e51-4fd5-b110-e5a6e6076561",
+      "timestamp": "2025-06-25T21:16:17.920971Z",
+      "event": {
+        "type": "add_pending",
+        "event_id": "acaa13ff-6e51-4fd5-b110-e5a6e6076561",
+        "transaction_id": "093d37a4-a073-4f39-b84f-c79a55ea14fa",
+        "amount": -943,
+        "description": "Purchase at CVS",
+        "merchant": "CVS",
+        "category": "Shopping"
+      }
+    },
+    {
+      "event_id": "5550f8ce-3794-4aea-acd9-117acc9334e8",
+      "timestamp": "2025-06-27T21:16:17.920971Z",
+      "event": {
+        "type": "add_cleared",
+        "event_id": "5550f8ce-3794-4aea-acd9-117acc9334e8",
+        "transaction_id": "2d44741e-f097-434f-94f2-79637645c21b",
+        "amount": -943,
+        "description": "Purchase at CVS",
+        "merchant": "CVS",
+        "category": "Shopping",
+        "pending_event_id": "acaa13ff-6e51-4fd5-b110-e5a6e6076561"
+      }
+    },
+    {
+      "event_id": "d69c5e80-cd36-4c80-898c-ee4c8bc1527d",
+      "timestamp": "2025-06-27T21:16:17.920971Z",
+      "event": {
+        "type": "remove_pending",
+        "event_id": "d69c5e80-cd36-4c80-898c-ee4c8bc1527d",
+        "transaction_id": "093d37a4-a073-4f39-b84f-c79a55ea14fa",
+        "reason": "cleared",
+        "related_event_id": "5550f8ce-3794-4aea-acd9-117acc9334e8"
+      }
+    },
+    {
+      "event_id": "b4cceace-7bee-43a0-bcc9-fa2460e9509a",
+      "timestamp": "2025-06-26T10:44:22.560548Z",
+      "event": {
+        "type": "add_pending",
+        "event_id": "b4cceace-7bee-43a0-bcc9-fa2460e9509a",
+        "transaction_id": "cdd52178-5906-4306-a6ac-d7a364798f6a",
+        "amount": -2907,
+        "description": "Purchase at Starbucks",
+        "merchant": "Starbucks",
+        "category": "Shopping"
+      }
+    },
+    {
+      "event_id": "0d2c5c82-eb62-4e21-8fa4-37ee3783789b",
+      "timestamp": "2025-06-28T10:44:22.560548Z",
+      "event": {
+        "type": "add_cleared",
+        "event_id": "0d2c5c82-eb62-4e21-8fa4-37ee3783789b",
+        "transaction_id": "d569f169-3a67-46e5-80e3-e75a9365281b",
+        "amount": -2907,
+        "description": "Purchase at Starbucks",
+        "merchant": "Starbucks",
+        "category": "Shopping",
+        "pending_event_id": "b4cceace-7bee-43a0-bcc9-fa2460e9509a"
+      }
+    },
+    {
+      "event_id": "2811290c-9393-4172-86a9-06a093ab89df",
+      "timestamp": "2025-06-28T10:44:22.560548Z",
+      "event": {
+        "type": "remove_pending",
+        "event_id": "2811290c-9393-4172-86a9-06a093ab89df",
+        "transaction_id": "cdd52178-5906-4306-a6ac-d7a364798f6a",
+        "reason": "cleared",
+        "related_event_id": "0d2c5c82-eb62-4e21-8fa4-37ee3783789b"
+      }
+    },
+    {
+      "event_id": "98df62ee-1885-42c7-8224-371f6dadf472",
+      "timestamp": "2025-06-26T08:06:08.475086Z",
+      "event": {
+        "type": "add_pending",
+        "event_id": "98df62ee-1885-42c7-8224-371f6dadf472",
+        "transaction_id": "7e10edb7-a969-4511-ad13-20491f044c67",
+        "amount": -4374,
+        "description": "Purchase at Subway",
+        "merchant": "Subway",
+        "category": "Food & Drink"
+      }
+    },
+    {
+      "event_id": "1e7fbfc0-04ff-40bd-b24a-3d3e3bb49af2",
+      "timestamp": "2025-06-28T08:06:08.475086Z",
+      "event": {
+        "type": "add_cleared",
+        "event_id": "1e7fbfc0-04ff-40bd-b24a-3d3e3bb49af2",
+        "transaction_id": "de5a3102-b7c5-475b-8a87-1f91a159b001",
+        "amount": -4374,
+        "description": "Purchase at Subway",
+        "merchant": "Subway",
+        "category": "Food & Drink",
+        "pending_event_id": "98df62ee-1885-42c7-8224-371f6dadf472"
+      }
+    },
+    {
+      "event_id": "4b40ebb0-4c11-4d59-9784-da5724caf673",
+      "timestamp": "2025-06-28T08:06:08.475086Z",
+      "event": {
+        "type": "remove_pending",
+        "event_id": "4b40ebb0-4c11-4d59-9784-da5724caf673",
+        "transaction_id": "7e10edb7-a969-4511-ad13-20491f044c67",
+        "reason": "cleared",
+        "related_event_id": "1e7fbfc0-04ff-40bd-b24a-3d3e3bb49af2"
+      }
+    },
+    {
+      "event_id": "a59b09dc-4c80-415c-a9bf-fd087dbbbb22",
+      "timestamp": "2025-06-27T09:03:41.876892Z",
+      "event": {
+        "type": "add_pending",
+        "event_id": "a59b09dc-4c80-415c-a9bf-fd087dbbbb22",
+        "transaction_id": "cc0ac7d9-df7d-45f3-90d7-52393e7dbf32",
+        "amount": -1260,
+        "description": "Purchase at Target",
+        "merchant": "Target",
+        "category": "Shopping"
+      }
+    },
+    {
+      "event_id": "fd9c33fe-7a3e-4057-a7c6-70eb6b5e7d92",
+      "timestamp": "2025-06-29T09:03:41.876892Z",
+      "event": {
+        "type": "add_cleared",
+        "event_id": "fd9c33fe-7a3e-4057-a7c6-70eb6b5e7d92",
+        "transaction_id": "4efa134e-9960-4af1-a60e-a4f4d9fcc639",
+        "amount": -1260,
+        "description": "Purchase at Target",
+        "merchant": "Target",
+        "category": "Shopping",
+        "pending_event_id": "a59b09dc-4c80-415c-a9bf-fd087dbbbb22"
+      }
+    },
+    {
+      "event_id": "4a9369a1-0111-456c-9683-430de462ac3b",
+      "timestamp": "2025-06-29T09:03:41.876892Z",
+      "event": {
+        "type": "remove_pending",
+        "event_id": "4a9369a1-0111-456c-9683-430de462ac3b",
+        "transaction_id": "cc0ac7d9-df7d-45f3-90d7-52393e7dbf32",
+        "reason": "cleared",
+        "related_event_id": "fd9c33fe-7a3e-4057-a7c6-70eb6b5e7d92"
+      }
+    },
+    {
+      "event_id": "67c54b29-3378-4786-bd77-c9186a66a54a",
+      "timestamp": "2025-06-27T06:11:42.255277Z",
+      "event": {
+        "type": "add_pending",
+        "event_id": "67c54b29-3378-4786-bd77-c9186a66a54a",
+        "transaction_id": "1f8792c2-3dc7-4320-add1-70ba13e92a22",
+        "amount": -503,
+        "description": "Purchase at Target",
+        "merchant": "Target",
+        "category": "Shopping"
+      }
+    },
+    {
+      "event_id": "317c94e8-cded-4d69-934b-d9619397a1a2",
+      "timestamp": "2025-06-29T06:11:42.255277Z",
+      "event": {
+        "type": "add_cleared",
+        "event_id": "317c94e8-cded-4d69-934b-d9619397a1a2",
+        "transaction_id": "b67dd170-330f-41dd-8a7f-bd9677481811",
+        "amount": -503,
+        "description": "Purchase at Target",
+        "merchant": "Target",
+        "category": "Shopping",
+        "pending_event_id": "67c54b29-3378-4786-bd77-c9186a66a54a"
+      }
+    },
+    {
+      "event_id": "044c71c6-ec2b-435c-9c4a-7068f0b25f93",
+      "timestamp": "2025-06-29T06:11:42.255277Z",
+      "event": {
+        "type": "remove_pending",
+        "event_id": "044c71c6-ec2b-435c-9c4a-7068f0b25f93",
+        "transaction_id": "1f8792c2-3dc7-4320-add1-70ba13e92a22",
+        "reason": "cleared",
+        "related_event_id": "317c94e8-cded-4d69-934b-d9619397a1a2"
+      }
+    },
+    {
+      "event_id": "1c682651-ff0d-4b52-a22c-0c5585f50be9",
+      "timestamp": "2025-06-30T09:20:48.576755Z",
+      "event": {
+        "type": "add_pending",
+        "event_id": "1c682651-ff0d-4b52-a22c-0c5585f50be9",
+        "transaction_id": "a4eae101-5c6f-4150-83c3-2659198fd18d",
+        "amount": -1777,
+        "description": "Purchase at Amazon",
+        "merchant": "Amazon",
+        "category": "Transportation"
+      }
+    },
+    {
+      "event_id": "1547264b-03f1-42ff-917b-1674d4de4206",
+      "timestamp": "2025-07-02T09:20:48.576755Z",
+      "event": {
+        "type": "add_cleared",
+        "event_id": "1547264b-03f1-42ff-917b-1674d4de4206",
+        "transaction_id": "0f19a8bc-27e2-4b45-8d91-5cd2fbf2daa7",
+        "amount": -1777,
+        "description": "Purchase at Amazon",
+        "merchant": "Amazon",
+        "category": "Transportation",
+        "pending_event_id": "1c682651-ff0d-4b52-a22c-0c5585f50be9"
+      }
+    },
+    {
+      "event_id": "47c0f00e-116f-42ee-b8ce-93680c777324",
+      "timestamp": "2025-07-02T09:20:48.576755Z",
+      "event": {
+        "type": "remove_pending",
+        "event_id": "47c0f00e-116f-42ee-b8ce-93680c777324",
+        "transaction_id": "a4eae101-5c6f-4150-83c3-2659198fd18d",
+        "reason": "cleared",
+        "related_event_id": "1547264b-03f1-42ff-917b-1674d4de4206"
+      }
+    },
+    {
+      "event_id": "8a351132-bfa9-4b7f-917b-0ee181646ae6",
+      "timestamp": "2025-06-30T12:37:41.865745Z",
+      "event": {
+        "type": "add_pending",
+        "event_id": "8a351132-bfa9-4b7f-917b-0ee181646ae6",
+        "transaction_id": "335bff88-6ca1-42e3-98e1-b29d04bf23ea",
+        "amount": -3995,
+        "description": "Purchase at Starbucks",
+        "merchant": "Starbucks",
+        "category": "Entertainment"
+      }
+    },
+    {
+      "event_id": "6466aee9-a450-4ab9-ae8b-586f1aff44b9",
+      "timestamp": "2025-07-02T12:37:41.865745Z",
+      "event": {
+        "type": "add_cleared",
+        "event_id": "6466aee9-a450-4ab9-ae8b-586f1aff44b9",
+        "transaction_id": "57a143dd-ab63-4c05-be9a-23c511a11e99",
+        "amount": -3995,
+        "description": "Purchase at Starbucks",
+        "merchant": "Starbucks",
+        "category": "Entertainment",
+        "pending_event_id": "8a351132-bfa9-4b7f-917b-0ee181646ae6"
+      }
+    },
+    {
+      "event_id": "2ce71871-360e-444b-b4ab-6f1fb5060a79",
+      "timestamp": "2025-07-02T12:37:41.865745Z",
+      "event": {
+        "type": "remove_pending",
+        "event_id": "2ce71871-360e-444b-b4ab-6f1fb5060a79",
+        "transaction_id": "335bff88-6ca1-42e3-98e1-b29d04bf23ea",
+        "reason": "cleared",
+        "related_event_id": "6466aee9-a450-4ab9-ae8b-586f1aff44b9"
+      }
+    },
+    {
+      "event_id": "378e7088-e78c-45fd-9cea-ec1104bd29bc",
+      "timestamp": "2025-07-01T23:33:09.900187Z",
+      "event": {
+        "type": "add_pending",
+        "event_id": "378e7088-e78c-45fd-9cea-ec1104bd29bc",
+        "transaction_id": "1cab72d5-1a37-4bda-9569-a5aaa2b1b767",
+        "amount": -947,
+        "description": "Purchase at Starbucks",
+        "merchant": "Starbucks",
+        "category": "Shopping"
+      }
+    },
+    {
+      "event_id": "da4f0c10-959b-4a48-ab19-7ad3e16db63b",
+      "timestamp": "2025-07-03T23:33:09.900187Z",
+      "event": {
+        "type": "add_cleared",
+        "event_id": "da4f0c10-959b-4a48-ab19-7ad3e16db63b",
+        "transaction_id": "68d103d9-6927-4e96-a2b4-d9b27e553e9d",
+        "amount": -947,
+        "description": "Purchase at Starbucks",
+        "merchant": "Starbucks",
+        "category": "Shopping",
+        "pending_event_id": "378e7088-e78c-45fd-9cea-ec1104bd29bc"
+      }
+    },
+    {
+      "event_id": "8574f363-39ed-41fc-9916-56e159c9ebc3",
+      "timestamp": "2025-07-03T23:33:09.900187Z",
+      "event": {
+        "type": "remove_pending",
+        "event_id": "8574f363-39ed-41fc-9916-56e159c9ebc3",
+        "transaction_id": "1cab72d5-1a37-4bda-9569-a5aaa2b1b767",
+        "reason": "cleared",
+        "related_event_id": "da4f0c10-959b-4a48-ab19-7ad3e16db63b"
+      }
+    },
+    {
+      "event_id": "ac57efdd-1458-4d73-aa6a-239a28911b87",
+      "timestamp": "2025-07-01T22:15:09.427591Z",
+      "event": {
+        "type": "add_pending",
+        "event_id": "ac57efdd-1458-4d73-aa6a-239a28911b87",
+        "transaction_id": "492ed9cb-bd70-4f61-8a81-312e2a1fb1ec",
+        "amount": -1960,
+        "description": "Purchase at Subway",
+        "merchant": "Subway",
+        "category": "Shopping"
+      }
+    },
+    {
+      "event_id": "22af9dc3-84b5-4987-977e-6d3d2d407e98",
+      "timestamp": "2025-07-03T22:15:09.427591Z",
+      "event": {
+        "type": "add_cleared",
+        "event_id": "22af9dc3-84b5-4987-977e-6d3d2d407e98",
+        "transaction_id": "8c8beec6-e9df-4682-849e-322407780a96",
+        "amount": -1960,
+        "description": "Purchase at Subway",
+        "merchant": "Subway",
+        "category": "Shopping",
+        "pending_event_id": "ac57efdd-1458-4d73-aa6a-239a28911b87"
+      }
+    },
+    {
+      "event_id": "39737721-625a-4173-9105-e887ab6870e5",
+      "timestamp": "2025-07-03T22:15:09.427591Z",
+      "event": {
+        "type": "remove_pending",
+        "event_id": "39737721-625a-4173-9105-e887ab6870e5",
+        "transaction_id": "492ed9cb-bd70-4f61-8a81-312e2a1fb1ec",
+        "reason": "cleared",
+        "related_event_id": "22af9dc3-84b5-4987-977e-6d3d2d407e98"
+      }
+    },
+    {
+      "event_id": "bd72b0c3-ff96-49bd-8c96-090d87344681",
+      "timestamp": "2025-07-02T01:14:53.922278Z",
+      "event": {
+        "type": "add_pending",
+        "event_id": "bd72b0c3-ff96-49bd-8c96-090d87344681",
+        "transaction_id": "230082d3-2b23-43ab-a488-2760a367a680",
+        "amount": -2757,
+        "description": "Purchase at Target",
+        "merchant": "Target",
+        "category": "Entertainment"
+      }
+    },
+    {
+      "event_id": "8644728b-7012-4c7f-99fe-2ec531643d89",
+      "timestamp": "2025-07-04T01:14:53.922278Z",
+      "event": {
+        "type": "add_cleared",
+        "event_id": "8644728b-7012-4c7f-99fe-2ec531643d89",
+        "transaction_id": "715ca01e-02e0-434d-83af-c09bfbc7ceb1",
+        "amount": -2757,
+        "description": "Purchase at Target",
+        "merchant": "Target",
+        "category": "Entertainment",
+        "pending_event_id": "bd72b0c3-ff96-49bd-8c96-090d87344681"
+      }
+    },
+    {
+      "event_id": "d642a7cc-babb-4cf4-807a-d3b176f1a981",
+      "timestamp": "2025-07-04T01:14:53.922278Z",
+      "event": {
+        "type": "remove_pending",
+        "event_id": "d642a7cc-babb-4cf4-807a-d3b176f1a981",
+        "transaction_id": "230082d3-2b23-43ab-a488-2760a367a680",
+        "reason": "cleared",
+        "related_event_id": "8644728b-7012-4c7f-99fe-2ec531643d89"
+      }
+    },
+    {
+      "event_id": "2a486907-c30e-408f-a0f5-7f54e3580620",
+      "timestamp": "2025-07-02T19:52:42.663772Z",
+      "event": {
+        "type": "add_pending",
+        "event_id": "2a486907-c30e-408f-a0f5-7f54e3580620",
+        "transaction_id": "d2797433-92b3-49a4-9eca-5d21c94da6bb",
+        "amount": -1078,
+        "description": "Purchase at Starbucks",
+        "merchant": "Starbucks",
+        "category": "Entertainment"
+      }
+    },
+    {
+      "event_id": "4e57eaa2-8fab-4b69-8d3e-7084785d5b6c",
+      "timestamp": "2025-07-04T19:52:42.663772Z",
+      "event": {
+        "type": "add_cleared",
+        "event_id": "4e57eaa2-8fab-4b69-8d3e-7084785d5b6c",
+        "transaction_id": "242236c7-a6f8-4068-aec3-fb9f79b5e056",
+        "amount": -1078,
+        "description": "Purchase at Starbucks",
+        "merchant": "Starbucks",
+        "category": "Entertainment",
+        "pending_event_id": "2a486907-c30e-408f-a0f5-7f54e3580620"
+      }
+    },
+    {
+      "event_id": "de9fd61d-0029-4595-a01f-ffae61cead3d",
+      "timestamp": "2025-07-04T19:52:42.663772Z",
+      "event": {
+        "type": "remove_pending",
+        "event_id": "de9fd61d-0029-4595-a01f-ffae61cead3d",
+        "transaction_id": "d2797433-92b3-49a4-9eca-5d21c94da6bb",
+        "reason": "cleared",
+        "related_event_id": "4e57eaa2-8fab-4b69-8d3e-7084785d5b6c"
+      }
+    },
+    {
+      "event_id": "71653b77-63be-4d61-8a66-1f2b30dcfb5b",
+      "timestamp": "2025-07-03T08:05:11.531046Z",
+      "event": {
+        "type": "add_pending",
+        "event_id": "71653b77-63be-4d61-8a66-1f2b30dcfb5b",
+        "transaction_id": "93530d34-6ac1-4c93-a4f8-1126403141d6",
+        "amount": -3244,
+        "description": "Purchase at Starbucks",
+        "merchant": "Starbucks",
+        "category": "Entertainment"
+      }
+    },
+    {
+      "event_id": "c8a1a9e0-960f-4174-9c99-37e9a117906c",
+      "timestamp": "2025-07-05T08:05:11.531046Z",
+      "event": {
+        "type": "add_cleared",
+        "event_id": "c8a1a9e0-960f-4174-9c99-37e9a117906c",
+        "transaction_id": "368f2d21-7b77-460e-a508-cdfb135cb347",
+        "amount": -3244,
+        "description": "Purchase at Starbucks",
+        "merchant": "Starbucks",
+        "category": "Entertainment",
+        "pending_event_id": "71653b77-63be-4d61-8a66-1f2b30dcfb5b"
+      }
+    },
+    {
+      "event_id": "80d46950-c1b7-49b3-a7d8-4cb69e19afbe",
+      "timestamp": "2025-07-05T08:05:11.531046Z",
+      "event": {
+        "type": "remove_pending",
+        "event_id": "80d46950-c1b7-49b3-a7d8-4cb69e19afbe",
+        "transaction_id": "93530d34-6ac1-4c93-a4f8-1126403141d6",
+        "reason": "cleared",
+        "related_event_id": "c8a1a9e0-960f-4174-9c99-37e9a117906c"
+      }
+    },
+    {
+      "event_id": "f1df793f-bda4-4adf-aac8-c4d55ee19db1",
+      "timestamp": "2025-07-03T04:02:53.382014Z",
+      "event": {
+        "type": "add_pending",
+        "event_id": "f1df793f-bda4-4adf-aac8-c4d55ee19db1",
+        "transaction_id": "fb92ac4a-89b4-401a-b9d7-d3568b441a37",
+        "amount": -1476,
+        "description": "Purchase at Target",
+        "merchant": "Target",
+        "category": "Food & Drink"
+      }
+    },
+    {
+      "event_id": "46451e37-2c31-479d-aabb-db2290375512",
+      "timestamp": "2025-07-05T04:02:53.382014Z",
+      "event": {
+        "type": "add_cleared",
+        "event_id": "46451e37-2c31-479d-aabb-db2290375512",
+        "transaction_id": "0ae243ed-354d-4044-b9bc-df2c41f29aa8",
+        "amount": -1476,
+        "description": "Purchase at Target",
+        "merchant": "Target",
+        "category": "Food & Drink",
+        "pending_event_id": "f1df793f-bda4-4adf-aac8-c4d55ee19db1"
+      }
+    },
+    {
+      "event_id": "4223eb26-3681-4271-91bb-6563d565379d",
+      "timestamp": "2025-07-05T04:02:53.382014Z",
+      "event": {
+        "type": "remove_pending",
+        "event_id": "4223eb26-3681-4271-91bb-6563d565379d",
+        "transaction_id": "fb92ac4a-89b4-401a-b9d7-d3568b441a37",
+        "reason": "cleared",
+        "related_event_id": "46451e37-2c31-479d-aabb-db2290375512"
       }
     }
   ]

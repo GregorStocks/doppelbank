@@ -36,10 +36,7 @@ class UserId:
         return self.user_id
 
     def __str__(self) -> str:
-        raise InvalidIdError(
-            f"UserId should not be stringified directly. Use .to_wire() instead. "
-            f"UserId: {self.user_id}"
-        )
+        return self.to_wire()
 
     @staticmethod
     def from_wire(wire_id: str) -> "UserId":
@@ -63,10 +60,7 @@ class ItemId:
         return f"{self.user_id}-{self.persona_id}-{self.institution_id}"
 
     def __str__(self) -> str:
-        raise InvalidIdError(
-            f"ItemId should not be stringified directly. Use .to_wire() instead. "
-            f"ItemId: {self.user_id}-{self.persona_id}-{self.institution_id}"
-        )
+        return self.to_wire()
 
     @staticmethod
     def from_wire(wire_id: str) -> "ItemId":
@@ -123,10 +117,7 @@ class AccountId:
         return f"{self.user_id}-{self.persona_id}-{self.institution_id}-{self.account_type}"
 
     def __str__(self) -> str:
-        raise InvalidIdError(
-            f"AccountId should not be stringified directly. Use .to_wire() instead. "
-            f"AccountId: {self.user_id}-{self.persona_id}-{self.institution_id}-{self.account_type}"
-        )
+        return self.to_wire()
 
     @staticmethod
     def from_wire(wire_id: str) -> "AccountId":

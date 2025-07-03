@@ -10,7 +10,7 @@ from doppelbank.veneer.endpoints.link.internal.models import (
 )
 
 
-def create_response() -> (WorkflowResponse, ItemId):
+def create_response() -> tuple[WorkflowResponse, ItemId]:
     data = load_example_response()
 
     user_id = "fakeuser"

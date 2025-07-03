@@ -13,8 +13,8 @@ git clone https://github.com/GregorStocks/doppelbank.git
 cd doppelbank
 uv sync --extra dev
 
-# 1. Generate a new synthetic user (24 months, deterministic seed)
-uv run python -m doppelbank.bedrock.cli generate --user-id 0042 --months 24 --seed 42 > personas/user_0042.json
+# 1. Generate a new synthetic user (24 months)
+uv run persona_generator generate --user-id 0042 --months 24 > personas/user_0042.json
 
 # 2. Launch the Plaid-style sandbox (serves all personas)
 uvicorn doppelbank.plaidshim.server:app --reload
@@ -83,31 +83,11 @@ uv run pytest --cov=doppelbank
 - All Python dependencies (including dev tools) are managed with [uv](https://github.com/astral-sh/uv).
 - The only non-Python dependency is `protoc` (see above).
 
-### Bedrock CLI
+### Persona Generator CLI
 
-The Bedrock component provides a CLI for generating synthetic financial events:
+The Persona Generator component provides a CLI for generating synthetic financial events:
 
 ```bash
-# Generate events in JSON format (default)
-uv run python -m doppelbank.bedrock.cli generate --user-id 42 --months 12 --seed 42
-
-# Generate events in binary protobuf format
-uv run python -m doppelbank.bedrock.cli generate --user-id 42 --months 3 --format binary --output events.bin
-
-# Validate an event file
-uv run python -m doppelbank.bedrock.cli validate events.json
+# Generate events in JSON format
+uv run persona_generator --months 12
 ```
-
-## Detritus CLI
-
-Generate Plaid-style sync data from bedrock events:
-
-```sh
-uv run detritus -- --input path/to/bedrock.json --output path/to/detritus.json --format json
-```
-
-- `--input`: Path to a bedrock events file (json or binary)
-- `--output`: Path to output detritus sync file (json or binary)
-- `--format`: Output format (`json` or `binary`, default: `json`)
-
-This will read the bedrock events, transform them, and write a Plaid-style sync file.

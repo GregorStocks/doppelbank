@@ -66,7 +66,7 @@ async def workflow_next(request: WorkflowNextRequest) -> WorkflowResponse:
             response = done.create_response(request)
 
             # Trigger ITEM_ADD_RESULT webhook (if configured)
-            async def delayed_webhook():
+            async def delayed_webhook() -> None:
                 logger.info("Sleeping for 2 seconds")
                 time.sleep(2)
                 logger.info("Sending ITEM_ADD_RESULT webhook")

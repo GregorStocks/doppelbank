@@ -6,19 +6,14 @@ This test file implements the "better tests" described in CLAUDE.md TODOs:
 - Single test that goes from Bedrock to Veneer
 """
 
-import json
 import multiprocessing
 import os
-import shutil
 import socket
 import subprocess
 import tempfile
 import time
-from collections.abc import Generator
 from pathlib import Path
-from typing import Any
 
-import pytest
 import requests
 import uvicorn
 
@@ -42,96 +37,55 @@ class TestVeneerIntegration:
         except OSError:
             return False
 
-    @pytest.fixture
-    def running_server(self) -> Generator[None]:
-        """Start a real Veneer server for integration testing."""
-        # Start server in a separate process
-        process = multiprocessing.Process(target=run_test_server)
-        process.start()
-
-        # Give server minimal time to start, then use rapid polling
-        time.sleep(0.5)  # 500ms minimal start time
-
-        # Then rapid polling with no additional sleeps
-        max_attempts = 50  # Should be more than enough with 0.1s timeout each
-        server_ready = False
-        for _ in range(max_attempts):
-            if self._check_server_ready("127.0.0.1", 8002):
-                server_ready = True
-                break
-
-        if not server_ready:
-            process.terminate()
-            process.join(timeout=5)
-            if process.is_alive():
-                process.kill()
-            pytest.fail("Server failed to start within timeout period")
-
-        yield
-
-        # Cleanup
-        process.terminate()
-        process.join(timeout=5)
-        if process.is_alive():
-            process.kill()
-
-    def test_full_pipeline_with_http_requests(self, running_server: Any) -> None:
+    def test_full_pipeline_with_http_requests(self) -> None:
         """
-        Test the complete pipeline: Bedrock -> Detritus -> Veneer with real HTTP requests.
-
-        This implements the TODO: "Single test that goes from Bedrock to Veneer"
+        Test the complete pipeline: Persona Generator -> Veneer with real HTTP requests.
         """
-        _ = running_server
 
         # Create a temporary directory for test data
         with tempfile.TemporaryDirectory() as temp_dir:
             temp_path = Path(temp_dir)
 
-            # Step 1: Generate complete persona data in temporary directory
-            test_account_file = temp_path / "integration_test_account.json"
             subprocess.run(
                 [
                     "uv",
                     "run",
-                    "python",
-                    "-m",
-                    "doppelbank.persona_generator.cli",
-                    "--user-id",
-                    "user_test",
+                    "persona_generator",
                     "--persona",
                     "integration_test",
                     "--institution",
                     "doppelbank",
                     "--account-type",
                     "checking",
-                    "--seed",
-                    "12345",
                     "--days",
                     "60",  # Generate 60 days of data
-                    "--output",
-                    str(test_account_file),
+                    "--output-dir",
+                    temp_path,
                 ],
                 check=True,
             )
 
-            # Verify test data was created
-            assert test_account_file.exists(), f"Expected test data at {test_account_file}"
-
-            with open(test_account_file) as f:
-                detritus_data = json.load(f)
-            assert "events" in detritus_data
-            assert len(detritus_data["events"]) > 0
-
-            # Set up hierarchical directory structure for the test
-            hierarchical_dir = temp_path / "data" / "personas" / "integration_test" / "doppelbank"
-            hierarchical_dir.mkdir(parents=True, exist_ok=True)
-            hierarchical_account_file = hierarchical_dir / "checking.json"
-            shutil.copy2(test_account_file, hierarchical_account_file)
-
             # Set environment variables to point to temporary directories
-            original_hierarchical_env = os.environ.get("VENEER_HIERARCHICAL_DATA_DIR")
+            original_data_dir = os.environ.get("VENEER_DATA_DIR", "")
 
-            os.environ["VENEER_HIERARCHICAL_DATA_DIR"] = str(temp_path / "data")
+            os.environ["VENEER_DATA_DIR"] = str(temp_path)
+
+            # Start server in a separate process
+            process = multiprocessing.Process(target=run_test_server)
+            process.start()
+
+            # Give server minimal time to start, then use rapid polling
+            time.sleep(0.5)  # 500ms minimal start time
+
+            # Then rapid polling with no additional sleeps
+            max_attempts = 50  # Should be more than enough with 0.1s timeout each
+            server_ready = False
+            for _ in range(max_attempts):
+                if self._check_server_ready("127.0.0.1", 8002):
+                    server_ready = True
+                    break
+            if not server_ready:
+                raise RuntimeError("Server failed to start")
 
             try:
                 # Step 3: Test the API with real HTTP requests (like curl)
@@ -181,7 +135,9 @@ class TestVeneerIntegration:
 
             finally:
                 # Restore original environment variables
-                if original_hierarchical_env is not None:
-                    os.environ["VENEER_HIERARCHICAL_DATA_DIR"] = original_hierarchical_env
-                else:
-                    os.environ.pop("VENEER_HIERARCHICAL_DATA_DIR", None)
+                os.environ["VENEER_DATA_DIR"] = original_data_dir
+
+                process.terminate()
+                process.join(timeout=5)
+                if process.is_alive():
+                    process.kill()

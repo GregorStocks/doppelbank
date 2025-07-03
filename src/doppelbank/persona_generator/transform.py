@@ -6,7 +6,6 @@ from doppelbank.schemas.bedrock import (
     CardSwipeEvent,
     EventCollection,
     PaycheckEvent,
-    TransferEvent,
 )
 from doppelbank.schemas.detritus import (
     AddCleared,
@@ -29,7 +28,6 @@ def bedrock_to_detritus(bedrock_collection: EventCollection) -> BankLedger:
             # AddPending event
             pending_id = str(uuid.uuid4())
             pending_transaction_id = str(uuid.uuid4())
-            account_id = cs.account_id
             events.append(
                 BankEvent(
                     event_id=pending_id,
@@ -37,7 +35,6 @@ def bedrock_to_detritus(bedrock_collection: EventCollection) -> BankLedger:
                     event=AddPending(
                         event_id=pending_id,
                         transaction_id=pending_transaction_id,
-                        account_id=account_id,
                         amount=cs.amount,
                         description=cs.description,
                         merchant=cs.merchant,
@@ -56,7 +53,6 @@ def bedrock_to_detritus(bedrock_collection: EventCollection) -> BankLedger:
                     event=AddCleared(
                         event_id=cleared_id,
                         transaction_id=cleared_transaction_id,
-                        account_id=account_id,
                         amount=cs.amount,
                         description=cs.description,
                         merchant=cs.merchant,
@@ -74,7 +70,6 @@ def bedrock_to_detritus(bedrock_collection: EventCollection) -> BankLedger:
                     event=RemovePending(
                         event_id=remove_pending_id,
                         transaction_id=pending_transaction_id,
-                        account_id=account_id,
                         reason="cleared",
                         related_event_id=cleared_id,
                     ),
@@ -85,7 +80,6 @@ def bedrock_to_detritus(bedrock_collection: EventCollection) -> BankLedger:
             if not pc.timestamp:
                 continue  # skip events with empty timestamp
             cleared_id = str(uuid.uuid4())
-            account_id = pc.account_id
             events.append(
                 BankEvent(
                     event_id=cleared_id,
@@ -93,51 +87,10 @@ def bedrock_to_detritus(bedrock_collection: EventCollection) -> BankLedger:
                     event=AddCleared(
                         event_id=cleared_id,
                         transaction_id=str(uuid.uuid4()),
-                        account_id=account_id,
                         amount=pc.amount,
                         description=pc.description,
                         merchant=pc.employer,
                         category="paycheck",
-                        pending_event_id="",
-                    ),
-                )
-            )
-        elif isinstance(event, TransferEvent):
-            tf = event
-            if not tf.timestamp:
-                continue  # skip events with empty timestamp
-            # Outgoing transfer (from_account)
-            out_id = str(uuid.uuid4())
-            events.append(
-                BankEvent(
-                    event_id=out_id,
-                    timestamp=tf.timestamp,
-                    event=AddCleared(
-                        event_id=out_id,
-                        transaction_id=str(uuid.uuid4()),
-                        account_id=tf.from_account,
-                        amount=-abs(tf.amount),  # negative for outgoing
-                        description=tf.description,
-                        merchant="transfer_out",
-                        category="transfer",
-                        pending_event_id="",
-                    ),
-                )
-            )
-            # Incoming transfer (to_account)
-            in_id = str(uuid.uuid4())
-            events.append(
-                BankEvent(
-                    event_id=in_id,
-                    timestamp=tf.timestamp,
-                    event=AddCleared(
-                        event_id=in_id,
-                        transaction_id=str(uuid.uuid4()),
-                        account_id=tf.to_account,
-                        amount=abs(tf.amount),  # positive for incoming
-                        description=tf.description,
-                        merchant="transfer_in",
-                        category="transfer",
                         pending_event_id="",
                     ),
                 )

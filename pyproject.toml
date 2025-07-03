@@ -19,8 +19,7 @@ dependencies = [
 ]
 
 [project.scripts]
-bedrock = "doppelbank.bedrock.cli:main"
-detritus = "doppelbank.detritus.cli:main"
+persona_generator = "doppelbank.persona_generator.cli:main"
 veneer = "doppelbank.veneer.cli:main"
 format = "ruff:main"
 lint = "scripts.lint:main"

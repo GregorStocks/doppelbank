@@ -20,11 +20,11 @@ from doppelbank.veneer.app import app
 @pytest.fixture(scope="module", autouse=True)
 def setup_test_environment() -> Generator[None]:
     """Configure VENEER_DATA_DIR to point to organized test data."""
-    detritus_test_data_dir = Path(__file__).parent / "data" / "detritus"
+    test_data_dir = Path(__file__).parent / "data"
     original_env = os.environ.get("VENEER_DATA_DIR")
 
     # Set environment variable to point to organized test data
-    os.environ["VENEER_DATA_DIR"] = str(detritus_test_data_dir)
+    os.environ["VENEER_DATA_DIR"] = str(test_data_dir)
 
     yield
 

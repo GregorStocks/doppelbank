@@ -1,15 +1,13 @@
 import logging
-import re
 import uuid
 from datetime import datetime
-from pathlib import Path
 
 import msgspec
 from fastapi import APIRouter, HTTPException
 
 from doppelbank.lib.ids import AccountId, ItemId
 from doppelbank.schemas.detritus import AddCleared, AddPending, BankLedger
-from doppelbank.veneer.data import find_account_file
+from doppelbank.veneer.data import find_account_file, get_data_dir
 from doppelbank.veneer.models import (
     Account,
     Balance,
@@ -26,21 +24,8 @@ router: APIRouter = APIRouter()
 logger = logging.getLogger(__name__)
 
 
-def validate_account_id(account_id: str) -> None:
-    """Validate account_id to prevent directory traversal and other security issues."""
-    # For hierarchical IDs, allow hyphens as delimiters
-    if not re.match(r"^[a-zA-Z0-9_-]{1,128}$", account_id):
-        raise HTTPException(
-            status_code=400,
-            detail=(
-                "Account ID must be 1-128 characters and can only contain letters, "
-                "numbers, underscores, and hyphens"
-            ),
-        )
-
-
 def transform_ledger_to_plaid(
-    ledger: BankLedger, account_id: str, cursor: str | None = None
+    ledger: BankLedger, account_id: AccountId, cursor: str | None = None
 ) -> TransactionsSyncResponse:
     """Transform a BankLedger to Plaid-style sync response."""
 
@@ -61,21 +46,15 @@ def transform_ledger_to_plaid(
     )
 
     # Parse hierarchical account ID for metadata
-    parsed_account = AccountId.from_wire(account_id)
-    account_name = f"{parsed_account.persona_id.title()} {parsed_account.account_type.title()}"
-    account_subtype = (
-        "checking"
-        if parsed_account.account_type in ["checking", "chequing"]
-        else parsed_account.account_type
-    )
+    account_name = f"{account_id.persona_id.title()} {account_id.account_type.title()}"
 
     account = Account(
-        account_id=account_id,
+        account_id=account_id.to_wire(),
         balances=dummy_balance,
         name=account_name,
         mask="1111",
         type="depository",
-        subtype=account_subtype,
+        subtype=account_id.account_type,
     )
 
     # Transform detritus events to Plaid transactions
@@ -95,7 +74,7 @@ def transform_ledger_to_plaid(
         if ev is not None:
             transaction = Transaction(
                 transaction_id=ev.transaction_id,
-                account_id=ev.account_id,
+                account_id=account_id.to_wire(),
                 amount=ev.amount / 100.0,  # Convert cents to dollars
                 date=bank_event.timestamp.split("T")[0],  # Extract date part from event timestamp
                 name=ev.description,
@@ -129,25 +108,31 @@ def transform_ledger_to_plaid(
     )
 
 
-def account_ids_from_access_token(access_token: str) -> list[str]:
+def account_ids_from_access_token(access_token: str) -> list[AccountId]:
     """Extract account IDs from access token using hierarchical structure."""
     # Parse the access token to get the item ID
     item_id = ItemId.from_access_token(access_token)
 
     # Scan for all accounts under this item
-    account_ids = []
-    personas_dir = Path("data/personas")
+    personas_dir = get_data_dir() / "personas"
     persona_institution_dir = personas_dir / item_id.persona_id / item_id.institution_id
 
     if not persona_institution_dir.exists():
+        logger.error(f"Couldn't find persona dir {persona_institution_dir}")
         raise HTTPException(
             status_code=404,
             detail=f"Persona {item_id.persona_id} not found",
         )
 
+    account_ids = []
     for account_file in persona_institution_dir.glob("*.json"):
         account_type = account_file.stem
-        account_id = f"{item_id.to_wire()}-{account_type}"
+        account_id = AccountId(
+            user_id=item_id.user_id,
+            persona_id=item_id.persona_id,
+            institution_id=item_id.institution_id,
+            account_type=account_type,
+        )
         account_ids.append(account_id)
 
     return account_ids
@@ -161,15 +146,13 @@ def handle_transactions_sync(
 
     # If account_id is provided, filter to only that account
     if request.options and "account_id" in request.options:
-        if request.options["account_id"] not in account_ids:
+        account_id = AccountId.from_wire(request.options["account_id"])
+        if account_id not in account_ids:
             raise HTTPException(
-                status_code=400,
+                status_code=404,
                 detail=f"Account ID {request.options['account_id']} not found",
             )
-        account_ids = [request.options["account_id"]]
-
-    for account_id in account_ids:
-        validate_account_id(account_id)
+        account_ids = [account_id]
 
     cursor = request.cursor
 
