@@ -35,11 +35,17 @@ class TestVeneerAccountsAPI:
 
     def test_accounts_get_basic(self) -> None:
         """Test basic accounts get endpoint using FastAPI TestClient."""
+        from doppelbank.lib.ids import ItemId
+
+        # Create a hierarchical ItemId and access token
+        item_id = ItemId("user_test", "jimmy", "doppelbank")
+        access_token = item_id.create_access_token()
+
         client = TestClient(app)
         response = client.post(
             "/accounts/get",
             json={
-                "access_token": "test_account|123",
+                "access_token": access_token,
             },
         )
 

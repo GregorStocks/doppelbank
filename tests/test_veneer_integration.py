@@ -138,26 +138,18 @@ class TestVeneerIntegration:
             # Step 3: Test the API with real HTTP requests (like curl)
             base_url = "http://127.0.0.1:8002"
 
-            # Create hierarchical account ID for testing
-            # For testing purposes, we'll use a simple user_id
-            hierarchical_account_id = "user_test-integration_test-doppelbank-checking"
+            # Create hierarchical IDs and access token for testing
+            from doppelbank.lib.ids import ItemId
 
-            # Test 1: Basic health check with old flat account
+            item_id = ItemId("user_test", "integration_test", "doppelbank")
+            access_token = item_id.create_access_token()
+            hierarchical_account_id = f"{item_id.to_wire()}-checking"
+
+            # Test 1: Query with hierarchical account_id
             response = requests.post(
                 f"{base_url}/transactions/sync",
                 json={
-                    "access_token": "test_account",
-                    "options": {"account_id": "test_account"},
-                },
-                timeout=10,
-            )
-            assert response.status_code == 200
-
-            # Test 2: Query with hierarchical account_id
-            response = requests.post(
-                f"{base_url}/transactions/sync",
-                json={
-                    "access_token": hierarchical_account_id,
+                    "access_token": access_token,
                     "options": {"account_id": hierarchical_account_id},
                 },
                 timeout=10,
@@ -175,24 +167,16 @@ class TestVeneerIntegration:
             # Verify the API returned data (event counts may differ due to transformation)
             assert len(api_data["added"]) > 0
 
-            # Test 3: Test with format parameter
-            response = requests.post(
-                f"{base_url}/transactions/sync",
-                json={
-                    "access_token": "test_account",
-                    "options": {"account_id": "test_account"},
-                    "format": "json",
-                },
-                timeout=10,
-            )
-            assert response.status_code == 200
+            # Test error handling for non-existent account
+            nonexistent_item_id = ItemId("user_test", "nonexistent", "nonexistent")
+            nonexistent_access_token = nonexistent_item_id.create_access_token()
+            nonexistent_account_id = f"{nonexistent_item_id.to_wire()}-nonexistent"
 
-            # Test 4: Test error handling for non-existent account
             response = requests.post(
                 f"{base_url}/transactions/sync",
                 json={
-                    "access_token": "nonexistent_account",
-                    "options": {"account_id": "nonexistent_account"},
+                    "access_token": nonexistent_access_token,
+                    "options": {"account_id": nonexistent_account_id},
                 },
                 timeout=10,
             )

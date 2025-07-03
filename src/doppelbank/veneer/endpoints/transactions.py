@@ -6,6 +6,7 @@ from datetime import datetime
 import msgspec
 from fastapi import APIRouter, HTTPException
 
+from doppelbank.lib.ids import AccountId
 from doppelbank.schemas.detritus import AddCleared, AddPending, BankLedger
 from doppelbank.veneer.models import (
     Account,
@@ -58,23 +59,16 @@ def transform_ledger_to_plaid(
         limit=None,
     )
 
-    # Try to parse hierarchical account ID for richer metadata
-    try:
-        from doppelbank.lib.ids import AccountId
-
-        parsed_account = AccountId.from_wire(account_id)
-        account_name = (
-            f"{parsed_account.persona_id.title()} {parsed_account.account_type.title()}"
-        )
-        account_subtype = (
-            "checking"
-            if parsed_account.account_type in ["checking", "chequing"]
-            else parsed_account.account_type
-        )
-    except Exception:
-        # Fall back to simple account info
-        account_name = f"Account {account_id}"
-        account_subtype = "checking"
+    # Parse hierarchical account ID for metadata
+    parsed_account = AccountId.from_wire(account_id)
+    account_name = (
+        f"{parsed_account.persona_id.title()} {parsed_account.account_type.title()}"
+    )
+    account_subtype = (
+        "checking"
+        if parsed_account.account_type in ["checking", "chequing"]
+        else parsed_account.account_type
+    )
 
     account = Account(
         account_id=account_id,
@@ -139,7 +133,31 @@ def transform_ledger_to_plaid(
 
 
 def account_ids_from_access_token(access_token: str) -> list[str]:
-    return [re.sub("[|].*", "", access_token)]
+    """Extract account IDs from access token using hierarchical structure."""
+    from pathlib import Path
+
+    from doppelbank.lib.ids import ItemId
+
+    # Parse the access token to get the item ID
+    item_id = ItemId.from_access_token(access_token)
+
+    # Scan for all accounts under this item
+    account_ids = []
+    personas_dir = Path("data/personas")
+    persona_institution_dir = personas_dir / item_id.persona_id / item_id.institution_id
+
+    if not persona_institution_dir.exists():
+        raise HTTPException(
+            status_code=404,
+            detail=f"Persona {item_id.persona_id} not found",
+        )
+
+    for account_file in persona_institution_dir.glob("*.json"):
+        account_type = account_file.stem
+        account_id = f"{item_id.to_wire()}-{account_type}"
+        account_ids.append(account_id)
+
+    return account_ids
 
 
 def handle_transactions_sync(
@@ -150,9 +168,12 @@ def handle_transactions_sync(
 
     # If account_id is provided, filter to only that account
     if request.options and "account_id" in request.options:
-        account_ids = list(
-            set.intersection(set(account_ids), {request.options["account_id"]})
-        )
+        if request.options["account_id"] not in account_ids:
+            raise HTTPException(
+                status_code=400,
+                detail=f"Account ID {request.options['account_id']} not found",
+            )
+        account_ids = [request.options["account_id"]]
 
     for account_id in account_ids:
         validate_account_id(account_id)
