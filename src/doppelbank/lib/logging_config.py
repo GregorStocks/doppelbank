@@ -26,9 +26,7 @@ def configure_logging(level: str | None = None, module_name: str | None = None) 
 
     # Create format string with optional module name
     if module_name:
-        format_str = (
-            f"%(asctime)s - {module_name} - %(name)s - %(levelname)s - %(message)s"
-        )
+        format_str = f"%(asctime)s - {module_name} - %(name)s - %(levelname)s - %(message)s"
     else:
         format_str = "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
 

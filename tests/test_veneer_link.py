@@ -53,9 +53,7 @@ class TestVeneerWebhooks:
             received_webhooks.append({"url": url, "payload": payload})
             return True
 
-        with patch(
-            "doppelbank.veneer.webhooks.send_webhook", side_effect=mock_send_webhook
-        ):
+        with patch("doppelbank.veneer.webhooks.send_webhook", side_effect=mock_send_webhook):
             # Step 1: Create link token with webhook
             response = client.post(
                 "/link/token/create",
@@ -137,9 +135,7 @@ class TestVeneerWebhooks:
             received_webhooks.append({"url": url, "payload": payload})
             return True
 
-        with patch(
-            "doppelbank.veneer.webhooks.send_webhook", side_effect=mock_send_webhook
-        ):
+        with patch("doppelbank.veneer.webhooks.send_webhook", side_effect=mock_send_webhook):
             # Create link token WITHOUT webhook
             response = client.post(
                 "/link/token/create",

@@ -4,7 +4,7 @@ Check lint: `uv run check`
 
 Autofix: `uv run fix`
 
-Run `uv run preflight` after every change. This runs all our linters and tests.
+Run `uv run preflight` after every change. This runs all our linters and tests, automatically fixing issues when possible.
 
 When adding new functionality, start by writing a test that will fail (red), then implement the code to make it pass (green).
 

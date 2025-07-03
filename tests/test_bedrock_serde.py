@@ -37,9 +37,7 @@ class TestJsonSerde:
                     "Acme Corp",
                     "Bi-weekly paycheck",
                 ),
-                create_transfer_event(
-                    10000, "2025-01-01T12:00:00Z", "checking", "savings"
-                ),
+                create_transfer_event(10000, "2025-01-01T12:00:00Z", "checking", "savings"),
                 create_card_swipe_event(
                     "acc_42",
                     -2550,
@@ -98,9 +96,7 @@ class TestBinarySerde:
                     "Acme Corp",
                     "Bi-weekly paycheck",
                 ),
-                create_transfer_event(
-                    10000, "2025-01-01T12:00:00Z", "checking", "savings"
-                ),
+                create_transfer_event(10000, "2025-01-01T12:00:00Z", "checking", "savings"),
                 create_card_swipe_event(
                     "acc_42",
                     -2550,

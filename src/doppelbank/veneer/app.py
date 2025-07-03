@@ -60,8 +60,7 @@ async def error_handler(
     detail = exc.detail if hasattr(exc, "detail") else str(exc)
 
     logger.warning(
-        f"HTTP {status_code} {detail}: {request.method} {request.url} - "
-        f"Body: {body_str}"
+        f"HTTP {status_code} {detail}: {request.method} {request.url} - Body: {body_str}"
     )
     return JSONResponse(status_code=status_code, content={"detail": detail})
 

@@ -2,13 +2,14 @@
 """
 Preflight script: runs code quality checks and tests.
 """
+
 import subprocess
 import sys
 
 
 def main() -> None:
-    print("[•] Running code quality checks...")
-    result = subprocess.run(["uv", "run", "check"])
+    print("[•] Running code quality fixes...")
+    result = subprocess.run(["uv", "run", "fix"])
     if result.returncode != 0:
         sys.exit(result.returncode)
     print("[•] Running tests...")

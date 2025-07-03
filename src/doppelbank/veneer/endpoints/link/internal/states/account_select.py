@@ -29,9 +29,9 @@ def create_response() -> WorkflowResponse:
 
     data["next_pane"]["user_selection"]["selections"][0]["responses"] = accounts
     data["next_pane"]["id"] = "account_select"
-    data["next_pane"]["user_selection"]["events"]["on_appear"][0]["metadata"][
-        "link_session_id"
-    ] = str(uuid.uuid4())
+    data["next_pane"]["user_selection"]["events"]["on_appear"][0]["metadata"]["link_session_id"] = (
+        str(uuid.uuid4())
+    )
 
     return WorkflowResponse(**data)
 

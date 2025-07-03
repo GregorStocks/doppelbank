@@ -3,13 +3,13 @@ import subprocess
 import sys
 
 CHECK_COMMANDS = [
-    ["uv", "run", "black", "--check", "src/", "tests/"],
+    ["uv", "run", "ruff", "format", "--check", "src/", "tests/"],
     ["uv", "run", "ruff", "check", "src/", "tests/"],
     ["uv", "run", "mypy", "src/", "tests/"],
 ]
 
 FIX_COMMANDS = [
-    ["uv", "run", "black", "src/", "tests/"],
+    ["uv", "run", "ruff", "format", "src/", "tests/"],
     ["uv", "run", "ruff", "check", "--fix", "src/", "tests/"],
 ]
 

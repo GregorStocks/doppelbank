@@ -32,11 +32,8 @@ class LinkTokenCreateResponse(VeneerResponse):
 async def create_link_token(
     request: LinkTokenCreateRequest,
 ) -> LinkTokenCreateResponse:
-
     link_token = f"link-devenv-{uuid.uuid4()}"
-    expiration = (datetime.now(UTC) + timedelta(hours=4)).replace(
-        microsecond=0
-    ).isoformat() + "Z"
+    expiration = (datetime.now(UTC) + timedelta(hours=4)).replace(microsecond=0).isoformat() + "Z"
     request_id = "".join(random.choices(string.ascii_letters + string.digits, k=15))
 
     # Store webhook URL if provided

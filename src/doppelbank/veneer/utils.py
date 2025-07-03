@@ -49,10 +49,7 @@ def find_account_file(account_id: str) -> Path:
                                     try:
                                         with open(account_file) as f:
                                             content = f.read()
-                                            if (
-                                                f'"account_id": "{account_id}"'
-                                                in content
-                                            ):
+                                            if f'"account_id": "{account_id}"' in content:
                                                 return account_file
                                     except Exception:
                                         continue

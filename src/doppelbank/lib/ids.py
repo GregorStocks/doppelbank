@@ -77,9 +77,7 @@ class ItemId:
             )
 
         user_id, persona_id, institution_id = parts
-        return ItemId(
-            user_id=user_id, persona_id=persona_id, institution_id=institution_id
-        )
+        return ItemId(user_id=user_id, persona_id=persona_id, institution_id=institution_id)
 
     def create_access_token(self) -> str:
         """Create a new access token for this item."""
@@ -91,9 +89,7 @@ class ItemId:
         # item_id|uuid
         match = re.match(r"^([a-zA-Z0-9_-]+)\|([a-z0-9-]+)$", access_token)
         if not match:
-            raise InvalidIdError(
-                f"Access token '{access_token}' must have format 'item_id|uuid'"
-            )
+            raise InvalidIdError(f"Access token '{access_token}' must have format 'item_id|uuid'")
 
         item_id_part, uuid_part = match.groups()
         return ItemId.from_wire(item_id_part)

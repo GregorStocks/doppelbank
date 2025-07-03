@@ -63,9 +63,7 @@ class PersonaInfo:
         }
 
 
-def generate_random_timestamp(
-    base_date: datetime, persona_info: PersonaInfo
-) -> datetime:
+def generate_random_timestamp(base_date: datetime, persona_info: PersonaInfo) -> datetime:
     """Generate a random timestamp within the given date."""
     # Generate random time components
     hour = random.randint(0, 23)
@@ -74,9 +72,7 @@ def generate_random_timestamp(
     microsecond = random.randint(0, 999999)
 
     persona_tz = persona_info.get_timezone()
-    local_time = base_date.replace(
-        hour=hour, minute=minute, second=second, microsecond=microsecond
-    )
+    local_time = base_date.replace(hour=hour, minute=minute, second=second, microsecond=microsecond)
 
     return persona_tz.localize(local_time)
 
@@ -103,9 +99,7 @@ def generate_events(
     current_date = start_date
     while current_date <= datetime.now():
         # Generate paycheck every 2 weeks
-        if (
-            current_date.weekday() == 4 and current_date.day % 14 < 7
-        ):  # Every other Friday
+        if current_date.weekday() == 4 and current_date.day % 14 < 7:  # Every other Friday
             timestamp = generate_random_timestamp(current_date, persona_info)
             events_list.append(
                 create_paycheck_event(
@@ -183,15 +177,9 @@ Examples:
     )
 
     # Main command - create complete persona data (generate + transform in one step)
-    parser.add_argument(
-        "--user-id", required=True, help="User ID for hierarchical structure"
-    )
-    parser.add_argument(
-        "--persona", required=True, help="Persona name (e.g., jimmy, claude)"
-    )
-    parser.add_argument(
-        "--institution", required=True, help="Institution ID (e.g., doppelbank)"
-    )
+    parser.add_argument("--user-id", required=True, help="User ID for hierarchical structure")
+    parser.add_argument("--persona", required=True, help="Persona name (e.g., jimmy, claude)")
+    parser.add_argument("--institution", required=True, help="Institution ID (e.g., doppelbank)")
     parser.add_argument(
         "--account-type", required=True, help="Account type (e.g., checking, savings)"
     )
@@ -210,9 +198,7 @@ Examples:
         default=30,
         help="Number of days to generate (default: 30)",
     )
-    parser.add_argument(
-        "--seed", type=int, help="Random seed for deterministic generation"
-    )
+    parser.add_argument("--seed", type=int, help="Random seed for deterministic generation")
     parser.add_argument(
         "--output",
         type=Path,
@@ -233,9 +219,7 @@ Examples:
         # Create hierarchical IDs
         user_id = UserId(args.user_id)
         item_id = ItemId(args.user_id, args.persona, args.institution)
-        account_id = AccountId(
-            args.user_id, args.persona, args.institution, args.account_type
-        )
+        account_id = AccountId(args.user_id, args.persona, args.institution, args.account_type)
 
         logger.info(f"Creating persona data for {item_id.to_wire()}")
         logger.info(f"Account: {account_id.to_wire()}")

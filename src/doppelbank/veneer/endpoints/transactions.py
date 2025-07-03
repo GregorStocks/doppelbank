@@ -62,9 +62,7 @@ def transform_ledger_to_plaid(
 
     # Parse hierarchical account ID for metadata
     parsed_account = AccountId.from_wire(account_id)
-    account_name = (
-        f"{parsed_account.persona_id.title()} {parsed_account.account_type.title()}"
-    )
+    account_name = f"{parsed_account.persona_id.title()} {parsed_account.account_type.title()}"
     account_subtype = (
         "checking"
         if parsed_account.account_type in ["checking", "chequing"]
@@ -99,9 +97,7 @@ def transform_ledger_to_plaid(
                 transaction_id=ev.transaction_id,
                 account_id=ev.account_id,
                 amount=ev.amount / 100.0,  # Convert cents to dollars
-                date=bank_event.timestamp.split("T")[
-                    0
-                ],  # Extract date part from event timestamp
+                date=bank_event.timestamp.split("T")[0],  # Extract date part from event timestamp
                 name=ev.description,
                 merchant_name=ev.merchant,
                 personal_finance_category=PersonalFinanceCategory(
@@ -180,19 +176,14 @@ def handle_transactions_sync(
     if len(account_ids) != 1:
         raise HTTPException(
             status_code=400,
-            detail=(
-                "Zero or multiple account IDs provided"
-                "but only exactly one is supported"
-            ),
+            detail=("Zero or multiple account IDs providedbut only exactly one is supported"),
         )
 
     account_id = account_ids[0]
     ledger_path = find_account_file(account_id)
 
     if not ledger_path.exists():
-        logger.error(
-            f"Ledger file not found for account {account_id} (looked in {ledger_path})"
-        )
+        logger.error(f"Ledger file not found for account {account_id} (looked in {ledger_path})")
         raise HTTPException(
             status_code=404,
             detail=f"Ledger file not found for account {account_id}",

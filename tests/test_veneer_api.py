@@ -157,9 +157,9 @@ class TestVeneerAPI:
                     },
                 )
                 # If we get here, the ItemId creation succeeded but AccountId parsing should fail
-                assert (
-                    response.status_code == 400
-                ), f"Account ID '{account_id}' should have failed validation"
+                assert response.status_code == 400, (
+                    f"Account ID '{account_id}' should have failed validation"
+                )
             except Exception:
                 # Good - the invalid characters caused an error during ID creation
                 pass

@@ -53,9 +53,7 @@ async def public_token_exchange(
     institution_id = random.choice(institutions)
 
     # Create item ID using hierarchical structure
-    item_id = ItemId(
-        user_id=user_id, persona_id=persona_id, institution_id=institution_id
-    )
+    item_id = ItemId(user_id=user_id, persona_id=persona_id, institution_id=institution_id)
 
     # Create access token using helper method
     access_token = item_id.create_access_token()

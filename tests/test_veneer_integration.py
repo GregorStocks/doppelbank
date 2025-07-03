@@ -115,9 +115,7 @@ class TestVeneerIntegration:
             )
 
             # Verify test data was created
-            assert (
-                test_account_file.exists()
-            ), f"Expected test data at {test_account_file}"
+            assert test_account_file.exists(), f"Expected test data at {test_account_file}"
 
             with open(test_account_file) as f:
                 detritus_data = json.load(f)
@@ -125,9 +123,7 @@ class TestVeneerIntegration:
             assert len(detritus_data["events"]) > 0
 
             # Set up hierarchical directory structure for the test
-            hierarchical_dir = (
-                temp_path / "data" / "personas" / "integration_test" / "doppelbank"
-            )
+            hierarchical_dir = temp_path / "data" / "personas" / "integration_test" / "doppelbank"
             hierarchical_dir.mkdir(parents=True, exist_ok=True)
             hierarchical_account_file = hierarchical_dir / "checking.json"
             shutil.copy2(test_account_file, hierarchical_account_file)
@@ -186,8 +182,6 @@ class TestVeneerIntegration:
             finally:
                 # Restore original environment variables
                 if original_hierarchical_env is not None:
-                    os.environ["VENEER_HIERARCHICAL_DATA_DIR"] = (
-                        original_hierarchical_env
-                    )
+                    os.environ["VENEER_HIERARCHICAL_DATA_DIR"] = original_hierarchical_env
                 else:
                     os.environ.pop("VENEER_HIERARCHICAL_DATA_DIR", None)

@@ -85,16 +85,12 @@ class TestItemId:
 
     def test_from_wire_too_few_parts(self) -> None:
         """Test creating from item wire ID with too few parts raises error."""
-        with pytest.raises(
-            InvalidIdError, match="must have exactly 3 parts separated by hyphens"
-        ):
+        with pytest.raises(InvalidIdError, match="must have exactly 3 parts separated by hyphens"):
             ItemId.from_wire("user_abc123-jimmy")
 
     def test_from_wire_too_many_parts(self) -> None:
         """Test creating from item wire ID with too many parts raises error."""
-        with pytest.raises(
-            InvalidIdError, match="must have exactly 3 parts separated by hyphens"
-        ):
+        with pytest.raises(InvalidIdError, match="must have exactly 3 parts separated by hyphens"):
             ItemId.from_wire("user_abc123-jimmy-doppelbank-extra")
 
     def test_from_wire_empty_section(self) -> None:
@@ -104,30 +100,22 @@ class TestItemId:
 
     def test_from_wire_invalid_user_section(self) -> None:
         """Test creating from item wire ID with invalid user section raises error."""
-        with pytest.raises(
-            InvalidIdError, match="User ID.*contains invalid characters"
-        ):
+        with pytest.raises(InvalidIdError, match="User ID.*contains invalid characters"):
             ItemId.from_wire("user@domain-jimmy-doppelbank")
 
     def test_from_wire_invalid_persona_section(self) -> None:
         """Test creating from item wire ID with invalid persona section raises error."""
-        with pytest.raises(
-            InvalidIdError, match="Persona ID.*contains invalid characters"
-        ):
+        with pytest.raises(InvalidIdError, match="Persona ID.*contains invalid characters"):
             ItemId.from_wire("user_abc123-jimmy!-doppelbank")
 
     def test_from_wire_invalid_institution_section(self) -> None:
         """Test creating from item wire ID with invalid institution section raises error."""
-        with pytest.raises(
-            InvalidIdError, match="Institution ID.*contains invalid characters"
-        ):
+        with pytest.raises(InvalidIdError, match="Institution ID.*contains invalid characters"):
             ItemId.from_wire("user_abc123-jimmy-doppel bank")
 
     def test_constructor_validation(self) -> None:
         """Test direct constructor validates input."""
-        with pytest.raises(
-            InvalidIdError, match="User ID.*contains invalid characters"
-        ):
+        with pytest.raises(InvalidIdError, match="User ID.*contains invalid characters"):
             ItemId("user-invalid", "jimmy", "doppelbank")
 
     def test_constructor_valid(self) -> None:
@@ -174,16 +162,12 @@ class TestAccountId:
 
     def test_from_wire_too_few_parts(self) -> None:
         """Test creating from account wire ID with too few parts raises error."""
-        with pytest.raises(
-            InvalidIdError, match="must have exactly 4 parts separated by hyphens"
-        ):
+        with pytest.raises(InvalidIdError, match="must have exactly 4 parts separated by hyphens"):
             AccountId.from_wire("user_abc123-jimmy-doppelbank")
 
     def test_from_wire_too_many_parts(self) -> None:
         """Test creating from account wire ID with too many parts raises error."""
-        with pytest.raises(
-            InvalidIdError, match="must have exactly 4 parts separated by hyphens"
-        ):
+        with pytest.raises(InvalidIdError, match="must have exactly 4 parts separated by hyphens"):
             AccountId.from_wire("user_abc123-jimmy-doppelbank-checking-extra")
 
     def test_from_wire_empty_section(self) -> None:
@@ -193,16 +177,12 @@ class TestAccountId:
 
     def test_from_wire_invalid_account_type(self) -> None:
         """Test creating from account wire ID with invalid account type raises error."""
-        with pytest.raises(
-            InvalidIdError, match="Account type.*contains invalid characters"
-        ):
+        with pytest.raises(InvalidIdError, match="Account type.*contains invalid characters"):
             AccountId.from_wire("user_abc123-jimmy-doppelbank-checking!")
 
     def test_constructor_validation(self) -> None:
         """Test direct constructor validates input."""
-        with pytest.raises(
-            InvalidIdError, match="Account type.*contains invalid characters"
-        ):
+        with pytest.raises(InvalidIdError, match="Account type.*contains invalid characters"):
             AccountId("user_abc123", "jimmy", "doppelbank", "checking!")
 
     def test_constructor_valid(self) -> None:
@@ -375,18 +355,11 @@ class TestValidationEdgeCases:
 
         # Complex item ID
         item_id = ItemId("user_123", "persona_name_with_underscores", "bank_name_2024")
-        assert (
-            item_id.to_wire() == "user_123-persona_name_with_underscores-bank_name_2024"
-        )
+        assert item_id.to_wire() == "user_123-persona_name_with_underscores-bank_name_2024"
 
         # Complex account ID
-        account_id = AccountId(
-            "user_123", "persona_name", "bank_name", "savings_premium_2024"
-        )
-        assert (
-            account_id.to_wire()
-            == "user_123-persona_name-bank_name-savings_premium_2024"
-        )
+        account_id = AccountId("user_123", "persona_name", "bank_name", "savings_premium_2024")
+        assert account_id.to_wire() == "user_123-persona_name-bank_name-savings_premium_2024"
 
 
 class TestAccessTokenHelpers:

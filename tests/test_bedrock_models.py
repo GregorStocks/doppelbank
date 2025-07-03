@@ -196,9 +196,7 @@ class TestEventTypeBehavior:
 
     def test_event_type_detection_with_transfer(self) -> None:
         """Test event type detection with transfer event."""
-        event = create_transfer_event(
-            10000, "2025-01-01T12:00:00Z", "checking", "savings"
-        )
+        event = create_transfer_event(10000, "2025-01-01T12:00:00Z", "checking", "savings")
 
         assert isinstance(event, TransferEvent)
         assert event.user_id == ""
@@ -221,12 +219,8 @@ class TestEventTypeBehavior:
         """Test that Event is a proper union type."""
         # Event is now a union type, so we can't create empty instances
         # Instead, test that our create functions return the right types
-        paycheck = create_paycheck_event(
-            "acc_42", 250000, "2025-01-01T12:00:00Z", "Acme Corp"
-        )
-        transfer = create_transfer_event(
-            10000, "2025-01-01T12:00:00Z", "checking", "savings"
-        )
+        paycheck = create_paycheck_event("acc_42", 250000, "2025-01-01T12:00:00Z", "Acme Corp")
+        transfer = create_transfer_event(10000, "2025-01-01T12:00:00Z", "checking", "savings")
         card_swipe = create_card_swipe_event(
             "acc_42", -2550, "2025-01-01T12:00:00Z", "Starbucks", "Food & Drink"
         )
