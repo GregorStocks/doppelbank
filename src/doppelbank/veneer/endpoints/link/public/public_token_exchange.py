@@ -1,13 +1,16 @@
 """Implementation of /item/public_token/exchange endpoint."""
 
+import logging
 import uuid
 
 from fastapi import APIRouter, HTTPException
 
 from doppelbank.veneer.common import VeneerRequest, VeneerResponse
-from doppelbank.veneer.webhooks import get_workflow_session_from_link_token
+from doppelbank.veneer.webhooks import get_workflow_session_from_public_token
 
 router = APIRouter()
+
+logger = logging.getLogger(__name__)
 
 
 class PublicTokenExchangeRequest(VeneerRequest):
@@ -24,7 +27,9 @@ class PublicTokenExchangeResponse(VeneerResponse):
 async def public_token_exchange(
     _request: PublicTokenExchangeRequest,
 ) -> PublicTokenExchangeResponse:
-    workflow_session = get_workflow_session_from_link_token(_request.public_token)
+    logger.info(f"Public token exchange {_request.public_token=}")
+
+    workflow_session = get_workflow_session_from_public_token(_request.public_token)
     item_id = workflow_session.item_id
     if not item_id:
         raise HTTPException(status_code=400, detail="No item ID found for link token")

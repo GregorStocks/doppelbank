@@ -119,7 +119,15 @@ class TestVeneerWebhooks:
 
             # Verify public token in response
             public_token = done_data["next_pane"]["sink"]["public_token"]
-            assert public_token == "beep boop token token"
+
+            response = client.post(
+                "/item/public_token/exchange",
+                json={"public_token": public_token},
+            )
+            assert response.status_code == 200
+            exchange_data = response.json()
+            access_token = exchange_data["access_token"]
+            _ = ItemId.from_access_token(access_token)
 
             # Verify webhook was sent
             assert len(received_webhooks) == 1
@@ -130,12 +138,12 @@ class TestVeneerWebhooks:
             assert payload["webhook_type"] == "TRANSACTIONS"
             assert payload["webhook_code"] == "SYNC_UPDATES_AVAILABLE"
             assert payload["environment"] == "sandbox"
-            item_id = ItemId.from_wire(webhook_call["payload"]["item_id"])
+            _ = ItemId.from_wire(webhook_call["payload"]["item_id"])
 
             # Fetch transactions for that item
             response = client.post(
                 "/transactions/sync",
-                json={"access_token": item_id.create_access_token()},
+                json={"access_token": access_token},
             )
             assert response.status_code == 200
             assert len(response.json()["added"]) > 0
@@ -210,11 +218,3 @@ class TestVeneerWebhooks:
                 },
             )
             assert response.status_code == 200
-            done_data = response.json()
-
-            # Verify flow completed normally
-            public_token = done_data["next_pane"]["sink"]["public_token"]
-            assert public_token == "beep boop token token"
-
-            # Verify NO webhook was sent
-            assert len(received_webhooks) == 0

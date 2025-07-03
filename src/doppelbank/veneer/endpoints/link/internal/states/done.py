@@ -1,4 +1,5 @@
 import json
+import logging
 from pathlib import Path
 from typing import Any
 
@@ -11,29 +12,32 @@ from doppelbank.veneer.endpoints.link.internal.models import (
 )
 from doppelbank.veneer.webhooks import get_workflow_session
 
+logger = logging.getLogger(__name__)
+
 
 def create_response(request: WorkflowNextRequest) -> WorkflowResponse:
-    data = load_example_response()
-
-    # Use hard-coded token for testing
-    public_token = "beep boop token token"
-    data["next_pane"]["sink"]["public_token"] = public_token
-    data["next_pane"]["sink"]["result"]["public_token"] = public_token
-    data["next_pane"]["id"] = "done"
-    data["workflow_session_id"] = request.workflow_session_id
-
-    workflow = get_workflow_session(request.workflow_session_id)
-    if not workflow:
+    workflow_session = get_workflow_session(request.workflow_session_id)
+    if not workflow_session:
         raise HTTPException(
             status_code=404, detail=f"Workflow session {request.workflow_session_id} not found"
         )
-
-    if not workflow.item_id:
+    if not workflow_session.item_id:
         raise HTTPException(
             status_code=404, detail=f"Workflow session {request.workflow_session_id} has no item ID"
         )
 
-    accounts = get_accounts(workflow.item_id)
+    data = load_example_response()
+
+    data["next_pane"]["id"] = "done"
+    data["workflow_session_id"] = workflow_session.session_id
+
+    public_token = workflow_session.public_token
+    data["next_pane"]["sink"]["public_token"] = public_token
+    data["next_pane"]["sink"]["result"]["public_token"] = public_token
+
+    logger.info(f"Done {workflow_session.session_id=} {public_token=}")
+
+    accounts = get_accounts(workflow_session.item_id)
 
     data["next_pane"]["sink"]["result"]["metadata"]["accounts"] = [
         {

@@ -15,7 +15,6 @@ from doppelbank.veneer.endpoints.link.internal.states import (
     done,
 )
 from doppelbank.veneer.webhooks import (
-    cleanup_completed_flow,
     get_workflow_session,
     get_workflow_session_from_link_token,
     send_item_add_result_webhook,
@@ -70,8 +69,6 @@ async def workflow_next(request: WorkflowNextRequest) -> WorkflowResponse:
                 time.sleep(2)
                 logger.info("Sending ITEM_ADD_RESULT webhook")
                 await send_item_add_result_webhook(request.workflow_session_id)
-
-                cleanup_completed_flow(request.workflow_session_id)
 
             asyncio.create_task(delayed_webhook())
 
