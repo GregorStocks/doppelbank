@@ -13,12 +13,8 @@ from unittest.mock import patch
 import pytest
 from fastapi.testclient import TestClient
 
+from doppelbank.lib.ids import ItemId
 from doppelbank.veneer.app import app
-from doppelbank.veneer.webhooks import (
-    associate_webhook_with_workflow,
-    get_webhook_for_workflow,
-    store_webhook_for_link_token,
-)
 
 
 @pytest.fixture(scope="module", autouse=True)
@@ -87,7 +83,7 @@ class TestVeneerWebhooks:
             workflow_session_id = start_data["workflow_session_id"]
             assert workflow_session_id
 
-            # Step 3: Progress to account_select_success
+            # Step 3: Progress to account_select_success (user selects accounts)
             response = client.post(
                 "/link/workflow/next",
                 json={
@@ -123,7 +119,15 @@ class TestVeneerWebhooks:
             assert payload["webhook_type"] == "TRANSACTIONS"
             assert payload["webhook_code"] == "SYNC_UPDATES_AVAILABLE"
             assert payload["environment"] == "sandbox"
-            assert payload["item_id"] == "default_item_id"
+            item_id = ItemId.from_wire(webhook_call["payload"]["item_id"])
+
+            # Fetch transactions for that item
+            response = client.post(
+                "/transactions/sync",
+                json={"access_token": item_id.create_access_token()},
+            )
+            assert response.status_code == 200
+            assert len(response.json()["added"]) > 0
 
     def test_link_flow_without_webhook(self) -> None:
         """Test Link flow completes normally when no webhook is configured."""
@@ -193,22 +197,3 @@ class TestVeneerWebhooks:
 
             # Verify NO webhook was sent
             assert len(received_webhooks) == 0
-
-    def test_webhook_storage_and_association(self) -> None:
-        """Test webhook storage and association with workflow sessions."""
-        # Test storing webhook for link token
-        link_token = "link-test-123"
-        webhook_url = "https://myapp.com/webhook"
-        store_webhook_for_link_token(link_token, webhook_url)
-
-        # Test associating with workflow session
-        workflow_session_id = "session-test-456"
-        associate_webhook_with_workflow(link_token, workflow_session_id)
-
-        # Test retrieving webhook for workflow
-        retrieved_url = get_webhook_for_workflow(workflow_session_id)
-        assert retrieved_url == webhook_url
-
-        # Test non-existent workflow
-        non_existent_url = get_webhook_for_workflow("non-existent-session")
-        assert non_existent_url is None

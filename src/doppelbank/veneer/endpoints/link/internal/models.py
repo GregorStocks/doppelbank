@@ -10,11 +10,12 @@ class LinkTokenConfiguration(VeneerRequest):
 
 class LinkWorkflowStartRequest(VeneerRequest):
     link_token_configuration: LinkTokenConfiguration
+    continuation_token: str | None = None
 
 
 class WorkflowNextRequest(VeneerRequest):
     pane_outputs: list[dict[str, Any]]
-    workflow_session_id: str | None = None  # Track which workflow session this is
+    workflow_session_id: str
 
 
 class WorkflowResponse(VeneerResponse):

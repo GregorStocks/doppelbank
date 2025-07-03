@@ -2,6 +2,7 @@ import logging
 
 from fastapi import APIRouter
 
+from doppelbank.veneer.endpoints.accounts import get_accounts
 from doppelbank.veneer.endpoints.link.internal.models import (
     LinkWorkflowStartRequest,
     WorkflowNextRequest,
@@ -13,8 +14,9 @@ from doppelbank.veneer.endpoints.link.internal.states import (
     done,
 )
 from doppelbank.veneer.webhooks import (
-    associate_webhook_with_workflow,
     cleanup_completed_flow,
+    create_workflow_session_from_link_token,
+    get_workflow_session,
     send_item_add_result_webhook,
 )
 
@@ -27,11 +29,12 @@ async def start_link_workflow_json(
     request: LinkWorkflowStartRequest,
 ) -> WorkflowResponse:
     logger.info(f"Starting Link workflow: {request}")
-    response = account_select.create_response()
+    response, item_id = account_select.create_response()
 
     # Associate webhook with this workflow session if link token provided
     if t := request.link_token_configuration.link_token:
-        associate_webhook_with_workflow(t, response.workflow_session_id)
+        session = create_workflow_session_from_link_token(t, response.workflow_session_id)
+        session.item_id = item_id
 
     return response
 
@@ -41,6 +44,21 @@ async def workflow_next(request: WorkflowNextRequest) -> WorkflowResponse:
     logger.info(f"Link workflow next: {request}")
     match request.pane_outputs[0]["pane_rendering_id"]:
         case "account_select":
+            # User has selected accounts - track the selection
+            workflow_session = get_workflow_session(request.workflow_session_id)
+            if not workflow_session:
+                raise ValueError(f"No workflow session found for {request.workflow_session_id}")
+
+            if not workflow_session.item_id:
+                raise ValueError(
+                    f"No item ID found for workflow session: {request.workflow_session_id}"
+                )
+
+            # TODO: Extract actual selected account IDs from request.pane_outputs
+            accounts = get_accounts(workflow_session.item_id)
+            for account in accounts:
+                workflow_session.selected_account_ids.append(account.account_id)
+
             # Accounts confirmed, go to success
             return account_select_success.create_response(request)
         case "account_select_success":
@@ -48,14 +66,8 @@ async def workflow_next(request: WorkflowNextRequest) -> WorkflowResponse:
             response = done.create_response(request)
 
             # Trigger ITEM_ADD_RESULT webhook if configured
-            if request.workflow_session_id:
-                # Extract public token from done response
-                public_token = response.next_pane.get("sink", {}).get("public_token")
-                if public_token:
-                    await send_item_add_result_webhook(
-                        request.workflow_session_id, "default_item_id"
-                    )
-                    cleanup_completed_flow(request.workflow_session_id)
+            await send_item_add_result_webhook(request.workflow_session_id)
+            cleanup_completed_flow(request.workflow_session_id)
 
             return response
         case unknown:

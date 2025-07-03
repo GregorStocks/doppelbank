@@ -11,9 +11,10 @@ from doppelbank.veneer.endpoints.link.internal.models import (
 def create_response(request: WorkflowNextRequest) -> WorkflowResponse:
     data = load_example_response()
 
-    token = "beep boop token token"
-    data["next_pane"]["sink"]["public_token"] = token
-    data["next_pane"]["sink"]["result"]["public_token"] = token
+    # Use hard-coded token for testing
+    public_token = "beep boop token token"
+    data["next_pane"]["sink"]["public_token"] = public_token
+    data["next_pane"]["sink"]["result"]["public_token"] = public_token
     data["next_pane"]["id"] = "done"
     data["workflow_session_id"] = request.workflow_session_id
 

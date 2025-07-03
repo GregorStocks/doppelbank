@@ -2,39 +2,56 @@
 
 import asyncio
 import logging
+from dataclasses import dataclass, field
 
 import httpx
 
+from doppelbank.lib.ids import ItemId
+
 logger = logging.getLogger(__name__)
 
-# In-memory storage for webhook tracking
+
+@dataclass
+class WorkflowSession:
+    """Information associated with a workflow session."""
+
+    webhook_url: str | None = None
+    item_id: ItemId | None = None
+    selected_account_ids: list[str] = field(default_factory=list)
+
+
+# In-memory storage for workflow tracking
 # TODO: Persist
-_link_token_to_webhook: dict[str, str] = {}
-_workflow_session_to_webhook: dict[str, str] = {}
+_link_token_to_webhook: dict[str, str | None] = {}
+_workflow_sessions: dict[str, WorkflowSession] = {}
 
 
-def store_webhook_for_link_token(link_token: str, webhook_url: str) -> None:
-    """Store webhook URL associated with a link token."""
+def store_webhook_for_link_token(link_token: str, webhook_url: str | None = None) -> None:
+    """Store link token data including optional webhook URL."""
     _link_token_to_webhook[link_token] = webhook_url
-    logger.info(f"Stored webhook for link token: {link_token}")
+    logger.info(f"Stored link token {link_token} with webhook: {webhook_url}")
 
 
-def associate_webhook_with_workflow(link_token: str, workflow_session_id: str) -> None:
-    """Associate stored webhook URL with a workflow session ID."""
-    webhook_url = _link_token_to_webhook.get(link_token)
+def create_workflow_session_from_link_token(
+    link_token: str, workflow_session_id: str
+) -> WorkflowSession:
+    """Create workflow session from link token data."""
+    webhook_url = _link_token_to_webhook.pop(link_token, None)
+
+    session = WorkflowSession(webhook_url=webhook_url, item_id=None, selected_account_ids=[])
+    _workflow_sessions[workflow_session_id] = session
+
     if webhook_url:
-        _workflow_session_to_webhook[workflow_session_id] = webhook_url
-        logger.info(
-            f"Associated webhook for link token {link_token} with workflow session:"
-            f"{workflow_session_id}"
-        )
+        logger.info(f"Created workflow session {workflow_session_id} with webhook: {webhook_url}")
     else:
-        logger.warning(f"No webhook found for link token {link_token}")
+        logger.info(f"Created workflow session {workflow_session_id} without webhook")
+
+    return session
 
 
-def get_webhook_for_workflow(workflow_session_id: str) -> str | None:
-    """Get webhook URL for a workflow session ID."""
-    return _workflow_session_to_webhook.get(workflow_session_id)
+def get_workflow_session(workflow_session_id: str) -> WorkflowSession | None:
+    """Get workflow session object for a workflow session ID."""
+    return _workflow_sessions.get(workflow_session_id)
 
 
 async def send_webhook(webhook_url: str, payload: dict) -> bool:
@@ -56,29 +73,34 @@ async def send_webhook(webhook_url: str, payload: dict) -> bool:
         return False
 
 
-async def send_item_add_result_webhook(workflow_session_id: str, item_id: str) -> None:
+async def send_item_add_result_webhook(workflow_session_id: str) -> None:
     """Send ITEM_ADD_RESULT webhook for completed Link flow."""
-    webhook_url = get_webhook_for_workflow(workflow_session_id)
-    if not webhook_url:
+    workflow_session = get_workflow_session(workflow_session_id)
+    if not workflow_session:
+        raise ValueError(f"No workflow session found for {workflow_session_id}")
+
+    if not workflow_session.webhook_url:
         logger.warning(f"No webhook configured for workflow session: {workflow_session_id}")
         return
+
+    if not workflow_session.item_id:
+        raise ValueError(f"No item ID found for workflow session: {workflow_session_id}")
 
     payload = {
         "webhook_type": "TRANSACTIONS",
         "webhook_code": "SYNC_UPDATES_AVAILABLE",
-        "item_id": item_id,
+        "item_id": workflow_session.item_id.to_wire(),
         "initial_update_complete": True,
         "historical_update_complete": True,
         "environment": "sandbox",
     }
 
     # Send webhook asynchronously (don't block the response)
-    asyncio.create_task(send_webhook(webhook_url, payload))
+    asyncio.create_task(send_webhook(workflow_session.webhook_url, payload))
     logger.info(f"Queued ITEM_ADD_RESULT webhook for session: {workflow_session_id}")
 
 
 def cleanup_completed_flow(workflow_session_id: str) -> None:
-    """Clean up webhook tracking for completed flow."""
-    _workflow_session_to_webhook.pop(workflow_session_id, None)
-    # Note: We keep link_token mapping in case of retries
-    logger.debug(f"Cleaned up webhook tracking for session: {workflow_session_id}")
+    """Clean up workflow session tracking for completed flow."""
+    _workflow_sessions.pop(workflow_session_id, None)
+    logger.debug(f"Cleaned up workflow session tracking for session: {workflow_session_id}")

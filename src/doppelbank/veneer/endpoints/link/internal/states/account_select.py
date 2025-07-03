@@ -3,21 +3,30 @@ import uuid
 from pathlib import Path
 from typing import Any
 
+from doppelbank.lib.ids import ItemId
+from doppelbank.veneer.endpoints.accounts import get_accounts
 from doppelbank.veneer.endpoints.link.internal.models import (
     WorkflowResponse,
 )
 
 
-def create_response() -> WorkflowResponse:
+def create_response() -> (WorkflowResponse, ItemId):
     data = load_example_response()
 
-    accounts = [
+    user_id = "fakeuser"
+    persona = "jimmy"
+    institution = "doppelbank"
+
+    item_id = ItemId(user_id, persona, institution)
+    accounts = get_accounts(item_id)
+
+    data["next_pane"]["user_selection"]["selections"][0]["responses"] = [
         {
-            "id": "test_account",
-            "title": {"translation": "Beep • 1111"},
+            "id": account.account_id,
+            "title": {"translation": account.name},
             "note": None,
             "subtitle": None,
-            "detail": {"translation": "$200.00"},
+            "detail": {"translation": f"${account.balances.current}"},
             "preselected": True,
             "trailing_icon": "SDK_ASSET_UNKNOWN",
             "on_submit": None,
@@ -25,15 +34,15 @@ def create_response() -> WorkflowResponse:
             "leading_asset": None,
             "trailing_asset": None,
         }
+        for account in accounts
     ]
-
-    data["next_pane"]["user_selection"]["selections"][0]["responses"] = accounts
     data["next_pane"]["id"] = "account_select"
     data["next_pane"]["user_selection"]["events"]["on_appear"][0]["metadata"]["link_session_id"] = (
         str(uuid.uuid4())
     )
+    data["workflow_session_id"] = str(uuid.uuid4())
 
-    return WorkflowResponse(**data)
+    return WorkflowResponse(**data), item_id
 
 
 def load_example_response() -> dict[str, Any]:

@@ -9,6 +9,7 @@ from fastapi import APIRouter, HTTPException
 
 from doppelbank.lib.ids import AccountId, ItemId
 from doppelbank.schemas.detritus import AddCleared, AddPending, BankLedger
+from doppelbank.veneer.data import find_account_file
 from doppelbank.veneer.models import (
     Account,
     Balance,
@@ -19,7 +20,6 @@ from doppelbank.veneer.models import (
     TransactionsSyncRequest,
     TransactionsSyncResponse,
 )
-from doppelbank.veneer.utils import find_account_file
 
 router: APIRouter = APIRouter()
 
