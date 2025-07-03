@@ -9,6 +9,7 @@ from pathlib import Path
 import pytest
 from fastapi.testclient import TestClient
 
+from doppelbank.lib.ids import ItemId
 from doppelbank.veneer.app import app
 
 
@@ -35,8 +36,6 @@ class TestVeneerAccountsAPI:
 
     def test_accounts_get_basic(self) -> None:
         """Test basic accounts get endpoint using FastAPI TestClient."""
-        from doppelbank.lib.ids import ItemId
-
         # Create a hierarchical ItemId and access token
         item_id = ItemId("user_test", "jimmy", "doppelbank")
         access_token = item_id.create_access_token()

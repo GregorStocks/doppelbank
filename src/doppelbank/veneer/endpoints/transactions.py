@@ -2,11 +2,12 @@ import logging
 import re
 import uuid
 from datetime import datetime
+from pathlib import Path
 
 import msgspec
 from fastapi import APIRouter, HTTPException
 
-from doppelbank.lib.ids import AccountId
+from doppelbank.lib.ids import AccountId, ItemId
 from doppelbank.schemas.detritus import AddCleared, AddPending, BankLedger
 from doppelbank.veneer.models import (
     Account,
@@ -134,10 +135,6 @@ def transform_ledger_to_plaid(
 
 def account_ids_from_access_token(access_token: str) -> list[str]:
     """Extract account IDs from access token using hierarchical structure."""
-    from pathlib import Path
-
-    from doppelbank.lib.ids import ItemId
-
     # Parse the access token to get the item ID
     item_id = ItemId.from_access_token(access_token)
 

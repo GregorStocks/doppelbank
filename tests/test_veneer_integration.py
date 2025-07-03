@@ -20,6 +20,7 @@ import pytest
 import requests
 import uvicorn
 
+from doppelbank.lib.ids import ItemId
 from doppelbank.veneer.app import app
 
 
@@ -139,8 +140,6 @@ class TestVeneerIntegration:
             base_url = "http://127.0.0.1:8002"
 
             # Create hierarchical IDs and access token for testing
-            from doppelbank.lib.ids import ItemId
-
             item_id = ItemId("user_test", "integration_test", "doppelbank")
             access_token = item_id.create_access_token()
             hierarchical_account_id = f"{item_id.to_wire()}-checking"

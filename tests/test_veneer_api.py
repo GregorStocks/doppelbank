@@ -5,6 +5,7 @@ These tests use FastAPI's TestClient for fast unit-style testing
 without needing a real HTTP server.
 """
 
+import base64
 import os
 from collections.abc import Generator
 from pathlib import Path
@@ -12,6 +13,7 @@ from pathlib import Path
 import pytest
 from fastapi.testclient import TestClient
 
+from doppelbank.lib.ids import ItemId
 from doppelbank.veneer.app import app
 
 
@@ -38,8 +40,6 @@ class TestVeneerAPI:
 
     def test_transactions_sync_basic(self) -> None:
         """Test basic transactions sync endpoint using FastAPI TestClient."""
-        from doppelbank.lib.ids import ItemId
-
         # Create hierarchical ItemId and account ID
         item_id = ItemId("user_test", "jimmy", "doppelbank")
         access_token = item_id.create_access_token()
@@ -70,8 +70,6 @@ class TestVeneerAPI:
 
     def test_transactions_sync_account_not_found(self) -> None:
         """Test error handling for non-existent account."""
-        from doppelbank.lib.ids import ItemId
-
         # Create a hierarchical ItemId for a non-existent account
         item_id = ItemId("user_test", "nonexistent", "nonexistent")
         access_token = item_id.create_access_token()
@@ -93,8 +91,6 @@ class TestVeneerAPI:
 
     def test_validate_account_id_valid_characters(self) -> None:
         """Test validation accepts valid account_id characters."""
-        from doppelbank.lib.ids import ItemId
-
         client = TestClient(app)
         # Test hierarchical account IDs with valid characters
         valid_accounts = [
@@ -126,8 +122,6 @@ class TestVeneerAPI:
 
     def test_validate_account_id_invalid_characters(self) -> None:
         """Test validation rejects invalid characters."""
-        from doppelbank.lib.ids import ItemId
-
         client = TestClient(app)
         # Test hierarchical account IDs with invalid characters
         invalid_accounts = [

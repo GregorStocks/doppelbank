@@ -3,6 +3,7 @@ Unit tests for bedrock CLI.
 """
 
 # Standard library
+from datetime import datetime
 
 # Third-party
 
@@ -45,8 +46,6 @@ class TestGenerateRandomTimestamp:
 
     def test_generate_random_timestamp(self) -> None:
         """Test random timestamp generation."""
-        from datetime import datetime
-
         persona_info = PersonaInfo("test_persona", timezone_name="US/Pacific")
         base_date = datetime(2025, 1, 1)
 

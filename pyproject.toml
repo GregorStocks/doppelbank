@@ -60,7 +60,8 @@ select = [
     "TCH",    # flake8-type-checking
     "UP",     # pyupgrade
     "FURB",   # refurb
-    "TID252", # no relative imports
+    "TID",    # flake8-tidy-imports
+    "PLC0415", # import-outside-top-level
 ]
 
 # Ignore print statements in CLI tools and scripts where they are appropriate
