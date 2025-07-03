@@ -4,7 +4,6 @@ import time
 
 from fastapi import APIRouter
 
-from doppelbank.veneer.endpoints.accounts import get_accounts
 from doppelbank.veneer.endpoints.link.internal.models import (
     LinkWorkflowStartRequest,
     WorkflowNextRequest,
@@ -56,10 +55,9 @@ async def workflow_next(request: WorkflowNextRequest) -> WorkflowResponse:
                     f"No item ID found for workflow session: {request.workflow_session_id}"
                 )
 
-            # TODO: Extract actual selected account IDs from request.pane_outputs
-            accounts = get_accounts(workflow_session.item_id)
-            for account in accounts:
-                workflow_session.selected_account_ids.append(account.account_id)
+            workflow_session.selected_account_ids = request.pane_outputs[0]["user_selection"][
+                "submit"
+            ]["responses"][0]["response_ids"]
 
             # Accounts confirmed, go to success
             return account_select_success.create_response(request)

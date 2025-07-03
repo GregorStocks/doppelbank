@@ -83,12 +83,23 @@ class TestVeneerWebhooks:
             workflow_session_id = start_data["workflow_session_id"]
             assert workflow_session_id
 
+            account_id = response.json()["next_pane"]["user_selection"]["selections"][0][
+                "responses"
+            ][0]["id"]
+
             # Step 3: Progress to account_select_success (user selects accounts)
             response = client.post(
                 "/link/workflow/next",
                 json={
                     "workflow_session_id": workflow_session_id,
-                    "pane_outputs": [{"pane_rendering_id": "account_select"}],
+                    "pane_outputs": [
+                        {
+                            "pane_rendering_id": "account_select",
+                            "user_selection": {
+                                "submit": {"responses": [{"response_ids": [account_id]}]}
+                            },
+                        }
+                    ],
                 },
             )
             assert response.status_code == 200
@@ -169,13 +180,23 @@ class TestVeneerWebhooks:
             assert response.status_code == 200
             start_data = response.json()
             workflow_session_id = start_data["workflow_session_id"]
+            account_id = response.json()["next_pane"]["user_selection"]["selections"][0][
+                "responses"
+            ][0]["id"]
 
             # Progress through flow
             response = client.post(
                 "/link/workflow/next",
                 json={
                     "workflow_session_id": workflow_session_id,
-                    "pane_outputs": [{"pane_rendering_id": "account_select"}],
+                    "pane_outputs": [
+                        {
+                            "pane_rendering_id": "account_select",
+                            "user_selection": {
+                                "submit": {"responses": [{"response_ids": [account_id]}]}
+                            },
+                        }
+                    ],
                 },
             )
             assert response.status_code == 200
