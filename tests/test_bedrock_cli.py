@@ -6,7 +6,6 @@ Unit tests for bedrock CLI.
 from datetime import datetime
 
 # Third-party
-
 # Local project
 from doppelbank.lib.timestamp import parse_iso8601_z
 from doppelbank.persona_generator.cli import (

@@ -14,6 +14,11 @@ import pytest
 from fastapi.testclient import TestClient
 
 from doppelbank.veneer.app import app
+from doppelbank.veneer.webhooks import (
+    associate_webhook_with_workflow,
+    get_webhook_for_workflow,
+    store_webhook_for_link_token,
+)
 
 
 @pytest.fixture(scope="module", autouse=True)
@@ -195,12 +200,6 @@ class TestVeneerWebhooks:
 
     def test_webhook_storage_and_association(self) -> None:
         """Test webhook storage and association with workflow sessions."""
-        from doppelbank.veneer.webhooks import (
-            associate_webhook_with_workflow,
-            get_webhook_for_workflow,
-            store_webhook_for_link_token,
-        )
-
         # Test storing webhook for link token
         link_token = "link-test-123"
         webhook_url = "https://myapp.com/webhook"

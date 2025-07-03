@@ -192,8 +192,6 @@ class TestVeneerAPI:
         assert isinstance(institution["logo"], str)
         assert len(institution["logo"]) > 100  # Should be a substantial base64 string
         # Verify it's valid base64 by trying to decode it
-        import base64
-
         try:
             base64.b64decode(institution["logo"])
         except Exception as e:
