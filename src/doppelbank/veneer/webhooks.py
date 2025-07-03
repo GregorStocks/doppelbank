@@ -2,6 +2,7 @@
 
 import asyncio
 import logging
+import uuid
 from dataclasses import dataclass, field
 
 import httpx
@@ -15,38 +16,32 @@ logger = logging.getLogger(__name__)
 class WorkflowSession:
     """Information associated with a workflow session."""
 
-    webhook_url: str | None = None
+    session_id: str
     item_id: ItemId | None = None
+    webhook_url: str | None = None
     selected_account_ids: list[str] = field(default_factory=list)
 
 
 # In-memory storage for workflow tracking
 # TODO: Persist
-_link_token_to_webhook: dict[str, str | None] = {}
+_link_token_to_workflow_session: dict[str, str] = {}
 _workflow_sessions: dict[str, WorkflowSession] = {}
 
 
-def store_webhook_for_link_token(link_token: str, webhook_url: str | None = None) -> None:
+def initialize_workflow_session(link_token: str, webhook_url: str | None = None) -> None:
     """Store link token data including optional webhook URL."""
-    _link_token_to_webhook[link_token] = webhook_url
-    logger.info(f"Stored link token {link_token} with webhook: {webhook_url}")
+    workflow_session_id = str(uuid.uuid4())
+
+    _link_token_to_workflow_session[link_token] = workflow_session_id
+    _workflow_sessions[workflow_session_id] = WorkflowSession(
+        session_id=workflow_session_id, webhook_url=webhook_url
+    )
+    logger.info(f"Stored {link_token=} {webhook_url=} {workflow_session_id=}")
 
 
-def create_workflow_session_from_link_token(
-    link_token: str, workflow_session_id: str
-) -> WorkflowSession:
+def get_workflow_session_from_link_token(link_token: str) -> WorkflowSession:
     """Create workflow session from link token data."""
-    webhook_url = _link_token_to_webhook.pop(link_token, None)
-
-    session = WorkflowSession(webhook_url=webhook_url, item_id=None, selected_account_ids=[])
-    _workflow_sessions[workflow_session_id] = session
-
-    if webhook_url:
-        logger.info(f"Created workflow session {workflow_session_id} with webhook: {webhook_url}")
-    else:
-        logger.info(f"Created workflow session {workflow_session_id} without webhook")
-
-    return session
+    return _workflow_sessions[_link_token_to_workflow_session[link_token]]
 
 
 def get_workflow_session(workflow_session_id: str) -> WorkflowSession | None:

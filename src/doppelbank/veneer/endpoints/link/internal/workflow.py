@@ -16,8 +16,8 @@ from doppelbank.veneer.endpoints.link.internal.states import (
 )
 from doppelbank.veneer.webhooks import (
     cleanup_completed_flow,
-    create_workflow_session_from_link_token,
     get_workflow_session,
+    get_workflow_session_from_link_token,
     send_item_add_result_webhook,
 )
 
@@ -30,12 +30,11 @@ async def start_link_workflow_json(
     request: LinkWorkflowStartRequest,
 ) -> WorkflowResponse:
     logger.info(f"Starting Link workflow: {request}")
-    response, item_id = account_select.create_response()
 
-    # Associate webhook with this workflow session if link token provided
-    if t := request.link_token_configuration.link_token:
-        session = create_workflow_session_from_link_token(t, response.workflow_session_id)
-        session.item_id = item_id
+    workflow_session = get_workflow_session_from_link_token(
+        request.link_token_configuration.link_token
+    )
+    response = account_select.create_response(workflow_session)
 
     return response
 

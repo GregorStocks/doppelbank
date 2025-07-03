@@ -1,13 +1,11 @@
 """Implementation of /item/public_token/exchange endpoint."""
 
-import random
 import uuid
 
-from fastapi import APIRouter
+from fastapi import APIRouter, HTTPException
 
-from doppelbank.lib.ids import ItemId
 from doppelbank.veneer.common import VeneerRequest, VeneerResponse
-from doppelbank.veneer.data import get_available_institutions_for_persona, get_available_personas
+from doppelbank.veneer.webhooks import get_workflow_session_from_link_token
 
 router = APIRouter()
 
@@ -26,18 +24,10 @@ class PublicTokenExchangeResponse(VeneerResponse):
 async def public_token_exchange(
     _request: PublicTokenExchangeRequest,
 ) -> PublicTokenExchangeResponse:
-    # Generate a realistic hierarchical ID using available data
-    user_id = f"user_{uuid.uuid4().hex[:8]}"
-
-    # Select a random persona and institution from available data
-    personas = get_available_personas()
-    persona_id = random.choice(personas)
-
-    institutions = get_available_institutions_for_persona(persona_id)
-    institution_id = random.choice(institutions)
-
-    # Create item ID using hierarchical structure
-    item_id = ItemId(user_id=user_id, persona_id=persona_id, institution_id=institution_id)
+    workflow_session = get_workflow_session_from_link_token(_request.public_token)
+    item_id = workflow_session.item_id
+    if not item_id:
+        raise HTTPException(status_code=400, detail="No item ID found for link token")
 
     # Create access token using helper method
     access_token = item_id.create_access_token()

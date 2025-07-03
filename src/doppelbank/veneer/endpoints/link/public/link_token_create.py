@@ -6,7 +6,7 @@ from datetime import UTC, datetime, timedelta
 from fastapi import APIRouter
 
 from doppelbank.veneer.common import VeneerRequest, VeneerResponse
-from doppelbank.veneer.webhooks import store_webhook_for_link_token
+from doppelbank.veneer.webhooks import initialize_workflow_session
 
 router = APIRouter()
 
@@ -37,8 +37,7 @@ async def create_link_token(
     request_id = "".join(random.choices(string.ascii_letters + string.digits, k=15))
 
     # Store webhook URL if provided
-    if request.webhook:
-        store_webhook_for_link_token(link_token, request.webhook)
+    initialize_workflow_session(link_token, request.webhook)
 
     return LinkTokenCreateResponse(
         link_token=link_token, expiration=expiration, request_id=request_id

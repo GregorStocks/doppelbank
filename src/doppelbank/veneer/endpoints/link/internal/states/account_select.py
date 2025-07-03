@@ -4,21 +4,24 @@ from pathlib import Path
 from typing import Any
 
 from doppelbank.lib.ids import ItemId
+from doppelbank.veneer.data import get_available_institutions_for_persona, get_available_personas
 from doppelbank.veneer.endpoints.accounts import get_accounts
 from doppelbank.veneer.endpoints.link.internal.models import (
     WorkflowResponse,
 )
+from doppelbank.veneer.webhooks import WorkflowSession
 
 
-def create_response() -> tuple[WorkflowResponse, ItemId]:
+def create_response(workflow_session: WorkflowSession) -> WorkflowResponse:
     data = load_example_response()
 
-    user_id = "fakeuser"
-    persona = "jimmy"
-    institution = "doppelbank"
+    user_id = uuid.uuid4().hex[:8]
+    persona = get_available_personas()[0]
+    institution = get_available_institutions_for_persona(persona)[0]
 
     item_id = ItemId(user_id, persona, institution)
     accounts = get_accounts(item_id)
+    workflow_session.item_id = item_id
 
     data["next_pane"]["user_selection"]["selections"][0]["responses"] = [
         {
@@ -40,9 +43,9 @@ def create_response() -> tuple[WorkflowResponse, ItemId]:
     data["next_pane"]["user_selection"]["events"]["on_appear"][0]["metadata"]["link_session_id"] = (
         str(uuid.uuid4())
     )
-    data["workflow_session_id"] = str(uuid.uuid4())
+    data["workflow_session_id"] = workflow_session.session_id
 
-    return WorkflowResponse(**data), item_id
+    return WorkflowResponse(**data)
 
 
 def load_example_response() -> dict[str, Any]:
