@@ -8,9 +8,11 @@ This test file implements the "better tests" described in CLAUDE.md TODOs:
 
 import json
 import multiprocessing
+import os
 import shutil
 import socket
 import subprocess
+import tempfile
 import time
 from collections.abc import Generator
 from pathlib import Path
@@ -80,110 +82,112 @@ class TestVeneerIntegration:
         This implements the TODO: "Single test that goes from Bedrock to Veneer"
         """
         _ = running_server
-        # Step 1: Generate complete persona data in one step using new hierarchical structure
-        # Generate directly into the data directory structure
-        subprocess.run(
-            [
-                "uv",
-                "run",
-                "python",
-                "-m",
-                "doppelbank.persona_generator.cli",
-                "--user-id",
-                "user_test",
-                "--persona",
-                "integration_test",
-                "--institution",
-                "doppelbank",
-                "--account-type",
-                "checking",
-                "--seed",
-                "12345",
-                "--days",
-                "60",  # Generate 60 days of data
-            ],
-            check=True,
-        )
 
-        # Verify hierarchical data was created
-        hierarchical_account_file = (
-            Path.cwd()
-            / "data"
-            / "personas"
-            / "integration_test"
-            / "doppelbank"
-            / "checking.json"
-        )
-        assert (
-            hierarchical_account_file.exists()
-        ), f"Expected hierarchical data at {hierarchical_account_file}"
+        # Create a temporary directory for test data
+        with tempfile.TemporaryDirectory() as temp_dir:
+            temp_path = Path(temp_dir)
 
-        with open(hierarchical_account_file) as f:
-            detritus_data = json.load(f)
-        assert "events" in detritus_data
-        assert len(detritus_data["events"]) > 0
-
-        # Step 2: Set up legacy flat data for backward compatibility testing
-        veneer_data_dir = (
-            Path(__file__).parent.parent / "src" / "doppelbank" / "veneer" / "data"
-        )
-        veneer_data_dir.mkdir(exist_ok=True)
-
-        # Copy the default test data for backward compatibility (flat structure)
-        detritus_test_data_dir = Path(__file__).parent / "data" / "detritus"
-        source_default_ledger = detritus_test_data_dir / "test_account.json"
-        default_ledger_path = veneer_data_dir / "test_account.json"
-        shutil.copy2(source_default_ledger, default_ledger_path)
-
-        try:
-            # Step 3: Test the API with real HTTP requests (like curl)
-            base_url = "http://127.0.0.1:8002"
-
-            # Create hierarchical IDs and access token for testing
-            item_id = ItemId("user_test", "integration_test", "doppelbank")
-            access_token = item_id.create_access_token()
-            hierarchical_account_id = f"{item_id.to_wire()}-checking"
-
-            # Test 1: Query with hierarchical account_id
-            response = requests.post(
-                f"{base_url}/transactions/sync",
-                json={
-                    "access_token": access_token,
-                    "options": {"account_id": hierarchical_account_id},
-                },
-                timeout=10,
+            # Step 1: Generate complete persona data in temporary directory
+            test_account_file = temp_path / "integration_test_account.json"
+            subprocess.run(
+                [
+                    "uv",
+                    "run",
+                    "python",
+                    "-m",
+                    "doppelbank.persona_generator.cli",
+                    "--user-id",
+                    "user_test",
+                    "--persona",
+                    "integration_test",
+                    "--institution",
+                    "doppelbank",
+                    "--account-type",
+                    "checking",
+                    "--seed",
+                    "12345",
+                    "--days",
+                    "60",  # Generate 60 days of data
+                    "--output",
+                    str(test_account_file),
+                ],
+                check=True,
             )
-            assert response.status_code == 200
 
-            api_data = response.json()
-            assert isinstance(api_data, dict)
-            assert "accounts" in api_data
-            assert "added" in api_data
-            assert isinstance(api_data["accounts"], list)
-            assert isinstance(api_data["added"], list)
-            assert len(api_data["accounts"]) > 0
+            # Verify test data was created
+            assert (
+                test_account_file.exists()
+            ), f"Expected test data at {test_account_file}"
 
-            # Verify the API returned data (event counts may differ due to transformation)
-            assert len(api_data["added"]) > 0
+            with open(test_account_file) as f:
+                detritus_data = json.load(f)
+            assert "events" in detritus_data
+            assert len(detritus_data["events"]) > 0
 
-            # Test error handling for non-existent account
-            nonexistent_item_id = ItemId("user_test", "nonexistent", "nonexistent")
-            nonexistent_access_token = nonexistent_item_id.create_access_token()
-            nonexistent_account_id = f"{nonexistent_item_id.to_wire()}-nonexistent"
-
-            response = requests.post(
-                f"{base_url}/transactions/sync",
-                json={
-                    "access_token": nonexistent_access_token,
-                    "options": {"account_id": nonexistent_account_id},
-                },
-                timeout=10,
+            # Set up hierarchical directory structure for the test
+            hierarchical_dir = (
+                temp_path / "data" / "personas" / "integration_test" / "doppelbank"
             )
-            assert response.status_code == 404
+            hierarchical_dir.mkdir(parents=True, exist_ok=True)
+            hierarchical_account_file = hierarchical_dir / "checking.json"
+            shutil.copy2(test_account_file, hierarchical_account_file)
 
-        finally:
-            # Cleanup: remove the test files
-            if default_ledger_path.exists():
-                default_ledger_path.unlink()
-            # Note: We don't clean up hierarchical_account_file as it's part of the data directory
-            # and may be used by other tests or processes
+            # Set environment variables to point to temporary directories
+            original_hierarchical_env = os.environ.get("VENEER_HIERARCHICAL_DATA_DIR")
+
+            os.environ["VENEER_HIERARCHICAL_DATA_DIR"] = str(temp_path / "data")
+
+            try:
+                # Step 3: Test the API with real HTTP requests (like curl)
+                base_url = "http://127.0.0.1:8002"
+
+                # Create hierarchical IDs and access token for testing
+                item_id = ItemId("user_test", "integration_test", "doppelbank")
+                access_token = item_id.create_access_token()
+                hierarchical_account_id = f"{item_id.to_wire()}-checking"
+
+                # Test 1: Query with hierarchical account_id
+                response = requests.post(
+                    f"{base_url}/transactions/sync",
+                    json={
+                        "access_token": access_token,
+                        "options": {"account_id": hierarchical_account_id},
+                    },
+                    timeout=10,
+                )
+                assert response.status_code == 200
+
+                api_data = response.json()
+                assert isinstance(api_data, dict)
+                assert "accounts" in api_data
+                assert "added" in api_data
+                assert isinstance(api_data["accounts"], list)
+                assert isinstance(api_data["added"], list)
+                assert len(api_data["accounts"]) > 0
+
+                # Verify the API returned data (event counts may differ due to transformation)
+                assert len(api_data["added"]) > 0
+
+                # Test error handling for non-existent account
+                nonexistent_item_id = ItemId("user_test", "nonexistent", "nonexistent")
+                nonexistent_access_token = nonexistent_item_id.create_access_token()
+                nonexistent_account_id = f"{nonexistent_item_id.to_wire()}-nonexistent"
+
+                response = requests.post(
+                    f"{base_url}/transactions/sync",
+                    json={
+                        "access_token": nonexistent_access_token,
+                        "options": {"account_id": nonexistent_account_id},
+                    },
+                    timeout=10,
+                )
+                assert response.status_code == 404
+
+            finally:
+                # Restore original environment variables
+                if original_hierarchical_env is not None:
+                    os.environ["VENEER_HIERARCHICAL_DATA_DIR"] = (
+                        original_hierarchical_env
+                    )
+                else:
+                    os.environ.pop("VENEER_HIERARCHICAL_DATA_DIR", None)
