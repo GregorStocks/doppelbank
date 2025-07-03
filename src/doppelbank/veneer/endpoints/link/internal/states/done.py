@@ -2,10 +2,12 @@ import json
 from pathlib import Path
 from typing import Any
 
+from doppelbank.veneer.endpoints.accounts import get_accounts
 from doppelbank.veneer.endpoints.link.internal.models import (
     WorkflowNextRequest,
     WorkflowResponse,
 )
+from doppelbank.veneer.webhooks import get_workflow_session
 
 
 def create_response(request: WorkflowNextRequest) -> WorkflowResponse:
@@ -18,13 +20,16 @@ def create_response(request: WorkflowNextRequest) -> WorkflowResponse:
     data["next_pane"]["id"] = "done"
     data["workflow_session_id"] = request.workflow_session_id
 
-    accounts = [
+    workflow = get_workflow_session(request.workflow_session_id)
+    accounts = get_accounts(workflow.item_id)
+
+    data["next_pane"]["sink"]["result"]["metadata"]["accounts"] = [
         {
-            "id": "test_account",
-            "title": {"translation": "Beep • 1111"},
+            "id": account.account_id,
+            "title": {"translation": account.name},
             "note": None,
             "subtitle": None,
-            "detail": {"translation": "$200.00"},
+            "detail": {"translation": f"${account.balances.current}"},
             "preselected": True,
             "trailing_icon": "SDK_ASSET_UNKNOWN",
             "on_submit": None,
@@ -32,9 +37,8 @@ def create_response(request: WorkflowNextRequest) -> WorkflowResponse:
             "leading_asset": None,
             "trailing_asset": None,
         }
+        for account in accounts
     ]
-
-    data["next_pane"]["sink"]["result"]["metadata"]["accounts"] = accounts
 
     return WorkflowResponse(**data)
 
