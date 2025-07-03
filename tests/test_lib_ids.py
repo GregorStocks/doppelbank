@@ -387,3 +387,52 @@ class TestValidationEdgeCases:
             account_id.to_wire()
             == "user_123-persona_name-bank_name-savings_premium_2024"
         )
+
+
+class TestAccessTokenHelpers:
+    """Test access token helper methods."""
+
+    def test_create_access_token(self) -> None:
+        """Test creating access token from ItemId."""
+        item_id = ItemId("user_123", "jimmy", "doppelbank")
+        access_token = item_id.create_access_token()
+
+        # Should have format: {item_id}|{uuid}
+        assert "|" in access_token
+        parts = access_token.split("|")
+        assert len(parts) == 2
+        assert parts[0] == "user_123-jimmy-doppelbank"
+        assert len(parts[1]) == 32  # UUID hex without dashes
+
+    def test_from_access_token(self) -> None:
+        """Test extracting ItemId from access token."""
+        original_item = ItemId("user_123", "jimmy", "doppelbank")
+        access_token = f"{original_item.to_wire()}|abc123def456"
+
+        extracted_item = ItemId.from_access_token(access_token)
+        assert extracted_item == original_item
+
+    def test_access_token_round_trip(self) -> None:
+        """Test round-trip: ItemId -> access_token -> ItemId."""
+        original_item = ItemId("user_123", "jimmy", "doppelbank")
+        access_token = original_item.create_access_token()
+        extracted_item = ItemId.from_access_token(access_token)
+
+        assert extracted_item == original_item
+
+    def test_from_access_token_invalid_format(self) -> None:
+        """Test that invalid access token format raises error."""
+        with pytest.raises(InvalidIdError, match="must have format 'item_id|uuid'"):
+            ItemId.from_access_token("invalid_token_without_separator")
+
+    def test_from_access_token_invalid_item_id(self) -> None:
+        """Test that invalid item ID in access token raises error."""
+        with pytest.raises(InvalidIdError, match="must have exactly 3 parts"):
+            ItemId.from_access_token("invalid-item|uuid")
+
+    def test_from_access_token_multiple_separators(self) -> None:
+        """Test access token with multiple separators raises error."""
+        access_token = "user_123-jimmy-doppelbank|uuid|extra"
+
+        with pytest.raises(InvalidIdError, match="must have format 'item_id|uuid'"):
+            ItemId.from_access_token(access_token)

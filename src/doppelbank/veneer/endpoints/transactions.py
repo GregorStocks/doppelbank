@@ -57,13 +57,32 @@ def transform_ledger_to_plaid(
         unofficial_currency_code=None,
         limit=None,
     )
+
+    # Try to parse hierarchical account ID for richer metadata
+    try:
+        from doppelbank.lib.ids import AccountId
+
+        parsed_account = AccountId.from_wire(account_id)
+        account_name = (
+            f"{parsed_account.persona_id.title()} {parsed_account.account_type.title()}"
+        )
+        account_subtype = (
+            "checking"
+            if parsed_account.account_type in ["checking", "chequing"]
+            else parsed_account.account_type
+        )
+    except Exception:
+        # Fall back to simple account info
+        account_name = f"Account {account_id}"
+        account_subtype = "checking"
+
     account = Account(
         account_id=account_id,
         balances=dummy_balance,
-        name=f"Account {account_id}",
+        name=account_name,
         mask="1111",
         type="depository",
-        subtype="checking",
+        subtype=account_subtype,
     )
 
     # Transform detritus events to Plaid transactions

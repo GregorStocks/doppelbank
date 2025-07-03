@@ -14,6 +14,7 @@ Hyphens are used as delimiters between sections.
 """
 
 import re
+import uuid
 from dataclasses import dataclass
 
 
@@ -68,6 +69,23 @@ class ItemId:
             user_id=user_id, persona_id=persona_id, institution_id=institution_id
         )
 
+    def create_access_token(self) -> str:
+        """Create a new access token for this item."""
+        return f"{self.to_wire()}|{uuid.uuid4().hex}"
+
+    @staticmethod
+    def from_access_token(access_token: str) -> "ItemId":
+        """Extract ItemId from access token format: {item_id}|{uuid}"""
+        # item_id|uuid
+        match = re.match(r"^([a-zA-Z0-9_-]+)\|([a-z0-9-]+)$", access_token)
+        if not match:
+            raise InvalidIdError(
+                f"Access token '{access_token}' must have format 'item_id|uuid'"
+            )
+
+        item_id_part, uuid_part = match.groups()
+        return ItemId.from_wire(item_id_part)
+
 
 @dataclass(frozen=True)
 class AccountId:
@@ -118,12 +136,12 @@ class AccountId:
 _VALID_SECTION_PATTERN = re.compile(r"^[a-zA-Z0-9_]+$")
 
 
-def _validate_section(section: str, section_name: str) -> None:
+def _validate_section(contents: str, section_name: str) -> None:
     """Validate that a section contains only valid characters."""
-    if not section:
+    if not contents:
         raise InvalidIdError(f"{section_name} cannot be empty")
-    if not _VALID_SECTION_PATTERN.match(section):
+    if not _VALID_SECTION_PATTERN.match(contents):
         raise InvalidIdError(
-            f"{section_name} '{section}' contains invalid characters. "
+            f"{section_name} '{contents}' contains invalid characters. "
             f"Only alphanumeric characters and underscores are allowed."
         )

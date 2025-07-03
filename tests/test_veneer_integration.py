@@ -72,17 +72,15 @@ class TestVeneerIntegration:
         if process.is_alive():
             process.kill()
 
-    def test_full_pipeline_with_http_requests(
-        self, running_server: Any, tmp_path: Path
-    ) -> None:
+    def test_full_pipeline_with_http_requests(self, running_server: Any) -> None:
         """
         Test the complete pipeline: Bedrock -> Detritus -> Veneer with real HTTP requests.
 
         This implements the TODO: "Single test that goes from Bedrock to Veneer"
         """
         _ = running_server
-        # Step 1: Generate complete persona data in one step
-        detritus_path = tmp_path / "integration_detritus.json"
+        # Step 1: Generate complete persona data in one step using new hierarchical structure
+        # Generate directly into the data directory structure
         subprocess.run(
             [
                 "uv",
@@ -91,17 +89,13 @@ class TestVeneerIntegration:
                 "-m",
                 "doppelbank.persona_generator.cli",
                 "--user-id",
-                "integration_test_user",
+                "user_test",
                 "--persona",
                 "integration_test",
                 "--institution",
                 "doppelbank",
                 "--account-type",
                 "checking",
-                "--output",
-                str(detritus_path),
-                "--format",
-                "json",
                 "--seed",
                 "12345",
                 "--days",
@@ -110,14 +104,25 @@ class TestVeneerIntegration:
             check=True,
         )
 
-        # Verify detritus file was created and has data
-        assert detritus_path.exists()
-        with open(detritus_path) as f:
+        # Verify hierarchical data was created
+        hierarchical_account_file = (
+            Path.cwd()
+            / "data"
+            / "personas"
+            / "integration_test"
+            / "doppelbank"
+            / "checking.json"
+        )
+        assert (
+            hierarchical_account_file.exists()
+        ), f"Expected hierarchical data at {hierarchical_account_file}"
+
+        with open(hierarchical_account_file) as f:
             detritus_data = json.load(f)
         assert "events" in detritus_data
         assert len(detritus_data["events"]) > 0
 
-        # Step 2: Set up both flat and hierarchical data for backward compatibility testing
+        # Step 2: Set up legacy flat data for backward compatibility testing
         veneer_data_dir = (
             Path(__file__).parent.parent / "src" / "doppelbank" / "veneer" / "data"
         )
@@ -129,32 +134,13 @@ class TestVeneerIntegration:
         default_ledger_path = veneer_data_dir / "test_account.json"
         shutil.copy2(source_default_ledger, default_ledger_path)
 
-        # For hierarchical data, we'll rely on the generated data structure in ./data/
-        # The persona generator already created the hierarchical structure
-        # We just need to make sure the integration test data exists there
-        hierarchical_account_id = (
-            "integration_test_user-integration_test-doppelbank-checking"
-        )
-        hierarchical_account_file = (
-            Path.cwd()
-            / "data"
-            / "personas"
-            / "integration_test"
-            / "doppelbank"
-            / "checking.json"
-        )
-
-        # If the hierarchical file doesn't exist, copy our generated file there
-        if not hierarchical_account_file.exists():
-            hierarchical_account_file.parent.mkdir(parents=True, exist_ok=True)
-            shutil.copy2(detritus_path, hierarchical_account_file)
-
         try:
             # Step 3: Test the API with real HTTP requests (like curl)
             base_url = "http://127.0.0.1:8002"
-            hierarchical_account_id = (
-                "integration_test_user-integration_test-doppelbank-checking"
-            )
+
+            # Create hierarchical account ID for testing
+            # For testing purposes, we'll use a simple user_id
+            hierarchical_account_id = "user_test-integration_test-doppelbank-checking"
 
             # Test 1: Basic health check with old flat account
             response = requests.post(
@@ -216,5 +202,5 @@ class TestVeneerIntegration:
             # Cleanup: remove the test files
             if default_ledger_path.exists():
                 default_ledger_path.unlink()
-            if hierarchical_account_file.exists():
-                hierarchical_account_file.unlink()
+            # Note: We don't clean up hierarchical_account_file as it's part of the data directory
+            # and may be used by other tests or processes
