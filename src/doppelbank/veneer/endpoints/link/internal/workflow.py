@@ -1,4 +1,5 @@
 import logging
+import asyncio
 
 from fastapi import APIRouter
 
@@ -65,8 +66,11 @@ async def workflow_next(request: WorkflowNextRequest) -> WorkflowResponse:
             # Go to end - this is where Link flow completes
             response = done.create_response(request)
 
-            # Trigger ITEM_ADD_RESULT webhook if configured
-            await send_item_add_result_webhook(request.workflow_session_id)
+            # Trigger ITEM_ADD_RESULT webhook (if configured)
+            async def delayed_webhook():
+                await asyncio.sleep(2)
+                await send_item_add_result_webhook(request.workflow_session_id)
+            asyncio.create_task(delayed_webhook())
             cleanup_completed_flow(request.workflow_session_id)
 
             return response
